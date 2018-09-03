@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+    <!-- 命名空间 -->
+    <typeAliases>
+        <typeAlias alias="User" type="com.melody.user.dto.User"/>
+        <typeAlias alias="Account" type="com.melody.user.dto.Account"/>
+        <typeAlias alias="BirdCoinAccount" type="com.melody.user.dto.BirdCoinAccount"/>
+        <!--<typeAlias alias="AccountOrderTotal" type="com.wy.user.dto.AccountOrderTotal"/>-->
+        <typeAlias alias="UserLogin" type="com.melody.user.dto.UserLogin"/>
+
+        <typeAlias alias="Sequence" type="com.melody.base.Sequence"/>
+        <typeAlias alias="UserLevel" type="com.melody.user.dto.UserLevel"/>
+        <!--<typeAlias alias="UserAgreement" type="com.wy.user.dto.UserAgreement"/>-->
+
+
+    </typeAliases>
+
+
+</configuration>

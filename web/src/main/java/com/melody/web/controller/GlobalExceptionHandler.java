@@ -31,7 +31,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseBody
     public Json handleShiroException(ShiroException e) {
         String eName = e.getClass().getSimpleName();
-        log.error("shiro执行出错：{}",eName);
+        log.error("shiro执行出错：{}", eName);
         return new Json(eName, false, Codes.SHIRO_ERR, "鉴权或授权过程出错", null);
     }
 
@@ -39,12 +39,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseBody
     public Json page401(UnauthenticatedException e) {
         String eMsg = e.getMessage();
-        if (StringUtils.startsWithIgnoreCase(eMsg,GUEST_ONLY)){
+        if (StringUtils.startsWithIgnoreCase(eMsg, GUEST_ONLY)) {
             return new Json("Unauthenticated", false, Codes.UNAUTHEN, "只允许游客访问，若您已登录，请先退出登录", null)
-                    .data("detail",e.getMessage());
-        }else{
+                    .data("detail", e.getMessage());
+        } else {
             return new Json("Unauthenticated", false, Codes.UNAUTHEN, "用户未登录", null)
-                    .data("detail",e.getMessage());
+                    .data("detail", e.getMessage());
         }
     }
 
@@ -54,5 +54,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new Json("Unauthorized", false, Codes.UNAUTHZ, "用户没有访问权限", null);
     }
 
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public Json Failed(Exception e) {
+        return new Json("FAILED", false, Codes.UNAUTHEN, "用户未登录", null)
+                .data("detail", e.getMessage());
+    }
 
 }

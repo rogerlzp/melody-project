@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.generated.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.User">
+    <id column="USER_ID" jdbcType="BIGINT" property="userId" />
+    <result column="MOBILE_NO" jdbcType="VARCHAR" property="mobileNo" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="USER_PWD" jdbcType="VARCHAR" property="userPwd" />
+    <result column="SALT" jdbcType="VARCHAR" property="salt" />
+    <result column="DEVICE_TOKEN" jdbcType="VARCHAR" property="deviceToken" />
+    <result column="ID_CARD" jdbcType="VARCHAR" property="idCard" />
+    <result column="REFERRAL_CODE" jdbcType="VARCHAR" property="referralCode" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="IS_FIRST_ORDER" jdbcType="INTEGER" property="isFirstOrder" />
+    <result column="REG_DATE" jdbcType="TIMESTAMP" property="regDate" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="NICKNAME" jdbcType="VARCHAR" property="nickname" />
+    <result column="HEAD_IMAGE" jdbcType="VARCHAR" property="headImage" />
+    <result column="GENDER" jdbcType="INTEGER" property="gender" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    USER_ID, MOBILE_NO, USER_NAME, USER_PWD, SALT, DEVICE_TOKEN, ID_CARD, REFERRAL_CODE, 
+    STATUS, IS_FIRST_ORDER, REG_DATE, CREATE_DATE, UPDATE_DATE, NICKNAME, HEAD_IMAGE, 
+    GENDER, EMAIL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TS_USER
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TS_USER
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.melody.generated.model.User">
+    insert into TS_USER (USER_ID, MOBILE_NO, USER_NAME, 
+      USER_PWD, SALT, DEVICE_TOKEN, 
+      ID_CARD, REFERRAL_CODE, STATUS, 
+      IS_FIRST_ORDER, REG_DATE, CREATE_DATE, 
+      UPDATE_DATE, NICKNAME, HEAD_IMAGE, 
+      GENDER, EMAIL)
+    values (#{userId,jdbcType=BIGINT}, #{mobileNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userPwd,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{deviceToken,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=VARCHAR}, #{referralCode,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{isFirstOrder,jdbcType=INTEGER}, #{regDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{nickname,jdbcType=VARCHAR}, #{headImage,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.melody.generated.model.User">
+    insert into TS_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="mobileNo != null">
+        MOBILE_NO,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="userPwd != null">
+        USER_PWD,
+      </if>
+      <if test="salt != null">
+        SALT,
+      </if>
+      <if test="deviceToken != null">
+        DEVICE_TOKEN,
+      </if>
+      <if test="idCard != null">
+        ID_CARD,
+      </if>
+      <if test="referralCode != null">
+        REFERRAL_CODE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="isFirstOrder != null">
+        IS_FIRST_ORDER,
+      </if>
+      <if test="regDate != null">
+        REG_DATE,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="nickname != null">
+        NICKNAME,
+      </if>
+      <if test="headImage != null">
+        HEAD_IMAGE,
+      </if>
+      <if test="gender != null">
+        GENDER,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="mobileNo != null">
+        #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceToken != null">
+        #{deviceToken,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="referralCode != null">
+        #{referralCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isFirstOrder != null">
+        #{isFirstOrder,jdbcType=INTEGER},
+      </if>
+      <if test="regDate != null">
+        #{regDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null">
+        #{headImage,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.User">
+    update TS_USER
+    <set>
+      <if test="mobileNo != null">
+        MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        USER_PWD = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        SALT = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceToken != null">
+        DEVICE_TOKEN = #{deviceToken,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        ID_CARD = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="referralCode != null">
+        REFERRAL_CODE = #{referralCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isFirstOrder != null">
+        IS_FIRST_ORDER = #{isFirstOrder,jdbcType=INTEGER},
+      </if>
+      <if test="regDate != null">
+        REG_DATE = #{regDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickname != null">
+        NICKNAME = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null">
+        HEAD_IMAGE = #{headImage,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        GENDER = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.User">
+    update TS_USER
+    set MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_PWD = #{userPwd,jdbcType=VARCHAR},
+      SALT = #{salt,jdbcType=VARCHAR},
+      DEVICE_TOKEN = #{deviceToken,jdbcType=VARCHAR},
+      ID_CARD = #{idCard,jdbcType=VARCHAR},
+      REFERRAL_CODE = #{referralCode,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      IS_FIRST_ORDER = #{isFirstOrder,jdbcType=INTEGER},
+      REG_DATE = #{regDate,jdbcType=TIMESTAMP},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      NICKNAME = #{nickname,jdbcType=VARCHAR},
+      HEAD_IMAGE = #{headImage,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=INTEGER},
+      EMAIL = #{email,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.User">
+    <id column="USER_ID" jdbcType="BIGINT" property="userId" />
+    <result column="MOBILE_NO" jdbcType="VARCHAR" property="mobileNo" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="USER_PWD" jdbcType="VARCHAR" property="userPwd" />
+    <result column="SALT" jdbcType="VARCHAR" property="salt" />
+    <result column="DEVICE_TOKEN" jdbcType="VARCHAR" property="deviceToken" />
+    <result column="ID_CARD" jdbcType="VARCHAR" property="idCard" />
+    <result column="REFERRAL_CODE" jdbcType="VARCHAR" property="referralCode" />
+    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="IS_FIRST_ORDER" jdbcType="INTEGER" property="isFirstOrder" />
+    <result column="REG_DATE" jdbcType="TIMESTAMP" property="regDate" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="NICKNAME" jdbcType="VARCHAR" property="nickname" />
+    <result column="HEAD_IMAGE" jdbcType="VARCHAR" property="headImage" />
+    <result column="GENDER" jdbcType="INTEGER" property="gender" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    USER_ID, MOBILE_NO, USER_NAME, USER_PWD, SALT, DEVICE_TOKEN, ID_CARD, REFERRAL_CODE, 
+    STATUS, IS_FIRST_ORDER, REG_DATE, CREATE_DATE, UPDATE_DATE, NICKNAME, HEAD_IMAGE,
+    GENDER, EMAIL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TS_USER
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TS_USER
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.melody.generated.model.User">
+    insert into TS_USER (USER_ID, MOBILE_NO, USER_NAME, 
+      USER_PWD, SALT, DEVICE_TOKEN, 
+      ID_CARD, REFERRAL_CODE, STATUS, 
+      IS_FIRST_ORDER, REG_DATE, CREATE_DATE, 
+      UPDATE_DATE, NICKNAME, HEAD_IMAGE,
+      GENDER, EMAIL)
+    values (#{userId,jdbcType=BIGINT}, #{mobileNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userPwd,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{deviceToken,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=VARCHAR}, #{referralCode,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{isFirstOrder,jdbcType=INTEGER}, #{regDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{nickname,jdbcType=VARCHAR}, #{headImage,jdbcType=VARCHAR},
+      #{gender,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.melody.generated.model.User">
+    insert into TS_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="mobileNo != null">
+        MOBILE_NO,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="userPwd != null">
+        USER_PWD,
+      </if>
+      <if test="salt != null">
+        SALT,
+      </if>
+      <if test="deviceToken != null">
+        DEVICE_TOKEN,
+      </if>
+      <if test="idCard != null">
+        ID_CARD,
+      </if>
+      <if test="referralCode != null">
+        REFERRAL_CODE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="isFirstOrder != null">
+        IS_FIRST_ORDER,
+      </if>
+      <if test="regDate != null">
+        REG_DATE,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="nickname != null">
+        NICKNAME,
+      </if>
+      <if test="headImage != null">
+        HEADIMAGE,
+      </if>
+      <if test="gender != null">
+        GENDER,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="mobileNo != null">
+        #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceToken != null">
+        #{deviceToken,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="referralCode != null">
+        #{referralCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isFirstOrder != null">
+        #{isFirstOrder,jdbcType=INTEGER},
+      </if>
+      <if test="regDate != null">
+        #{regDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null">
+        #{headImage,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.User">
+    update TS_USER
+    <set>
+      <if test="mobileNo != null">
+        MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        USER_PWD = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        SALT = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceToken != null">
+        DEVICE_TOKEN = #{deviceToken,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        ID_CARD = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="referralCode != null">
+        REFERRAL_CODE = #{referralCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isFirstOrder != null">
+        IS_FIRST_ORDER = #{isFirstOrder,jdbcType=INTEGER},
+      </if>
+      <if test="regDate != null">
+        REG_DATE = #{regDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickname != null">
+        NICKNAME = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null">
+        HEAD_IMAGE = #{headImage,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        GENDER = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.User">
+    update TS_USER
+    set MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_PWD = #{userPwd,jdbcType=VARCHAR},
+      SALT = #{salt,jdbcType=VARCHAR},
+      DEVICE_TOKEN = #{deviceToken,jdbcType=VARCHAR},
+      ID_CARD = #{idCard,jdbcType=VARCHAR},
+      REFERRAL_CODE = #{referralCode,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      IS_FIRST_ORDER = #{isFirstOrder,jdbcType=INTEGER},
+      REG_DATE = #{regDate,jdbcType=TIMESTAMP},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      NICKNAME = #{nickname,jdbcType=VARCHAR},
+      HEAD_IMAGE = #{headImage,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=INTEGER},
+      EMAIL = #{email,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>

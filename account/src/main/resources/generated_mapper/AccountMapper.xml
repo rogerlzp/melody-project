@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.generated.dao.AccountMapper">
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Account">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="USER_ID" jdbcType="BIGINT" property="userId" />
+    <result column="TOTAL_ASSET" jdbcType="DECIMAL" property="totalAsset" />
+    <result column="USABLE_BALANCE" jdbcType="DECIMAL" property="usableBalance" />
+    <result column="FROZEN_AMOUNT" jdbcType="DECIMAL" property="frozenAmount" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, USER_ID, TOTAL_ASSET, USABLE_BALANCE, FROZEN_AMOUNT, CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_ACCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TT_ACCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.melody.generated.model.Account">
+    insert into TT_ACCOUNT (ID, USER_ID, TOTAL_ASSET, 
+      USABLE_BALANCE, FROZEN_AMOUNT, CREATE_DATE, 
+      UPDATE_DATE)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{totalAsset,jdbcType=DECIMAL}, 
+      #{usableBalance,jdbcType=DECIMAL}, #{frozenAmount,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.melody.generated.model.Account">
+    insert into TT_ACCOUNT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="totalAsset != null">
+        TOTAL_ASSET,
+      </if>
+      <if test="usableBalance != null">
+        USABLE_BALANCE,
+      </if>
+      <if test="frozenAmount != null">
+        FROZEN_AMOUNT,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAsset != null">
+        #{totalAsset,jdbcType=DECIMAL},
+      </if>
+      <if test="usableBalance != null">
+        #{usableBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null">
+        #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Account">
+    update TT_ACCOUNT
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAsset != null">
+        TOTAL_ASSET = #{totalAsset,jdbcType=DECIMAL},
+      </if>
+      <if test="usableBalance != null">
+        USABLE_BALANCE = #{usableBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null">
+        FROZEN_AMOUNT = #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Account">
+    update TT_ACCOUNT
+    set USER_ID = #{userId,jdbcType=BIGINT},
+      TOTAL_ASSET = #{totalAsset,jdbcType=DECIMAL},
+      USABLE_BALANCE = #{usableBalance,jdbcType=DECIMAL},
+      FROZEN_AMOUNT = #{frozenAmount,jdbcType=DECIMAL},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Account">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="USER_ID" jdbcType="BIGINT" property="userId" />
+    <result column="TOTAL_ASSET" jdbcType="DECIMAL" property="totalAsset" />
+    <result column="USABLE_BALANCE" jdbcType="DECIMAL" property="usableBalance" />
+    <result column="FROZEN_AMOUNT" jdbcType="DECIMAL" property="frozenAmount" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, USER_ID, TOTAL_ASSET, USABLE_BALANCE, FROZEN_AMOUNT, CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_ACCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TT_ACCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.melody.generated.model.Account">
+    insert into TT_ACCOUNT (ID, USER_ID, TOTAL_ASSET, 
+      USABLE_BALANCE, FROZEN_AMOUNT, CREATE_DATE, 
+      UPDATE_DATE)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{totalAsset,jdbcType=DECIMAL}, 
+      #{usableBalance,jdbcType=DECIMAL}, #{frozenAmount,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.melody.generated.model.Account">
+    insert into TT_ACCOUNT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="totalAsset != null">
+        TOTAL_ASSET,
+      </if>
+      <if test="usableBalance != null">
+        USABLE_BALANCE,
+      </if>
+      <if test="frozenAmount != null">
+        FROZEN_AMOUNT,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAsset != null">
+        #{totalAsset,jdbcType=DECIMAL},
+      </if>
+      <if test="usableBalance != null">
+        #{usableBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null">
+        #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Account">
+    update TT_ACCOUNT
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAsset != null">
+        TOTAL_ASSET = #{totalAsset,jdbcType=DECIMAL},
+      </if>
+      <if test="usableBalance != null">
+        USABLE_BALANCE = #{usableBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null">
+        FROZEN_AMOUNT = #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Account">
+    update TT_ACCOUNT
+    set USER_ID = #{userId,jdbcType=BIGINT},
+      TOTAL_ASSET = #{totalAsset,jdbcType=DECIMAL},
+      USABLE_BALANCE = #{usableBalance,jdbcType=DECIMAL},
+      FROZEN_AMOUNT = #{frozenAmount,jdbcType=DECIMAL},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Account">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="USER_ID" jdbcType="BIGINT" property="userId" />
+    <result column="TOTAL_ASSET" jdbcType="DECIMAL" property="totalAsset" />
+    <result column="USABLE_BALANCE" jdbcType="DECIMAL" property="usableBalance" />
+    <result column="FROZEN_AMOUNT" jdbcType="DECIMAL" property="frozenAmount" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, USER_ID, TOTAL_ASSET, USABLE_BALANCE, FROZEN_AMOUNT, CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_ACCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TT_ACCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.melody.generated.model.Account">
+    insert into TT_ACCOUNT (ID, USER_ID, TOTAL_ASSET, 
+      USABLE_BALANCE, FROZEN_AMOUNT, CREATE_DATE, 
+      UPDATE_DATE)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{totalAsset,jdbcType=DECIMAL}, 
+      #{usableBalance,jdbcType=DECIMAL}, #{frozenAmount,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.melody.generated.model.Account">
+    insert into TT_ACCOUNT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="totalAsset != null">
+        TOTAL_ASSET,
+      </if>
+      <if test="usableBalance != null">
+        USABLE_BALANCE,
+      </if>
+      <if test="frozenAmount != null">
+        FROZEN_AMOUNT,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAsset != null">
+        #{totalAsset,jdbcType=DECIMAL},
+      </if>
+      <if test="usableBalance != null">
+        #{usableBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null">
+        #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Account">
+    update TT_ACCOUNT
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAsset != null">
+        TOTAL_ASSET = #{totalAsset,jdbcType=DECIMAL},
+      </if>
+      <if test="usableBalance != null">
+        USABLE_BALANCE = #{usableBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null">
+        FROZEN_AMOUNT = #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Account">
+    update TT_ACCOUNT
+    set USER_ID = #{userId,jdbcType=BIGINT},
+      TOTAL_ASSET = #{totalAsset,jdbcType=DECIMAL},
+      USABLE_BALANCE = #{usableBalance,jdbcType=DECIMAL},
+      FROZEN_AMOUNT = #{frozenAmount,jdbcType=DECIMAL},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Account">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="USER_ID" jdbcType="BIGINT" property="userId" />
+    <result column="TOTAL_ASSET" jdbcType="DECIMAL" property="totalAsset" />
+    <result column="USABLE_BALANCE" jdbcType="DECIMAL" property="usableBalance" />
+    <result column="FROZEN_AMOUNT" jdbcType="DECIMAL" property="frozenAmount" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, USER_ID, TOTAL_ASSET, USABLE_BALANCE, FROZEN_AMOUNT, CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_ACCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TT_ACCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.melody.generated.model.Account">
+    insert into TT_ACCOUNT (ID, USER_ID, TOTAL_ASSET, 
+      USABLE_BALANCE, FROZEN_AMOUNT, CREATE_DATE, 
+      UPDATE_DATE)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{totalAsset,jdbcType=DECIMAL}, 
+      #{usableBalance,jdbcType=DECIMAL}, #{frozenAmount,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.melody.generated.model.Account">
+    insert into TT_ACCOUNT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="totalAsset != null">
+        TOTAL_ASSET,
+      </if>
+      <if test="usableBalance != null">
+        USABLE_BALANCE,
+      </if>
+      <if test="frozenAmount != null">
+        FROZEN_AMOUNT,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAsset != null">
+        #{totalAsset,jdbcType=DECIMAL},
+      </if>
+      <if test="usableBalance != null">
+        #{usableBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null">
+        #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Account">
+    update TT_ACCOUNT
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAsset != null">
+        TOTAL_ASSET = #{totalAsset,jdbcType=DECIMAL},
+      </if>
+      <if test="usableBalance != null">
+        USABLE_BALANCE = #{usableBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null">
+        FROZEN_AMOUNT = #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Account">
+    update TT_ACCOUNT
+    set USER_ID = #{userId,jdbcType=BIGINT},
+      TOTAL_ASSET = #{totalAsset,jdbcType=DECIMAL},
+      USABLE_BALANCE = #{usableBalance,jdbcType=DECIMAL},
+      FROZEN_AMOUNT = #{frozenAmount,jdbcType=DECIMAL},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Account">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="USER_ID" jdbcType="BIGINT" property="userId" />
+    <result column="TOTAL_ASSET" jdbcType="DECIMAL" property="totalAsset" />
+    <result column="USABLE_BALANCE" jdbcType="DECIMAL" property="usableBalance" />
+    <result column="FROZEN_AMOUNT" jdbcType="DECIMAL" property="frozenAmount" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, USER_ID, TOTAL_ASSET, USABLE_BALANCE, FROZEN_AMOUNT, CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_ACCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TT_ACCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.melody.generated.model.Account">
+    insert into TT_ACCOUNT (ID, USER_ID, TOTAL_ASSET, 
+      USABLE_BALANCE, FROZEN_AMOUNT, CREATE_DATE, 
+      UPDATE_DATE)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{totalAsset,jdbcType=DECIMAL}, 
+      #{usableBalance,jdbcType=DECIMAL}, #{frozenAmount,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.melody.generated.model.Account">
+    insert into TT_ACCOUNT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="totalAsset != null">
+        TOTAL_ASSET,
+      </if>
+      <if test="usableBalance != null">
+        USABLE_BALANCE,
+      </if>
+      <if test="frozenAmount != null">
+        FROZEN_AMOUNT,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAsset != null">
+        #{totalAsset,jdbcType=DECIMAL},
+      </if>
+      <if test="usableBalance != null">
+        #{usableBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null">
+        #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Account">
+    update TT_ACCOUNT
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAsset != null">
+        TOTAL_ASSET = #{totalAsset,jdbcType=DECIMAL},
+      </if>
+      <if test="usableBalance != null">
+        USABLE_BALANCE = #{usableBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null">
+        FROZEN_AMOUNT = #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Account">
+    update TT_ACCOUNT
+    set USER_ID = #{userId,jdbcType=BIGINT},
+      TOTAL_ASSET = #{totalAsset,jdbcType=DECIMAL},
+      USABLE_BALANCE = #{usableBalance,jdbcType=DECIMAL},
+      FROZEN_AMOUNT = #{frozenAmount,jdbcType=DECIMAL},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

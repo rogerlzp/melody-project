@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.generated.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Order">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <id column="ORDER_CODE" jdbcType="BIGINT" property="orderCode" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="TOTAL_NUM" jdbcType="DECIMAL" property="totalNum" />
+    <result column="TOTAL_DISCOUNT" jdbcType="DECIMAL" property="totalDiscount" />
+    <result column="USER_ID" jdbcType="BIGINT" property="userId" />
+    <result column="TOTAL_AMOUNT" jdbcType="VARCHAR" property="totalAmount" />
+    <result column="EXPRESS_FEE" jdbcType="DECIMAL" property="expressFee" />
+    <result column="REFUND_STATUS" jdbcType="VARCHAR" property="refundStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ORDER_CODE, STATUS, CREATE_TIME, UPDATE_TIME, TOTAL_NUM, TOTAL_DISCOUNT, USER_ID, 
+    TOTAL_AMOUNT, EXPRESS_FEE, REFUND_STATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.melody.generated.model.OrderKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_ORDER
+    where ID = #{id,jdbcType=BIGINT}
+      and ORDER_CODE = #{orderCode,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.melody.generated.model.OrderKey">
+    delete from TT_ORDER
+    where ID = #{id,jdbcType=BIGINT}
+      and ORDER_CODE = #{orderCode,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Order" useGeneratedKeys="true">
+    insert into TT_ORDER (ORDER_CODE, STATUS, CREATE_TIME, 
+      UPDATE_TIME, TOTAL_NUM, TOTAL_DISCOUNT, 
+      USER_ID, TOTAL_AMOUNT, EXPRESS_FEE, 
+      REFUND_STATUS)
+    values (#{orderCode,jdbcType=BIGINT}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{totalNum,jdbcType=DECIMAL}, #{totalDiscount,jdbcType=DECIMAL}, 
+      #{userId,jdbcType=BIGINT}, #{totalAmount,jdbcType=VARCHAR}, #{expressFee,jdbcType=DECIMAL}, 
+      #{refundStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Order" useGeneratedKeys="true">
+    insert into TT_ORDER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderCode != null">
+        ORDER_CODE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="totalNum != null">
+        TOTAL_NUM,
+      </if>
+      <if test="totalDiscount != null">
+        TOTAL_DISCOUNT,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="totalAmount != null">
+        TOTAL_AMOUNT,
+      </if>
+      <if test="expressFee != null">
+        EXPRESS_FEE,
+      </if>
+      <if test="refundStatus != null">
+        REFUND_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalNum != null">
+        #{totalNum,jdbcType=DECIMAL},
+      </if>
+      <if test="totalDiscount != null">
+        #{totalDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAmount != null">
+        #{totalAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="expressFee != null">
+        #{expressFee,jdbcType=DECIMAL},
+      </if>
+      <if test="refundStatus != null">
+        #{refundStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Order">
+    update TT_ORDER
+    <set>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalNum != null">
+        TOTAL_NUM = #{totalNum,jdbcType=DECIMAL},
+      </if>
+      <if test="totalDiscount != null">
+        TOTAL_DISCOUNT = #{totalDiscount,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAmount != null">
+        TOTAL_AMOUNT = #{totalAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="expressFee != null">
+        EXPRESS_FEE = #{expressFee,jdbcType=DECIMAL},
+      </if>
+      <if test="refundStatus != null">
+        REFUND_STATUS = #{refundStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+      and ORDER_CODE = #{orderCode,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Order">
+    update TT_ORDER
+    set STATUS = #{status,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      TOTAL_NUM = #{totalNum,jdbcType=DECIMAL},
+      TOTAL_DISCOUNT = #{totalDiscount,jdbcType=DECIMAL},
+      USER_ID = #{userId,jdbcType=BIGINT},
+      TOTAL_AMOUNT = #{totalAmount,jdbcType=VARCHAR},
+      EXPRESS_FEE = #{expressFee,jdbcType=DECIMAL},
+      REFUND_STATUS = #{refundStatus,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+      and ORDER_CODE = #{orderCode,jdbcType=BIGINT}
+  </update>
+</mapper>

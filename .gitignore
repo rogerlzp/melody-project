@@ -36,3 +36,5 @@
 
 /web/target/
 /web/.mvn/
+/admin-web/.mvn/
+/service-gateway/target/

@@ -1,7 +1,8 @@
 package com.melody.common.sms.yunpian;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wy.common.utils.AuthCodeUtils;
+
+import com.melody.common.utils.AuthCodeUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;

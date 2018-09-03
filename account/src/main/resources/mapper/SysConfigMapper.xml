@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.melody.dao.SysConfigDao">
+
+
+    <resultMap type="com.melody.system.dto.DictItem" id="dictItemResultMap">
+        <result property="className" column="CLASS_NAME"/>
+        <result property="itemName" column="ITEM_NAME"/>
+        <result property="itemValue" column="ITEM_VALUE"/>
+    </resultMap>
+
+
+    <select id="refreshSysParameter" resultMap="dictItemResultMap">
+        SELECT t.CLASS_NAME,t.ITEM_NAME,t.ITEM_VALUE FROM TS_SYSPARAMETER  t WHERE t.STATUS='1'
+  </select>
+
+    
+</mapper>

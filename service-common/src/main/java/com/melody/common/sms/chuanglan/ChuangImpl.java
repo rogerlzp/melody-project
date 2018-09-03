@@ -1,6 +1,6 @@
 package com.melody.common.sms.chuanglan;
 
-import com.wy.utils.HttpUtil;
+import com.melody.utils.HttpUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

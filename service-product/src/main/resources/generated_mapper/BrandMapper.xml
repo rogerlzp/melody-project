@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.generated.dao.BrandMapper">
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Brand">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="BRAND_NAME" jdbcType="VARCHAR" property="brandName" />
+    <result column="BRAND_CODE" jdbcType="VARCHAR" property="brandCode" />
+    <result column="BRAND_IMAGE_URL" jdbcType="VARCHAR" property="brandImageUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, BRAND_NAME, BRAND_CODE, BRAND_IMAGE_URL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_BRAND
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TT_BRAND
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Brand" useGeneratedKeys="true">
+    insert into TT_BRAND (BRAND_NAME, BRAND_CODE, BRAND_IMAGE_URL
+      )
+    values (#{brandName,jdbcType=VARCHAR}, #{brandCode,jdbcType=VARCHAR}, #{brandImageUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Brand" useGeneratedKeys="true">
+    insert into TT_BRAND
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="brandName != null">
+        BRAND_NAME,
+      </if>
+      <if test="brandCode != null">
+        BRAND_CODE,
+      </if>
+      <if test="brandImageUrl != null">
+        BRAND_IMAGE_URL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandCode != null">
+        #{brandCode,jdbcType=VARCHAR},
+      </if>
+      <if test="brandImageUrl != null">
+        #{brandImageUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Brand">
+    update TT_BRAND
+    <set>
+      <if test="brandName != null">
+        BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandCode != null">
+        BRAND_CODE = #{brandCode,jdbcType=VARCHAR},
+      </if>
+      <if test="brandImageUrl != null">
+        BRAND_IMAGE_URL = #{brandImageUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Brand">
+    update TT_BRAND
+    set BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+      BRAND_CODE = #{brandCode,jdbcType=VARCHAR},
+      BRAND_IMAGE_URL = #{brandImageUrl,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
