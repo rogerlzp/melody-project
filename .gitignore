@@ -38,3 +38,6 @@
 /web/.mvn/
 /admin-web/.mvn/
 /service-gateway/target/
+/service-gateway/.mvn/
+/service-product/.mvn/
+/web2/
