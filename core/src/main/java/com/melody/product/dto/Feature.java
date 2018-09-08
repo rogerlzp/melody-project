@@ -1,33 +1,23 @@
 package com.melody.product.dto;
 
-public class Feature {
-    private Long id;
+import lombok.Data;
+
+import java.io.Serializable;
+import java.util.List;
+
+@Data
+public class Feature implements Serializable {
+    private static final long serialVersionUID = 3230925201809061619L;
+
+    private Integer id;
 
     private String featureName;
 
     private String categoryCode;
+    private String categoryName;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private List<FeatureOption> featureOptions;
 
-    public String getFeatureName() {
-        return featureName;
-    }
 
-    public void setFeatureName(String featureName) {
-        this.featureName = featureName == null ? null : featureName.trim();
-    }
-
-    public String getCategoryCode() {
-        return categoryCode;
-    }
-
-    public void setCategoryCode(String categoryCode) {
-        this.categoryCode = categoryCode == null ? null : categoryCode.trim();
-    }
 }

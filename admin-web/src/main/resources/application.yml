@@ -78,8 +78,8 @@ com:
 # dubbo
 dubbo :
   application :
-    id: app-web
-    name : app-web
+    id: admin-web
+    name : admin-web
 #  registry :
 #    id: app-web
   protocol:

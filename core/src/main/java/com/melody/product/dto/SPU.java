@@ -1,13 +1,21 @@
 package com.melody.product.dto;
 
-public class SPU {
+import lombok.Data;
+
+import java.io.Serializable;
+
+@Data
+public class SPU implements Serializable {
+
+    private static final long serialVersionUID = 3230925201809051006L;
+
     private Long id;
 
     private String spuName;
 
     private String spuCode;
 
-    private String desc;
+    private String description;
 
     private String detail;
 
@@ -39,12 +47,12 @@ public class SPU {
         this.spuCode = spuCode == null ? null : spuCode.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return this.description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getDetail() {

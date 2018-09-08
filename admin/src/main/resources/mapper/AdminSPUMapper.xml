@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.dao.AdminSPUMapper">
+    <resultMap id="BaseResultMap" type="SPU">
+        <id column="ID" jdbcType="BIGINT" property="id" />
+        <result column="SPU_NAME" jdbcType="VARCHAR" property="spuName" />
+        <result column="SPU_CODE" jdbcType="VARCHAR" property="spuCode" />
+        <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+        <result column="DETAIL" jdbcType="VARCHAR" property="detail" />
+        <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
+        <result column="BRAND_CODE" jdbcType="VARCHAR" property="brandCode" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID, SPU_NAME, SPU_CODE, DESCRIPTION, DETAIL, CATEGORY_CODE, BRAND_CODE
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from TT_SPU
+        where ID = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteBySPUId" parameterType="java.lang.Long">
+        delete from TT_SPU
+        where ID = #{id}
+    </delete>
+    <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="SPU" useGeneratedKeys="true">
+        insert into TT_SPU (ID, SPU_NAME, SPU_CODE, DESCRIPTION,
+        DETAIL, CATEGORY_CODE, BRAND_CODE
+        )
+        values (#{id},#{spuName,jdbcType=VARCHAR}, #{spuCode,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+        #{detail,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR}, #{brandCode,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="SPU" useGeneratedKeys="true">
+        insert into TT_SPU
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="spuName != null">
+                SPU_NAME,
+            </if>
+            <if test="spuCode != null">
+                SPU_CODE,
+            </if>
+            <if test="description != null">
+                DESCRIPTION,
+            </if>
+            <if test="detail != null">
+                DETAIL,
+            </if>
+            <if test="categoryCode != null">
+                CATEGORY_CODE,
+            </if>
+            <if test="brandCode != null">
+                BRAND_CODE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="spuName != null">
+                #{spuName,jdbcType=VARCHAR},
+            </if>
+            <if test="spuCode != null">
+                #{spuCode,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="detail != null">
+                #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryCode != null">
+                #{categoryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="brandCode != null">
+                #{brandCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="SPU">
+        update TT_SPU
+        <set>
+            <if test="spuName != null">
+                SPU_NAME = #{spuName,jdbcType=VARCHAR},
+            </if>
+            <if test="spuCode != null">
+                SPU_CODE = #{spuCode,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                DESCRIPTION = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="detail != null">
+                DETAIL = #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryCode != null">
+                CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="brandCode != null">
+                BRAND_CODE = #{brandCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="SPU">
+        update TT_SPU
+        set SPU_NAME = #{spuName,jdbcType=VARCHAR},
+        SPU_CODE = #{spuCode,jdbcType=VARCHAR},
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+        DETAIL = #{detail,jdbcType=VARCHAR},
+        CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+        BRAND_CODE = #{brandCode,jdbcType=VARCHAR}
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+
+
+
+    <select id="countAllSPU" resultType="java.lang.Integer">
+        select count(*) FROM TT_SPU;
+    </select>
+
+
+    <select id="querySPUList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from TT_SPU
+    </select>
+    <select id="querySPUByBC" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from TT_SPU
+        WHERE CATEGORY_CODE = #{categoryCode} AND BRAND_CODE = #{brandCode}
+    </select>
+
+
+</mapper>

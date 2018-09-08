@@ -1,6 +1,10 @@
 package com.melody.generated.model;
 
-public class Feature {
+import java.io.Serializable;
+
+public class Feature implements Serializable {
+
+
     private Long id;
 
     private String featureName;

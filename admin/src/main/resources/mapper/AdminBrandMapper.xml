@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.dao.AdminBrandMapper">
+    <resultMap id="BrandResultMap" type="Brand">
+        <id column="ID" jdbcType="INTEGER" property="id"/>
+        <result column="BRAND_NAME" jdbcType="VARCHAR" property="brandName"/>
+        <result column="BRAND_CODE" jdbcType="VARCHAR" property="brandCode"/>
+        <result column="BRAND_IMAGE_URL" jdbcType="VARCHAR" property="brandImageUrl"/>
+    </resultMap>
+    <sql id="Brand_Column_List">
+        ID, BRAND_NAME, BRAND_CODE, BRAND_IMAGE_URL
+    </sql>
+
+    <sql id="pagination">
+        <![CDATA[
+	    limit #{offset}, #{pageSize}
+        ]]>
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BrandResultMap">
+        select
+        <include refid="Brand_Column_List"/>
+        from TT_BRAND
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from TT_BRAND
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="Brand" useGeneratedKeys="true">
+        insert into TT_BRAND (ID, BRAND_NAME, BRAND_CODE, BRAND_IMAGE_URL
+        )
+        values (#{id},#{brandName,jdbcType=VARCHAR}, #{brandCode,jdbcType=VARCHAR}, #{brandImageUrl,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="Brand" useGeneratedKeys="true">
+        insert into TT_BRAND
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="brandName != null">
+                BRAND_NAME,
+            </if>
+            <if test="brandCode != null">
+                BRAND_CODE,
+            </if>
+            <if test="brandImageUrl != null">
+                BRAND_IMAGE_URL,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="brandName != null">
+                #{brandName,jdbcType=VARCHAR},
+            </if>
+            <if test="brandCode != null">
+                #{brandCode,jdbcType=VARCHAR},
+            </if>
+            <if test="brandImageUrl != null">
+                #{brandImageUrl,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="Brand">
+        update TT_BRAND
+        <set>
+            <if test="brandName != null">
+                BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+            </if>
+            <if test="brandCode != null">
+                BRAND_CODE = #{brandCode,jdbcType=VARCHAR},
+            </if>
+            <if test="brandImageUrl != null">
+                BRAND_IMAGE_URL = #{brandImageUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="Brand">
+        update TT_BRAND
+        set BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+        BRAND_CODE = #{brandCode,jdbcType=VARCHAR},
+        BRAND_IMAGE_URL = #{brandImageUrl,jdbcType=VARCHAR}
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="countAllBrand" resultType="java.lang.Integer">
+        select count(*) FROM TT_BRAND;
+    </select>
+
+
+    <select id="queryBrandList" resultMap="BrandResultMap">
+        select
+        <include refid="Brand_Column_List"/>
+        from TT_BRAND
+        <include refid="pagination"/>
+    </select>
+
+    <!--<resultMap id="roleMap" type="SysRole">-->
+    <!--<id property="rid" column="rid"/>-->
+    <!--<result property="rname" column="rname" />-->
+    <!--<result property="rdesc" column="rdesc" />-->
+    <!--<result property="rval" column="rval" />-->
+    <!--<result property="created" column="created" jdbcType="TIMESTAMP" />-->
+    <!--<result property="updated" column="updated" jdbcType="TIMESTAMP" />-->
+    <!--</resultMap>-->
+
+    <!--<resultMap id="userIncludeRolesMap" extends="userMap" type="SysUser">-->
+    <!--<collection property="roleList" columnPrefix="role_" resultMap="com.melody.dao.SysRoleMapper.roleMap">-->
+    <!--</collection>-->
+    <!--</resultMap>-->
+
+
+    <!--<select id="selectUserIncludeRoles" resultMap="userIncludeRolesMap">-->
+    <!--select-->
+    <!--u.*,-->
+    <!--r.rid as role_rid,-->
+    <!--r.rname as role_rname,-->
+    <!--r.rdesc as role_rdesc,-->
+    <!--r.rval as role_rval,-->
+    <!--r.created as role_created,-->
+    <!--r.updated  as role_updated-->
+    <!--from sys_user u-->
+    <!--left join sys_user_role ur on u.uid = ur.user_id-->
+    <!--left join sys_role r on ur.role_id = r.rid-->
+    <!--<where>-->
+    <!--<if test="nick != null and nick != ''">-->
+    <!--u.`nick` like concat('%',#{nick},'%')-->
+    <!--</if>-->
+    <!--</where>-->
+    <!--order by u.uid-->
+    <!--</select>-->
+</mapper>

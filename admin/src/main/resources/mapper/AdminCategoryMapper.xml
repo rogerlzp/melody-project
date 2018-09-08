@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.dao.AdminCategoryMapper">
+    <resultMap id="CategoryResultMap" type="Category">
+        <id column="ID" property="id"/>
+        <result column="CATEGORY_NAME" property="categoryName"/>
+        <result column="CATEGORY_CODE" property="categoryCode"/>
+        <result column="PARENT_ID" property="parentId"/>
+    </resultMap>
+    <sql id="Category_Column_List">
+        ID, CATEGORY_NAME, CATEGORY_CODE, PARENT_ID
+    </sql>
+    <sql id="pagination">
+        <![CDATA[
+	    limit #{offset}, #{pageSize}
+        ]]>
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="CategoryResultMap">
+        select
+        <include refid="Category_Column_List"/>
+        from TT_CATEGORY
+        where ID = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from TT_CATEGORY
+        where ID = #{id}
+    </delete>
+    <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="Category" useGeneratedKeys="true">
+        insert into TT_CATEGORY (ID, CATEGORY_NAME, CATEGORY_CODE, PARENT_ID
+        )
+        values (#{id},#{categoryName}, #{categoryCode}, #{parentId}
+        )
+    </insert>
+
+
+
+    <select id="countAllCategory" resultType="java.lang.Integer">
+        select count(*) FROM TT_CATEGORY;
+    </select>
+
+
+    <select id="queryCategoryList" resultMap="CategoryResultMap">
+        select
+        <include refid="Category_Column_List"/>
+        from TT_CATEGORY
+        <include refid="pagination"/>
+    </select>
+
+
+</mapper>

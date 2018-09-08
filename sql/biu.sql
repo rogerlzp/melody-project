@@ -19,7 +19,40 @@ CREATE TABLE `sys_perm` (
 
 /*Data for the table `sys_perm` */
 
-insert  into `sys_perm`(`pval`,`parent`,`pname`,`ptype`,`leaf`,`created`,`updated`) values ('*',NULL,'所有权限',0,NULL,'2018-04-19 18:14:12',NULL),('a:auth',NULL,'登录模块',3,1,NULL,NULL),('a:gradleBuild','a:test','构建gradle',3,1,NULL,NULL),('a:mvn:install','a:test','mvnInstall',3,1,NULL,NULL),('a:option',NULL,'选项模块',3,1,NULL,NULL),('a:perm:query','a:sys:perm','查询sys_perm',3,1,NULL,NULL),('a:perm:update','a:sys:perm','update',3,1,NULL,NULL),('a:role:query','a:sys:role','query',3,1,NULL,NULL),('a:role:update','a:sys:role','update',3,1,NULL,NULL),('a:sys:perm',NULL,'系统权限模块',3,0,NULL,NULL),('a:sys:role',NULL,'系统角色模块',3,0,NULL,NULL),('a:sys:接口',NULL,'系统用户模块',3,1,NULL,NULL),('a:test',NULL,'测试模块模块',3,0,NULL,NULL),('b:user:add','m:sys:user','添加用户',2,NULL,'2018-06-02 11:00:37',NULL),('b:user:delete','m:sys:user','删除用户',2,NULL,'2018-06-02 11:00:56',NULL),('m:menu1',NULL,'菜单1',1,1,NULL,NULL),('m:menu2',NULL,'菜单2',1,1,NULL,NULL),('m:menu3',NULL,'菜单3',1,0,NULL,NULL),('m:menu3:1','m:menu3','菜单3-1',1,1,NULL,NULL),('m:menu3:2','m:menu3','菜单3-2',1,1,NULL,NULL),('m:menu3:3','m:menu3','菜单3-3',1,1,NULL,NULL),('m:menu4',NULL,'菜单4',1,0,NULL,NULL),('m:menu4:1','m:menu4','菜单4-1',1,0,NULL,NULL),('m:menu4:1:a','m:menu4:1','菜单4-1-a',1,1,NULL,NULL),('m:menu4:1:b','m:menu4:1','菜单4-1-b',1,1,NULL,NULL),('m:menu4:1:c','m:menu4:1','菜单4-1-c',1,1,NULL,NULL),('m:menu4:2','m:menu4','菜单4-2',1,1,NULL,NULL),('m:sys',NULL,'系统',1,0,NULL,NULL),('m:sys:perm','m:sys','权限管理',1,1,NULL,NULL),('m:sys:role','m:sys','角色管理',1,1,NULL,NULL),('m:sys:user','m:sys','用户管理',1,1,NULL,NULL);
+insert  into `sys_perm`(`pval`,`parent`,`pname`,`ptype`,`leaf`,`created`,`updated`) values
+('*',NULL,'所有权限',0,NULL,'2018-04-19 18:14:12',NULL),
+('a:auth',NULL,'登录模块',3,1,NULL,NULL),
+('a:gradleBuild','a:test','构建gradle',3,1,NULL,NULL),
+('a:mvn:install','a:test','mvnInstall',3,1,NULL,NULL),
+('a:option',NULL,'选项模块',3,1,NULL,NULL),
+('a:perm:query','a:sys:perm','查询sys_perm',3,1,NULL,NULL),
+('a:perm:update','a:sys:perm','update',3,1,NULL,NULL),
+('a:role:query','a:sys:role','query',3,1,NULL,NULL),
+('a:role:update','a:sys:role','update',3,1,NULL,NULL),
+('a:sys:perm',NULL,'系统权限模块',3,0,NULL,NULL),
+('a:sys:role',NULL,'系统角色模块',3,0,NULL,NULL),
+('a:sys:接口',NULL,'系统用户模块',3,1,NULL,NULL),
+('a:test',NULL,'测试模块模块',3,0,NULL,NULL),
+('b:user:add','m:sys:user','添加用户',2,NULL,'2018-06-02 11:00:37',NULL),
+('b:user:delete','m:sys:user','删除用户',2,NULL,'2018-06-02 11:00:56',NULL),
+('m:menu1',NULL,'菜单1',1,1,NULL,NULL),
+('m:menu2',NULL,'菜单2',1,1,NULL,NULL),
+('m:menu3',NULL,'菜单3',1,0,NULL,NULL),
+('m:menu3:1','m:menu3','菜单3-1',1,1,NULL,NULL),
+('m:menu3:2','m:menu3','菜单3-2',1,1,NULL,NULL),
+('m:menu3:3','m:menu3','菜单3-3',1,1,NULL,NULL),
+('m:menu4',NULL,'菜单4',1,0,NULL,NULL),
+('m:menu4:1','m:menu4','菜单4-1',1,0,NULL,NULL),
+('m:menu4:1:a','m:menu4:1','菜单4-1-a',1,1,NULL,NULL),
+('m:menu4:1:b','m:menu4:1','菜单4-1-b',1,1,NULL,NULL),
+('m:menu4:1:c','m:menu4:1','菜单4-1-c',1,1,NULL,NULL),
+('m:menu4:2','m:menu4','菜单4-2',1,1,NULL,NULL),
+('m:sys',NULL,'系统',1,0,NULL,NULL),
+('m:sys:perm','m:sys','权限管理',1,1,NULL,NULL),
+('m:sys:role','m:sys','角色管理',1,1,NULL,NULL),
+('m:sys:user','m:sys','用户管理',1,1,NULL,NULL);
+
+
 
 /*Table structure for table `sys_role` */
 

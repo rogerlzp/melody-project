@@ -17,6 +17,4 @@ public interface SysPermMapper extends BaseMapper<SysPerm> {
 
     void saveOrUpdate(@Param("perms") List<SysPerm> perms);
 
-
-
 }

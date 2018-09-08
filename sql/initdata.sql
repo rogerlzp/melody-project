@@ -15,3 +15,16 @@ insert  into `TS_SEQUENCE`(`tablename`,`current_value`,`increment`,`cache`,`vers
 ('TT_BIRD_COIN_ACCOUNT',800000,1,NULL,NULL),
 ('TT_USER_LEVEL',800000,1,NULL,NULL);
 
+
+# sku
+insert  into `TS_SEQUENCE`(`tablename`,`current_value`,`increment`,`cache`,`version`) values
+('TT_BRAND',600000,1,NULL,NULL),
+('TT_CATEGORY',600000,1,NULL,NULL),
+('TT_FEATURE',600000,1,NULL,NULL),
+('TT_SPU',600000,1,NULL,NULL),
+('TT_SKU',600000,1,NULL,NULL);
+('TR_FEATURE_OPTION',600000,1,NULL,NULL),
+('TR_SKU_FEATURE',600000,1,NULL,NULL),
+('TR_SKU_IMAGE',600000,1,NULL,NULL),
+
+
