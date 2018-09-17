@@ -5,7 +5,7 @@ import java.util.Date;
 public class SKU_IMAGE {
     private Long id;
 
-    private String skuCode;
+    private String skuNo;
 
     private Byte isMain;
 
@@ -13,7 +13,7 @@ public class SKU_IMAGE {
 
     private Byte picSeq;
 
-    private Date createTime;
+    private Date createDate;
 
     public Long getId() {
         return id;
@@ -23,12 +23,12 @@ public class SKU_IMAGE {
         this.id = id;
     }
 
-    public String getSkuCode() {
-        return skuCode;
+    public String getSkuNo() {
+        return skuNo;
     }
 
-    public void setSkuCode(String skuCode) {
-        this.skuCode = skuCode == null ? null : skuCode.trim();
+    public void setSkuNo(String skuNo) {
+        this.skuNo = skuNo == null ? null : skuNo.trim();
     }
 
     public Byte getIsMain() {
@@ -55,11 +55,11 @@ public class SKU_IMAGE {
         this.picSeq = picSeq;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

@@ -18,6 +18,4 @@ public class Account implements Serializable {
     private Date updateDate;
     private double eggToken;  //蛋币
 
-
-
 }

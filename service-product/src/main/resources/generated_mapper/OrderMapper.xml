@@ -3,19 +3,19 @@
 <mapper namespace="com.melody.generated.dao.OrderMapper">
   <resultMap id="BaseResultMap" type="com.melody.generated.model.Order">
     <id column="ID" jdbcType="BIGINT" property="id" />
-    <id column="ORDER_CODE" jdbcType="BIGINT" property="orderCode" />
+    <id column="ORDER_NO" jdbcType="VARCHAR" property="orderNo" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
     <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
     <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="TOTAL_NUM" jdbcType="DECIMAL" property="totalNum" />
+    <result column="TOTAL_NUM" jdbcType="INTEGER" property="totalNum" />
     <result column="TOTAL_DISCOUNT" jdbcType="DECIMAL" property="totalDiscount" />
     <result column="USER_ID" jdbcType="BIGINT" property="userId" />
-    <result column="TOTAL_AMOUNT" jdbcType="VARCHAR" property="totalAmount" />
+    <result column="TOTAL_AMOUNT" jdbcType="DECIMAL" property="totalAmount" />
     <result column="EXPRESS_FEE" jdbcType="DECIMAL" property="expressFee" />
     <result column="REFUND_STATUS" jdbcType="VARCHAR" property="refundStatus" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, ORDER_CODE, STATUS, CREATE_TIME, UPDATE_TIME, TOTAL_NUM, TOTAL_DISCOUNT, USER_ID, 
+    ID, ORDER_NO, STATUS, CREATE_TIME, UPDATE_TIME, TOTAL_NUM, TOTAL_DISCOUNT, USER_ID, 
     TOTAL_AMOUNT, EXPRESS_FEE, REFUND_STATUS
   </sql>
   <select id="selectByPrimaryKey" parameterType="com.melody.generated.model.OrderKey" resultMap="BaseResultMap">
@@ -23,28 +23,28 @@
     <include refid="Base_Column_List" />
     from TT_ORDER
     where ID = #{id,jdbcType=BIGINT}
-      and ORDER_CODE = #{orderCode,jdbcType=BIGINT}
+      and ORDER_NO = #{orderNo,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.melody.generated.model.OrderKey">
     delete from TT_ORDER
     where ID = #{id,jdbcType=BIGINT}
-      and ORDER_CODE = #{orderCode,jdbcType=BIGINT}
+      and ORDER_NO = #{orderNo,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Order" useGeneratedKeys="true">
-    insert into TT_ORDER (ORDER_CODE, STATUS, CREATE_TIME, 
+    insert into TT_ORDER (ORDER_NO, STATUS, CREATE_TIME, 
       UPDATE_TIME, TOTAL_NUM, TOTAL_DISCOUNT, 
       USER_ID, TOTAL_AMOUNT, EXPRESS_FEE, 
       REFUND_STATUS)
-    values (#{orderCode,jdbcType=BIGINT}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{totalNum,jdbcType=DECIMAL}, #{totalDiscount,jdbcType=DECIMAL}, 
-      #{userId,jdbcType=BIGINT}, #{totalAmount,jdbcType=VARCHAR}, #{expressFee,jdbcType=DECIMAL}, 
+    values (#{orderNo,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{totalNum,jdbcType=INTEGER}, #{totalDiscount,jdbcType=DECIMAL}, 
+      #{userId,jdbcType=BIGINT}, #{totalAmount,jdbcType=DECIMAL}, #{expressFee,jdbcType=DECIMAL}, 
       #{refundStatus,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Order" useGeneratedKeys="true">
     insert into TT_ORDER
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="orderCode != null">
-        ORDER_CODE,
+      <if test="orderNo != null">
+        ORDER_NO,
       </if>
       <if test="status != null">
         STATUS,
@@ -75,8 +75,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="orderCode != null">
-        #{orderCode,jdbcType=BIGINT},
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
@@ -88,7 +88,7 @@
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="totalNum != null">
-        #{totalNum,jdbcType=DECIMAL},
+        #{totalNum,jdbcType=INTEGER},
       </if>
       <if test="totalDiscount != null">
         #{totalDiscount,jdbcType=DECIMAL},
@@ -97,7 +97,7 @@
         #{userId,jdbcType=BIGINT},
       </if>
       <if test="totalAmount != null">
-        #{totalAmount,jdbcType=VARCHAR},
+        #{totalAmount,jdbcType=DECIMAL},
       </if>
       <if test="expressFee != null">
         #{expressFee,jdbcType=DECIMAL},
@@ -120,7 +120,7 @@
         UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="totalNum != null">
-        TOTAL_NUM = #{totalNum,jdbcType=DECIMAL},
+        TOTAL_NUM = #{totalNum,jdbcType=INTEGER},
       </if>
       <if test="totalDiscount != null">
         TOTAL_DISCOUNT = #{totalDiscount,jdbcType=DECIMAL},
@@ -129,7 +129,7 @@
         USER_ID = #{userId,jdbcType=BIGINT},
       </if>
       <if test="totalAmount != null">
-        TOTAL_AMOUNT = #{totalAmount,jdbcType=VARCHAR},
+        TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
       </if>
       <if test="expressFee != null">
         EXPRESS_FEE = #{expressFee,jdbcType=DECIMAL},
@@ -139,20 +139,20 @@
       </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
-      and ORDER_CODE = #{orderCode,jdbcType=BIGINT}
+      and ORDER_NO = #{orderNo,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Order">
     update TT_ORDER
     set STATUS = #{status,jdbcType=VARCHAR},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-      TOTAL_NUM = #{totalNum,jdbcType=DECIMAL},
+      TOTAL_NUM = #{totalNum,jdbcType=INTEGER},
       TOTAL_DISCOUNT = #{totalDiscount,jdbcType=DECIMAL},
       USER_ID = #{userId,jdbcType=BIGINT},
-      TOTAL_AMOUNT = #{totalAmount,jdbcType=VARCHAR},
+      TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
       EXPRESS_FEE = #{expressFee,jdbcType=DECIMAL},
       REFUND_STATUS = #{refundStatus,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=BIGINT}
-      and ORDER_CODE = #{orderCode,jdbcType=BIGINT}
+      and ORDER_NO = #{orderNo,jdbcType=VARCHAR}
   </update>
 </mapper>

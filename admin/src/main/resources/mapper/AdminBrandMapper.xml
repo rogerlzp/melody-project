@@ -4,11 +4,16 @@
     <resultMap id="BrandResultMap" type="Brand">
         <id column="ID" jdbcType="INTEGER" property="id"/>
         <result column="BRAND_NAME" jdbcType="VARCHAR" property="brandName"/>
+        <result column="BRAND_ENG_NAME" jdbcType="VARCHAR" property="brandEngName"/>
         <result column="BRAND_CODE" jdbcType="VARCHAR" property="brandCode"/>
-        <result column="BRAND_IMAGE_URL" jdbcType="VARCHAR" property="brandImageUrl"/>
+        <result column="BRAND_LOGO_URL" jdbcType="VARCHAR" property="brandLogoUrl"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="HOMEPAGE" jdbcType="VARCHAR" property="homepage"/>
+        <result column="BRAND_STORY" jdbcType="VARCHAR" property="brandStory"/>
+        <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId"/>
     </resultMap>
     <sql id="Brand_Column_List">
-        ID, BRAND_NAME, BRAND_CODE, BRAND_IMAGE_URL
+        ID, BRAND_NAME, BRAND_ENG_NAME, BRAND_CODE, BRAND_LOGO_URL, STATUS, HOMEPAGE, BRAND_STORY, PARENT_ID
     </sql>
 
     <sql id="pagination">
@@ -28,9 +33,9 @@
         where ID = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="Brand" useGeneratedKeys="true">
-        insert into TT_BRAND (ID, BRAND_NAME, BRAND_CODE, BRAND_IMAGE_URL
-        )
-        values (#{id},#{brandName,jdbcType=VARCHAR}, #{brandCode,jdbcType=VARCHAR}, #{brandImageUrl,jdbcType=VARCHAR}
+        insert into TT_BRAND
+        <include refid="Brand_Column_List"/>
+        values (#{id}, #{brandName}, #{brandEngName}, #{brandCode}, #{brandLogoUrl}, #{status}, #{homepage}, #{brandStory}, #{parentId}
         )
     </insert>
     <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="Brand" useGeneratedKeys="true">
@@ -77,13 +82,14 @@
         update TT_BRAND
         set BRAND_NAME = #{brandName,jdbcType=VARCHAR},
         BRAND_CODE = #{brandCode,jdbcType=VARCHAR},
-        BRAND_IMAGE_URL = #{brandImageUrl,jdbcType=VARCHAR}
+        BRAND_LOGO_URL = #{brandLogoUrl,jdbcType=VARCHAR}
         where ID = #{id,jdbcType=INTEGER}
     </update>
 
 
     <select id="countAllBrand" resultType="java.lang.Integer">
-        select count(*) FROM TT_BRAND;
+        select count(*) FROM TT_BRAND
+        WHERE STATUS = '1'
     </select>
 
 
@@ -91,41 +97,9 @@
         select
         <include refid="Brand_Column_List"/>
         from TT_BRAND
+        WHERE STATUS = '1'
         <include refid="pagination"/>
     </select>
 
-    <!--<resultMap id="roleMap" type="SysRole">-->
-    <!--<id property="rid" column="rid"/>-->
-    <!--<result property="rname" column="rname" />-->
-    <!--<result property="rdesc" column="rdesc" />-->
-    <!--<result property="rval" column="rval" />-->
-    <!--<result property="created" column="created" jdbcType="TIMESTAMP" />-->
-    <!--<result property="updated" column="updated" jdbcType="TIMESTAMP" />-->
-    <!--</resultMap>-->
 
-    <!--<resultMap id="userIncludeRolesMap" extends="userMap" type="SysUser">-->
-    <!--<collection property="roleList" columnPrefix="role_" resultMap="com.melody.dao.SysRoleMapper.roleMap">-->
-    <!--</collection>-->
-    <!--</resultMap>-->
-
-
-    <!--<select id="selectUserIncludeRoles" resultMap="userIncludeRolesMap">-->
-    <!--select-->
-    <!--u.*,-->
-    <!--r.rid as role_rid,-->
-    <!--r.rname as role_rname,-->
-    <!--r.rdesc as role_rdesc,-->
-    <!--r.rval as role_rval,-->
-    <!--r.created as role_created,-->
-    <!--r.updated  as role_updated-->
-    <!--from sys_user u-->
-    <!--left join sys_user_role ur on u.uid = ur.user_id-->
-    <!--left join sys_role r on ur.role_id = r.rid-->
-    <!--<where>-->
-    <!--<if test="nick != null and nick != ''">-->
-    <!--u.`nick` like concat('%',#{nick},'%')-->
-    <!--</if>-->
-    <!--</where>-->
-    <!--order by u.uid-->
-    <!--</select>-->
 </mapper>

@@ -3,7 +3,7 @@ package com.melody.generated.model;
 public class SkuFeature {
     private Long id;
 
-    private String skuCode;
+    private String skuNo;
 
     private Integer featureOptionId;
 
@@ -15,12 +15,12 @@ public class SkuFeature {
         this.id = id;
     }
 
-    public String getSkuCode() {
-        return skuCode;
+    public String getSkuNo() {
+        return skuNo;
     }
 
-    public void setSkuCode(String skuCode) {
-        this.skuCode = skuCode == null ? null : skuCode.trim();
+    public void setSkuNo(String skuNo) {
+        this.skuNo = skuNo == null ? null : skuNo.trim();
     }
 
     public Integer getFeatureOptionId() {

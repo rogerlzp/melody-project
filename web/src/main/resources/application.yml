@@ -6,6 +6,11 @@ server:
     session:
       cookie:
         name: BIUSID
+  ssl:
+    key-store: classpath:cert/EggKeyStore.jks
+    key-store-password: eggegg
+    key-password: eggegg
+
 spring:
   profiles:
     active: dev
@@ -99,3 +104,12 @@ dubbo :
 endpoints:
   dubbo:
     enabled: true
+
+
+# 微信小程序配置
+wxapp:
+  sessionHost: https://api.weixin.qq.com/sns/jscode2session
+  appId: wx947f9ebffe9e2cb7
+  secret: 2413edfed83449ed94fc006e8eb30634
+  grantType: authorization_code
+

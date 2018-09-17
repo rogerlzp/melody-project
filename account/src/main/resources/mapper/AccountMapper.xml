@@ -11,6 +11,12 @@
         <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate"/>
         <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate"/>
     </resultMap>
+
+    <resultMap type="BirdCoinAccount" id="BirdCoinAccountMap">
+        <result property="totalAmount" column="TOTAL_AMOUNT" />
+        <result property="updateDate" column="CREATE_DATE" />
+        <result property="balance" column="BALANCE" />
+    </resultMap>
     <sql id="Base_Column_List">
         ID, USER_ID, TOTAL_ASSET, USABLE_BALANCE, FROZEN_AMOUNT, CREATE_DATE, UPDATE_DATE
     </sql>
@@ -22,11 +28,7 @@
 
     <sql id="pagination">
         <![CDATA[
-
-
 	    LIMIT #{currentPage}, #{pageSize}
-
-
         ]]>
 	</sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -176,7 +178,7 @@
 
     <insert id="insertUserLevel">
 		INSERT INTO TT_USER_LEVEL SET
-		ID=#{id},USER_ID=#{userId},LEVEL=#{level},CREATE_DATE=SYSDATE()
+		ID=#{id},USER_ID=#{userId},LEVEL_ID=#{levelId},CREATE_DATE=SYSDATE()
 	</insert>
 
 
@@ -215,6 +217,12 @@
     <!--<select id="findsxtIsShow" resultType="java.lang.Integer">-->
     <!--SELECT IFNULL(TS.ITEM_VALUE,0) FROM TS_SYSPARAMETER TS WHERE TS.ITEM_NAME='SXT_ISSHOW';-->
     <!--</select>-->
+
+    <select id="findBirdCoinTotal" resultMap="BirdCoinAccountMap">
+        select
+        TOTAL_AMOUNT,BALANCE,CREATE_DATE from TT_BIRD_COIN_ACCOUNT where
+        USER_ID =#{userId}
+    </select>
 
 
 </mapper>

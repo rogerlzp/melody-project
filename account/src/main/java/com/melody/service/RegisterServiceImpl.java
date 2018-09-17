@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
-@Service(group = "registerService")
+@Service(group = "registerService", timeout = 10000)
 public class RegisterServiceImpl implements RegisterService {
 
     private static final Log log = LogFactory.getLog(RegisterServiceImpl.class);
@@ -182,7 +182,7 @@ public class RegisterServiceImpl implements RegisterService {
         Long sequenceId = baseService.getNextSequence("TT_USER_LEVEL");
         userLevel.setId(sequenceId);
         userLevel.setUserId((int) id);
-        userLevel.setLevel(UserLevelEnum.NO_LEVEL.getEnName());
+        userLevel.setLevelId(UserLevelEnum.NO_LEVEL.getEnName());
         return userLevel;
     }
 

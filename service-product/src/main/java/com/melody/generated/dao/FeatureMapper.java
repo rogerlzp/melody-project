@@ -3,13 +3,13 @@ package com.melody.generated.dao;
 import com.melody.generated.model.Feature;
 
 public interface FeatureMapper {
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Feature record);
 
     int insertSelective(Feature record);
 
-    Feature selectByPrimaryKey(Long id);
+    Feature selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(Feature record);
 

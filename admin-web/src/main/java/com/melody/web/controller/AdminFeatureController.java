@@ -28,7 +28,7 @@ public class AdminFeatureController {
     private static final Logger log = LoggerFactory.getLogger(AdminFeatureController.class);
 
 
-    @Reference(group = "adminFeatureService")
+    @Reference(group = "adminFeatureService", timeout = 10000)
     private AdminFeatureService adminFeatureService;
 
 

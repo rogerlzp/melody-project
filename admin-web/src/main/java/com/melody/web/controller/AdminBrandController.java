@@ -35,7 +35,7 @@ public class AdminBrandController {
     private static final Logger log = LoggerFactory.getLogger(AdminBrandController.class);
 
 
-    @Reference(group = "adminBrandService")
+    @Reference(group = "adminBrandService", timeout = 10000)
     private AdminBrandService adminBrandService;
 
 

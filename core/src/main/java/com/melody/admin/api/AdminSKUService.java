@@ -3,11 +3,21 @@ package com.melody.admin.api;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.melody.product.dto.SKU;
+import com.melody.product.dto.SKUEnter;
 import com.melody.product.dto.SPU;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+
 
 public interface AdminSKUService {
 
     String addSKU(SKU sku);
+
+//    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+//    String addSKUEnter(SKUEnter skuEnter);
+
 
     Page<SKU> querySKUList(Page page);
 
@@ -16,5 +26,7 @@ public interface AdminSKUService {
 
     // 根据skuNo来删除
     int deleteById(String skuNo);
+
+
 
 }

@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 
-@Service(group = "adminSPUService")
+@Service(group = "adminSPUService", timeout = 10000)
 public class AdminSPUServiceImpl implements AdminSPUService {
 
     @Autowired

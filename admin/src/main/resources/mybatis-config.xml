@@ -4,13 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <!--<settings>-->
-        <!--<setting name="logImpl" value="LOG4J"/>-->
+    <!--<setting name="logImpl" value="LOG4J"/>-->
     <!--</settings>-->
     <!-- 命名空间 -->
     <typeAliases>
         <typeAlias alias="User" type="com.melody.user.dto.User"/>
         <typeAlias alias="Account" type="com.melody.user.dto.Account"/>
         <typeAlias alias="BirdCoinAccount" type="com.melody.user.dto.BirdCoinAccount"/>
+        <typeAlias alias="Banner" type="com.melody.product.dto.Banner"/>
         <!--<typeAlias alias="AccountOrderTotal" type="com.wy.user.dto.AccountOrderTotal"/>-->
         <typeAlias alias="UserLogin" type="com.melody.user.dto.UserLogin"/>
 
@@ -25,6 +26,12 @@
         <typeAlias alias="FeatureOption" type="com.melody.product.dto.FeatureOption"/>
         <typeAlias alias="SkuFeature" type="com.melody.product.dto.SkuFeature"/>
         <typeAlias alias="SkuImage" type="com.melody.product.dto.SkuImage"/>
+
+        <typeAlias alias="SkuPrice" type="com.melody.product.dto.SkuPrice"/>
+        <typeAlias alias="UserSkuDiscount" type="com.melody.product.dto.UserSkuDiscount"/>
+        <typeAlias alias="Inventory" type="com.melody.product.dto.Inventory"/>
+
+        <typeAlias alias="SysCustomerLevel" type="com.melody.system.dto.SysCustomerLevel"/>
 
 
     </typeAliases>

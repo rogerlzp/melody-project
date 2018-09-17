@@ -3,16 +3,17 @@
 <mapper namespace="com.melody.generated.dao.OrderExpressMapper">
   <resultMap id="BaseResultMap" type="com.melody.generated.model.OrderExpress">
     <id column="ID" jdbcType="BIGINT" property="id" />
-    <result column="ORDER_CODE" jdbcType="VARCHAR" property="orderCode" />
-    <result column="USER_NAME" jdbcType="INTEGER" property="userName" />
-    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
-    <result column="CONTACT_PHONE" jdbcType="VARCHAR" property="contactPhone" />
+    <result column="ORDER_NO" jdbcType="VARCHAR" property="orderNo" />
+    <result column="RECEIVER_NAME" jdbcType="VARCHAR" property="receiverName" />
+    <result column="ADDRESS_DETAIL" jdbcType="VARCHAR" property="addressDetail" />
+    <result column="RECEIVER_PHONE" jdbcType="VARCHAR" property="receiverPhone" />
     <result column="ZIPCODE" jdbcType="VARCHAR" property="zipcode" />
     <result column="DEVELIERY_COMPANY" jdbcType="VARCHAR" property="develieryCompany" />
     <result column="DEVELIERY_TIME" jdbcType="TIMESTAMP" property="develieryTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, ORDER_CODE, USER_NAME, ADDRESS, CONTACT_PHONE, ZIPCODE, DEVELIERY_COMPANY, DEVELIERY_TIME
+    ID, ORDER_NO, RECEIVER_NAME, ADDRESS_DETAIL, RECEIVER_PHONE, ZIPCODE, DEVELIERY_COMPANY, 
+    DEVELIERY_TIME
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -25,27 +26,27 @@
     where ID = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.OrderExpress" useGeneratedKeys="true">
-    insert into TR_ORDER_EXPRESS (ORDER_CODE, USER_NAME, ADDRESS, 
-      CONTACT_PHONE, ZIPCODE, DEVELIERY_COMPANY, 
+    insert into TR_ORDER_EXPRESS (ORDER_NO, RECEIVER_NAME, ADDRESS_DETAIL, 
+      RECEIVER_PHONE, ZIPCODE, DEVELIERY_COMPANY, 
       DEVELIERY_TIME)
-    values (#{orderCode,jdbcType=VARCHAR}, #{userName,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
-      #{contactPhone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{develieryCompany,jdbcType=VARCHAR}, 
+    values (#{orderNo,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR}, 
+      #{receiverPhone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{develieryCompany,jdbcType=VARCHAR}, 
       #{develieryTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.OrderExpress" useGeneratedKeys="true">
     insert into TR_ORDER_EXPRESS
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="orderCode != null">
-        ORDER_CODE,
+      <if test="orderNo != null">
+        ORDER_NO,
       </if>
-      <if test="userName != null">
-        USER_NAME,
+      <if test="receiverName != null">
+        RECEIVER_NAME,
       </if>
-      <if test="address != null">
-        ADDRESS,
+      <if test="addressDetail != null">
+        ADDRESS_DETAIL,
       </if>
-      <if test="contactPhone != null">
-        CONTACT_PHONE,
+      <if test="receiverPhone != null">
+        RECEIVER_PHONE,
       </if>
       <if test="zipcode != null">
         ZIPCODE,
@@ -58,17 +59,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="orderCode != null">
-        #{orderCode,jdbcType=VARCHAR},
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
       </if>
-      <if test="userName != null">
-        #{userName,jdbcType=INTEGER},
+      <if test="receiverName != null">
+        #{receiverName,jdbcType=VARCHAR},
       </if>
-      <if test="address != null">
-        #{address,jdbcType=VARCHAR},
+      <if test="addressDetail != null">
+        #{addressDetail,jdbcType=VARCHAR},
       </if>
-      <if test="contactPhone != null">
-        #{contactPhone,jdbcType=VARCHAR},
+      <if test="receiverPhone != null">
+        #{receiverPhone,jdbcType=VARCHAR},
       </if>
       <if test="zipcode != null">
         #{zipcode,jdbcType=VARCHAR},
@@ -84,17 +85,17 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.OrderExpress">
     update TR_ORDER_EXPRESS
     <set>
-      <if test="orderCode != null">
-        ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      <if test="orderNo != null">
+        ORDER_NO = #{orderNo,jdbcType=VARCHAR},
       </if>
-      <if test="userName != null">
-        USER_NAME = #{userName,jdbcType=INTEGER},
+      <if test="receiverName != null">
+        RECEIVER_NAME = #{receiverName,jdbcType=VARCHAR},
       </if>
-      <if test="address != null">
-        ADDRESS = #{address,jdbcType=VARCHAR},
+      <if test="addressDetail != null">
+        ADDRESS_DETAIL = #{addressDetail,jdbcType=VARCHAR},
       </if>
-      <if test="contactPhone != null">
-        CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+      <if test="receiverPhone != null">
+        RECEIVER_PHONE = #{receiverPhone,jdbcType=VARCHAR},
       </if>
       <if test="zipcode != null">
         ZIPCODE = #{zipcode,jdbcType=VARCHAR},
@@ -110,10 +111,10 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.OrderExpress">
     update TR_ORDER_EXPRESS
-    set ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
-      USER_NAME = #{userName,jdbcType=INTEGER},
-      ADDRESS = #{address,jdbcType=VARCHAR},
-      CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+    set ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      RECEIVER_NAME = #{receiverName,jdbcType=VARCHAR},
+      ADDRESS_DETAIL = #{addressDetail,jdbcType=VARCHAR},
+      RECEIVER_PHONE = #{receiverPhone,jdbcType=VARCHAR},
       ZIPCODE = #{zipcode,jdbcType=VARCHAR},
       DEVELIERY_COMPANY = #{develieryCompany,jdbcType=VARCHAR},
       DEVELIERY_TIME = #{develieryTime,jdbcType=TIMESTAMP}

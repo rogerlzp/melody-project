@@ -3,15 +3,15 @@
 <mapper namespace="com.melody.generated.dao.OrderItemMapper">
   <resultMap id="BaseResultMap" type="com.melody.generated.model.OrderItem">
     <id column="ID" jdbcType="BIGINT" property="id" />
-    <result column="SKU_CODE" jdbcType="VARCHAR" property="skuCode" />
-    <result column="ORDER_CODE" jdbcType="VARCHAR" property="orderCode" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="ORDER_NO" jdbcType="VARCHAR" property="orderNo" />
     <result column="AMOUNT" jdbcType="DECIMAL" property="amount" />
     <result column="ORIGINAL_PRICE" jdbcType="DECIMAL" property="originalPrice" />
     <result column="PRICE" jdbcType="DECIMAL" property="price" />
     <result column="NUMBER" jdbcType="INTEGER" property="number" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, SKU_CODE, ORDER_CODE, AMOUNT, ORIGINAL_PRICE, PRICE, NUMBER
+    ID, SKU_NO, ORDER_NO, AMOUNT, ORIGINAL_PRICE, PRICE, NUMBER
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -24,21 +24,21 @@
     where ID = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.OrderItem" useGeneratedKeys="true">
-    insert into TR_ORDER_ITEM (SKU_CODE, ORDER_CODE, AMOUNT, 
+    insert into TR_ORDER_ITEM (SKU_NO, ORDER_NO, AMOUNT, 
       ORIGINAL_PRICE, PRICE, NUMBER
       )
-    values (#{skuCode,jdbcType=VARCHAR}, #{orderCode,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, 
+    values (#{skuNo,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, 
       #{originalPrice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{number,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.OrderItem" useGeneratedKeys="true">
     insert into TR_ORDER_ITEM
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="skuCode != null">
-        SKU_CODE,
+      <if test="skuNo != null">
+        SKU_NO,
       </if>
-      <if test="orderCode != null">
-        ORDER_CODE,
+      <if test="orderNo != null">
+        ORDER_NO,
       </if>
       <if test="amount != null">
         AMOUNT,
@@ -54,11 +54,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="skuCode != null">
-        #{skuCode,jdbcType=VARCHAR},
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
       </if>
-      <if test="orderCode != null">
-        #{orderCode,jdbcType=VARCHAR},
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
       </if>
       <if test="amount != null">
         #{amount,jdbcType=DECIMAL},
@@ -77,11 +77,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.OrderItem">
     update TR_ORDER_ITEM
     <set>
-      <if test="skuCode != null">
-        SKU_CODE = #{skuCode,jdbcType=VARCHAR},
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
       </if>
-      <if test="orderCode != null">
-        ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      <if test="orderNo != null">
+        ORDER_NO = #{orderNo,jdbcType=VARCHAR},
       </if>
       <if test="amount != null">
         AMOUNT = #{amount,jdbcType=DECIMAL},
@@ -100,8 +100,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.OrderItem">
     update TR_ORDER_ITEM
-    set SKU_CODE = #{skuCode,jdbcType=VARCHAR},
-      ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      ORDER_NO = #{orderNo,jdbcType=VARCHAR},
       AMOUNT = #{amount,jdbcType=DECIMAL},
       ORIGINAL_PRICE = #{originalPrice,jdbcType=DECIMAL},
       PRICE = #{price,jdbcType=DECIMAL},

@@ -9,38 +9,41 @@ import com.melody.common.utils.crypto.CryptoUtils;
 import com.melody.exception.AuthorizeException;
 import com.melody.exception.BaseException;
 import com.melody.exception.TxException;
+import com.melody.product.dto.SKUResult;
 import com.melody.result.ErrorCode;
 import com.melody.result.JsonApi;
 import com.melody.user.api.RegisterService;
+import com.melody.user.api.UserAddressService;
 import com.melody.user.api.UserService;
-import com.melody.user.dto.RegisterEnter;
-import com.melody.user.dto.RegisterResult;
-import com.melody.user.dto.User;
+import com.melody.user.dto.*;
 import com.melody.web.base.BaseController;
 import com.melody.web.config.shiro.JwtUtil;
+import com.melody.web.util.JsonHelper;
+import com.melody.web.vo.UserAddressListVO;
+import com.melody.web.vo.UserAddressVO;
 import com.melody.web.vo.UserVO;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Map;
 
 @RestController
 public class UserController extends BaseController {
 
-    @Reference(group = "userService")
+    @Reference(group = "userService", timeout = 10000)
     private UserService userService;
 
-    @Reference(group = "registerService")
+    @Reference(group = "registerService", timeout = 10000)
     private RegisterService registerService;
 
+    @Reference(group = "userAddressService", timeout = 10000)
+    private UserAddressService userAddressService;
 
     @ApiOperation(value = "用户登录", notes = "用户登录,使用用户名和邮箱都可以")
     @ApiImplicitParams({
@@ -106,4 +109,41 @@ public class UserController extends BaseController {
         return JsonApi.isOk().data(json);
     }
 
+    @ApiOperation(value = "用户信息", notes = "获取用户信息")
+    @ApiImplicitParam(name = "Authorization", value = "Authorization", required = true, type = "String")
+    @RequestMapping(value = "/user/address/wx/saveOrUpdate", produces = "application/json;charset=UTF-8")
+    public Map<String, Object> updateUserAddress(@Valid UserAddressVO userAddressVO, HttpServletRequest request, BindingResult bindingResult) {
+        UserAddress userAddress = new UserAddress();
+        BeanUtils.copyProperties(userAddressVO, userAddress);
+
+        UserAddressSaveResult userAddressSaveResult = userAddressService.saveUserAddress(userAddress);
+
+        Map<String, Object> results = JsonHelper.toRespJson(userAddressSaveResult);
+        results.put("data", userAddressSaveResult);
+        return results;
+
+    }
+
+
+    @ApiOperation(value = "用户地址信息", notes = "获取用户地址信息")
+    @ApiImplicitParam(name = "Authorization", value = "Authorization", required = true, type = "String")
+    @RequestMapping(value = "/user/address/wx/list", produces = "application/json;charset=UTF-8")
+    public Map<String, Object> getUserAddress(@Valid UserAddressListVO userAddressVO, HttpServletRequest request, BindingResult bindingResult) {
+
+        UserAddressResult userAddressResult = userAddressService.getUserAddressByOpenId(userAddressVO.getOpenId());
+        Map<String, Object> results = JsonHelper.toRespJson(userAddressResult);
+        results.put("data", userAddressResult);
+        return results;
+    }
+
+    @ApiOperation(value = "用户地址信息", notes = "获取用户地址信息")
+    @ApiImplicitParam(name = "Authorization", value = "Authorization", required = true, type = "String")
+    @RequestMapping(value = "/user/address/wx/receiverInfoById", produces = "application/json;charset=UTF-8")
+    public Map<String, Object> getUserAddressById(UserAddressListVO userAddressVO, HttpServletRequest request, BindingResult bindingResult) {
+
+        UserAddressSaveResult userAddressSaveResult = userAddressService.getUserAddressById(userAddressVO.getId());
+        Map<String, Object> results = JsonHelper.toRespJson(userAddressSaveResult);
+        results.put("data", userAddressSaveResult);
+        return results;
+    }
 }

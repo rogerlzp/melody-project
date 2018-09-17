@@ -3,7 +3,7 @@ package com.melody.generated.model;
 public class Category {
     private Long id;
 
-    private String categroyName;
+    private String categoryName;
 
     private String categoryCode;
 
@@ -17,12 +17,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getCategroyName() {
-        return categroyName;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategroyName(String categroyName) {
-        this.categroyName = categroyName == null ? null : categroyName.trim();
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName == null ? null : categoryName.trim();
     }
 
     public String getCategoryCode() {

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.melody.dao.BannerDao">
+
+    <resultMap type="Banner" id="bannerResultMap">
+        <id property="bannerId" column="BANNER_ID"/>
+        <id property="bannerName" column="BANNER_NAME"/>
+        <id property="bannerUrl" column="BANNER_URL"/>
+        <id property="linkUrl" column="LINK_URL"/>
+        <id property="bannerState" column="BANNER_STATE"/>
+    </resultMap>
+
+
+    <sql id="bannerColumns">
+        <![CDATA[
+          BANNER_ID,BANNER_NAME,BANNER_URL,LINK_URL,BANNER_STATE
+        ]]>
+    </sql>
+
+    <select id="findBannerDetailById" resultMap="bannerResultMap">
+        SELECT
+        BANNER_ID,
+        BANNER_NAME,
+        BANNER_URL,
+        LINK_URL,
+        BANNER_STATE
+        FROM TT_BANNER
+        WHERE BANNER_ID = #{bannerId}
+    </select>
+
+    <select id="queryHomepageBanners" resultMap="bannerResultMap">
+        SELECT
+        <include refid="bannerColumns"/>
+        FROM TT_BANNER WHERE BANNER_STATE='1'
+    </select>
+
+    <select id="queryAllBanners" resultMap="bannerResultMap">
+        SELECT
+        <include refid="bannerColumns"/>
+        FROM TT_BANNER
+    </select>
+
+
+</mapper>

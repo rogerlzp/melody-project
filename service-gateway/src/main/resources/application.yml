@@ -37,6 +37,29 @@ spring:
     # 合并多个DruidDataSource的监控数据
     useGlobalDataSourceStat: false
 
+  redis:
+    # 服务器IP地址
+    host: 127.0.0.1
+    # 连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
+
+    jedis:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: 800
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: 10000
+        # 连接池中的最大空闲连接
+        max-idle: 20
+        # 连接池中的最小空闲连接
+        min-idle: 2
+        # 连接超时时间（毫秒）
+        timeout: 30000
+  cache:
+    type: redis
+
     # redis
 #  redis:
 #    # 服务器IP地址
@@ -131,3 +154,22 @@ management:
 #  # 指向实体类包路径
 #  #type-aliases-package: com.ysla.api.auto.model
 #
+wxapp:
+  #  微信小程序appId
+  # 微信公众号：wxSpAppId: wxdea73c90e2da69bd
+  wxSpAppId: wx642cd8007029736a
+  # 小程序应用秘钥
+  # 微信公众号： wxSpSecrect: 5452ed441243d8818671c73f4d11d9f8
+  wxSpSecrect: c1314af6961041720a2686aa2e6afa1b
+
+  # 小程序关联商户号
+  wxSpMchId: 1512078181
+  # 小程序关联商户秘钥
+  wxSpMchKey: 12345678123456781234567812345678
+  #小程序关联商户证书地址, 更新服务器文件夹位置
+  wxSpCertPath: /Users/zhengpingli/IdeaProjects/melody-project/service-gateway/src/main/resources/cert
+  #统一异步回调地址
+  notifyUrl: http://127.0.0.1:8888/api/v1/wx/xcx/callback
+
+
+

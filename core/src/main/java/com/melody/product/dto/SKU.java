@@ -28,7 +28,7 @@ public class SKU implements Serializable {
 
     private Integer totalNumber;
 
-    private Integer inventory;
+//    private Integer inventory;
 
     private String productDesc;
 
@@ -40,6 +40,39 @@ public class SKU implements Serializable {
 
     private List<FeatureOption> featureOptionList;
     private List<SkuImage> skuImageList;
+
+
+    List<SkuFeature> skuFeatureList;
+    // 价格表
+    private SkuPrice skuPrice;
+
+    // 库存表
+    private Inventory inventory;
+
+//    private List<FeatureOption> featureOptionList;
+//    private List<SkuImage> skuImageList;
+
+    // 价格表
+    private SkuPriceEnter skuPriceEnter;
+//
+//    // 库存表
+//    private Inventory inventory;
+
+    // 数量，对外显示使用
+    private Integer sellableNum;  // 和Inventory中的一样
+
+    // 同SkuPrice 中的一样
+    private Double listPrice;
+    private Double salePrice;
+    private Double specialPrice;
+
+    // 主要的图片
+
+    private String picUrl;  // 同SkuImage 中的一个
+
+
+
+
 
     private Date createDate;
     private Date updateDate;

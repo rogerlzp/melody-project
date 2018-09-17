@@ -2,6 +2,7 @@ package com.melody.web.base;
 
 import com.google.gson.Gson;
 
+import com.melody.common.constant.BusinessCodes;
 import com.melody.exception.BusinessException;
 import com.melody.result.JsonApi;
 import com.melody.web.util.JsonHelper;
@@ -53,9 +54,8 @@ public class BaseController {
 
             String message = getMessage("errorCode." + businessException.getErrorCode(), null);
 
-            resp.put("resultCode", businessException.getErrorCode());
-            resp.put("resultMessage", message);
-            return JsonApi.isFail().message(resp.toString());
+            return JsonApi.isFail(Integer.valueOf(businessException.getErrorCode()), message);
+
         } else if (ex instanceof BindException) {
             BindException bindException = (BindException) ex;
             BindingResult result = bindException.getBindingResult();
@@ -63,9 +63,10 @@ public class BaseController {
             String field = error.getField();
             String code = error.getDefaultMessage();
             String message = String.format("%s:%s", field, code);
-            return JsonApi.isFail().message("参数验证失败=" + message);
+            return JsonApi.isFail(Integer.valueOf(BusinessCodes.ERROR), "参数验证失败=" + message);
         } else {
-            return JsonApi.isFail().message(resp.toString()); }
+            return JsonApi.unknowError();
+        }
 
     }
 

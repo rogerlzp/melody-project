@@ -5,13 +5,13 @@ import java.util.Date;
 public class OrderExpress {
     private Long id;
 
-    private String orderCode;
+    private String orderNo;
 
-    private Integer userName;
+    private String receiverName;
 
-    private String address;
+    private String addressDetail;
 
-    private String contactPhone;
+    private String receiverPhone;
 
     private String zipcode;
 
@@ -27,36 +27,36 @@ public class OrderExpress {
         this.id = id;
     }
 
-    public String getOrderCode() {
-        return orderCode;
+    public String getOrderNo() {
+        return orderNo;
     }
 
-    public void setOrderCode(String orderCode) {
-        this.orderCode = orderCode == null ? null : orderCode.trim();
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo == null ? null : orderNo.trim();
     }
 
-    public Integer getUserName() {
-        return userName;
+    public String getReceiverName() {
+        return receiverName;
     }
 
-    public void setUserName(Integer userName) {
-        this.userName = userName;
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName == null ? null : receiverName.trim();
     }
 
-    public String getAddress() {
-        return address;
+    public String getAddressDetail() {
+        return addressDetail;
     }
 
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
+    public void setAddressDetail(String addressDetail) {
+        this.addressDetail = addressDetail == null ? null : addressDetail.trim();
     }
 
-    public String getContactPhone() {
-        return contactPhone;
+    public String getReceiverPhone() {
+        return receiverPhone;
     }
 
-    public void setContactPhone(String contactPhone) {
-        this.contactPhone = contactPhone == null ? null : contactPhone.trim();
+    public void setReceiverPhone(String receiverPhone) {
+        this.receiverPhone = receiverPhone == null ? null : receiverPhone.trim();
     }
 
     public String getZipcode() {

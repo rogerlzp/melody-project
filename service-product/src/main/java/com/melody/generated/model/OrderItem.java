@@ -5,9 +5,9 @@ import java.math.BigDecimal;
 public class OrderItem {
     private Long id;
 
-    private String skuCode;
+    private String skuNo;
 
-    private String orderCode;
+    private String orderNo;
 
     private BigDecimal amount;
 
@@ -25,20 +25,20 @@ public class OrderItem {
         this.id = id;
     }
 
-    public String getSkuCode() {
-        return skuCode;
+    public String getSkuNo() {
+        return skuNo;
     }
 
-    public void setSkuCode(String skuCode) {
-        this.skuCode = skuCode == null ? null : skuCode.trim();
+    public void setSkuNo(String skuNo) {
+        this.skuNo = skuNo == null ? null : skuNo.trim();
     }
 
-    public String getOrderCode() {
-        return orderCode;
+    public String getOrderNo() {
+        return orderNo;
     }
 
-    public void setOrderCode(String orderCode) {
-        this.orderCode = orderCode == null ? null : orderCode.trim();
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo == null ? null : orderNo.trim();
     }
 
     public BigDecimal getAmount() {

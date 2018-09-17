@@ -2,12 +2,15 @@ package com.melody.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.melody.common.constant.BusinessCodes;
+import com.melody.common.constant.RedisCodes;
 import com.melody.gateway.api.QiNiuTokenService;
 import com.melody.gateway.dto.QiNiuTokenEnter;
 import com.melody.gateway.dto.QiNiuTokenResult;
+import com.melody.redis.RedisCache;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import com.qiniu.util.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 /**
@@ -25,6 +28,9 @@ public class QiNiuTokenServiceImpl implements QiNiuTokenService {
     //  String bucket = "washcar";
     String bucket = "newegg";
 
+    @Autowired
+    RedisCache redisCache;
+
 
     @Override
     public QiNiuTokenResult getQiNiuToken(QiNiuTokenEnter qiNiuTokenEnter) {
@@ -33,12 +39,22 @@ public class QiNiuTokenServiceImpl implements QiNiuTokenService {
         if (!StringUtils.isNullOrEmpty(qiNiuTokenEnter.getSpaceName())) {
             bucket = qiNiuTokenEnter.getSpaceName();
         }
+        String upToken = redisCache.getString(RedisCodes.QINIU_UPTOKEN + bucket);
+        if (StringUtils.isNullOrEmpty(upToken)) {
 
-        Auth auth = Auth.create(accessKey, secretKey);
-        StringMap putPolicy = new StringMap();
-        putPolicy.put("returnBody", "{\"key\":\"$(key)\",\"hash\":\"$(etag)\",\"bucket\":\"$(bucket)\",\"fsize\":$(fsize)}");
-        long expireSeconds = 3600;
-        String upToken = auth.uploadToken(bucket);
+
+            Auth auth = Auth.create(accessKey, secretKey);
+            StringMap putPolicy = new StringMap();
+            putPolicy.put("returnBody", "{\"key\":\"$(key)\",\"hash\":\"$(etag)\",\"bucket\":\"$(bucket)\",\"fsize\":$(fsize)}");
+            long expireSeconds = 3600;
+            upToken = auth.uploadToken(bucket);
+
+            //把TOKEN保存到redis中，1个小时有效
+            redisCache.setString(RedisCodes.QINIU_UPTOKEN + bucket,
+                    upToken, RedisCodes.QINIU_TOKEN_EXPIRE_TIME);
+
+
+        }
         //  String upToken = auth.uploadToken(bucket, null, expireSeconds, putPolicy);
         if (!StringUtils.isNullOrEmpty(upToken)) {
 

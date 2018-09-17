@@ -1,16 +1,18 @@
 package com.melody.dao;
 
-import com.melody.generated.model.Order;
-import com.melody.generated.model.OrderKey;
+
+import com.melody.product.dto.Order;
+import com.melody.product.dto.OrderExpress;
+import com.melody.product.dto.OrderItem;
 
 public interface OrderMapper {
-    int deleteByPrimaryKey(OrderKey key);
 
-    int insert(Order record);
+    int insertOrder(Order record);
+    int insertOrderItem(OrderItem orderItem);
+    int insertOrderExpress(OrderExpress orderExpress);
 
     int insertSelective(Order record);
 
-    Order selectByPrimaryKey(OrderKey key);
 
     int updateByPrimaryKeySelective(Order record);
 

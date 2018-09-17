@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.dao.AdminUserMapper">
+    <resultMap id="BaseResultMap" type="SysCustomerLevel">
+        <id column="ID" jdbcType="BIGINT" property="id" />
+        <result column="LEVEL_ID" jdbcType="VARCHAR" property="levelId" />
+        <result column="LEVEL_NAME" jdbcType="VARCHAR" property="levelName" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID, LEVEL_ID, LEVEL_NAME
+    </sql>
+
+    <select id="getCustomerLevel" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from SYS_CUSTOMER_LEVEL
+    </select>
+
+</mapper>

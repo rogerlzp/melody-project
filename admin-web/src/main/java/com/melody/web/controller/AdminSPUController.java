@@ -33,10 +33,10 @@ public class AdminSPUController {
     private static final Logger log = LoggerFactory.getLogger(AdminSPUController.class);
 
 
-    @Reference(group = "adminSKUService")
+    @Reference(group = "adminSKUService", timeout = 10000)
     private AdminSKUService adminSKUService;
 
-    @Reference(group = "adminSPUService")
+    @Reference(group = "adminSPUService", timeout = 10000)
     private AdminSPUService adminSPUService;
 
     //获取categroy

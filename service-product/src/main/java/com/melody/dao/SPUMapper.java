@@ -1,6 +1,7 @@
 package com.melody.dao;
 
-import com.melody.generated.model.SPU;
+
+import com.melody.product.dto.SPU;
 
 public interface SPUMapper {
     int deleteByPrimaryKey(Long id);
@@ -14,4 +15,7 @@ public interface SPUMapper {
     int updateByPrimaryKeySelective(SPU record);
 
     int updateByPrimaryKey(SPU record);
+
+    SPU selectBySpuCode(String spuCode);
+
 }

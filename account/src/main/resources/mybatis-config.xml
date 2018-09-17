@@ -18,6 +18,7 @@
         <typeAlias alias="UserLevel" type="com.melody.user.dto.UserLevel"/>
         <!--<typeAlias alias="UserAgreement" type="com.wy.user.dto.UserAgreement"/>-->
 
+        <typeAlias alias="UserWx" type="com.melody.user.dto.UserWx"/>
 
     </typeAliases>
 

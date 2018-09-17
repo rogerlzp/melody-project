@@ -3,7 +3,7 @@ package com.melody.generated.model;
 public class OrderKey {
     private Long id;
 
-    private Long orderCode;
+    private String orderNo;
 
     public Long getId() {
         return id;
@@ -13,11 +13,11 @@ public class OrderKey {
         this.id = id;
     }
 
-    public Long getOrderCode() {
-        return orderCode;
+    public String getOrderNo() {
+        return orderNo;
     }
 
-    public void setOrderCode(Long orderCode) {
-        this.orderCode = orderCode;
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo == null ? null : orderNo.trim();
     }
 }

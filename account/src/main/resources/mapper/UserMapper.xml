@@ -31,16 +31,16 @@
         <id property="id" column="ID"/>
         <id property="userId" column="USER_ID"/>
         <id property="userName" column="USER_NAME"/>
-        <id property="loginMobileNo" column="LOGIN_MOBILE_NO"/>
+        <id property="mobileNo" column="MOBILE_NO"/>
         <id property="locationInfo" column="LOCATION_INFO"/>
         <id property="primaryPwd" column="PRIMARY_PWD"/>
         <id property="newPwd" column="NEW_PWD"/>
-        <id property="logType" column="LOG_TYPE"/>
+        <id property="loginType" column="LOGIN_TYPE"/>
         <id property="loginIp" column="LOGIN_IP"/>
         <id property="errorReson" column="ERROR_RESON"/>
         <id property="loginStatus" column="LOGINSTATUS"/>
         <id property="loginDate" column="LOGIN_DATE"/>
-        <id property="sessionKey" column="SESSIONKEY"/>
+        <id property="sessionKey" column="SESSION_KEY"/>
     </resultMap>
 
 
@@ -61,8 +61,8 @@
 
 
     <insert id="insertUserLoginLog" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-	INSERT INTO TL_USER_LOGIN (ID,USER_ID,USER_NAME,LOGIN_MOBILE_NO,LOCATION_INFO,PRIMARY_PWD,NEW_PWD,LOG_TYPE,LOGIN_IP,ERROR_RESON,LOGINSTATUS,LOGIN_DATE,SESSIONKEY)
-	VALUES (#{id},#{userId},#{userName},#{loginMobileNo},#{locationInfo},#{primaryPwd},#{newPwd},#{logType},#{loginIp},#{errorReson},#{loginStatus},#{loginDate},#{sessionKey})
+	INSERT INTO TL_USER_LOGIN (ID,USER_ID,USER_NAME,MOBILE_NO,LOCATION_INFO,PRIMARY_PWD,NEW_PWD,LOGIN_TYPE,LOGIN_IP,ERROR_RESON,LOGINSTATUS,LOGIN_DATE,SESSION_KEY)
+	VALUES (#{id},#{userId},#{userName},#{mobileNo},#{locationInfo},#{primaryPwd},#{newPwd},#{loginType},#{loginIp},#{errorReson},#{loginStatus},#{loginDate},#{sessionKey})
 	</insert>
 
 
@@ -97,7 +97,9 @@
 
 
     <select id="findLastUserLoginLog" resultMap="userLoginResultMap">
-		SELECT ID,USER_ID,USER_NAME,LOGIN_MOBILE_NO,LOCATION_INFO,PRIMARY_PWD,NEW_PWD,LOG_TYPE,LOGIN_IP,ERROR_RESON,LOGINSTATUS,LOGIN_DATE,SESSIONKEY FROM TL_USER_LOGIN
+		SELECT ID,USER_ID,USER_NAME,MOBILE_NO,
+		LOCATION_INFO,PRIMARY_PWD,NEW_PWD,LOGIN_TYPE,LOGIN_IP,ERROR_RESON,LOGINSTATUS,LOGIN_DATE,SESSION_KEY
+		FROM TL_USER_LOGIN
 		WHERE USER_ID=#{userId} AND LOGINSTATUS='0' ORDER BY LOGIN_DATE DESC LIMIT 1
 	</select>
 

@@ -29,7 +29,7 @@ public class AdminCategoryController {
     private static final Logger log = LoggerFactory.getLogger(AdminCategoryController.class);
 
 
-    @Reference(group = "adminCategoryService")
+    @Reference(group = "adminCategoryService", timeout=10000)
     private AdminCategoryService adminCategoryService;
 
 

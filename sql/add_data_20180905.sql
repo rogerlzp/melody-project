@@ -13,3 +13,17 @@ insert  into `sys_perm`(`pval`,`parent`,`pname`,`ptype`,`leaf`,`created`,`update
 ('m:menu5',NULL,'产品管理',1,1,NULL,NULL),
 ('m:menu5:1','m:menu5','品牌管理',1,1,NULL,NULL),
 ('m:menu5:2','m:menu5','分类管理',1,1,NULL,NULL),
+
+
+# 会员管理模块
+('a:user',NULL,'用户管理模块',3,0,NULL,NULL),
+
+
+
+
+# 活动banner
+insert into `TT_BANNER` (`BANNER_ID`, `BANNER_NAME`, `BANNER_URL`, `LINK_URL`, `BANNER_STATE`)
+values('1000001','安全保障','https://www.lingtouniao.com/img/banner/aqbz.jpg',
+'https://www.lingtouniao.com/h5/insurance.html','1'),
+('1000002','活动一','https://www.lingtouniao.com/img/banner/banner1.jpg',
+'https://www.lingtouniao.com/h5/banner-intro.html','1');

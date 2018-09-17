@@ -3,14 +3,14 @@
 <mapper namespace="com.melody.generated.dao.OrderRefundItemMapper">
   <resultMap id="BaseResultMap" type="com.melody.generated.model.OrderRefundItem">
     <id column="ID" jdbcType="BIGINT" property="id" />
-    <result column="ORDER_CODE" jdbcType="VARCHAR" property="orderCode" />
+    <result column="ORDER_NO" jdbcType="VARCHAR" property="orderNo" />
     <result column="REFUND_ORDER_ID" jdbcType="BIGINT" property="refundOrderId" />
-    <result column="SKU_CODE" jdbcType="VARCHAR" property="skuCode" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
     <result column="ORDER_SKU_ID" jdbcType="BIGINT" property="orderSkuId" />
     <result column="REFUND_NUM" jdbcType="INTEGER" property="refundNum" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, ORDER_CODE, REFUND_ORDER_ID, SKU_CODE, ORDER_SKU_ID, REFUND_NUM
+    ID, ORDER_NO, REFUND_ORDER_ID, SKU_NO, ORDER_SKU_ID, REFUND_NUM
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -23,22 +23,22 @@
     where ID = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.OrderRefundItem" useGeneratedKeys="true">
-    insert into TR_ORDER_REFUND_ITEM (ORDER_CODE, REFUND_ORDER_ID, SKU_CODE, 
+    insert into TR_ORDER_REFUND_ITEM (ORDER_NO, REFUND_ORDER_ID, SKU_NO, 
       ORDER_SKU_ID, REFUND_NUM)
-    values (#{orderCode,jdbcType=VARCHAR}, #{refundOrderId,jdbcType=BIGINT}, #{skuCode,jdbcType=VARCHAR}, 
+    values (#{orderNo,jdbcType=VARCHAR}, #{refundOrderId,jdbcType=BIGINT}, #{skuNo,jdbcType=VARCHAR}, 
       #{orderSkuId,jdbcType=BIGINT}, #{refundNum,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.OrderRefundItem" useGeneratedKeys="true">
     insert into TR_ORDER_REFUND_ITEM
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="orderCode != null">
-        ORDER_CODE,
+      <if test="orderNo != null">
+        ORDER_NO,
       </if>
       <if test="refundOrderId != null">
         REFUND_ORDER_ID,
       </if>
-      <if test="skuCode != null">
-        SKU_CODE,
+      <if test="skuNo != null">
+        SKU_NO,
       </if>
       <if test="orderSkuId != null">
         ORDER_SKU_ID,
@@ -48,14 +48,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="orderCode != null">
-        #{orderCode,jdbcType=VARCHAR},
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
       </if>
       <if test="refundOrderId != null">
         #{refundOrderId,jdbcType=BIGINT},
       </if>
-      <if test="skuCode != null">
-        #{skuCode,jdbcType=VARCHAR},
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
       </if>
       <if test="orderSkuId != null">
         #{orderSkuId,jdbcType=BIGINT},
@@ -68,14 +68,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.OrderRefundItem">
     update TR_ORDER_REFUND_ITEM
     <set>
-      <if test="orderCode != null">
-        ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      <if test="orderNo != null">
+        ORDER_NO = #{orderNo,jdbcType=VARCHAR},
       </if>
       <if test="refundOrderId != null">
         REFUND_ORDER_ID = #{refundOrderId,jdbcType=BIGINT},
       </if>
-      <if test="skuCode != null">
-        SKU_CODE = #{skuCode,jdbcType=VARCHAR},
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
       </if>
       <if test="orderSkuId != null">
         ORDER_SKU_ID = #{orderSkuId,jdbcType=BIGINT},
@@ -88,9 +88,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.OrderRefundItem">
     update TR_ORDER_REFUND_ITEM
-    set ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+    set ORDER_NO = #{orderNo,jdbcType=VARCHAR},
       REFUND_ORDER_ID = #{refundOrderId,jdbcType=BIGINT},
-      SKU_CODE = #{skuCode,jdbcType=VARCHAR},
+      SKU_NO = #{skuNo,jdbcType=VARCHAR},
       ORDER_SKU_ID = #{orderSkuId,jdbcType=BIGINT},
       REFUND_NUM = #{refundNum,jdbcType=INTEGER}
     where ID = #{id,jdbcType=BIGINT}

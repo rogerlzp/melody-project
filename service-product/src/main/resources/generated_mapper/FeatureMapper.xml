@@ -2,6 +2,655 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.melody.generated.dao.FeatureMapper">
   <resultMap id="BaseResultMap" type="com.melody.generated.model.Feature">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="FEATURE_NAME" jdbcType="VARCHAR" property="featureName" />
+    <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, FEATURE_NAME, CATEGORY_CODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE (FEATURE_NAME, CATEGORY_CODE)
+    values (#{featureName,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        FEATURE_NAME,
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    <set>
+      <if test="featureName != null">
+        FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    set FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Feature">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="FEATURE_NAME" jdbcType="VARCHAR" property="featureName" />
+    <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, FEATURE_NAME, CATEGORY_CODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE (FEATURE_NAME, CATEGORY_CODE)
+    values (#{featureName,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        FEATURE_NAME,
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    <set>
+      <if test="featureName != null">
+        FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    set FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Feature">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="FEATURE_NAME" jdbcType="VARCHAR" property="featureName" />
+    <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, FEATURE_NAME, CATEGORY_CODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE (FEATURE_NAME, CATEGORY_CODE)
+    values (#{featureName,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        FEATURE_NAME,
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    <set>
+      <if test="featureName != null">
+        FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    set FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Feature">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="FEATURE_NAME" jdbcType="VARCHAR" property="featureName" />
+    <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, FEATURE_NAME, CATEGORY_CODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE (FEATURE_NAME, CATEGORY_CODE)
+    values (#{featureName,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        FEATURE_NAME,
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    <set>
+      <if test="featureName != null">
+        FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    set FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Feature">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="FEATURE_NAME" jdbcType="VARCHAR" property="featureName" />
+    <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, FEATURE_NAME, CATEGORY_CODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE (FEATURE_NAME, CATEGORY_CODE)
+    values (#{featureName,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        FEATURE_NAME,
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    <set>
+      <if test="featureName != null">
+        FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    set FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Feature">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="FEATURE_NAME" jdbcType="VARCHAR" property="featureName" />
+    <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, FEATURE_NAME, CATEGORY_CODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE (FEATURE_NAME, CATEGORY_CODE)
+    values (#{featureName,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        FEATURE_NAME,
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    <set>
+      <if test="featureName != null">
+        FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    set FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Feature">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="FEATURE_NAME" jdbcType="VARCHAR" property="featureName" />
+    <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, FEATURE_NAME, CATEGORY_CODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE (FEATURE_NAME, CATEGORY_CODE)
+    values (#{featureName,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        FEATURE_NAME,
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    <set>
+      <if test="featureName != null">
+        FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    set FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Feature">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="FEATURE_NAME" jdbcType="VARCHAR" property="featureName" />
+    <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, FEATURE_NAME, CATEGORY_CODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE (FEATURE_NAME, CATEGORY_CODE)
+    values (#{featureName,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        FEATURE_NAME,
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    <set>
+      <if test="featureName != null">
+        FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    set FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Feature">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="FEATURE_NAME" jdbcType="VARCHAR" property="featureName" />
+    <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, FEATURE_NAME, CATEGORY_CODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE (FEATURE_NAME, CATEGORY_CODE)
+    values (#{featureName,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        FEATURE_NAME,
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    <set>
+      <if test="featureName != null">
+        FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    set FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Feature">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="FEATURE_NAME" jdbcType="VARCHAR" property="featureName" />
+    <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, FEATURE_NAME, CATEGORY_CODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE (FEATURE_NAME, CATEGORY_CODE)
+    values (#{featureName,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        FEATURE_NAME,
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    <set>
+      <if test="featureName != null">
+        FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    set FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Feature">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="FEATURE_NAME" jdbcType="VARCHAR" property="featureName" />
+    <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, FEATURE_NAME, CATEGORY_CODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TT_FEATURE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE (FEATURE_NAME, CATEGORY_CODE)
+    values (#{featureName,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Feature" useGeneratedKeys="true">
+    insert into TT_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        FEATURE_NAME,
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="featureName != null">
+        #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    <set>
+      <if test="featureName != null">
+        FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Feature">
+    update TT_FEATURE
+    set FEATURE_NAME = #{featureName,jdbcType=VARCHAR},
+      CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Feature">
     <id column="ID" jdbcType="BIGINT" property="id" />
     <result column="FEATURE_NAME" jdbcType="VARCHAR" property="featureName" />
     <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />

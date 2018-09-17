@@ -32,7 +32,7 @@ import org.springframework.util.ObjectUtils;
  * @Description: Mobile verification code send
  * @date 2015-11-25
  */
-@Service(group = "mobileCodeService")
+@Service(group = "mobileCodeService", timeout = 10000)
 public class MobileCodeServiceImpl implements MobileCodeService {
     private static final Logger log = LoggerFactory.getLogger(MobileCodeServiceImpl.class);
     //请及时输入，五分钟后失效。
@@ -51,7 +51,7 @@ public class MobileCodeServiceImpl implements MobileCodeService {
     @Autowired
     RedisLocker redisLocker;
 
-    @Reference(group = "privateMobileCodeService")
+    @Reference(group = "privateMobileCodeService", timeout = 10000)
     PrivateMobileCodeService privateMobileCodeService;
 
 

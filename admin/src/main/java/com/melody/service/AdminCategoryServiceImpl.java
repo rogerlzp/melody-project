@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 
-@Service(group = "adminCategoryService")
+@Service(group = "adminCategoryService", timeout = 10000)
 public class AdminCategoryServiceImpl implements AdminCategoryService {
 
     @Autowired

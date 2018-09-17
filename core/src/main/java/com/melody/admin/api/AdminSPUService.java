@@ -10,6 +10,7 @@ public interface AdminSPUService {
 
     int addSPU(SPU spu);
 
+
     Page<SPU> querySPUList(Page page);
 
     int deleteById(long spuId);

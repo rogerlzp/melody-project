@@ -1,6 +1,9 @@
 package com.melody.result;
 
+import com.melody.exception.BusinessException;
 import lombok.Data;
+
+import java.util.Map;
 
 /**
  * 统一返回实体
@@ -10,20 +13,15 @@ import lombok.Data;
 @Data
 public class JsonApi<T> {
 
-    private static final int OK = 1;
-    private static final int FAIL = 0;
+    private static final int OK = 0;
+    private static final int FAIL = -1;
+    private static final int UNKNOWN_ERROR = 9999;
 
-    private int code = OK;
+    private int resultCode = OK;
+
     private T data;
-    private String message = "请求成功！";
+    private String resultMessage = "请求成功！";
 
-    public int getCode() {
-        return this.code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
 
     public T getData() {
         return this.data;
@@ -33,13 +31,6 @@ public class JsonApi<T> {
         this.data = data;
     }
 
-    public String getMessage() {
-        return this.message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public JsonApi() {
     }
@@ -48,41 +39,57 @@ public class JsonApi<T> {
         return new JsonApi();
     }
 
-    public static JsonApi isFail() {
-        return isFail(FAIL);
-    }
+//    public static JsonApi isFail() {
+//        return isFail(FAIL);
+//    }
 
     public static JsonApi isFail(Integer code) {
         return new JsonApi().code(code);
     }
 
-    public static JsonApi isFail(Throwable e) {
-        return isFail().message(e);
-    }
+//    public static JsonApi isFail(Throwable e) {
+//        return isFail().message(e);
+//    }
 
     public static JsonApi isFail(ErrorCode errorCode) {
         return new JsonApi()
                 .code(errorCode.getErrorID())
                 .message(errorCode.getErrorMsg());
     }
-
+//
+//    public JsonApi code(String code) {
+//        this.setResultCode(code);
+//        return this;
+//    }
     public JsonApi code(int code) {
-        this.setCode(code);
+        this.setResultCode(code);
         return this;
     }
 
+
     public JsonApi message(Throwable e) {
-        this.setMessage(e.getMessage());
+        this.setResultMessage(e.getMessage());
         return this;
     }
 
     public JsonApi message(String message) {
-        this.setMessage(message);
+        this.setResultMessage(message);
         return this;
     }
 
     public JsonApi data(T data) {
         this.setData(data);
         return this;
+    }
+
+    public static JsonApi isFail(int errorCode, String message) {
+        return new JsonApi()
+                .code(errorCode)
+                .message(message);
+    }
+    public static JsonApi unknowError() {
+        return new JsonApi()
+                .code(UNKNOWN_ERROR)
+                .message("服务器异常");
     }
 }

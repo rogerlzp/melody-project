@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSON;
 import com.melody.common.constant.RedisCodes;
 import com.melody.common.utils.TokenUtils;
 import com.melody.user.dto.User;
+import com.melody.user.dto.UserWx;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -330,6 +331,19 @@ public class RedisCache {
     public boolean updateUser(User user) {
         final String objectJson = JSON.toJSONString(user);
         final String key = RedisCodes.USER + user.mobileNo;
+        return new Executor<Boolean>(shardedJedisPool) {
+            @Override
+            Boolean execute() {
+                Jedis _jedis = jedis.getShard(key);
+                _jedis.set(key, objectJson);
+                return true;
+            }
+        }.getResult();
+    }
+
+    public boolean updateWXUser(UserWx userWx) {
+        final String objectJson = JSON.toJSONString(userWx);
+        final String key = RedisCodes.WX_USER + userWx.getOpenId();
         return new Executor<Boolean>(shardedJedisPool) {
             @Override
             Boolean execute() {

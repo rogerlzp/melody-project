@@ -1,11 +1,18 @@
 package com.melody.product.dto;
 
+import lombok.Data;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class OrderRefund {
+@Data
+public class OrderRefund implements Serializable {
+
+    private static final long serialVersionUID = 3230925201809151750L;
+
     private Long id;
 
-    private String orderCode;
+    private String orderNo;
 
     private String refundStatus;
 
@@ -13,43 +20,5 @@ public class OrderRefund {
 
     private BigDecimal realAmount;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getOrderCode() {
-        return orderCode;
-    }
-
-    public void setOrderCode(String orderCode) {
-        this.orderCode = orderCode == null ? null : orderCode.trim();
-    }
-
-    public String getRefundStatus() {
-        return refundStatus;
-    }
-
-    public void setRefundStatus(String refundStatus) {
-        this.refundStatus = refundStatus == null ? null : refundStatus.trim();
-    }
-
-    public BigDecimal getAskedAmount() {
-        return askedAmount;
-    }
-
-    public void setAskedAmount(BigDecimal askedAmount) {
-        this.askedAmount = askedAmount;
-    }
-
-    public BigDecimal getRealAmount() {
-        return realAmount;
-    }
-
-    public void setRealAmount(BigDecimal realAmount) {
-        this.realAmount = realAmount;
-    }
 }

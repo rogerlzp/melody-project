@@ -9,17 +9,20 @@ import com.melody.admin.api.SysPermService;
 import com.melody.admin.dto.SysPerm;
 import com.melody.dao.AdminSKUMapper;
 import com.melody.dao.AdminSPUMapper;
+import com.melody.dao.AdminUserMapper;
 import com.melody.dao.SysPermMapper;
-import com.melody.product.dto.FeatureOption;
-import com.melody.product.dto.SKU;
-import com.melody.product.dto.SPU;
-import com.melody.product.dto.SkuImage;
+import com.melody.product.dto.*;
+import com.melody.system.dto.SysCustomerLevel;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 
-@Service(group = "adminSKUService")
+@Service(group = "adminSKUService", timeout = 10000)
 public class AdminSKUServiceImpl implements AdminSKUService {
 
     @Autowired
@@ -28,9 +31,23 @@ public class AdminSKUServiceImpl implements AdminSKUService {
     @Autowired
     BaseServiceImpl baseService;
 
+
+    @Autowired
+    AdminUserMapper adminUserMapper;
+
+//    @Override
+//    public String addSKU(SKU sku) {
+//        return null;
+//    }
+
+
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public String addSKU(SKU sku) {
-        long skuId = baseService.getNextSequence("TT_FEATURE");
+
+//        SKU sku = new SKU();
+//        BeanUtils.copyProperties(skuEnter, sku);
+        long skuId = baseService.getNextSequence("TT_SKU");
         sku.setId(skuId);
 
         // SKU NO
@@ -39,6 +56,7 @@ public class AdminSKUServiceImpl implements AdminSKUService {
 
         sku.setStatus("1"); // 新建，有效
 
+
         int insertResult = adminSKUMapper.insert(sku);
 
         // 添加属性成功后，在添加特性
@@ -46,7 +64,7 @@ public class AdminSKUServiceImpl implements AdminSKUService {
             if (sku.getFeatureOptionList() != null) {
                 for (FeatureOption featureOption : sku.getFeatureOptionList()) {
                     long skuFeatureId = baseService.getNextSequence("TR_SKU_FEATURE");
-                    adminSKUMapper.insertSKUFeature(skuFeatureId, featureOption.getId(), skuId);
+                    adminSKUMapper.insertSKUFeature(skuFeatureId, featureOption.getId(), skuNo);
                 }
             }
             if (sku.getSkuImageList() != null) {
@@ -60,11 +78,50 @@ public class AdminSKUServiceImpl implements AdminSKUService {
                     adminSKUMapper.insertSKUImage(skuImage);
                 }
             }
+
+            // 增加库存
+            if(sku.getInventory() !=null) {
+                Inventory inventory = sku.getInventory();
+                long inventoryId = baseService.getNextSequence("TT_INVENTORY");
+                inventory.setId(inventoryId);
+                inventory.setSkuNo(skuNo);
+                adminSKUMapper.insertSKUInventory(inventory);
+            }
+
+            // 增加价格
+            if(sku.getSkuPriceEnter() !=null) {
+                SkuPriceEnter skuPriceEnter = sku.getSkuPriceEnter();
+                SkuPrice skuPrice = new SkuPrice();
+                BeanUtils.copyProperties(skuPriceEnter, skuPrice);
+                long skuPriceId = baseService.getNextSequence("TR_SKU_PRICE");
+                skuPrice.setId(skuPriceId);
+                skuPrice.setSkuNo(skuNo);
+                adminSKUMapper.insertSKUPrice(skuPrice);
+
+                // 添加会员价格
+                List<SysCustomerLevel> customerLevelList =  adminUserMapper.getCustomerLevel();
+               for(int i=0;i<customerLevelList.size();i++){
+                    UserSkuDiscount userSkuDiscount =  new UserSkuDiscount();
+                    long userSkuDiscountId = baseService.getNextSequence("TR_USER_SKU_DISCOUNT");
+                   userSkuDiscount.setId(userSkuDiscountId);
+                   userSkuDiscount.setDiscount(skuPriceEnter.getDiscountPriceList().get(i));
+                   userSkuDiscount.setDiscount(100D);
+                   userSkuDiscount.setUserLevelId(customerLevelList.get(i).getLevelId());
+                   userSkuDiscount.setSkuNo(skuNo);
+                   userSkuDiscount.setStatus("1");
+                   adminSKUMapper.insertUserSKUDiscount(userSkuDiscount);
+              }
+            }
+
         } else {
             // TODO: add fail later
         }
         return skuNo;
     }
+
+
+
+
 
 
     @Override

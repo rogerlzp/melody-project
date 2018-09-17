@@ -156,4 +156,10 @@ public class BusinessCodes {
     public static final int TAG_ALL = 500006;// TAG ALL list
 
 
+    /*** 参数验证失败 ****/
+
+//    public static final int ERROR_INPUT_PARAM = 500006;// TAG ALL list
+
+
+
 }

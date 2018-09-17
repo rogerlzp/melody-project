@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class OrderRefund {
     private Long id;
 
-    private String orderCode;
+    private String orderNo;
 
     private String refundStatus;
 
@@ -21,12 +21,12 @@ public class OrderRefund {
         this.id = id;
     }
 
-    public String getOrderCode() {
-        return orderCode;
+    public String getOrderNo() {
+        return orderNo;
     }
 
-    public void setOrderCode(String orderCode) {
-        this.orderCode = orderCode == null ? null : orderCode.trim();
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo == null ? null : orderNo.trim();
     }
 
     public String getRefundStatus() {

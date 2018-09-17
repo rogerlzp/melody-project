@@ -33,7 +33,7 @@ public class MobileCodeController extends BaseController {
 
     public static final String PRIVATE_KEY = "private_key";
 
-    @Reference(group = "mobileCodeService")
+    @Reference(group = "mobileCodeService", timeout = 10000)
     MobileCodeService mobileCodeService;
 
     @RequestMapping

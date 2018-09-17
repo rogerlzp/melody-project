@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by liuyw on 2016/1/19.
  */
 
-@Service(group="sysConfigService")
+@Service(group="sysConfigService", timeout = 10000)
 public class SysConfigServiceImpl implements SysConfigService {
     public static String CONCAT_FLAG = "|";
     public static String CONCAT_DEFAULT = "ITEM";//default

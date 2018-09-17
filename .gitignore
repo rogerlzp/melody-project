@@ -41,3 +41,16 @@
 /service-gateway/.mvn/
 /service-product/.mvn/
 /web2/
+/dump.rdb
+/zookeeper.out
+admin-web/src/main/java/com/melody/web/base/
+admin-web/src/main/java/com/melody/web/support/
+admin-web/src/main/java/controller/
+admin-web/src/main/resources/i18n/messages/
+dump.rdb
+service-common/src/main/java/com/melody/common/redis/
+web/src/main/java/controller/
+web/src/main/resources/i18n/messages/
+web/src/main/resources/t1/t2/
+zookeeper.out
+melody/

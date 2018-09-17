@@ -20,8 +20,6 @@ public class SKU {
 
     private Integer totalNumber;
 
-    private Integer inventory;
-
     private String productDesc;
 
     private String status;
@@ -29,6 +27,10 @@ public class SKU {
     private BigDecimal price;
 
     private String spuCode;
+
+    private Date createDate;
+
+    private Date updateDate;
 
     public String getSkuNo() {
         return skuNo;
@@ -94,14 +96,6 @@ public class SKU {
         this.totalNumber = totalNumber;
     }
 
-    public Integer getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(Integer inventory) {
-        this.inventory = inventory;
-    }
-
     public String getProductDesc() {
         return productDesc;
     }
@@ -132,5 +126,21 @@ public class SKU {
 
     public void setSpuCode(String spuCode) {
         this.spuCode = spuCode == null ? null : spuCode.trim();
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 }

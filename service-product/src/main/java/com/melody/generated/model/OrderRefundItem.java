@@ -3,11 +3,11 @@ package com.melody.generated.model;
 public class OrderRefundItem {
     private Long id;
 
-    private String orderCode;
+    private String orderNo;
 
     private Long refundOrderId;
 
-    private String skuCode;
+    private String skuNo;
 
     private Long orderSkuId;
 
@@ -21,12 +21,12 @@ public class OrderRefundItem {
         this.id = id;
     }
 
-    public String getOrderCode() {
-        return orderCode;
+    public String getOrderNo() {
+        return orderNo;
     }
 
-    public void setOrderCode(String orderCode) {
-        this.orderCode = orderCode == null ? null : orderCode.trim();
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo == null ? null : orderNo.trim();
     }
 
     public Long getRefundOrderId() {
@@ -37,12 +37,12 @@ public class OrderRefundItem {
         this.refundOrderId = refundOrderId;
     }
 
-    public String getSkuCode() {
-        return skuCode;
+    public String getSkuNo() {
+        return skuNo;
     }
 
-    public void setSkuCode(String skuCode) {
-        this.skuCode = skuCode == null ? null : skuCode.trim();
+    public void setSkuNo(String skuNo) {
+        this.skuNo = skuNo == null ? null : skuNo.trim();
     }
 
     public Long getOrderSkuId() {

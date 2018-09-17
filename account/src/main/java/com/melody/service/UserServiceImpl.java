@@ -22,7 +22,7 @@ import javax.annotation.Resource;
  * @author konghang
  */
 @Component
-@Service(group = "userService")
+@Service(group = "userService", timeout = 10000)
 public class UserServiceImpl implements UserService {
 
     @Resource
@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User selectUserBy(User user) {
 
-//        return userDao.selectUserBy(user);
         return null;
+//        return userDao.selectUserBy(user);
     }
 
     /**

@@ -3,6 +3,1415 @@
 <mapper namespace="com.melody.generated.dao.SkuFeatureMapper">
   <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
     <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="FEATURE_OPTION_ID" jdbcType="INTEGER" property="featureOptionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, FEATURE_OPTION_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE (SKU_NO, FEATURE_OPTION_ID)
+    values (#{skuNo,jdbcType=VARCHAR}, #{featureOptionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureOptionId != null">
+        #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="FEATURE_OPTION_ID" jdbcType="INTEGER" property="featureOptionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, FEATURE_OPTION_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE (SKU_NO, FEATURE_OPTION_ID)
+    values (#{skuNo,jdbcType=VARCHAR}, #{featureOptionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureOptionId != null">
+        #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="FEATURE_OPTION_ID" jdbcType="INTEGER" property="featureOptionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, FEATURE_OPTION_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE (SKU_NO, FEATURE_OPTION_ID)
+    values (#{skuNo,jdbcType=VARCHAR}, #{featureOptionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureOptionId != null">
+        #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="FEATURE_OPTION_ID" jdbcType="INTEGER" property="featureOptionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, FEATURE_OPTION_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE (SKU_NO, FEATURE_OPTION_ID)
+    values (#{skuNo,jdbcType=VARCHAR}, #{featureOptionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureOptionId != null">
+        #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="FEATURE_OPTION_ID" jdbcType="INTEGER" property="featureOptionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, FEATURE_OPTION_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE (SKU_NO, FEATURE_OPTION_ID)
+    values (#{skuNo,jdbcType=VARCHAR}, #{featureOptionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureOptionId != null">
+        #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="FEATURE_OPTION_ID" jdbcType="INTEGER" property="featureOptionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, FEATURE_OPTION_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE (SKU_NO, FEATURE_OPTION_ID)
+    values (#{skuNo,jdbcType=VARCHAR}, #{featureOptionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureOptionId != null">
+        #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="FEATURE_OPTION_ID" jdbcType="INTEGER" property="featureOptionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, FEATURE_OPTION_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE (SKU_NO, FEATURE_OPTION_ID)
+    values (#{skuNo,jdbcType=VARCHAR}, #{featureOptionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureOptionId != null">
+        #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_ID" jdbcType="BIGINT" property="skuId" />
+    <result column="FEATURE_OPTION_ID" jdbcType="INTEGER" property="featureOptionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_ID, FEATURE_OPTION_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE (SKU_ID, FEATURE_OPTION_ID)
+    values (#{skuId,jdbcType=BIGINT}, #{featureOptionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        SKU_ID,
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="featureOptionId != null">
+        #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    <set>
+      <if test="skuId != null">
+        SKU_ID = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    set SKU_ID = #{skuId,jdbcType=BIGINT},
+      FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_ID" jdbcType="BIGINT" property="skuId" />
+    <result column="FEATURE_OPTION_ID" jdbcType="INTEGER" property="featureOptionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_ID, FEATURE_OPTION_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE (SKU_ID, FEATURE_OPTION_ID)
+    values (#{skuId,jdbcType=BIGINT}, #{featureOptionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        SKU_ID,
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="featureOptionId != null">
+        #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    <set>
+      <if test="skuId != null">
+        SKU_ID = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    set SKU_ID = #{skuId,jdbcType=BIGINT},
+      FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="TOTAL_NUM" jdbcType="INTEGER" property="totalNum" />
+    <result column="SELLABLE_NUM" jdbcType="INTEGER" property="sellableNum" />
+    <result column="ORDER_OCCUPIED_NUM" jdbcType="INTEGER" property="orderOccupiedNum" />
+    <result column="UNABAILABLE_NUM" jdbcType="INTEGER" property="unabailableNum" />
+    <result column="LOCKED_NUM" jdbcType="INTEGER" property="lockedNum" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, TOTAL_NUM, SELLABLE_NUM, ORDER_OCCUPIED_NUM, UNABAILABLE_NUM, LOCKED_NUM, 
+    CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_INVENTORY
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_INVENTORY
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_INVENTORY (SKU_NO, TOTAL_NUM, SELLABLE_NUM, 
+      ORDER_OCCUPIED_NUM, UNABAILABLE_NUM, LOCKED_NUM, 
+      CREATE_DATE, UPDATE_DATE)
+    values (#{skuNo,jdbcType=VARCHAR}, #{totalNum,jdbcType=INTEGER}, #{sellableNum,jdbcType=INTEGER}, 
+      #{orderOccupiedNum,jdbcType=INTEGER}, #{unabailableNum,jdbcType=INTEGER}, #{lockedNum,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_INVENTORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="totalNum != null">
+        TOTAL_NUM,
+      </if>
+      <if test="sellableNum != null">
+        SELLABLE_NUM,
+      </if>
+      <if test="orderOccupiedNum != null">
+        ORDER_OCCUPIED_NUM,
+      </if>
+      <if test="unabailableNum != null">
+        UNABAILABLE_NUM,
+      </if>
+      <if test="lockedNum != null">
+        LOCKED_NUM,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNum != null">
+        #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="sellableNum != null">
+        #{sellableNum,jdbcType=INTEGER},
+      </if>
+      <if test="orderOccupiedNum != null">
+        #{orderOccupiedNum,jdbcType=INTEGER},
+      </if>
+      <if test="unabailableNum != null">
+        #{unabailableNum,jdbcType=INTEGER},
+      </if>
+      <if test="lockedNum != null">
+        #{lockedNum,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_INVENTORY
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNum != null">
+        TOTAL_NUM = #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="sellableNum != null">
+        SELLABLE_NUM = #{sellableNum,jdbcType=INTEGER},
+      </if>
+      <if test="orderOccupiedNum != null">
+        ORDER_OCCUPIED_NUM = #{orderOccupiedNum,jdbcType=INTEGER},
+      </if>
+      <if test="unabailableNum != null">
+        UNABAILABLE_NUM = #{unabailableNum,jdbcType=INTEGER},
+      </if>
+      <if test="lockedNum != null">
+        LOCKED_NUM = #{lockedNum,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_INVENTORY
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      TOTAL_NUM = #{totalNum,jdbcType=INTEGER},
+      SELLABLE_NUM = #{sellableNum,jdbcType=INTEGER},
+      ORDER_OCCUPIED_NUM = #{orderOccupiedNum,jdbcType=INTEGER},
+      UNABAILABLE_NUM = #{unabailableNum,jdbcType=INTEGER},
+      LOCKED_NUM = #{lockedNum,jdbcType=INTEGER},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="LIST_PRICE" jdbcType="DECIMAL" property="listPrice" />
+    <result column="SALE_PRICE" jdbcType="DECIMAL" property="salePrice" />
+    <result column="SPECIAL_PRICE" jdbcType="DECIMAL" property="specialPrice" />
+    <result column="IMPORT_PRICE" jdbcType="DECIMAL" property="importPrice" />
+    <result column="COST_PRICE" jdbcType="DECIMAL" property="costPrice" />
+    <result column="DISCOUNT_PRICE" jdbcType="DECIMAL" property="discountPrice" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, LIST_PRICE, SALE_PRICE, SPECIAL_PRICE, IMPORT_PRICE, COST_PRICE, DISCOUNT_PRICE, 
+    CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_PRICE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_PRICE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_PRICE (SKU_NO, LIST_PRICE, SALE_PRICE, 
+      SPECIAL_PRICE, IMPORT_PRICE, COST_PRICE, 
+      DISCOUNT_PRICE, CREATE_DATE, UPDATE_DATE
+      )
+    values (#{skuNo,jdbcType=VARCHAR}, #{listPrice,jdbcType=DECIMAL}, #{salePrice,jdbcType=DECIMAL}, 
+      #{specialPrice,jdbcType=DECIMAL}, #{importPrice,jdbcType=DECIMAL}, #{costPrice,jdbcType=DECIMAL}, 
+      #{discountPrice,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_PRICE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="listPrice != null">
+        LIST_PRICE,
+      </if>
+      <if test="salePrice != null">
+        SALE_PRICE,
+      </if>
+      <if test="specialPrice != null">
+        SPECIAL_PRICE,
+      </if>
+      <if test="importPrice != null">
+        IMPORT_PRICE,
+      </if>
+      <if test="costPrice != null">
+        COST_PRICE,
+      </if>
+      <if test="discountPrice != null">
+        DISCOUNT_PRICE,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="listPrice != null">
+        #{listPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="salePrice != null">
+        #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="specialPrice != null">
+        #{specialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="importPrice != null">
+        #{importPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="costPrice != null">
+        #{costPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="discountPrice != null">
+        #{discountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_PRICE
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="listPrice != null">
+        LIST_PRICE = #{listPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="salePrice != null">
+        SALE_PRICE = #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="specialPrice != null">
+        SPECIAL_PRICE = #{specialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="importPrice != null">
+        IMPORT_PRICE = #{importPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="costPrice != null">
+        COST_PRICE = #{costPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="discountPrice != null">
+        DISCOUNT_PRICE = #{discountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_PRICE
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      LIST_PRICE = #{listPrice,jdbcType=DECIMAL},
+      SALE_PRICE = #{salePrice,jdbcType=DECIMAL},
+      SPECIAL_PRICE = #{specialPrice,jdbcType=DECIMAL},
+      IMPORT_PRICE = #{importPrice,jdbcType=DECIMAL},
+      COST_PRICE = #{costPrice,jdbcType=DECIMAL},
+      DISCOUNT_PRICE = #{discountPrice,jdbcType=DECIMAL},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="USER_LEVEL_ID" jdbcType="INTEGER" property="userLevelId" />
+    <result column="DISCOUNT" jdbcType="DECIMAL" property="discount" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, USER_LEVEL_ID, DISCOUNT, STATUS, CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_USER_SKU_DISCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_USER_SKU_DISCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_USER_SKU_DISCOUNT (SKU_NO, USER_LEVEL_ID, DISCOUNT, 
+      STATUS, CREATE_DATE, UPDATE_DATE
+      )
+    values (#{skuNo,jdbcType=VARCHAR}, #{userLevelId,jdbcType=INTEGER}, #{discount,jdbcType=DECIMAL}, 
+      #{status,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_USER_SKU_DISCOUNT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="userLevelId != null">
+        USER_LEVEL_ID,
+      </if>
+      <if test="discount != null">
+        DISCOUNT,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevelId != null">
+        #{userLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null">
+        #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_USER_SKU_DISCOUNT
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevelId != null">
+        USER_LEVEL_ID = #{userLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null">
+        DISCOUNT = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_USER_SKU_DISCOUNT
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      USER_LEVEL_ID = #{userLevelId,jdbcType=INTEGER},
+      DISCOUNT = #{discount,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_ID" jdbcType="BIGINT" property="skuId" />
+    <result column="FEATURE_OPTION_ID" jdbcType="INTEGER" property="featureOptionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_ID, FEATURE_OPTION_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE (SKU_ID, FEATURE_OPTION_ID)
+    values (#{skuId,jdbcType=BIGINT}, #{featureOptionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        SKU_ID,
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="featureOptionId != null">
+        #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    <set>
+      <if test="skuId != null">
+        SKU_ID = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    set SKU_ID = #{skuId,jdbcType=BIGINT},
+      FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="TOTAL_NUM" jdbcType="INTEGER" property="totalNum" />
+    <result column="SELLABLE_NUM" jdbcType="INTEGER" property="sellableNum" />
+    <result column="ORDER_OCCUPIED_NUM" jdbcType="INTEGER" property="orderOccupiedNum" />
+    <result column="UNABAILABLE_NUM" jdbcType="INTEGER" property="unabailableNum" />
+    <result column="LOCKED_NUM" jdbcType="INTEGER" property="lockedNum" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, TOTAL_NUM, SELLABLE_NUM, ORDER_OCCUPIED_NUM, UNABAILABLE_NUM, LOCKED_NUM, 
+    CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_INVENTORY
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_INVENTORY
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_INVENTORY (SKU_NO, TOTAL_NUM, SELLABLE_NUM, 
+      ORDER_OCCUPIED_NUM, UNABAILABLE_NUM, LOCKED_NUM, 
+      CREATE_DATE, UPDATE_DATE)
+    values (#{skuNo,jdbcType=VARCHAR}, #{totalNum,jdbcType=INTEGER}, #{sellableNum,jdbcType=INTEGER}, 
+      #{orderOccupiedNum,jdbcType=INTEGER}, #{unabailableNum,jdbcType=INTEGER}, #{lockedNum,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_INVENTORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="totalNum != null">
+        TOTAL_NUM,
+      </if>
+      <if test="sellableNum != null">
+        SELLABLE_NUM,
+      </if>
+      <if test="orderOccupiedNum != null">
+        ORDER_OCCUPIED_NUM,
+      </if>
+      <if test="unabailableNum != null">
+        UNABAILABLE_NUM,
+      </if>
+      <if test="lockedNum != null">
+        LOCKED_NUM,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNum != null">
+        #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="sellableNum != null">
+        #{sellableNum,jdbcType=INTEGER},
+      </if>
+      <if test="orderOccupiedNum != null">
+        #{orderOccupiedNum,jdbcType=INTEGER},
+      </if>
+      <if test="unabailableNum != null">
+        #{unabailableNum,jdbcType=INTEGER},
+      </if>
+      <if test="lockedNum != null">
+        #{lockedNum,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_INVENTORY
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNum != null">
+        TOTAL_NUM = #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="sellableNum != null">
+        SELLABLE_NUM = #{sellableNum,jdbcType=INTEGER},
+      </if>
+      <if test="orderOccupiedNum != null">
+        ORDER_OCCUPIED_NUM = #{orderOccupiedNum,jdbcType=INTEGER},
+      </if>
+      <if test="unabailableNum != null">
+        UNABAILABLE_NUM = #{unabailableNum,jdbcType=INTEGER},
+      </if>
+      <if test="lockedNum != null">
+        LOCKED_NUM = #{lockedNum,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_INVENTORY
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      TOTAL_NUM = #{totalNum,jdbcType=INTEGER},
+      SELLABLE_NUM = #{sellableNum,jdbcType=INTEGER},
+      ORDER_OCCUPIED_NUM = #{orderOccupiedNum,jdbcType=INTEGER},
+      UNABAILABLE_NUM = #{unabailableNum,jdbcType=INTEGER},
+      LOCKED_NUM = #{lockedNum,jdbcType=INTEGER},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="LIST_PRICE" jdbcType="DECIMAL" property="listPrice" />
+    <result column="SALE_PRICE" jdbcType="DECIMAL" property="salePrice" />
+    <result column="SPECIAL_PRICE" jdbcType="DECIMAL" property="specialPrice" />
+    <result column="IMPORT_PRICE" jdbcType="DECIMAL" property="importPrice" />
+    <result column="COST_PRICE" jdbcType="DECIMAL" property="costPrice" />
+    <result column="DISCOUNT_PRICE" jdbcType="DECIMAL" property="discountPrice" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, LIST_PRICE, SALE_PRICE, SPECIAL_PRICE, IMPORT_PRICE, COST_PRICE, DISCOUNT_PRICE, 
+    CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_PRICE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_PRICE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_PRICE (SKU_NO, LIST_PRICE, SALE_PRICE, 
+      SPECIAL_PRICE, IMPORT_PRICE, COST_PRICE, 
+      DISCOUNT_PRICE, CREATE_DATE, UPDATE_DATE
+      )
+    values (#{skuNo,jdbcType=VARCHAR}, #{listPrice,jdbcType=DECIMAL}, #{salePrice,jdbcType=DECIMAL}, 
+      #{specialPrice,jdbcType=DECIMAL}, #{importPrice,jdbcType=DECIMAL}, #{costPrice,jdbcType=DECIMAL}, 
+      #{discountPrice,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_PRICE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="listPrice != null">
+        LIST_PRICE,
+      </if>
+      <if test="salePrice != null">
+        SALE_PRICE,
+      </if>
+      <if test="specialPrice != null">
+        SPECIAL_PRICE,
+      </if>
+      <if test="importPrice != null">
+        IMPORT_PRICE,
+      </if>
+      <if test="costPrice != null">
+        COST_PRICE,
+      </if>
+      <if test="discountPrice != null">
+        DISCOUNT_PRICE,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="listPrice != null">
+        #{listPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="salePrice != null">
+        #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="specialPrice != null">
+        #{specialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="importPrice != null">
+        #{importPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="costPrice != null">
+        #{costPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="discountPrice != null">
+        #{discountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_PRICE
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="listPrice != null">
+        LIST_PRICE = #{listPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="salePrice != null">
+        SALE_PRICE = #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="specialPrice != null">
+        SPECIAL_PRICE = #{specialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="importPrice != null">
+        IMPORT_PRICE = #{importPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="costPrice != null">
+        COST_PRICE = #{costPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="discountPrice != null">
+        DISCOUNT_PRICE = #{discountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_PRICE
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      LIST_PRICE = #{listPrice,jdbcType=DECIMAL},
+      SALE_PRICE = #{salePrice,jdbcType=DECIMAL},
+      SPECIAL_PRICE = #{specialPrice,jdbcType=DECIMAL},
+      IMPORT_PRICE = #{importPrice,jdbcType=DECIMAL},
+      COST_PRICE = #{costPrice,jdbcType=DECIMAL},
+      DISCOUNT_PRICE = #{discountPrice,jdbcType=DECIMAL},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="USER_LEVEL_ID" jdbcType="INTEGER" property="userLevelId" />
+    <result column="DISCOUNT" jdbcType="DECIMAL" property="discount" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, USER_LEVEL_ID, DISCOUNT, STATUS, CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_USER_SKU_DISCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_USER_SKU_DISCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_USER_SKU_DISCOUNT (SKU_NO, USER_LEVEL_ID, DISCOUNT, 
+      STATUS, CREATE_DATE, UPDATE_DATE
+      )
+    values (#{skuNo,jdbcType=VARCHAR}, #{userLevelId,jdbcType=INTEGER}, #{discount,jdbcType=DECIMAL}, 
+      #{status,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_USER_SKU_DISCOUNT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="userLevelId != null">
+        USER_LEVEL_ID,
+      </if>
+      <if test="discount != null">
+        DISCOUNT,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevelId != null">
+        #{userLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null">
+        #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_USER_SKU_DISCOUNT
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevelId != null">
+        USER_LEVEL_ID = #{userLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null">
+        DISCOUNT = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_USER_SKU_DISCOUNT
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      USER_LEVEL_ID = #{userLevelId,jdbcType=INTEGER},
+      DISCOUNT = #{discount,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_ID" jdbcType="BIGINT" property="skuId" />
+    <result column="FEATURE_OPTION_ID" jdbcType="INTEGER" property="featureOptionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_ID, FEATURE_OPTION_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_FEATURE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE (SKU_ID, FEATURE_OPTION_ID)
+    values (#{skuId,jdbcType=BIGINT}, #{featureOptionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuFeature" useGeneratedKeys="true">
+    insert into TR_SKU_FEATURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        SKU_ID,
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="featureOptionId != null">
+        #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    <set>
+      <if test="skuId != null">
+        SKU_ID = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="featureOptionId != null">
+        FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuFeature">
+    update TR_SKU_FEATURE
+    set SKU_ID = #{skuId,jdbcType=BIGINT},
+      FEATURE_OPTION_ID = #{featureOptionId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuFeature">
+    <id column="ID" jdbcType="BIGINT" property="id" />
     <result column="SKU_CODE" jdbcType="VARCHAR" property="skuCode" />
     <result column="FEATURE_OPTION_ID" jdbcType="INTEGER" property="featureOptionId" />
   </resultMap>

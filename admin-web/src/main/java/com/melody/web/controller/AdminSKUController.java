@@ -9,9 +9,7 @@ import com.melody.admin.api.AdminSKUService;
 import com.melody.admin.api.AdminSPUService;
 import com.melody.admin.api.SysPermService;
 import com.melody.annotation.PermInfo;
-import com.melody.product.dto.Brand;
-import com.melody.product.dto.SKU;
-import com.melody.product.dto.SkuImage;
+import com.melody.product.dto.*;
 import com.melody.util.PageUtils;
 import com.melody.vo.Json;
 import org.apache.commons.lang3.StringUtils;
@@ -31,10 +29,10 @@ public class AdminSKUController {
     private static final Logger log = LoggerFactory.getLogger(AdminSKUController.class);
 
 
-    @Reference(group = "adminSKUService")
+    @Reference(group = "adminSKUService", timeout = 10000)
     private AdminSKUService adminSKUService;
 
-    @Reference(group = "adminSPUService")
+    @Reference(group = "adminSPUService", timeout = 10000)
     private AdminSPUService adminSPUService;
 
     //获取categroy
@@ -62,19 +60,46 @@ public class AdminSKUController {
         JSONObject jsonObject = JSON.parseObject(brandStr);
         JSONArray jsonArray = jsonObject.getJSONArray("skuImageList");
         List<SkuImage> skuImageList = new ArrayList<>();
-        for (Object obj : jsonArray) {
-            JSONObject jsonObject2 = (JSONObject) obj;
-            String picUrl = jsonObject2.getString("picUrl");
-            SkuImage skuImage = new SkuImage();
-            skuImage.setPicUrl(picUrl);
-            skuImageList.add(skuImage);
+        if(jsonArray!=null) {
+            for (Object obj : jsonArray) {
+                JSONObject jsonObject2 = (JSONObject) obj;
+                String picUrl = jsonObject2.getString("picUrl");
+                SkuImage skuImage = new SkuImage();
+                skuImage.setPicUrl(picUrl);
+                skuImageList.add(skuImage);
+            }
+            brandObj.setSkuImageList(skuImageList);
         }
-        brandObj.setSkuImageList(skuImageList);
 
+        // 获取库存
+        Inventory inventory = new Inventory();
+
+        inventory.setTotalNum(jsonObject.getInteger("totalNum"));
+        inventory.setSellableNum(jsonObject.getInteger("sellableNum"));
+        inventory.setLockedNum(jsonObject.getInteger("lockedNum"));
+        brandObj.setInventory(inventory);
+
+        // 获取价格
+        SkuPriceEnter skuPriceEnter = new SkuPriceEnter();
+        skuPriceEnter.setListPrice(jsonObject.getDouble("listPrice"));
+        skuPriceEnter.setSalePrice(jsonObject.getDouble("salePrice"));
+        skuPriceEnter.setSpecialPrice(jsonObject.getDouble("specialPrice"));
+        skuPriceEnter.setImportPrice(jsonObject.getDouble("importPrice"));
+        skuPriceEnter.setCostPrice(jsonObject.getDouble("costPrice"));
+
+        List<Double> discountPriceList =
+                JSON.parseArray(jsonObject.getJSONArray("discountPrice").toString(), Double.class);
+        skuPriceEnter.setDiscountPriceList(discountPriceList);
+
+        brandObj.setSkuPriceEnter(skuPriceEnter);
 
         String skuNo = adminSKUService.addSKU(brandObj);
         return Json.result(oper, skuNo.equals("-1") ? false : true)
                 .data("skuNo", skuNo);
+    }
+
+    private void setNullIfNotExist(){
+
     }
 
 

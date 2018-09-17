@@ -1,33 +1,22 @@
 package com.melody.product.dto;
 
-public class SkuFeature {
+import lombok.Data;
+
+import java.io.Serializable;
+
+@Data
+public class SkuFeature implements Serializable {
+
+    private static final long serialVersionUID = 3230925201809131048L;
+
+
     private Long id;
 
-    private String skuCode;
+    private String skuNo;
 
     private Integer featureOptionId;
 
-    public Long getId() {
-        return id;
-    }
+    private String featureName;
+    private String featureValue;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getSkuCode() {
-        return skuCode;
-    }
-
-    public void setSkuCode(String skuCode) {
-        this.skuCode = skuCode == null ? null : skuCode.trim();
-    }
-
-    public Integer getFeatureOptionId() {
-        return featureOptionId;
-    }
-
-    public void setFeatureOptionId(Integer featureOptionId) {
-        this.featureOptionId = featureOptionId;
-    }
 }

@@ -1,6 +1,7 @@
 package com.melody.dao;
 
 import com.melody.user.dto.Account;
+import com.melody.user.dto.BirdCoinAccount;
 import com.melody.user.dto.UserLevel;
 import org.apache.ibatis.annotations.Param;
 
@@ -24,7 +25,7 @@ public interface AccountDao {
 
     int insertAccount(Account account);//插入账户信息
 
-//    int insertBirdCoinAccount(BirdCoinAccount birdCoinAccount);//插入鸟币账户
+    int insertBirdCoinAccount(BirdCoinAccount birdCoinAccount);//插入鸟币账户
 
 //    int insertBankAccount(BankAccount bankAccount);//插入银行卡信息
 
@@ -37,6 +38,8 @@ public interface AccountDao {
     int updateReplaceCardStatus(@Param(value = "id") String id);//更新换卡还是查询进度
 
     Account findAccountTotalByUserId(@Param(value = "userId") long userId);//查询用户总资产
+
+    BirdCoinAccount findBirdCoinTotal(@Param(value = "userId") long userId);//获取鸟币账户信息
 
 
     int updateAccountUsableBalance(@Param(value = "id") String id, @Param(value = "usableBalance") double usableBalance);//修改总金额

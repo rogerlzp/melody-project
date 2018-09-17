@@ -10,13 +10,13 @@ public class Order extends OrderKey {
 
     private Date updateTime;
 
-    private BigDecimal totalNum;
+    private Integer totalNum;
 
     private BigDecimal totalDiscount;
 
     private Long userId;
 
-    private String totalAmount;
+    private BigDecimal totalAmount;
 
     private BigDecimal expressFee;
 
@@ -46,11 +46,11 @@ public class Order extends OrderKey {
         this.updateTime = updateTime;
     }
 
-    public BigDecimal getTotalNum() {
+    public Integer getTotalNum() {
         return totalNum;
     }
 
-    public void setTotalNum(BigDecimal totalNum) {
+    public void setTotalNum(Integer totalNum) {
         this.totalNum = totalNum;
     }
 
@@ -70,12 +70,12 @@ public class Order extends OrderKey {
         this.userId = userId;
     }
 
-    public String getTotalAmount() {
+    public BigDecimal getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(String totalAmount) {
-        this.totalAmount = totalAmount == null ? null : totalAmount.trim();
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
     public BigDecimal getExpressFee() {

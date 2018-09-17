@@ -14,7 +14,17 @@ public class Brand implements Serializable{
 
     private String brandCode;
 
-    private String brandImageUrl;
+    private String brandEngName;
+
+    private String brandLogoUrl;
+
+    private String status;
+
+    private String homepage;
+
+    private String brandStory;
+
+    private Integer parentId;
 
 
 }

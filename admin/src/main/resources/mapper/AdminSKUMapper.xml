@@ -2,23 +2,67 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.melody.dao.AdminSKUMapper">
     <resultMap id="BaseResultMap" type="SKU">
-        <id column="SKU_NO" jdbcType="VARCHAR" property="skuNo"/>
-        <result column="ID" jdbcType="BIGINT" property="id"/>
-        <result column="SKU_NAME" jdbcType="VARCHAR" property="skuName"/>
-        <result column="PRODUCT_PLACE" jdbcType="VARCHAR" property="productPlace"/>
-        <result column="CHUCHANG_TIME" jdbcType="TIMESTAMP" property="chuchangTime"/>
-        <result column="EXPIRATION_TIME" jdbcType="TIMESTAMP" property="expirationTime"/>
-        <result column="BAOZHI_DAY" jdbcType="INTEGER" property="baozhiDay"/>
-        <result column="TOTAL_NUMBER" jdbcType="INTEGER" property="totalNumber"/>
-        <result column="INVENTORY" jdbcType="INTEGER" property="inventory"/>
-        <result column="PRODUCT_DESC" jdbcType="VARCHAR" property="productDesc"/>
-        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
-        <result column="PRICE" jdbcType="DECIMAL" property="price"/>
-        <result column="SPU_CODE" jdbcType="VARCHAR" property="spuCode"/>
-    </resultMap>
+    <id column="SKU_NO" jdbcType="VARCHAR" property="skuNo"/>
+    <result column="ID" jdbcType="BIGINT" property="id"/>
+    <result column="SKU_NAME" jdbcType="VARCHAR" property="skuName"/>
+    <result column="PRODUCT_PLACE" jdbcType="VARCHAR" property="productPlace"/>
+    <result column="CHUCHANG_TIME" jdbcType="TIMESTAMP" property="chuchangTime"/>
+    <result column="EXPIRATION_TIME" jdbcType="TIMESTAMP" property="expirationTime"/>
+    <result column="BAOZHI_DAY" jdbcType="INTEGER" property="baozhiDay"/>
+    <result column="TOTAL_NUMBER" jdbcType="INTEGER" property="totalNumber"/>
+    <result column="PRODUCT_DESC" jdbcType="VARCHAR" property="productDesc"/>
+    <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+    <result column="PRICE" jdbcType="DECIMAL" property="price"/>
+    <result column="SPU_CODE" jdbcType="VARCHAR" property="spuCode"/>
+</resultMap>
+
     <sql id="Base_Column_List">
         SKU_NO, ID, SKU_NAME, PRODUCT_PLACE, CHUCHANG_TIME, EXPIRATION_TIME, BAOZHI_DAY,
-        TOTAL_NUMBER, INVENTORY, PRODUCT_DESC, STATUS, PRICE, SPU_CODE
+        TOTAL_NUMBER,  PRODUCT_DESC, STATUS, PRICE, SPU_CODE
+    </sql>
+
+
+
+
+    <resultMap id="InventoryResultMap" type="Inventory">
+        <id column="ID" jdbcType="BIGINT" property="id"/>
+        <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo"/>
+        <result column="TOTAL_NUM" jdbcType="VARCHAR" property="totalNum"/>
+        <result column="SELLABLE_NUM" jdbcType="VARCHAR" property="sellableNum"/>
+        <result column="ORDER_OCCUPIED_NUM" jdbcType="TIMESTAMP" property="orderOccupiedNum"/>
+        <result column="UNAVAILABLE_NUM" jdbcType="TIMESTAMP" property="unavailableNum"/>
+        <result column="LOCKED_NUM" jdbcType="INTEGER" property="lockedNum"/>
+    </resultMap>
+
+    <sql id="Inventory_Column_List">
+        ID, SKU_NO, TOTAL_NUM, SELLABLE_NUM, ORDER_OCCUPIED_NUM, UNAVAILABLE_NUM, LOCKED_NUM
+    </sql>
+
+    <resultMap id="SkuPriceResultMap" type="SkuPrice">
+        <id column="ID" property="id"/>
+        <result column="SKU_NO" property="skuNo"/>
+        <result column="LIST_PRICE"  property="listPrice"/>
+        <result column="SALE_PRICE"  property="salePrice"/>
+        <result column="SPECIAL_PRICE"  property="specialPrice"/>
+        <result column="IMPORT_PRICE"  property="importPrice"/>
+        <result column="COST_PRICE"  property="costPrice"/>
+        <result column="DISCOUNT_PRICE" jdbcType="INTEGER" property="discountPrice"/>
+    </resultMap>
+    <sql id="SkuPrice_Column_List">
+        ID, SKU_NO, LIST_PRICE, SALE_PRICE, SPECIAL_PRICE, IMPORT_PRICE,
+        COST_PRICE,  DISCOUNT_PRICE
+    </sql>
+
+    <resultMap id="UserSkuDiscountResultMap" type="UserSkuDiscount">
+        <id column="ID" property="id"/>
+        <result column="SKU_NO" property="skuNo"/>
+        <result column="USER_LEVEL_ID"  property="userLevelId"/>
+        <result column="DISCOUNT"  property="discount"/>
+        <result column="STATUS"  property="status"/>
+    </resultMap>
+
+    <sql id="UserSkuDiscount_Column_List">
+        ID, SKU_NO, USER_LEVEL_ID, DISCOUNT, STATUS
     </sql>
 
     <sql id="pagination">
@@ -39,16 +83,35 @@
         where TT_SKU.SPU_CODE = TT_SPU.SPU_CODE AND TT_SPU.ID = #{id}
     </delete>
 
+    <insert id="insertSKUInventory" keyColumn="ID" keyProperty="id" parameterType="Inventory" useGeneratedKeys="true">
+        insert into TR_INVENTORY
+        (<include refid="Inventory_Column_List"/>)
+        values (#{id}, #{skuNo}, #{totalNum}, #{sellableNum},#{orderOccupiedNum}, #{unavailableNum},#{lockedNum})
+    </insert>
+
+    <insert id="insertSKUPrice" keyColumn="ID" keyProperty="id" parameterType="SkuPrice" useGeneratedKeys="true">
+        insert into TR_SKU_PRICE
+        (<include refid="SkuPrice_Column_List"/>)
+        values (#{id}, #{skuNo}, #{listPrice}, #{salePrice},#{specialPrice}, #{importPrice},#{costPrice},#{discountPrice}
+        )
+    </insert>
+    <insert id="insertUserSKUDiscount" keyColumn="ID" keyProperty="id" parameterType="UserSkuDiscount" useGeneratedKeys="true">
+        insert into TR_USER_SKU_DISCOUNT
+        (<include refid="UserSkuDiscount_Column_List"/>)
+        values (#{id}, #{skuNo}, #{userLevelId}, #{discount},#{status}
+        )
+    </insert>
+
 
     <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="SKU" useGeneratedKeys="true">
         insert into TT_SKU (ID, SKU_NO, SKU_NAME, PRODUCT_PLACE,
         CHUCHANG_TIME, EXPIRATION_TIME, BAOZHI_DAY,
-        TOTAL_NUMBER, INVENTORY, PRODUCT_DESC,
+        TOTAL_NUMBER,  PRODUCT_DESC,
         STATUS, PRICE, SPU_CODE, CREATE_DATE
         )
         values (#{id}, #{skuNo}, #{skuName,jdbcType=VARCHAR}, #{productPlace,jdbcType=VARCHAR},
         #{chuchangTime,jdbcType=TIMESTAMP}, #{expirationTime,jdbcType=TIMESTAMP}, #{baozhiDay,jdbcType=INTEGER},
-        #{totalNumber,jdbcType=INTEGER}, #{inventory,jdbcType=INTEGER}, #{productDesc,jdbcType=VARCHAR},
+        #{totalNumber,jdbcType=INTEGER},  #{productDesc,jdbcType=VARCHAR},
         #{status,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{spuCode,jdbcType=VARCHAR}, now()
         )
     </insert>
@@ -81,9 +144,7 @@
             <if test="totalNumber != null">
                 TOTAL_NUMBER,
             </if>
-            <if test="inventory != null">
-                INVENTORY,
-            </if>
+
             <if test="productDesc != null">
                 PRODUCT_DESC,
             </if>
@@ -119,9 +180,7 @@
             <if test="totalNumber != null">
                 #{totalNumber,jdbcType=INTEGER},
             </if>
-            <if test="inventory != null">
-                #{inventory,jdbcType=INTEGER},
-            </if>
+
             <if test="productDesc != null">
                 #{productDesc,jdbcType=VARCHAR},
             </if>
@@ -160,9 +219,7 @@
             <if test="totalNumber != null">
                 TOTAL_NUMBER = #{totalNumber,jdbcType=INTEGER},
             </if>
-            <if test="inventory != null">
-                INVENTORY = #{inventory,jdbcType=INTEGER},
-            </if>
+
             <if test="productDesc != null">
                 PRODUCT_DESC = #{productDesc,jdbcType=VARCHAR},
             </if>
@@ -187,7 +244,6 @@
         EXPIRATION_TIME = #{expirationTime,jdbcType=TIMESTAMP},
         BAOZHI_DAY = #{baozhiDay,jdbcType=INTEGER},
         TOTAL_NUMBER = #{totalNumber,jdbcType=INTEGER},
-        INVENTORY = #{inventory,jdbcType=INTEGER},
         PRODUCT_DESC = #{productDesc,jdbcType=VARCHAR},
         STATUS = #{status,jdbcType=VARCHAR},
         PRICE = #{price,jdbcType=DECIMAL},
@@ -203,7 +259,8 @@
     </update>
 
     <select id="countAllSKU" resultType="java.lang.Integer">
-        select count(*) FROM TT_SKU;
+        select count(*) FROM TT_SKU
+        WHERE STATUS = '1'
     </select>
 
 
@@ -216,8 +273,8 @@
     </select>
 
     <insert id="insertSKUFeature">
-        INSERT INTO TR_SKU_FEATURE (ID, SKU_ID, FEATURE_OPTION_ID)
-        VALUES (#{id},#{skuId},#{featureOptionId})
+        INSERT INTO TR_SKU_FEATURE (ID, SKU_NO, FEATURE_OPTION_ID)
+        VALUES (#{id},#{skuNo},#{featureOptionId})
     </insert>
 
 </mapper>

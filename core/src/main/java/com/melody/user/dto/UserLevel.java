@@ -15,9 +15,7 @@ public class UserLevel implements Serializable {
 
     private static final long serialVersionUID = -3838792339175482239L;
     private Long id;
-    private String  level;
-
-
+    private String  levelId;
 
     private Integer userId;
     private Integer orderId;
