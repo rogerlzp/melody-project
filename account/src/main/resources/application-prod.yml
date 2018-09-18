@@ -2,7 +2,7 @@
 
 spring:
   application:
-    name: admin-provider
+    name: account-provider
   datasource:
     name: dev
     url: jdbc:mysql://121.42.145.216:3306/biu?useUnicode=true&characterEncoding=UTF-8&useSSL=false
@@ -66,8 +66,8 @@ spring:
 # dubbo
 dubbo :
   application :
-    id: admin-provider
-    name: admin-provider
+    id: account-provider
+    name: account-provider
     qos-enable: false
     qos-port: 22222
   protocol:
@@ -122,7 +122,7 @@ mybatis-plus:
     cache-enabled: false
     #配置JdbcTypeForNull, oracle数据库必须配置
     jdbc-type-for-null: 'null'
-##
+#
 mybatis:
   configuration:
     # 开启驼峰命名转换 Table(create_time) -> Entity(createTime)
@@ -133,7 +133,5 @@ mybatis:
     type-aliases-package: com.melody
   config-location: classpath:resources/mybatis-config.xml
   mapper-locations: classpath:/mapper/*Mapper.xml
-
-
 
 

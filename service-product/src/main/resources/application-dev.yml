@@ -1,5 +1,3 @@
-
-
 spring:
   application:
     name: admin-provider
@@ -42,11 +40,11 @@ spring:
     # redis
   redis:
     # 服务器IP地址
-    host: r-m5e9d1d924170e54.redis.rds.aliyuncs.com
+    host: 127.0.0.1
     # 连接端口
     port: 6379
     # Redis服务器连接密码（默认为空）
-    password: AAbb3344
+    password:
 
     jedis:
       pool:
@@ -66,8 +64,8 @@ spring:
 # dubbo
 dubbo :
   application :
-    id: admin-provider
-    name: admin-provider
+    id: account-provider
+    name: account-provider
     qos-enable: false
     qos-port: 22222
   protocol:
@@ -76,7 +74,7 @@ dubbo :
 
 #    status: server
   registry:
-    address: zookeeper://121.42.145.216:2181
+    address: zookeeper://127.0.0.1:2181
 #    id: admin-provider
   scan:
     basePackages: com.melody.service
@@ -86,6 +84,7 @@ management:
     dubbo:
       status:
         extras: load,threadpool
+#pagehelper分页插件
 pagehelper:
   helperDialect: mysql
   # 启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页
@@ -98,7 +97,7 @@ mybatis-plus:
   # 如果是放在resource目录 classpath:/mapper/*Mapper.xml
   mapper-locations: classpath:/mapper/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: com.melody.user.dto
+  typeAliasesPackage: com.melody.*.dto
   global-config:
     #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
     id-type: 0
@@ -122,7 +121,7 @@ mybatis-plus:
     cache-enabled: false
     #配置JdbcTypeForNull, oracle数据库必须配置
     jdbc-type-for-null: 'null'
-##
+#
 mybatis:
   configuration:
     # 开启驼峰命名转换 Table(create_time) -> Entity(createTime)
@@ -132,8 +131,4 @@ mybatis:
   # 指向实体类包路径
     type-aliases-package: com.melody
   config-location: classpath:resources/mybatis-config.xml
-  mapper-locations: classpath:/mapper/*Mapper.xml
-
-
-
 

@@ -11,5 +11,6 @@ public class BaseForm {
 
     private String sessionKey;
 
+    private String openId; // 用户ID
 
 }

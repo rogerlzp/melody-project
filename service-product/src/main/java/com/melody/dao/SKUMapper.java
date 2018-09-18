@@ -43,4 +43,9 @@ public interface SKUMapper {
 
     int updateSkuNum(@Param(value = "skuNo") String skuNo, @Param(value = "num") Integer num);
 
+    // getPriceBySkuNo
+
+    Double getPriceBySkuNo(@Param(value = "skuNo") String skuNo);
+
+
 }

@@ -14,6 +14,20 @@
         <result column="EXPRESS_FEE" jdbcType="DECIMAL" property="expressFee"/>
         <result column="REFUND_STATUS" jdbcType="VARCHAR" property="refundStatus"/>
     </resultMap>
+
+    <resultMap id="OrderDetailResultMap" type="OrderDetailResult">
+        <id column="ID" jdbcType="BIGINT" property="id"/>
+        <id column="ORDER_NO" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="TOTAL_NUM" jdbcType="INTEGER" property="totalNum"/>
+        <result column="TOTAL_DISCOUNT" jdbcType="DECIMAL" property="totalDiscount"/>
+        <result column="USER_ID" jdbcType="BIGINT" property="userId"/>
+        <result column="TOTAL_AMOUNT" jdbcType="DECIMAL" property="totalAmount"/>
+        <result column="EXPRESS_FEE" jdbcType="DECIMAL" property="expressFee"/>
+        <result column="REFUND_STATUS" jdbcType="VARCHAR" property="refundStatus"/>
+    </resultMap>
     <sql id="Base_Column_List">
         ID, ORDER_NO, STATUS, CREATE_TIME, UPDATE_TIME, TOTAL_NUM, TOTAL_DISCOUNT, USER_ID,
         TOTAL_AMOUNT, EXPRESS_FEE, REFUND_STATUS
@@ -146,7 +160,6 @@
     </update>
 
 
-
     <insert id="insertOrderItem" keyColumn="ID" keyProperty="id" parameterType="OrderItem" useGeneratedKeys="true">
         insert into TR_ORDER_ITEM (ID, SKU_NO, ORDER_NO, AMOUNT,
         ORIGINAL_PRICE, PRICE, NUM
@@ -165,6 +178,55 @@
         #{receiverPhone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{develieryCompany,jdbcType=VARCHAR},
         #{develieryTime,jdbcType=TIMESTAMP})
     </insert>
+
+
+    <update id="updateOrderStatus">
+        update TT_ORDER
+        set STATUS = #{status},
+        UPDATE_TIME = now()
+        where ORDER_NO = #{orderNo}
+    </update>
+
+    <select id="getOrderDetailByOrderNo" resultMap="OrderDetailResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM TT_ORDER
+        where ORDER_NO = #{orderNo}
+    </select>
+
+
+
+
+    <select id="countAllMyOrder" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM TT_ORDER
+        where USER_ID = #{userId}
+        <if test="status != null and status != '' ">
+            AND STATUS = #{status}
+        </if>
+    </select>
+
+
+    <sql id="pagination">
+        <![CDATA[
+
+	    limit #{offset}, #{pageSize}
+
+        ]]>
+    </sql>
+
+    <select id="queryOrderList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM TT_ORDER
+        where USER_ID = #{userId}
+        <if test="status != null and status != '' ">
+            AND STATUS = #{status}
+        </if>
+        <include refid="pagination"/>
+    </select>
+
+
 
 
 

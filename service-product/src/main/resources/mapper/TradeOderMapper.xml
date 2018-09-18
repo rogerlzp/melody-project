@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.dao.TradeOderMapper">
+  <resultMap id="BaseResultMap" type="TradeOder">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="ORDER_NO" jdbcType="VARCHAR" property="orderNo" />
+    <result column="TRADE_NO" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="OUT_TRADE_NO" jdbcType="VARCHAR" property="outTradeNo" />
+    <result column="BANK_TYPE" jdbcType="VARCHAR" property="bankType" />
+    <result column="TOTAL_FEE" jdbcType="DECIMAL" property="totalFee" />
+    <result column="PAY_TYPE" jdbcType="VARCHAR" property="payType" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="TIME_END" jdbcType="TIMESTAMP" property="timeEnd" />
+    <result column="MCH_ID" jdbcType="VARCHAR" property="mchId" />
+    <result column="PRODUCT" jdbcType="VARCHAR" property="product" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="CASH_FEE" jdbcType="DECIMAL" property="cashFee" />
+    <result column="FEE_TYPE" jdbcType="VARCHAR" property="feeType" />
+    <result column="OPENID" jdbcType="VARCHAR" property="openid" />
+    <result column="RESULT_CODE" jdbcType="VARCHAR" property="resultCode" />
+    <result column="RETURN_CODE" jdbcType="VARCHAR" property="returnCode" />
+    <result column="TRADE_TYPE" jdbcType="VARCHAR" property="tradeType" />
+    <result column="TRANSACTION_ID" jdbcType="VARCHAR" property="transactionId" />
+    <result column="SIGN" jdbcType="VARCHAR" property="sign" />
+    <result column="NONCE_STR" jdbcType="VARCHAR" property="nonceStr" />
+    <result column="APPID" jdbcType="VARCHAR" property="appid" />
+    <result column="IS_SUBSCRIBE" jdbcType="VARCHAR" property="isSubscribe" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ORDER_NO, TRADE_NO, OUT_TRADE_NO, BANK_TYPE, TOTAL_FEE, PAY_TYPE, STATUS, TIME_END, 
+    MCH_ID, PRODUCT, CREATE_DATE, UPDATE_DATE, CASH_FEE, FEE_TYPE, OPENID, RESULT_CODE, 
+    RETURN_CODE, TRADE_TYPE, TRANSACTION_ID, SIGN, NONCE_STR, APPID, IS_SUBSCRIBE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_TRADE_ORDER
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TT_TRADE_ORDER
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="TradeOder" useGeneratedKeys="true">
+    insert into TT_TRADE_ORDER (ID,ORDER_NO, TRADE_NO, OUT_TRADE_NO,
+      BANK_TYPE, TOTAL_FEE, PAY_TYPE, 
+      STATUS, TIME_END, MCH_ID, 
+      PRODUCT, CREATE_DATE, UPDATE_DATE, 
+      CASH_FEE, FEE_TYPE, OPENID, 
+      RESULT_CODE, RETURN_CODE, TRADE_TYPE, 
+      TRANSACTION_ID, SIGN, NONCE_STR, 
+      APPID, IS_SUBSCRIBE)
+    values (#{id}, #{orderNo,jdbcType=VARCHAR}, #{tradeNo,jdbcType=VARCHAR}, #{outTradeNo,jdbcType=VARCHAR},
+      #{bankType,jdbcType=VARCHAR}, #{totalFee,jdbcType=DECIMAL}, #{payType,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{timeEnd,jdbcType=TIMESTAMP}, #{mchId,jdbcType=VARCHAR}, 
+      #{product,jdbcType=VARCHAR}, now(), #{updateDate,jdbcType=TIMESTAMP},
+      #{cashFee,jdbcType=DECIMAL}, #{feeType,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
+      #{resultCode,jdbcType=VARCHAR}, #{returnCode,jdbcType=VARCHAR}, #{tradeType,jdbcType=VARCHAR}, 
+      #{transactionId,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{nonceStr,jdbcType=VARCHAR}, 
+      #{appid,jdbcType=VARCHAR}, #{isSubscribe,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="TradeOder" useGeneratedKeys="true">
+    insert into TT_TRADE_ORDER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderNo != null">
+        ORDER_NO,
+      </if>
+      <if test="tradeNo != null">
+        TRADE_NO,
+      </if>
+      <if test="outTradeNo != null">
+        OUT_TRADE_NO,
+      </if>
+      <if test="bankType != null">
+        BANK_TYPE,
+      </if>
+      <if test="totalFee != null">
+        TOTAL_FEE,
+      </if>
+      <if test="payType != null">
+        PAY_TYPE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="timeEnd != null">
+        TIME_END,
+      </if>
+      <if test="mchId != null">
+        MCH_ID,
+      </if>
+      <if test="product != null">
+        PRODUCT,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="cashFee != null">
+        CASH_FEE,
+      </if>
+      <if test="feeType != null">
+        FEE_TYPE,
+      </if>
+      <if test="openid != null">
+        OPENID,
+      </if>
+      <if test="resultCode != null">
+        RESULT_CODE,
+      </if>
+      <if test="returnCode != null">
+        RETURN_CODE,
+      </if>
+      <if test="tradeType != null">
+        TRADE_TYPE,
+      </if>
+      <if test="transactionId != null">
+        TRANSACTION_ID,
+      </if>
+      <if test="sign != null">
+        SIGN,
+      </if>
+      <if test="nonceStr != null">
+        NONCE_STR,
+      </if>
+      <if test="appid != null">
+        APPID,
+      </if>
+      <if test="isSubscribe != null">
+        IS_SUBSCRIBE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null">
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNo != null">
+        #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankType != null">
+        #{bankType,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null">
+        #{totalFee,jdbcType=DECIMAL},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="timeEnd != null">
+        #{timeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mchId != null">
+        #{mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null">
+        #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cashFee != null">
+        #{cashFee,jdbcType=DECIMAL},
+      </if>
+      <if test="feeType != null">
+        #{feeType,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="resultCode != null">
+        #{resultCode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnCode != null">
+        #{returnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null">
+        #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionId != null">
+        #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="nonceStr != null">
+        #{nonceStr,jdbcType=VARCHAR},
+      </if>
+      <if test="appid != null">
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="isSubscribe != null">
+        #{isSubscribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="TradeOder">
+    update TT_TRADE_ORDER
+    <set>
+      <if test="orderNo != null">
+        ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null">
+        TRADE_NO = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNo != null">
+        OUT_TRADE_NO = #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankType != null">
+        BANK_TYPE = #{bankType,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null">
+        TOTAL_FEE = #{totalFee,jdbcType=DECIMAL},
+      </if>
+      <if test="payType != null">
+        PAY_TYPE = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="timeEnd != null">
+        TIME_END = #{timeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mchId != null">
+        MCH_ID = #{mchId,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null">
+        PRODUCT = #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cashFee != null">
+        CASH_FEE = #{cashFee,jdbcType=DECIMAL},
+      </if>
+      <if test="feeType != null">
+        FEE_TYPE = #{feeType,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        OPENID = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="resultCode != null">
+        RESULT_CODE = #{resultCode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnCode != null">
+        RETURN_CODE = #{returnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null">
+        TRADE_TYPE = #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionId != null">
+        TRANSACTION_ID = #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        SIGN = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="nonceStr != null">
+        NONCE_STR = #{nonceStr,jdbcType=VARCHAR},
+      </if>
+      <if test="appid != null">
+        APPID = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="isSubscribe != null">
+        IS_SUBSCRIBE = #{isSubscribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="TradeOder">
+    update TT_TRADE_ORDER
+    set ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      TRADE_NO = #{tradeNo,jdbcType=VARCHAR},
+      OUT_TRADE_NO = #{outTradeNo,jdbcType=VARCHAR},
+      BANK_TYPE = #{bankType,jdbcType=VARCHAR},
+      TOTAL_FEE = #{totalFee,jdbcType=DECIMAL},
+      PAY_TYPE = #{payType,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      TIME_END = #{timeEnd,jdbcType=TIMESTAMP},
+      MCH_ID = #{mchId,jdbcType=VARCHAR},
+      PRODUCT = #{product,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      CASH_FEE = #{cashFee,jdbcType=DECIMAL},
+      FEE_TYPE = #{feeType,jdbcType=VARCHAR},
+      OPENID = #{openid,jdbcType=VARCHAR},
+      RESULT_CODE = #{resultCode,jdbcType=VARCHAR},
+      RETURN_CODE = #{returnCode,jdbcType=VARCHAR},
+      TRADE_TYPE = #{tradeType,jdbcType=VARCHAR},
+      TRANSACTION_ID = #{transactionId,jdbcType=VARCHAR},
+      SIGN = #{sign,jdbcType=VARCHAR},
+      NONCE_STR = #{nonceStr,jdbcType=VARCHAR},
+      APPID = #{appid,jdbcType=VARCHAR},
+      IS_SUBSCRIBE = #{isSubscribe,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

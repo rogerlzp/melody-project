@@ -42,11 +42,11 @@ spring:
     # redis
   redis:
     # 服务器IP地址
-    host: r-m5e9d1d924170e54.redis.rds.aliyuncs.com
+    host: 127.0.0.1
     # 连接端口
     port: 6379
     # Redis服务器连接密码（默认为空）
-    password: AAbb3344
+    password:
 
     jedis:
       pool:
@@ -76,7 +76,7 @@ dubbo :
 
 #    status: server
   registry:
-    address: zookeeper://121.42.145.216:2181
+    address: zookeeper://127.0.0.1:2181
 #    id: admin-provider
   scan:
     basePackages: com.melody.service
@@ -121,7 +121,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
     #配置JdbcTypeForNull, oracle数据库必须配置
-    jdbc-type-for-null: 'null'
+#    jdbc-type-for-null: 'null'
 ##
 mybatis:
   configuration:

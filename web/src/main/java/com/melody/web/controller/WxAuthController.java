@@ -1,12 +1,16 @@
 package com.melody.web.controller;
 
+import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
 import com.melody.annotation.PermInfo;
 import com.melody.exception.BusinessException;
 import com.melody.gateway.api.WxAuthService;
 import com.melody.gateway.api.WxPayService;
+import com.melody.product.api.OrderService;
+import com.melody.product.dto.TradeOder;
 import com.melody.result.JsonApi;
 import com.melody.user.api.WxService;
 import com.melody.user.dto.UserQueryResult;
@@ -44,6 +48,9 @@ public class WxAuthController extends BaseController {
 
     @Reference(group = "wxPayService", timeout = 10000)
     WxPayService wxPayService;
+
+    @Reference(group = "orderService", timeout = 10000)
+    OrderService orderService;
 
     public static final String USER = "/api/v1/user";
     private static final Logger log = LoggerFactory.getLogger(WxAuthController.class);
@@ -152,13 +159,65 @@ public class WxAuthController extends BaseController {
         return JsonApi.isOk().data(map);
     }
 
+
+    /**
+     * 回调后的结果如下：
+     * 2018-09-17 21:26:17.032  INFO 16177 --- [https-jsse-nio-8888-exec-3] c.m.web.controller.WxAuthController      : xiaochengxu callback, get result from Tencent:: <xml><appid><![CDATA[wx642cd8007029736a]]></appid>
+     <bank_type><![CDATA[CMBC_CREDIT]]></bank_type>
+     <cash_fee><![CDATA[10]]></cash_fee>
+     <fee_type><![CDATA[CNY]]></fee_type>
+     <is_subscribe><![CDATA[N]]></is_subscribe>
+     <mch_id><![CDATA[1512078181]]></mch_id>
+     <nonce_str><![CDATA[b609742e2850167421e0e5965]]></nonce_str>
+     <openid><![CDATA[osJGK5fZCr6UwtHXdDr8OLvRTCXM]]></openid>
+     <out_trade_no><![CDATA[PO1809172126020001]]></out_trade_no>
+     <result_code><![CDATA[SUCCESS]]></result_code>
+     <return_code><![CDATA[SUCCESS]]></return_code>
+     <sign><![CDATA[895B37FA11EB96BBAC23036D199CDE08]]></sign>
+     <time_end><![CDATA[20180917212616]]></time_end>
+     <total_fee>10</total_fee>
+     <trade_type><![CDATA[JSAPI]]></trade_type>
+     <transaction_id><![CDATA[4200000207201809170733503201]]></transaction_id>
+     </xml>
+     2018-09-17 21:26:32.602  INFO 16177 --- [https-jsse-nio-8888-exec-2] c.m.web.controller.WxAuthController      : xiaochengxu callback, get result from Tencent::
+     <xml><appid><![CDATA[wx642cd8007029736a]]></appid>
+     <bank_type><![CDATA[CMBC_CREDIT]]></bank_type>
+     <cash_fee><![CDATA[10]]></cash_fee>
+     <fee_type><![CDATA[CNY]]></fee_type>
+     <is_subscribe><![CDATA[N]]></is_subscribe>
+     <mch_id><![CDATA[1512078181]]></mch_id>
+     <nonce_str><![CDATA[b609742e2850167421e0e5965]]></nonce_str>
+     <openid><![CDATA[osJGK5fZCr6UwtHXdDr8OLvRTCXM]]></openid>
+     <out_trade_no><![CDATA[PO1809172126020001]]></out_trade_no>
+     <result_code><![CDATA[SUCCESS]]></result_code>
+     <return_code><![CDATA[SUCCESS]]></return_code>
+     <sign><![CDATA[895B37FA11EB96BBAC23036D199CDE08]]></sign>
+     <time_end><![CDATA[20180917212616]]></time_end>
+     <total_fee>10</total_fee>
+     <trade_type><![CDATA[JSAPI]]></trade_type>
+     <transaction_id><![CDATA[4200000207201809170733503201]]></transaction_id>
+     </xml>
+     * @param body
+     * @return
+     * 1. 向微信服务器返回结果
+     * 2. 更新订单状态
+     * 3.
+     */
+
     @PostMapping("/xcx/callback")
-    public JsonApi login(@RequestBody String body) {
+    public String login(@RequestBody String body) {
 
+       Map<String, String> resultMap= wxPayService.getPayNotification(body);
 
-        String oper = "xiaochengxu callback";
-        log.info("{}, get result from Tencent:: {}",oper,body);
-        return JsonApi.isOk();
+        TradeOder tradeOder =   JSONObject.parseObject(JSON.toJSONString(resultMap),
+                TradeOder.class);
+
+        int result = orderService.saveTradeOrder(tradeOder);
+
+        if(tradeOder.getResultCode().equals("SUCCESS")){
+            return wxPayService.returnPayNotification("SUCCESS", "OK");
+        } else
+            return wxPayService.returnPayNotification("SUCCESS", "OK");
     }
 
 

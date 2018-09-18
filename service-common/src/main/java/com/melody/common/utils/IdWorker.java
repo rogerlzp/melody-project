@@ -34,6 +34,29 @@ public class IdWorker {
 		return formatOrderNum(orderPrefix, str, orderNum);
 	}
 
+
+	/**
+	 * 生成订单编号
+	 *
+	 * @return
+	 */
+	public static synchronized String getTradeNo(String tradePrefix) {
+		Date currentDate = new Date();
+		String str = new SimpleDateFormat("yyMMddHHmmss").format(currentDate);
+		String hour = new SimpleDateFormat("yyMMddHH").format(currentDate);
+		String orderKey = buildKey(tradePrefix, hour);
+		Integer orderNum = orderNumMap.get(orderKey);
+		if (orderNum == null) {
+			orderNum = 1;
+			orderNumMap.put(orderKey, orderNum);
+		} else {
+			orderNum++;
+			orderNumMap.put(orderKey, orderNum);
+		}
+		return formatOrderNum(tradePrefix, str, orderNum);
+	}
+
+
 	public static void main(String[] args) {
 		for (int i = 0; i < 10; i++) {
 			System.out.println(getOrderNo("PO"));

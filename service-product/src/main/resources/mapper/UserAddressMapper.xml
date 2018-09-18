@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.dao.UserAddressMapper">
+  <resultMap id="BaseResultMap" type="UserAddress">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="USER_ID" jdbcType="BIGINT" property="userId" />
+    <result column="OPENID" jdbcType="VARCHAR" property="openId" />
+    <result column="ADDRESS_DETAIL" jdbcType="VARCHAR" property="addressDetail" />
+    <result column="IS_DEFAULT" property="isDefault" />
+    <result column="RECEIVER_NAME" jdbcType="VARCHAR" property="receiverName" />
+    <result column="RECEIVER_PHONE" jdbcType="VARCHAR" property="receiverPhone" />
+    <result column="ZIPCODE" jdbcType="VARCHAR" property="zipcode" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="PROVINCE" jdbcType="VARCHAR" property="province" />
+    <result column="CITY" jdbcType="VARCHAR" property="city" />
+    <result column="AREA" jdbcType="VARCHAR" property="area" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, USER_ID, OPENID, ADDRESS_DETAIL, IS_DEFAULT, RECEIVER_NAME, RECEIVER_PHONE, ZIPCODE,
+    CREATE_DATE, PROVINCE, CITY, AREA
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_USER_ADDRESS
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="getUserAddress"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from TR_USER_ADDRESS
+    where OPENID = #{openId}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_USER_ADDRESS
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="UserAddress" useGeneratedKeys="true">
+    insert into TR_USER_ADDRESS (ID, USER_ID, OPENID, ADDRESS_DETAIL,
+    IS_DEFAULT, RECEIVER_NAME, RECEIVER_PHONE,
+    ZIPCODE, CREATE_DATE, PROVINCE,
+    CITY, AREA)
+    values (#{id}, #{userId,jdbcType=BIGINT}, #{openId,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR},
+    #{isDefault}, #{receiverName,jdbcType=VARCHAR}, #{receiverPhone,jdbcType=VARCHAR},
+    #{zipcode,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{province,jdbcType=VARCHAR},
+    #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR})
+  </insert>
+
+
+
+
+
+
+
+  <update id="resetDefaultAddress" parameterType="java.lang.Long">
+    update TR_USER_ADDRESS
+    set IS_DEFAULT = 0
+    where USER_ID = #{userId}
+  </update>
+
+
+
+
+
+
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="UserAddress" useGeneratedKeys="true">
+    insert into TR_USER_ADDRESS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="openId != null">
+        OPENID,
+      </if>
+      <if test="addressDetail != null">
+        ADDRESS_DETAIL,
+      </if>
+      <if test="isDefault != null">
+        IS_DEFAULT,
+      </if>
+      <if test="receiverName != null">
+        RECEIVER_NAME,
+      </if>
+      <if test="receiverPhone != null">
+        RECEIVER_PHONE,
+      </if>
+      <if test="zipcode != null">
+        ZIPCODE,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="province != null">
+        PROVINCE,
+      </if>
+      <if test="city != null">
+        CITY,
+      </if>
+      <if test="area != null">
+        AREA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null">
+        #{isDefault},
+      </if>
+      <if test="receiverName != null">
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhone != null">
+        #{receiverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null">
+        #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="UserAddress">
+    update TR_USER_ADDRESS
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="openId != null">
+        OPENID = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        ADDRESS_DETAIL = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null">
+        IS_DEFAULT = #{isDefault},
+      </if>
+      <if test="receiverName != null">
+        RECEIVER_NAME = #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhone != null">
+        RECEIVER_PHONE = #{receiverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null">
+        ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="province != null">
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="UserAddress">
+    update TR_USER_ADDRESS
+    set USER_ID = #{userId,jdbcType=BIGINT},
+    OPENID = #{openId,jdbcType=VARCHAR},
+    ADDRESS_DETAIL = #{addressDetail,jdbcType=VARCHAR},
+    IS_DEFAULT = #{isDefault},
+    RECEIVER_NAME = #{receiverName,jdbcType=VARCHAR},
+    RECEIVER_PHONE = #{receiverPhone,jdbcType=VARCHAR},
+    ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+    CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+    PROVINCE = #{province,jdbcType=VARCHAR},
+    CITY = #{city,jdbcType=VARCHAR},
+    AREA = #{area,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from TR_USER_ADDRESS
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+
+
+  <select id="getDefaultAddressByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from TR_USER_ADDRESS
+    where USER_ID = #{userId}
+    AND  IS_DEFAULT = 1
+  </select>
+
+
+</mapper>

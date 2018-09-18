@@ -456,6 +456,13 @@
         WHERE SKU_NO = #{skuNo}
     </update>
 
+    <select id="getPriceBySkuNo" resultType="java.lang.Double">
+        SELECT
+        SALE_PRICE
+        FROM TR_SKU_PRICE
+        WHERE SKU_NO = #{skuNo}
+    </select>
+
 
 
 </mapper>

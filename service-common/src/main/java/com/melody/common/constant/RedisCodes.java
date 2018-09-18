@@ -36,6 +36,16 @@ public class RedisCodes {
     public final static String WX_USER = "WXUSER_";
 
     /**
+     * 微信小程序 ACCESS_TOKEN
+     */
+    public final static String ACCESS_TOKEN = "ACCESS_TOKEN_";
+
+    /**
+     * 微信小程序 ACCESS_TOKEN 保存时间，2*60*60
+     */
+    public final static Integer XCX_TOKEN_EXPIRE_TIME = 2*60*60;
+
+    /**
      * 短信
      */
     public final static String MOBILE_SMS="SMS_";

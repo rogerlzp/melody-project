@@ -14,6 +14,7 @@ public class GeneralEnter implements Serializable {
     private String sessionKey;
     private Integer pageSize = 10;
     private Integer currentPage = 0;
+    private String openId; // 微信用户需要openId
 
     public GeneralEnter() {
     }

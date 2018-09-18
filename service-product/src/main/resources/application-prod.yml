@@ -1,8 +1,6 @@
-
-
 spring:
   application:
-    name: admin-provider
+    name: product-provider
   datasource:
     name: dev
     url: jdbc:mysql://121.42.145.216:3306/biu?useUnicode=true&characterEncoding=UTF-8&useSSL=false
@@ -66,8 +64,8 @@ spring:
 # dubbo
 dubbo :
   application :
-    id: admin-provider
-    name: admin-provider
+    id: product-provider
+    name: product-provider
     qos-enable: false
     qos-port: 22222
   protocol:
@@ -86,6 +84,7 @@ management:
     dubbo:
       status:
         extras: load,threadpool
+#pagehelper分页插件
 pagehelper:
   helperDialect: mysql
   # 启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页
@@ -98,7 +97,7 @@ mybatis-plus:
   # 如果是放在resource目录 classpath:/mapper/*Mapper.xml
   mapper-locations: classpath:/mapper/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: com.melody.user.dto
+  typeAliasesPackage: com.melody.*.dto
   global-config:
     #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
     id-type: 0
@@ -122,7 +121,7 @@ mybatis-plus:
     cache-enabled: false
     #配置JdbcTypeForNull, oracle数据库必须配置
     jdbc-type-for-null: 'null'
-##
+#
 mybatis:
   configuration:
     # 开启驼峰命名转换 Table(create_time) -> Entity(createTime)
@@ -132,8 +131,5 @@ mybatis:
   # 指向实体类包路径
     type-aliases-package: com.melody
   config-location: classpath:resources/mybatis-config.xml
-  mapper-locations: classpath:/mapper/*Mapper.xml
-
-
 
 

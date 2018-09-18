@@ -94,7 +94,7 @@ dubbo :
 #    status: server
   registry:
 #    protocol: zookeeper
-    address: zookeeper://121.42.145.216:2181
+    address: zookeeper://127.0.0.1:2181
 #    id: admin-provider
 #  scan:
 #    basePackages: com.melody.service

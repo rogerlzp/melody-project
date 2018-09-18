@@ -15,7 +15,7 @@ public class OrderItem {
 
     private BigDecimal price;
 
-    private Integer number;
+    private Integer num;
 
     public Long getId() {
         return id;
@@ -65,11 +65,11 @@ public class OrderItem {
         this.price = price;
     }
 
-    public Integer getNumber() {
-        return number;
+    public Integer getNum() {
+        return num;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setNum(Integer num) {
+        this.num = num;
     }
 }

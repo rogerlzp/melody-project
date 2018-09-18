@@ -19,6 +19,8 @@ public class OrderExpress {
 
     private Date develieryTime;
 
+    private String status;
+
     public Long getId() {
         return id;
     }
@@ -81,5 +83,13 @@ public class OrderExpress {
 
     public void setDevelieryTime(Date develieryTime) {
         this.develieryTime = develieryTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 }

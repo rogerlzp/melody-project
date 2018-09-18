@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.dao.CartMapper">
+  <resultMap id="BaseResultMap" type="Cart">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="USER_ID" jdbcType="BIGINT" property="userId" />
+    <result column="TOTAL_PRICE" jdbcType="DECIMAL" property="totalPrice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, USER_ID, TOTAL_PRICE
+  </sql>
+
+  <resultMap id="CartItemResultMap" type="CartItem">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="CART_ID" jdbcType="BIGINT" property="cartId" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="NUM" jdbcType="INTEGER" property="num" />
+    <result column="PRICE" jdbcType="DECIMAL" property="price" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_ITEM" jdbcType="TIMESTAMP" property="updateItem" />
+    <result column="PIC_URL"  property="picUrl" />
+    <result column="SKU_NAME"  property="skuName" />
+    <result column="SPU_NAME"  property="spuName" />
+  </resultMap>
+  <sql id="CartItem_Column_List">
+    ID, CART_ID, SKU_NO, NUM, PRICE, STATUS, CREATE_TIME, UPDATE_ITEM
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_CART
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from TT_CART
+    where USER_ID = #{userId}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TT_CART
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="Cart" useGeneratedKeys="true">
+    insert into TT_CART (ID, USER_ID, TOTAL_PRICE)
+    values (#{id}, #{userId,jdbcType=BIGINT}, #{totalPrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="Cart" useGeneratedKeys="true">
+    insert into TT_CART
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="totalPrice != null">
+        TOTAL_PRICE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="totalPrice != null">
+        #{totalPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateCart" parameterType="Cart">
+    update TT_CART
+    set USER_ID = #{userId,jdbcType=BIGINT},
+      TOTAL_PRICE = #{totalPrice,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <insert id="insertCartItem" keyColumn="ID" keyProperty="id" parameterType="CartItem" useGeneratedKeys="true">
+    insert into TR_CART_ITEM (ID, CART_ID, SKU_NO, NUM,
+    PRICE, STATUS, CREATE_TIME,
+    UPDATE_ITEM)
+    values (#{id}, #{cartId,jdbcType=BIGINT}, #{skuNo,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER},
+    #{price,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, now(),
+    #{updateItem,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateCartItem" parameterType="CartItem">
+    update TR_CART_ITEM
+    NUM = #{num,jdbcType=INTEGER},
+    UPDATE_ITEM = now()
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <select id="selectCartItemBySkuNo"  resultMap="CartItemResultMap">
+    select
+    <include refid="CartItem_Column_List" />
+    from TR_CART_ITEM
+    where SKU_NO = #{skuNo} AND  CART_ID = #{cartId}
+  </select>
+
+  <select id="selectCartItemListByCartId"  resultMap="CartItemResultMap">
+    select
+    tci.ID,
+    tci.CART_ID,
+    tci.SKU_NO,
+    tci.NUM,
+    tci.PRICE,
+    tci.STATUS,
+    tci.CREATE_TIME,
+    tci.UPDATE_ITEM,
+
+    tk.SKU_NAME,
+    ti.PIC_URL,
+    tp.SPU_NAME
+
+    from TR_CART_ITEM tci
+    LEFT JOIN TT_SKU tk ON tk.SKU_NO = tci.SKU_NO
+    LEFT JOIN TT_SPU tp ON tk.SPU_CODE = tp.SPU_CODE
+    LEFT JOIN TR_SKU_IMAGE ti ON ti.SKU_NO =tci.SKU_NO
+    where CART_ID = #{cartId}    AND ti.IS_MAIN = 1
+  </select>
+</mapper>
