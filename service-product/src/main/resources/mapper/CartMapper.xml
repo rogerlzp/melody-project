@@ -17,14 +17,15 @@
     <result column="NUM" jdbcType="INTEGER" property="num" />
     <result column="PRICE" jdbcType="DECIMAL" property="price" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
-    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="UPDATE_ITEM" jdbcType="TIMESTAMP" property="updateItem" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
     <result column="PIC_URL"  property="picUrl" />
     <result column="SKU_NAME"  property="skuName" />
     <result column="SPU_NAME"  property="spuName" />
+    <result column="IS_CHECKED"  property="isChecked" />
   </resultMap>
   <sql id="CartItem_Column_List">
-    ID, CART_ID, SKU_NO, NUM, PRICE, STATUS, CREATE_TIME, UPDATE_ITEM
+    ID, CART_ID, SKU_NO, NUM, PRICE, STATUS, CREATE_DATE, UPDATE_DATE, IS_CHECKED
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -79,17 +80,17 @@
 
   <insert id="insertCartItem" keyColumn="ID" keyProperty="id" parameterType="CartItem" useGeneratedKeys="true">
     insert into TR_CART_ITEM (ID, CART_ID, SKU_NO, NUM,
-    PRICE, STATUS, CREATE_TIME,
-    UPDATE_ITEM)
+    PRICE, STATUS, CREATE_DATE,
+    UPDATE_DATE, IS_CHECKED)
     values (#{id}, #{cartId,jdbcType=BIGINT}, #{skuNo,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER},
     #{price,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, now(),
-    #{updateItem,jdbcType=TIMESTAMP})
+    #{updateItem,jdbcType=TIMESTAMP},#{isChecked})
   </insert>
   <update id="updateCartItem" parameterType="CartItem">
     update TR_CART_ITEM
-    NUM = #{num,jdbcType=INTEGER},
-    UPDATE_ITEM = now()
-    where ID = #{id,jdbcType=BIGINT}
+    SET NUM = #{num},
+    UPDATE_DATE = now()
+    where ID = #{id}
   </update>
 
 
@@ -109,8 +110,9 @@
     tci.NUM,
     tci.PRICE,
     tci.STATUS,
-    tci.CREATE_TIME,
-    tci.UPDATE_ITEM,
+    tci.CREATE_DATE,
+    tci.UPDATE_DATE,
+    tci.IS_CHECKED,
 
     tk.SKU_NAME,
     ti.PIC_URL,
