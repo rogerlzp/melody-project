@@ -48,6 +48,8 @@
         <result column="ORDER_NO" jdbcType="VARCHAR" property="orderNo" />
         <result column="AMOUNT" jdbcType="DECIMAL" property="amount" />
         <result column="ORIGINAL_PRICE" jdbcType="DECIMAL" property="originalPrice" />
+        <result column="REFUND_STATUS" jdbcType="VARCHAR" property="refundStatus"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
         <result column="PRICE" jdbcType="DECIMAL" property="price" />
         <result column="NUM" jdbcType="INTEGER" property="num" />
         <result column="PIC_URL" property="picUrl"/>
@@ -55,7 +57,7 @@
         <result column="SPU_NAME" property="spuName"/>
     </resultMap>
     <sql id="OrderItem_Column_List">
-        ID, SKU_NO, ORDER_NO, AMOUNT, ORIGINAL_PRICE, PRICE, NUM
+        ID, SKU_NO, ORDER_NO, AMOUNT, ORIGINAL_PRICE, PRICE, NUM, STATUS, REFUND_STATUS
     </sql>
 
     <insert id="insertOrder" keyColumn="ID" keyProperty="id" parameterType="Order" useGeneratedKeys="true">
@@ -187,10 +189,10 @@
 
     <insert id="insertOrderItem" keyColumn="ID" keyProperty="id" parameterType="OrderItem" useGeneratedKeys="true">
         insert into TR_ORDER_ITEM (ID, SKU_NO, ORDER_NO, AMOUNT,
-        ORIGINAL_PRICE, PRICE, NUM
+        ORIGINAL_PRICE, PRICE, NUM, STATUS, REFUND_STATUS
         )
         values (#{id}, #{skuNo,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL},
-        #{originalPrice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{num}
+        #{originalPrice}, #{price}, #{num}, #{status}, #{refundStatus}
         )
     </insert>
 
@@ -201,7 +203,7 @@
         DEVELIERY_TIME, USER_ADDRESS_ID)
         values (#{id},#{orderNo,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR},
         #{receiverPhone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{develieryCompany,jdbcType=VARCHAR},
-        #{develieryTime,jdbcType=TIMESTAMP}, #{userAddressId}))
+        #{develieryTime,jdbcType=TIMESTAMP}, #{userAddressId})
     </insert>
 
 
@@ -210,6 +212,26 @@
         set STATUS = #{status},
         UPDATE_TIME = now()
         where ORDER_NO = #{orderNo}
+    </update>
+
+    <update id="updateOrderRefundStatus">
+        update TT_ORDER
+        set REFUND_STATUS = #{refundStatus},
+        UPDATE_TIME = now()
+        where ORDER_NO = #{orderNo}
+    </update>
+
+
+    <update id="updateOrderItemStatus">
+        update TR_ORDER_ITEM
+        set STATUS = #{status}
+        where ID = #{id}
+    </update>
+
+    <update id="updateOrderItemRefundStatus">
+    update TR_ORDER_ITEM
+    set REFUND_STATUS = #{refundStatus}
+    where ID = #{id}
     </update>
 
     <update id="updateOrderStatusToPaid">
@@ -270,6 +292,9 @@
         toi.ORIGINAL_PRICE,
         toi.PRICE,
         toi.NUM,
+        toi.STATUS,
+        toi.REFUND_STATUS,
+
 
         tsi.PIC_URL,
         tk.SKU_NAME,
@@ -281,6 +306,13 @@
         LEFT JOIN TT_SPU ts ON ts.SPU_CODE = tk.SPU_CODE
         WHERE toi.ORDER_NO = #{orderNo}
         AND tsi.IS_MAIN = 1
+    </select>
+
+    <select id="getOrderNoByOrderItem" resultType="java.lang.String">
+       SELECT
+       toi.ORDER_NO
+       FROM TR_ORDER_ITEM toi
+       WHERE toi.ID = #{orderItemId}
     </select>
 
 </mapper>

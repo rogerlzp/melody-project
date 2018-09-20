@@ -16,13 +16,13 @@ public class Order implements Serializable {
     private Long userId;
     private String orderNo;
     private String status;
+    private String refundStatus;
     private Date createTime;
     private Date updateTime;
     private Integer totalNum;
     private Double totalDiscount;
     private Double totalAmount;
     private Double expressFee;
-    private String refundStatus;
     private Integer birdCoin; // 积分
     private Date paidTime; //付款时间
 

@@ -197,12 +197,6 @@
   </update>
 
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from TR_USER_ADDRESS
-    where ID = #{id,jdbcType=BIGINT}
-  </select>
 
 
   <select id="getDefaultAddressByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">

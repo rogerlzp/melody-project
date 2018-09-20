@@ -151,10 +151,10 @@ public class WxAuthController extends BaseController {
     @RequestMapping(value = "/prePay", method = RequestMethod.GET, produces = "application/json")
     public JsonApi requestPay(@RequestParam(required = true, value = "openId") String openId,
                                           @RequestParam(required = true, value = "payAmount") Double payAmount,
-                                          @RequestParam(required = true, value = "orderId") String orderId)
+                                          @RequestParam(required = true, value = "orderNo") String orderNo)
             throws Exception {
 
-        Map map = wxPayService.wxSpPay(orderId, payAmount, openId);
+        Map map = wxPayService.wxSpPay(orderNo, payAmount, openId);
         log.info(map.toString());
         return JsonApi.isOk().data(map);
     }

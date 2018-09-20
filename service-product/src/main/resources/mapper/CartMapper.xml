@@ -84,7 +84,7 @@
     UPDATE_DATE, IS_CHECKED)
     values (#{id}, #{cartId,jdbcType=BIGINT}, #{skuNo,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER},
     #{price,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, now(),
-    #{updateItem,jdbcType=TIMESTAMP},#{isChecked})
+    #{updateDate,jdbcType=TIMESTAMP},#{isChecked})
   </insert>
   <update id="updateCartItem" parameterType="CartItem">
     update TR_CART_ITEM

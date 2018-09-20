@@ -22,5 +22,9 @@ public class OrderItem implements Serializable {
     private String skuName;
     private String spuName;
 
+    // 这两个状态默认同Order是一样的。发货或者退货的时候在自行变化。
+    private String status;
+    private String refundStatus;
+
 
 }

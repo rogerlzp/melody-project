@@ -38,6 +38,7 @@ public interface OrderMapper {
     int updateOrderStatusToPaid(@Param(value = "orderNo") String orderNo, @Param(value = "paidTime") Date paidTime, @Param(value = "status") String status);
     int updateOrderStatus(@Param(value = "orderNo") String orderNo, @Param(value = "status") String status);
 
+    int updateOrderRefundStatus(@Param(value = "orderNo") String orderNo, @Param(value = "refundStatus") String refundStatus);
 
     int countAllMyOrder(@Param(value = "userId") Long userId, @Param(value = "status") String status);
 
@@ -48,4 +49,9 @@ public interface OrderMapper {
     List<Map> counterOrderStatus(@Param(value = "userId") Long userId);
 
     List<OrderItem> getOrderItemListByOrderNo(@Param(value = "orderNo") String orderNo);
+
+    String getOrderNoByOrderItem(@Param(value = "orderItemId") Long orderItemId);
+
+    int updateOrderItemStatus(@Param(value = "id") Long id, @Param(value = "status") String status);
+    int updateOrderItemRefundStatus(@Param(value = "id") Long id, @Param(value = "refundStatus") String refundStatus);
 }
