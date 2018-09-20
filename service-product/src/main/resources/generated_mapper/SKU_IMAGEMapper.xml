@@ -1037,6 +1037,382 @@
   </update>
   <resultMap id="BaseResultMap" type="com.melody.generated.model.SKU_IMAGE">
     <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="IS_MAIN" jdbcType="TINYINT" property="isMain" />
+    <result column="PIC_URL" jdbcType="VARCHAR" property="picUrl" />
+    <result column="PIC_SEQ" jdbcType="TINYINT" property="picSeq" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, IS_MAIN, PIC_URL, PIC_SEQ, CREATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_IMAGE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_IMAGE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SKU_IMAGE" useGeneratedKeys="true">
+    insert into TR_SKU_IMAGE (SKU_NO, IS_MAIN, PIC_URL, 
+      PIC_SEQ, CREATE_DATE)
+    values (#{skuNo,jdbcType=VARCHAR}, #{isMain,jdbcType=TINYINT}, #{picUrl,jdbcType=VARCHAR}, 
+      #{picSeq,jdbcType=TINYINT}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SKU_IMAGE" useGeneratedKeys="true">
+    insert into TR_SKU_IMAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="isMain != null">
+        IS_MAIN,
+      </if>
+      <if test="picUrl != null">
+        PIC_URL,
+      </if>
+      <if test="picSeq != null">
+        PIC_SEQ,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=TINYINT},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picSeq != null">
+        #{picSeq,jdbcType=TINYINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SKU_IMAGE">
+    update TR_SKU_IMAGE
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isMain != null">
+        IS_MAIN = #{isMain,jdbcType=TINYINT},
+      </if>
+      <if test="picUrl != null">
+        PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picSeq != null">
+        PIC_SEQ = #{picSeq,jdbcType=TINYINT},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SKU_IMAGE">
+    update TR_SKU_IMAGE
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      IS_MAIN = #{isMain,jdbcType=TINYINT},
+      PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      PIC_SEQ = #{picSeq,jdbcType=TINYINT},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SKU_IMAGE">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="IS_MAIN" jdbcType="TINYINT" property="isMain" />
+    <result column="PIC_URL" jdbcType="VARCHAR" property="picUrl" />
+    <result column="PIC_SEQ" jdbcType="TINYINT" property="picSeq" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, IS_MAIN, PIC_URL, PIC_SEQ, CREATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_IMAGE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_IMAGE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SKU_IMAGE" useGeneratedKeys="true">
+    insert into TR_SKU_IMAGE (SKU_NO, IS_MAIN, PIC_URL, 
+      PIC_SEQ, CREATE_DATE)
+    values (#{skuNo,jdbcType=VARCHAR}, #{isMain,jdbcType=TINYINT}, #{picUrl,jdbcType=VARCHAR}, 
+      #{picSeq,jdbcType=TINYINT}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SKU_IMAGE" useGeneratedKeys="true">
+    insert into TR_SKU_IMAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="isMain != null">
+        IS_MAIN,
+      </if>
+      <if test="picUrl != null">
+        PIC_URL,
+      </if>
+      <if test="picSeq != null">
+        PIC_SEQ,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=TINYINT},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picSeq != null">
+        #{picSeq,jdbcType=TINYINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SKU_IMAGE">
+    update TR_SKU_IMAGE
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isMain != null">
+        IS_MAIN = #{isMain,jdbcType=TINYINT},
+      </if>
+      <if test="picUrl != null">
+        PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picSeq != null">
+        PIC_SEQ = #{picSeq,jdbcType=TINYINT},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SKU_IMAGE">
+    update TR_SKU_IMAGE
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      IS_MAIN = #{isMain,jdbcType=TINYINT},
+      PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      PIC_SEQ = #{picSeq,jdbcType=TINYINT},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SKU_IMAGE">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="IS_MAIN" jdbcType="TINYINT" property="isMain" />
+    <result column="PIC_URL" jdbcType="VARCHAR" property="picUrl" />
+    <result column="PIC_SEQ" jdbcType="TINYINT" property="picSeq" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, IS_MAIN, PIC_URL, PIC_SEQ, CREATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_IMAGE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_IMAGE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SKU_IMAGE" useGeneratedKeys="true">
+    insert into TR_SKU_IMAGE (SKU_NO, IS_MAIN, PIC_URL, 
+      PIC_SEQ, CREATE_DATE)
+    values (#{skuNo,jdbcType=VARCHAR}, #{isMain,jdbcType=TINYINT}, #{picUrl,jdbcType=VARCHAR}, 
+      #{picSeq,jdbcType=TINYINT}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SKU_IMAGE" useGeneratedKeys="true">
+    insert into TR_SKU_IMAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="isMain != null">
+        IS_MAIN,
+      </if>
+      <if test="picUrl != null">
+        PIC_URL,
+      </if>
+      <if test="picSeq != null">
+        PIC_SEQ,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=TINYINT},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picSeq != null">
+        #{picSeq,jdbcType=TINYINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SKU_IMAGE">
+    update TR_SKU_IMAGE
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isMain != null">
+        IS_MAIN = #{isMain,jdbcType=TINYINT},
+      </if>
+      <if test="picUrl != null">
+        PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picSeq != null">
+        PIC_SEQ = #{picSeq,jdbcType=TINYINT},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SKU_IMAGE">
+    update TR_SKU_IMAGE
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      IS_MAIN = #{isMain,jdbcType=TINYINT},
+      PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      PIC_SEQ = #{picSeq,jdbcType=TINYINT},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SKU_IMAGE">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="IS_MAIN" jdbcType="TINYINT" property="isMain" />
+    <result column="PIC_URL" jdbcType="VARCHAR" property="picUrl" />
+    <result column="PIC_SEQ" jdbcType="TINYINT" property="picSeq" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, IS_MAIN, PIC_URL, PIC_SEQ, CREATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_IMAGE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_IMAGE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SKU_IMAGE" useGeneratedKeys="true">
+    insert into TR_SKU_IMAGE (SKU_NO, IS_MAIN, PIC_URL, 
+      PIC_SEQ, CREATE_DATE)
+    values (#{skuNo,jdbcType=VARCHAR}, #{isMain,jdbcType=TINYINT}, #{picUrl,jdbcType=VARCHAR}, 
+      #{picSeq,jdbcType=TINYINT}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SKU_IMAGE" useGeneratedKeys="true">
+    insert into TR_SKU_IMAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="isMain != null">
+        IS_MAIN,
+      </if>
+      <if test="picUrl != null">
+        PIC_URL,
+      </if>
+      <if test="picSeq != null">
+        PIC_SEQ,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isMain != null">
+        #{isMain,jdbcType=TINYINT},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picSeq != null">
+        #{picSeq,jdbcType=TINYINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SKU_IMAGE">
+    update TR_SKU_IMAGE
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isMain != null">
+        IS_MAIN = #{isMain,jdbcType=TINYINT},
+      </if>
+      <if test="picUrl != null">
+        PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="picSeq != null">
+        PIC_SEQ = #{picSeq,jdbcType=TINYINT},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SKU_IMAGE">
+    update TR_SKU_IMAGE
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      IS_MAIN = #{isMain,jdbcType=TINYINT},
+      PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      PIC_SEQ = #{picSeq,jdbcType=TINYINT},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SKU_IMAGE">
+    <id column="ID" jdbcType="BIGINT" property="id" />
     <result column="SKU_CODE" jdbcType="VARCHAR" property="skuCode" />
     <result column="IS_MAIN" jdbcType="TINYINT" property="isMain" />
     <result column="PIC_URL" jdbcType="VARCHAR" property="picUrl" />

@@ -25,5 +25,5 @@ public class OrderExpress implements Serializable {
 
     private Date develieryTime;
     private String status;
-
+    private Long userAddressId;
 }

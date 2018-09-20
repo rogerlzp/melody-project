@@ -60,6 +60,13 @@ spring:
   cache:
     type: redis
 
+# rabbit mq
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
     # redis
 #  redis:
 #    # 服务器IP地址

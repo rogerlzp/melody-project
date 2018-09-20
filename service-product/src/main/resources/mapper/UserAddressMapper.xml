@@ -214,4 +214,24 @@
   </select>
 
 
+
+  <select id="getUserAddressByOrderNo"  resultMap="BaseResultMap">
+    select
+    tua.ID,
+    tua.USER_ID,
+    tua.OPENID,
+    tua.ADDRESS_DETAIL,
+    tua.IS_DEFAULT,
+    tua.RECEIVER_NAME,
+    tua.RECEIVER_PHONE,
+    tua.ZIPCODE,
+    tua.CREATE_DATE,
+    tua.PROVINCE,
+    tua.CITY,
+    tua.AREA
+    from TR_USER_ADDRESS tua, TR_ORDER_EXPRESS toe
+    WHERE toe.ORDER_NO = #{orderNo}
+    AND toe.USER_ADDRESS_ID = tua.ID
+  </select>
+
 </mapper>

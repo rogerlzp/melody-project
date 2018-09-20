@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class Order implements Serializable {
@@ -22,7 +23,8 @@ public class Order implements Serializable {
     private Double totalAmount;
     private Double expressFee;
     private String refundStatus;
-
     private Integer birdCoin; // 积分
+    private Date paidTime; //付款时间
 
+    private List<OrderItem> orderItemList;
 }

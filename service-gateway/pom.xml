@@ -79,6 +79,18 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- 添加 rabbitmq 的支持 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+            <version>2.0.4.RELEASE</version>
+        </dependency>
+        <!-- rabbitmq 依赖于 spring-boot-starter-web 吗？
+         -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

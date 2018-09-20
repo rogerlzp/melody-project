@@ -13,6 +13,8 @@
         <result column="TOTAL_AMOUNT" jdbcType="DECIMAL" property="totalAmount"/>
         <result column="EXPRESS_FEE" jdbcType="DECIMAL" property="expressFee"/>
         <result column="REFUND_STATUS" jdbcType="VARCHAR" property="refundStatus"/>
+        <result column="PAID_TIME"  property="paidTime"/>
+
     </resultMap>
 
     <resultMap id="OrderDetailResultMap" type="OrderDetailResult">
@@ -27,10 +29,33 @@
         <result column="TOTAL_AMOUNT" jdbcType="DECIMAL" property="totalAmount"/>
         <result column="EXPRESS_FEE" jdbcType="DECIMAL" property="expressFee"/>
         <result column="REFUND_STATUS" jdbcType="VARCHAR" property="refundStatus"/>
+        <result column="PAID_TIME"  property="paidTime"/>
     </resultMap>
     <sql id="Base_Column_List">
         ID, ORDER_NO, STATUS, CREATE_TIME, UPDATE_TIME, TOTAL_NUM, TOTAL_DISCOUNT, USER_ID,
-        TOTAL_AMOUNT, EXPRESS_FEE, REFUND_STATUS
+        TOTAL_AMOUNT, EXPRESS_FEE, REFUND_STATUS, PAID_TIME
+    </sql>
+
+    <resultMap id="OrderStatusResultMap" type="java.util.Map">
+        <result column="COUNT" jdbcType="INTEGER" property="count"/>
+        <result column="STATUS" property="status"/>
+    </resultMap>
+
+
+    <resultMap id="OrderItemResultMap" type="OrderItem">
+        <id column="ID" jdbcType="BIGINT" property="id" />
+        <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+        <result column="ORDER_NO" jdbcType="VARCHAR" property="orderNo" />
+        <result column="AMOUNT" jdbcType="DECIMAL" property="amount" />
+        <result column="ORIGINAL_PRICE" jdbcType="DECIMAL" property="originalPrice" />
+        <result column="PRICE" jdbcType="DECIMAL" property="price" />
+        <result column="NUM" jdbcType="INTEGER" property="num" />
+        <result column="PIC_URL" property="picUrl"/>
+        <result column="SKU_NAME" property="skuName"/>
+        <result column="SPU_NAME" property="spuName"/>
+    </resultMap>
+    <sql id="OrderItem_Column_List">
+        ID, SKU_NO, ORDER_NO, AMOUNT, ORIGINAL_PRICE, PRICE, NUM
     </sql>
 
     <insert id="insertOrder" keyColumn="ID" keyProperty="id" parameterType="Order" useGeneratedKeys="true">
@@ -173,10 +198,10 @@
             useGeneratedKeys="true">
       insert into TR_ORDER_EXPRESS (ID,ORDER_NO, RECEIVER_NAME, ADDRESS_DETAIL,
         RECEIVER_PHONE, ZIPCODE, DEVELIERY_COMPANY,
-        DEVELIERY_TIME)
+        DEVELIERY_TIME, USER_ADDRESS_ID)
         values (#{id},#{orderNo,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR},
         #{receiverPhone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{develieryCompany,jdbcType=VARCHAR},
-        #{develieryTime,jdbcType=TIMESTAMP})
+        #{develieryTime,jdbcType=TIMESTAMP}, #{userAddressId}))
     </insert>
 
 
@@ -187,14 +212,18 @@
         where ORDER_NO = #{orderNo}
     </update>
 
+    <update id="updateOrderStatusToPaid">
+        update TT_ORDER
+        set STATUS = #{status}, PAID_TIME=#{paidTime},
+        UPDATE_TIME = now()
+        where ORDER_NO = #{orderNo}
+    </update>
     <select id="getOrderDetailByOrderNo" resultMap="OrderDetailResultMap">
         SELECT
         <include refid="Base_Column_List"/>
         FROM TT_ORDER
         where ORDER_NO = #{orderNo}
     </select>
-
-
 
 
     <select id="countAllMyOrder" resultType="java.lang.Integer">
@@ -210,7 +239,9 @@
     <sql id="pagination">
         <![CDATA[
 
+
 	    limit #{offset}, #{pageSize}
+
 
         ]]>
     </sql>
@@ -226,8 +257,30 @@
         <include refid="pagination"/>
     </select>
 
+    <select id="counterOrderStatus" resultMap="OrderStatusResultMap">
+        SELECT count(STATUS) AS COUNT, STATUS from TT_ORDER group by (STATUS);
+    </select>
 
+    <select id="getOrderItemListByOrderNo" resultMap="OrderItemResultMap">
+        SELECT
+        toi.ID,
+        toi.SKU_NO,
+        toi.ORDER_NO,
+        toi.AMOUNT,
+        toi.ORIGINAL_PRICE,
+        toi.PRICE,
+        toi.NUM,
 
+        tsi.PIC_URL,
+        tk.SKU_NAME,
+        ts.SPU_NAME
 
+        FROM TR_ORDER_ITEM toi
+        LEFT JOIN TT_SKU tk on toi.SKU_NO = tk.SKU_NO
+        LEFT JOIN TR_SKU_IMAGE tsi ON tsi.SKU_NO = tk.SKU_NO
+        LEFT JOIN TT_SPU ts ON ts.SPU_CODE = tk.SPU_CODE
+        WHERE toi.ORDER_NO = #{orderNo}
+        AND tsi.IS_MAIN = 1
+    </select>
 
 </mapper>

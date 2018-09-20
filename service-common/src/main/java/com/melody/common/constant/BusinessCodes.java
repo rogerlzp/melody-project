@@ -133,14 +133,9 @@ public class BusinessCodes {
     public static final String GATEWAY_PUSH_USER_ID_IS_NULL = "40000003";// 用户ID为空！
 
 
-    /***************预订 *************/
+    /*************** 微信 *************/
 
-    public static final String RESERVE_ERROR = "90000001";// 预订失败
-    public static final String RESERVE_PRODUCT_ERROR = "90000002";// 预订单个服务失败
-
-    /*************** 车辆 *************/
-    public static final String CAR_ERROR = "90000003";// 添加车辆失败
-
+    public final static String WX_ACCOUNT_ERROR = "90000001";// 微信openid 不正确
 
     /*************** 家庭作业 *************/
     public static final String ACTIVE_HOMEWORK_NOT_EXIST = "60000001";// 没有未完成的作业
