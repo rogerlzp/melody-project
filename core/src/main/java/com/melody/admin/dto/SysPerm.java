@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * created by CaiBaoHong at 2018/4/17 14:55<br>
  */
-@TableName("sys_perm")
+@TableName("SYS_PERM")
 public class SysPerm extends Model<SysPerm> {
 
     @TableId(type = IdType.INPUT)

@@ -13,7 +13,7 @@ public interface AdminSKUMapper {
     int insert(SKU sku);
 
 
-    int insertSKUInventory(Inventory inventory);
+    int insertSKUInventory(SkuInventory skuInventory);
     int insertSKUPrice(SkuPrice skuPrice);
     int insertUserSKUDiscount(UserSkuDiscount userSkuDiscount);
 
@@ -34,4 +34,5 @@ public interface AdminSKUMapper {
 
 
     int updateSKU(@Param(value = "skuNo") String skuNo, @Param(value = "status") String status);
+    int updateSKUNum(@Param(value = "skuNo") String skuNo, @Param(value = "num") Integer num);
 }

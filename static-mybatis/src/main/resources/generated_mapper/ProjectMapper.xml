@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.generated.dao.ProjectMapper">
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Project">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="PROJECT_NAME" jdbcType="VARCHAR" property="projectName" />
+    <result column="BEGIN_TIME" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="LOCATION" jdbcType="VARCHAR" property="location" />
+    <result column="CUSTOMER" jdbcType="VARCHAR" property="customer" />
+    <result column="PROJECT_DESC" jdbcType="VARCHAR" property="projectDesc" />
+    <result column="SPACE_TYPE" jdbcType="VARCHAR" property="spaceType" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, PROJECT_NAME, BEGIN_TIME, END_TIME, LOCATION, CUSTOMER, PROJECT_DESC, SPACE_TYPE, 
+    STATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_PROJECT
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TT_PROJECT
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Project" useGeneratedKeys="true">
+    insert into TT_PROJECT (PROJECT_NAME, BEGIN_TIME, END_TIME, 
+      LOCATION, CUSTOMER, PROJECT_DESC, 
+      SPACE_TYPE, STATUS)
+    values (#{projectName,jdbcType=VARCHAR}, #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{location,jdbcType=VARCHAR}, #{customer,jdbcType=VARCHAR}, #{projectDesc,jdbcType=VARCHAR}, 
+      #{spaceType,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Project" useGeneratedKeys="true">
+    insert into TT_PROJECT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectName != null">
+        PROJECT_NAME,
+      </if>
+      <if test="beginTime != null">
+        BEGIN_TIME,
+      </if>
+      <if test="endTime != null">
+        END_TIME,
+      </if>
+      <if test="location != null">
+        LOCATION,
+      </if>
+      <if test="customer != null">
+        CUSTOMER,
+      </if>
+      <if test="projectDesc != null">
+        PROJECT_DESC,
+      </if>
+      <if test="spaceType != null">
+        SPACE_TYPE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectName != null">
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="customer != null">
+        #{customer,jdbcType=VARCHAR},
+      </if>
+      <if test="projectDesc != null">
+        #{projectDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="spaceType != null">
+        #{spaceType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Project">
+    update TT_PROJECT
+    <set>
+      <if test="projectName != null">
+        PROJECT_NAME = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        BEGIN_TIME = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="location != null">
+        LOCATION = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="customer != null">
+        CUSTOMER = #{customer,jdbcType=VARCHAR},
+      </if>
+      <if test="projectDesc != null">
+        PROJECT_DESC = #{projectDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="spaceType != null">
+        SPACE_TYPE = #{spaceType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Project">
+    update TT_PROJECT
+    set PROJECT_NAME = #{projectName,jdbcType=VARCHAR},
+      BEGIN_TIME = #{beginTime,jdbcType=TIMESTAMP},
+      END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      LOCATION = #{location,jdbcType=VARCHAR},
+      CUSTOMER = #{customer,jdbcType=VARCHAR},
+      PROJECT_DESC = #{projectDesc,jdbcType=VARCHAR},
+      SPACE_TYPE = #{spaceType,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

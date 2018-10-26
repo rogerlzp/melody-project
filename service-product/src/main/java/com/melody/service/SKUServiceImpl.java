@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.melody.annotation.Role;
 import com.melody.base.GeneralEnter;
 import com.melody.common.constant.BusinessCodes;
+import com.melody.common.constant.SKUStatusEnum;
 import com.melody.context.ServiceContext;
 import com.melody.dao.SKUMapper;
 import com.melody.dao.SPUMapper;
@@ -114,5 +115,46 @@ public class SKUServiceImpl implements SKUService {
         return skuMapper.getSkuDiscount(skuNo, userId);
 
     }
+
+    /**
+     * SPU下面的所有属性
+     * skuList:{1. featureList,  2. price, 3. inventory}
+     *
+     * @param skuListEnter
+     * @return
+     */
+    @Override
+    public SKUListResult getSKUListFilter(SKUListEnter skuListEnter) {
+
+        String spuCode = skuMapper.getSPUCodeBySKUNo(skuListEnter.getSkuNo());
+        // 1. 获取所有库存
+        List<SKU> skuList = skuMapper.getAllSKUBySpu(spuCode, SKUStatusEnum.SKU_STATUS_YOUXIAO.getEnName());
+
+        // 2. 获取价格和库存
+        for (SKU sku : skuList) {
+            List<SkuImage> skuImageList = skuMapper.getSkuImageList(sku.getSkuNo());
+            sku.setSkuImageList(skuImageList);
+
+            List<SkuFeature> skuFeatureList = skuMapper.getSkuFeatureList(sku.getSkuNo());
+            sku.setSkuFeatureList(skuFeatureList);
+        }
+        // 根据spuCode 获取Feature和对应的值
+
+        List<Feature> spuFeatureList = spuMapper.getFeatureListBySpuCode(spuCode);
+        for (Feature feature : spuFeatureList) {
+            List<FeatureOption> featureOptionList = spuMapper.getFeatureOptionByFeationId(feature.getId());
+            feature.setFeatureOptions(featureOptionList);
+        }
+
+
+        SKUListResult skuListResult = new SKUListResult();
+        skuListResult.setSkuList(skuList);
+        skuListResult.setFeatureList(spuFeatureList);
+        skuListResult.setCode(BusinessCodes.SUCCESS);
+
+        return skuListResult;
+
+    }
+
 
 }

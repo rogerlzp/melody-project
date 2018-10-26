@@ -12,6 +12,4 @@ public class FeatureOption implements Serializable {
     private Integer featureId;
     private String featureValue;  // 这个值可能是整数类型
 
-
-
 }

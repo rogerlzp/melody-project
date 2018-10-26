@@ -1,7 +1,12 @@
 package com.melody.dao;
 
 
+import com.melody.product.dto.Feature;
+import com.melody.product.dto.FeatureOption;
 import com.melody.product.dto.SPU;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SPUMapper {
     int deleteByPrimaryKey(Long id);
@@ -18,4 +23,7 @@ public interface SPUMapper {
 
     SPU selectBySpuCode(String spuCode);
 
+    List<Feature> getFeatureListBySpuCode(@Param(value = "spuCode") String spuCode);
+
+    List<FeatureOption> getFeatureOptionByFeationId(@Param(value = "featureId") Integer featureId);
 }

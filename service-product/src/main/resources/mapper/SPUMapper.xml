@@ -12,6 +12,19 @@
         <result column="BRAND_CODE" jdbcType="VARCHAR" property="brandCode" />
         <result column="BRAND_NAME" jdbcType="VARCHAR" property="brandName" />
     </resultMap>
+
+    <resultMap id="FeatureResultMap" type="Feature">
+        <id column="ID" property="id"/>
+        <result column="FEATURE_NAME" property="featureName"/>
+    </resultMap>
+    <resultMap id="FeatureOptionResultMap" type="FeatureOption">
+        <id column="ID" property="id"/>
+        <result column="FEATURE_ID" property="featureId"/>
+        <result column="FEATURE_Value" property="featureValue"/>
+    </resultMap>
+
+
+
     <sql id="Base_Column_List">
         ID, SPU_NAME, SPU_CODE, DESCRIPTION, DETAIL, CATEGORY_CODE, BRAND_CODE
     </sql>
@@ -148,6 +161,24 @@
         <include refid="Base_Column_List"/>
         from TT_SPU
         WHERE CATEGORY_CODE = #{categoryCode} AND BRAND_CODE = #{brandCode}
+    </select>
+
+    <select id="getFeatureListBySpuCode" resultMap="FeatureResultMap">
+    SELECT
+    ttf.ID,
+    ttf.FEATURE_NAME
+    FROM  TT_FEATURE ttf,TT_SPU tts
+    WHERE ttf.CATEGORY_CODE = tts.CATEGORY_CODE
+    AND tts.SPU_CODE = #{spuCode}
+    </select>
+
+    <select id="getFeatureOptionByFeationId" resultMap="FeatureOptionResultMap">
+        SELECT
+        trfo.ID,
+        trfo.FEATURE_ID,
+        trfo.FEATURE_VALUE
+        FROM  TR_FEATURE_OPTION trfo
+        WHERE trfo.FEATURE_ID = #{featureId}
     </select>
 
 

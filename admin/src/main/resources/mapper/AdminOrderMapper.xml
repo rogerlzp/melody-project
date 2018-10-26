@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.dao.AdminOrderMapper">
+    <resultMap id="BaseResultMap" type="Order">
+        <id column="ID" jdbcType="BIGINT" property="id"/>
+        <id column="ORDER_NO" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="TOTAL_NUM" jdbcType="INTEGER" property="totalNum"/>
+        <result column="TOTAL_DISCOUNT" jdbcType="DECIMAL" property="totalDiscount"/>
+        <result column="USER_ID" jdbcType="BIGINT" property="userId"/>
+        <result column="TOTAL_AMOUNT" jdbcType="DECIMAL" property="totalAmount"/>
+        <result column="EXPRESS_FEE" jdbcType="DECIMAL" property="expressFee"/>
+        <result column="REFUND_STATUS" jdbcType="VARCHAR" property="refundStatus"/>
+        <result column="PAID_TIME" property="paidTime"/>
+
+    </resultMap>
+
+    <resultMap id="OrderDetailResultMap" type="OrderDetailResult">
+        <id column="ID" jdbcType="BIGINT" property="id"/>
+        <id column="ORDER_NO" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="TOTAL_NUM" jdbcType="INTEGER" property="totalNum"/>
+        <result column="TOTAL_DISCOUNT" jdbcType="DECIMAL" property="totalDiscount"/>
+        <result column="USER_ID" jdbcType="BIGINT" property="userId"/>
+        <result column="TOTAL_AMOUNT" jdbcType="DECIMAL" property="totalAmount"/>
+        <result column="EXPRESS_FEE" jdbcType="DECIMAL" property="expressFee"/>
+        <result column="REFUND_STATUS" jdbcType="VARCHAR" property="refundStatus"/>
+        <result column="PAID_TIME" property="paidTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID, ORDER_NO, STATUS, CREATE_TIME, UPDATE_TIME, TOTAL_NUM, TOTAL_DISCOUNT, USER_ID,
+        TOTAL_AMOUNT, EXPRESS_FEE, REFUND_STATUS, PAID_TIME
+    </sql>
+
+    <resultMap id="OrderStatusResultMap" type="java.util.Map">
+        <result column="COUNT" jdbcType="INTEGER" property="count"/>
+        <result column="STATUS" property="status"/>
+    </resultMap>
+
+
+    <resultMap id="OrderItemResultMap" type="OrderItem">
+        <id column="ID" jdbcType="BIGINT" property="id"/>
+        <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo"/>
+        <result column="ORDER_NO" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="AMOUNT" jdbcType="DECIMAL" property="amount"/>
+        <result column="ORIGINAL_PRICE" jdbcType="DECIMAL" property="originalPrice"/>
+        <result column="REFUND_STATUS" jdbcType="VARCHAR" property="refundStatus"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="PRICE" jdbcType="DECIMAL" property="price"/>
+        <result column="NUM" jdbcType="INTEGER" property="num"/>
+        <result column="PIC_URL" property="picUrl"/>
+        <result column="SKU_NAME" property="skuName"/>
+        <result column="SPU_NAME" property="spuName"/>
+        <result column="REFUND_REASON" property="refundReason"/>
+        <result column="ASKED_AMOUNT" property="askedAmount"/>
+    </resultMap>
+    <sql id="OrderItem_Column_List">
+        ID, SKU_NO, ORDER_NO, AMOUNT, ORIGINAL_PRICE, PRICE, NUM, STATUS, REFUND_STATUS
+    </sql>
+
+
+    <resultMap id="OrderRefundResultMap" type="OrderRefund">
+        <id column="ID" jdbcType="BIGINT" property="id"/>
+        <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo"/>
+        <result column="ORDER_NO" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="AMOUNT" jdbcType="DECIMAL" property="amount"/>
+        <result column="ORIGINAL_PRICE" jdbcType="DECIMAL" property="originalPrice"/>
+        <result column="REFUND_STATUS" jdbcType="VARCHAR" property="refundStatus"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="PRICE" jdbcType="DECIMAL" property="price"/>
+        <result column="NUM" jdbcType="INTEGER" property="num"/>
+        <result column="PIC_URL" property="picUrl"/>
+        <result column="SKU_NAME" property="skuName"/>
+        <result column="SPU_NAME" property="spuName"/>
+    </resultMap>
+    <sql id="OrderRefund_Column_List">
+        ID, SKU_NO, ORDER_NO, AMOUNT, ORIGINAL_PRICE, PRICE, NUM, STATUS, REFUND_STATUS
+    </sql>
+
+
+    <insert id="insertOrder" keyColumn="ID" keyProperty="id" parameterType="Order" useGeneratedKeys="true">
+        insert into TT_ORDER (ID, ORDER_NO, STATUS, CREATE_TIME,
+        UPDATE_TIME, TOTAL_NUM, TOTAL_DISCOUNT,
+        USER_ID, TOTAL_AMOUNT, EXPRESS_FEE,
+        REFUND_STATUS)
+        values (#{id}, #{orderNo,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, now(),
+        #{updateTime,jdbcType=TIMESTAMP}, #{totalNum,jdbcType=INTEGER}, #{totalDiscount,jdbcType=DECIMAL},
+        #{userId,jdbcType=BIGINT}, #{totalAmount,jdbcType=DECIMAL}, #{expressFee,jdbcType=DECIMAL},
+        #{refundStatus,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="Order" useGeneratedKeys="true">
+        insert into TT_ORDER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">
+                ORDER_NO,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME,
+            </if>
+            <if test="totalNum != null">
+                TOTAL_NUM,
+            </if>
+            <if test="totalDiscount != null">
+                TOTAL_DISCOUNT,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="totalAmount != null">
+                TOTAL_AMOUNT,
+            </if>
+            <if test="expressFee != null">
+                EXPRESS_FEE,
+            </if>
+            <if test="refundStatus != null">
+                REFUND_STATUS,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="totalNum != null">
+                #{totalNum,jdbcType=INTEGER},
+            </if>
+            <if test="totalDiscount != null">
+                #{totalDiscount,jdbcType=DECIMAL},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="totalAmount != null">
+                #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="expressFee != null">
+                #{expressFee,jdbcType=DECIMAL},
+            </if>
+            <if test="refundStatus != null">
+                #{refundStatus,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="Order">
+        update TT_ORDER
+        <set>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="totalNum != null">
+                TOTAL_NUM = #{totalNum,jdbcType=INTEGER},
+            </if>
+            <if test="totalDiscount != null">
+                TOTAL_DISCOUNT = #{totalDiscount,jdbcType=DECIMAL},
+            </if>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="totalAmount != null">
+                TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="expressFee != null">
+                EXPRESS_FEE = #{expressFee,jdbcType=DECIMAL},
+            </if>
+            <if test="refundStatus != null">
+                REFUND_STATUS = #{refundStatus,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+        and ORDER_NO = #{orderNo,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="Order">
+        update TT_ORDER
+        set STATUS = #{status,jdbcType=VARCHAR},
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+        TOTAL_NUM = #{totalNum,jdbcType=INTEGER},
+        TOTAL_DISCOUNT = #{totalDiscount,jdbcType=DECIMAL},
+        USER_ID = #{userId,jdbcType=BIGINT},
+        TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+        EXPRESS_FEE = #{expressFee,jdbcType=DECIMAL},
+        REFUND_STATUS = #{refundStatus,jdbcType=VARCHAR}
+        where ID = #{id,jdbcType=BIGINT}
+        and ORDER_NO = #{orderNo,jdbcType=VARCHAR}
+    </update>
+
+
+    <insert id="insertOrderItem" keyColumn="ID" keyProperty="id" parameterType="OrderItem" useGeneratedKeys="true">
+        insert into TR_ORDER_ITEM (ID, SKU_NO, ORDER_NO, AMOUNT,
+        ORIGINAL_PRICE, PRICE, NUM, STATUS, REFUND_STATUS
+        )
+        values (#{id}, #{skuNo,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL},
+        #{originalPrice}, #{price}, #{num}, #{status}, #{refundStatus}
+        )
+    </insert>
+
+    <insert id="insertOrderExpress" keyColumn="ID" keyProperty="id" parameterType="OrderExpress"
+            useGeneratedKeys="true">
+        insert into TR_ORDER_EXPRESS (ID,ORDER_NO, RECEIVER_NAME, ADDRESS_DETAIL,
+        RECEIVER_PHONE, ZIPCODE, DEVELIERY_COMPANY,
+        DEVELIERY_TIME, USER_ADDRESS_ID)
+        values (#{id},#{orderNo,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR},
+        #{receiverPhone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{develieryCompany,jdbcType=VARCHAR},
+        #{develieryTime,jdbcType=TIMESTAMP}, #{userAddressId})
+    </insert>
+
+
+    <update id="updateOrderStatus">
+        update TT_ORDER
+        set STATUS = #{status},
+        UPDATE_TIME = now()
+        where ORDER_NO = #{orderNo}
+    </update>
+
+    <update id="updateOrderRefundStatus">
+        update TT_ORDER
+        set REFUND_STATUS = #{refundStatus},
+        UPDATE_TIME = now()
+        where ORDER_NO = #{orderNo}
+    </update>
+
+
+    <update id="updateOrderItemStatusByOrderNo">
+        update TR_ORDER_ITEM
+        set STATUS = #{status}
+        where ORDER_NO = #{orderNo}
+    </update>
+
+    <update id="updateOrderItemRefundStatus">
+        update TR_ORDER_ITEM
+        set REFUND_STATUS = #{refundStatus}
+        where ID = #{id}
+    </update>
+
+    <update id="updateOrderStatusToPaid">
+        update TT_ORDER
+        set STATUS = #{status}, PAID_TIME=#{paidTime},
+        UPDATE_TIME = now()
+        where ORDER_NO = #{orderNo}
+    </update>
+    <select id="getOrderDetailByOrderNo" resultMap="OrderDetailResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM TT_ORDER
+        where ORDER_NO = #{orderNo}
+    </select>
+
+
+    <select id="countAllMyOrder" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM TT_ORDER
+        where USER_ID = #{userId}
+        <if test="status != null and status != '' ">
+            AND STATUS = #{status}
+        </if>
+    </select>
+
+
+    <sql id="pagination">
+        <![CDATA[
+	    limit #{offset}, #{pageSize}
+        ]]>
+    </sql>
+
+
+    <select id="queryOrderListByStatus" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM TT_ORDER
+        WHERE STATUS = #{status} AND REFUND_STATUS=#{refundStatus}
+        <include refid="pagination"/>
+    </select>
+
+
+    <select id="getOrderItemByOrderItemId" resultMap="OrderItemResultMap">
+        SELECT
+        <include refid="OrderItem_Column_List"/>
+        FROM TR_ORDER_ITEM
+        WHERE ID = #{id}
+    </select>
+
+
+    <select id="counterOrderStatus" resultMap="OrderStatusResultMap">
+        SELECT count(STATUS) AS COUNT, STATUS from TT_ORDER group by (STATUS);
+    </select>
+
+    <select id="getOrderItemListByOrderNo" resultMap="OrderItemResultMap">
+        SELECT
+        toi.ID,
+        toi.SKU_NO,
+        toi.ORDER_NO,
+        toi.AMOUNT,
+        toi.ORIGINAL_PRICE,
+        toi.PRICE,
+        toi.NUM,
+        toi.STATUS,
+        toi.REFUND_STATUS,
+        tsi.PIC_URL,
+        tk.SKU_NAME,
+        ts.SPU_NAME,
+        tori.REFUND_REASON,
+        tori.ASKED_AMOUNT
+        FROM TR_ORDER_ITEM toi
+        LEFT JOIN TT_SKU tk on toi.SKU_NO = tk.SKU_NO
+        LEFT JOIN TR_SKU_IMAGE tsi ON tsi.SKU_NO = tk.SKU_NO
+        LEFT JOIN TT_SPU ts ON ts.SPU_CODE = tk.SPU_CODE
+        LEFT JOIN TR_ORDER_REFUND_ITEM tori ON tori.ORDER_ITEM_ID = toi.ID
+        WHERE toi.ORDER_NO = #{orderNo}
+        AND tsi.IS_MAIN = 1
+    </select>
+
+    <select id="getOrderNoByOrderItem" resultType="java.lang.String">
+        SELECT
+        toi.ORDER_NO
+        FROM TR_ORDER_ITEM toi
+        WHERE toi.ID = #{orderItemId}
+    </select>
+
+    <select id="countAllOrderByStatus" resultType="java.lang.Integer">
+        select count(*) FROM TT_ORDER
+        WHERE STATUS = #{status} AND REFUND_STATUS = #{refundStatus}
+    </select>
+
+    <select id="getOrderByOrderItemId" resultMap="BaseResultMap">
+        SELECT
+        tr.ID,
+        tr.ORDER_NO,
+        tr.STATUS,
+        tr.CREATE_TIME,
+        tr.UPDATE_TIME,
+        tr.TOTAL_NUM,
+        tr.TOTAL_DISCOUNT,
+        tr.USER_ID,
+        tr.TOTAL_AMOUNT,
+        tr.EXPRESS_FEE,
+        tr.REFUND_STATUS,
+        tr.PAID_TIME
+
+        FROM TR_ORDER_ITEM toi, TT_ORDER tr
+        WHERE tr.ORDER_NO = toi.ORDER_NO
+        AND toi.ID = #{id}
+    </select>
+
+    <select id="getOrderByOrderNo" resultMap="BaseResultMap">
+        SELECT
+        tr.ID,
+        tr.ORDER_NO,
+        tr.STATUS,
+        tr.CREATE_TIME,
+        tr.UPDATE_TIME,
+        tr.TOTAL_NUM,
+        tr.TOTAL_DISCOUNT,
+        tr.USER_ID,
+        tr.TOTAL_AMOUNT,
+        tr.EXPRESS_FEE,
+        tr.REFUND_STATUS,
+        tr.PAID_TIME
+
+        FROM TT_ORDER tr
+        WHERE tr.ORDER_NO = #{orderNo}
+    </select>
+
+</mapper>

@@ -3,14 +3,14 @@
 <mapper namespace="com.melody.dao.SysUserMapper">
 
     <resultMap id="userMap" type="SysUser">
-        <id property="uid" column="uid"/>
-        <result property="uname"  column="uname" />
-        <result property="nick"  column="nick" />
-        <result property="pwd"  column="pwd" />
-        <result property="salt"  column="salt" />
-        <result property="lock"  column="lock" />
-        <result property="created"  column="created" jdbcType="TIMESTAMP" />
-        <result property="updated"  column="updated" jdbcType="TIMESTAMP" />
+        <id property="uid" column="UID"/>
+        <result property="uname"  column="UNAME" />
+        <result property="nick"  column="NICK" />
+        <result property="pwd"  column="PWD" />
+        <result property="salt"  column="SALT" />
+        <result property="lock"  column="LOCK" />
+        <result property="created"  column="CREATED" jdbcType="TIMESTAMP" />
+        <result property="updated"  column="UPDATED" jdbcType="TIMESTAMP" />
     </resultMap>
 
     <!-- 一对多：user、role -->
@@ -22,21 +22,21 @@
     <select id="selectUserIncludeRoles" resultMap="userIncludeRolesMap">
         select
           u.*,
-          r.rid as role_rid,
-          r.rname as role_rname,
-          r.rdesc as role_rdesc,
-          r.rval as role_rval,
-          r.created as role_created,
-          r.updated  as role_updated
-        from sys_user u
-        left join sys_user_role ur on u.uid = ur.user_id
-        left join sys_role r on ur.role_id = r.rid
+          r.RID as role_rid,
+          r.RNAME as role_rname,
+          r.RDESC as role_rdesc,
+          r.RVAL as role_rval,
+          r.CREATED as role_created,
+          r.UPDATED  as role_updated
+        from SYS_USER u
+        left join SYS_USER_ROLE ur on u.UID = ur.USER_ID
+        left join SYS_ROLE r on ur.ROLE_ID = r.RID
         <where>
             <if test="nick != null and nick != ''">
-                u.`nick` like concat('%',#{nick},'%')
+                u.`NICK` like concat('%',#{nick},'%')
             </if>
         </where>
-        order by u.uid
+        order by u.UID
     </select>
 
 </mapper>

@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * created by CaiBaoHong at 2018/4/17 14:55<br>
  */
-@TableName("sys_role")
+@TableName("SYS_ROLE")
 public class SysRole extends Model<SysRole> {
 
     @TableId(type = IdType.ID_WORKER_STR)

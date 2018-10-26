@@ -8,14 +8,14 @@ import java.io.Serializable;
 /**
  * created by CaiBaoHong at 2018/4/17 14:55<br>
  */
-@TableName("sys_role_perm")
+@TableName("SYS_ROLE_PERM")
 public class SysRolePerm implements Serializable {
 
-    @TableField("role_id")
+    @TableField("ROLE_ID")
     private String roleId;
-    @TableField("perm_val")
+    @TableField("PERM_VAL")
     private String permVal;
-    @TableField("perm_type")
+    @TableField("PERM_TYPE")
     private Integer permType;
 
     public SysRolePerm() {

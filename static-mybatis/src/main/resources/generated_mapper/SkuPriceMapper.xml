@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.generated.dao.SkuPriceMapper">
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuPrice">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="SKU_APPEND_ATTR_ID" jdbcType="INTEGER" property="skuAppendAttrId" />
+    <result column="LIST_PRICE" jdbcType="DECIMAL" property="listPrice" />
+    <result column="SALE_PRICE" jdbcType="DECIMAL" property="salePrice" />
+    <result column="SPECIAL_PRICE" jdbcType="DECIMAL" property="specialPrice" />
+    <result column="IMPORT_PRICE" jdbcType="DECIMAL" property="importPrice" />
+    <result column="COST_PRICE" jdbcType="DECIMAL" property="costPrice" />
+    <result column="DISCOUNT_PRICE" jdbcType="DECIMAL" property="discountPrice" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, SKU_APPEND_ATTR_ID, LIST_PRICE, SALE_PRICE, SPECIAL_PRICE, IMPORT_PRICE, 
+    COST_PRICE, DISCOUNT_PRICE, CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_PRICE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_PRICE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuPrice" useGeneratedKeys="true">
+    insert into TR_SKU_PRICE (SKU_NO, SKU_APPEND_ATTR_ID, LIST_PRICE, 
+      SALE_PRICE, SPECIAL_PRICE, IMPORT_PRICE, 
+      COST_PRICE, DISCOUNT_PRICE, CREATE_DATE, 
+      UPDATE_DATE)
+    values (#{skuNo,jdbcType=VARCHAR}, #{skuAppendAttrId,jdbcType=INTEGER}, #{listPrice,jdbcType=DECIMAL}, 
+      #{salePrice,jdbcType=DECIMAL}, #{specialPrice,jdbcType=DECIMAL}, #{importPrice,jdbcType=DECIMAL}, 
+      #{costPrice,jdbcType=DECIMAL}, #{discountPrice,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuPrice" useGeneratedKeys="true">
+    insert into TR_SKU_PRICE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="skuAppendAttrId != null">
+        SKU_APPEND_ATTR_ID,
+      </if>
+      <if test="listPrice != null">
+        LIST_PRICE,
+      </if>
+      <if test="salePrice != null">
+        SALE_PRICE,
+      </if>
+      <if test="specialPrice != null">
+        SPECIAL_PRICE,
+      </if>
+      <if test="importPrice != null">
+        IMPORT_PRICE,
+      </if>
+      <if test="costPrice != null">
+        COST_PRICE,
+      </if>
+      <if test="discountPrice != null">
+        DISCOUNT_PRICE,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="skuAppendAttrId != null">
+        #{skuAppendAttrId,jdbcType=INTEGER},
+      </if>
+      <if test="listPrice != null">
+        #{listPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="salePrice != null">
+        #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="specialPrice != null">
+        #{specialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="importPrice != null">
+        #{importPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="costPrice != null">
+        #{costPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="discountPrice != null">
+        #{discountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuPrice">
+    update TR_SKU_PRICE
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="skuAppendAttrId != null">
+        SKU_APPEND_ATTR_ID = #{skuAppendAttrId,jdbcType=INTEGER},
+      </if>
+      <if test="listPrice != null">
+        LIST_PRICE = #{listPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="salePrice != null">
+        SALE_PRICE = #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="specialPrice != null">
+        SPECIAL_PRICE = #{specialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="importPrice != null">
+        IMPORT_PRICE = #{importPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="costPrice != null">
+        COST_PRICE = #{costPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="discountPrice != null">
+        DISCOUNT_PRICE = #{discountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuPrice">
+    update TR_SKU_PRICE
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      SKU_APPEND_ATTR_ID = #{skuAppendAttrId,jdbcType=INTEGER},
+      LIST_PRICE = #{listPrice,jdbcType=DECIMAL},
+      SALE_PRICE = #{salePrice,jdbcType=DECIMAL},
+      SPECIAL_PRICE = #{specialPrice,jdbcType=DECIMAL},
+      IMPORT_PRICE = #{importPrice,jdbcType=DECIMAL},
+      COST_PRICE = #{costPrice,jdbcType=DECIMAL},
+      DISCOUNT_PRICE = #{discountPrice,jdbcType=DECIMAL},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

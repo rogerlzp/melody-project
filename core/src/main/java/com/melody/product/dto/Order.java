@@ -26,5 +26,6 @@ public class Order implements Serializable {
     private Integer birdCoin; // 积分
     private Date paidTime; //付款时间
 
+
     private List<OrderItem> orderItemList;
 }

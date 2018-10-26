@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.melody.dao.AdminInventoryMapper">
-  <resultMap id="BaseResultMap" type="Inventory">
+  <resultMap id="BaseResultMap" type="SkuInventory">
     <id column="ID" jdbcType="BIGINT" property="id" />
     <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
     <result column="TOTAL_NUM" jdbcType="INTEGER" property="totalNum" />
@@ -19,23 +19,23 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from TR_INVENTORY
+    from TR_SKU_INVENTORY
     where ID = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from TR_INVENTORY
+    delete from TR_SKU_INVENTORY
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="Inventory" useGeneratedKeys="true">
-    insert into TR_INVENTORY (SKU_NO, TOTAL_NUM, SELLABLE_NUM, 
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="SkuInventory" useGeneratedKeys="true">
+    insert into TR_SKU_INVENTORY (SKU_NO, TOTAL_NUM, SELLABLE_NUM,
       ORDER_OCCUPIED_NUM, UNABAILABLE_NUM, LOCKED_NUM, 
       CREATE_DATE, UPDATE_DATE)
     values (#{skuNo,jdbcType=VARCHAR}, #{totalNum,jdbcType=INTEGER}, #{sellableNum,jdbcType=INTEGER}, 
       #{orderOccupiedNum,jdbcType=INTEGER}, #{unabailableNum,jdbcType=INTEGER}, #{lockedNum,jdbcType=INTEGER}, 
       #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="Inventory" useGeneratedKeys="true">
-    insert into TR_INVENTORY
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="SkuInventory" useGeneratedKeys="true">
+    insert into TR_SKU_INVENTORY
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="skuNo != null">
         SKU_NO,
@@ -89,8 +89,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="Inventory">
-    update TR_INVENTORY
+  <update id="updateByPrimaryKeySelective" parameterType="SkuInventory">
+    update TR_SKU_INVENTORY
     <set>
       <if test="skuNo != null">
         SKU_NO = #{skuNo,jdbcType=VARCHAR},
@@ -119,8 +119,8 @@
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="Inventory">
-    update TR_INVENTORY
+  <update id="updateByPrimaryKey" parameterType="SkuInventory">
+    update TR_SKU_INVENTORY
     set SKU_NO = #{skuNo,jdbcType=VARCHAR},
       TOTAL_NUM = #{totalNum,jdbcType=INTEGER},
       SELLABLE_NUM = #{sellableNum,jdbcType=INTEGER},

@@ -47,7 +47,7 @@ public class SKUDetailResult extends GeneralResult implements Serializable {
     private SkuPrice skuPrice;
 
     // 库存表
-    private Inventory inventory;
+    private SkuInventory skuInventory;
 
 
 

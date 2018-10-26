@@ -240,6 +240,21 @@
         UPDATE_TIME = now()
         where ORDER_NO = #{orderNo}
     </update>
+
+    <update id="updateOrderStatusIfNotPaid">
+        update TT_ORDER
+        set STATUS = #{status},
+        UPDATE_TIME = now()
+        where ORDER_NO = #{orderNo} AND STATUS = 'YXD'
+    </update>
+
+
+    <update id="updateOrderItemStatusToPaid">
+        update TR_ORDER_ITEM
+        set STATUS = #{status}
+        where ORDER_NO = #{orderNo}
+    </update>
+
     <select id="getOrderDetailByOrderNo" resultMap="OrderDetailResultMap">
         SELECT
         <include refid="Base_Column_List"/>
@@ -314,5 +329,34 @@
        FROM TR_ORDER_ITEM toi
        WHERE toi.ID = #{orderItemId}
     </select>
+
+
+    <select id="getOrderItemByOrderItemId" resultMap="OrderItemResultMap">
+        SELECT
+        <include refid="OrderItem_Column_List"/>
+        FROM TR_ORDER_ITEM
+        WHERE ID = #{id}
+    </select>
+
+    <select id="getOrderByOrderItemId" resultMap="BaseResultMap">
+        SELECT
+        tr.ID,
+        tr.ORDER_NO,
+        tr.STATUS,
+        tr.CREATE_TIME,
+        tr.UPDATE_TIME,
+        tr.TOTAL_NUM,
+        tr.TOTAL_DISCOUNT,
+        tr.USER_ID,
+        tr.TOTAL_AMOUNT,
+        tr.EXPRESS_FEE,
+        tr.REFUND_STATUS,
+        tr.PAID_TIME
+
+        FROM TR_ORDER_ITEM toi, TT_ORDER tr
+        WHERE tr.ORDER_NO = toi.ORDER_NO
+        AND toi.ID = #{id}
+    </select>
+
 
 </mapper>

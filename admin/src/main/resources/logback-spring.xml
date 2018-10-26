@@ -14,7 +14,7 @@
 	<jmxConfigurator />
 
 	<!-- 定义日志文件 输出位置 -->
-	<property name="log_dir" value="~/data/log" />
+	<property name="log_dir" value="./data/log" />
 	
 	<!-- 定义日志文件名称 -->
 	<property name="log_name" value="app-provider" />

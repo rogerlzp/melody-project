@@ -26,5 +26,7 @@ public class OrderItem implements Serializable {
     private String status;
     private String refundStatus;
 
+    private String refundReason; // 查询时候使用
+    private Integer askedAmount; // 查询价格
 
 }

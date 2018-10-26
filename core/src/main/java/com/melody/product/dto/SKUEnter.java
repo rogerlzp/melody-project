@@ -47,7 +47,7 @@ public class SKUEnter extends GeneralEnter implements Serializable {
     private SkuPriceEnter skuPriceEnter;
 
     // 库存表
-    private Inventory inventory;
+    private SkuInventory skuInventory;
 
     private Date createDate;
     private Date updateDate;

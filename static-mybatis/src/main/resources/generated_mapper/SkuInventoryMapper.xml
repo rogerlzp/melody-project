@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.generated.dao.SkuInventoryMapper">
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuInventory">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="SKU_APPEND_ATTR_ID" jdbcType="INTEGER" property="skuAppendAttrId" />
+    <result column="TOTAL_NUM" jdbcType="INTEGER" property="totalNum" />
+    <result column="SELLABLE_NUM" jdbcType="INTEGER" property="sellableNum" />
+    <result column="ORDER_OCCUPIED_NUM" jdbcType="INTEGER" property="orderOccupiedNum" />
+    <result column="UNAVAILABLE_NUM" jdbcType="INTEGER" property="unavailableNum" />
+    <result column="LOCKED_NUM" jdbcType="INTEGER" property="lockedNum" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, SKU_APPEND_ATTR_ID, TOTAL_NUM, SELLABLE_NUM, ORDER_OCCUPIED_NUM, UNAVAILABLE_NUM, 
+    LOCKED_NUM, CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_INVENTORY
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_INVENTORY
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuInventory" useGeneratedKeys="true">
+    insert into TR_SKU_INVENTORY (SKU_NO, SKU_APPEND_ATTR_ID, TOTAL_NUM, 
+      SELLABLE_NUM, ORDER_OCCUPIED_NUM, UNAVAILABLE_NUM, 
+      LOCKED_NUM, CREATE_DATE, UPDATE_DATE
+      )
+    values (#{skuNo,jdbcType=VARCHAR}, #{skuAppendAttrId,jdbcType=INTEGER}, #{totalNum,jdbcType=INTEGER}, 
+      #{sellableNum,jdbcType=INTEGER}, #{orderOccupiedNum,jdbcType=INTEGER}, #{unavailableNum,jdbcType=INTEGER}, 
+      #{lockedNum,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuInventory" useGeneratedKeys="true">
+    insert into TR_SKU_INVENTORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="skuAppendAttrId != null">
+        SKU_APPEND_ATTR_ID,
+      </if>
+      <if test="totalNum != null">
+        TOTAL_NUM,
+      </if>
+      <if test="sellableNum != null">
+        SELLABLE_NUM,
+      </if>
+      <if test="orderOccupiedNum != null">
+        ORDER_OCCUPIED_NUM,
+      </if>
+      <if test="unavailableNum != null">
+        UNAVAILABLE_NUM,
+      </if>
+      <if test="lockedNum != null">
+        LOCKED_NUM,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="skuAppendAttrId != null">
+        #{skuAppendAttrId,jdbcType=INTEGER},
+      </if>
+      <if test="totalNum != null">
+        #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="sellableNum != null">
+        #{sellableNum,jdbcType=INTEGER},
+      </if>
+      <if test="orderOccupiedNum != null">
+        #{orderOccupiedNum,jdbcType=INTEGER},
+      </if>
+      <if test="unavailableNum != null">
+        #{unavailableNum,jdbcType=INTEGER},
+      </if>
+      <if test="lockedNum != null">
+        #{lockedNum,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuInventory">
+    update TR_SKU_INVENTORY
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="skuAppendAttrId != null">
+        SKU_APPEND_ATTR_ID = #{skuAppendAttrId,jdbcType=INTEGER},
+      </if>
+      <if test="totalNum != null">
+        TOTAL_NUM = #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="sellableNum != null">
+        SELLABLE_NUM = #{sellableNum,jdbcType=INTEGER},
+      </if>
+      <if test="orderOccupiedNum != null">
+        ORDER_OCCUPIED_NUM = #{orderOccupiedNum,jdbcType=INTEGER},
+      </if>
+      <if test="unavailableNum != null">
+        UNAVAILABLE_NUM = #{unavailableNum,jdbcType=INTEGER},
+      </if>
+      <if test="lockedNum != null">
+        LOCKED_NUM = #{lockedNum,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuInventory">
+    update TR_SKU_INVENTORY
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      SKU_APPEND_ATTR_ID = #{skuAppendAttrId,jdbcType=INTEGER},
+      TOTAL_NUM = #{totalNum,jdbcType=INTEGER},
+      SELLABLE_NUM = #{sellableNum,jdbcType=INTEGER},
+      ORDER_OCCUPIED_NUM = #{orderOccupiedNum,jdbcType=INTEGER},
+      UNAVAILABLE_NUM = #{unavailableNum,jdbcType=INTEGER},
+      LOCKED_NUM = #{lockedNum,jdbcType=INTEGER},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

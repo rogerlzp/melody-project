@@ -80,8 +80,8 @@ public class AdminSKUServiceImpl implements AdminSKUService {
             }
 
             // 增加库存
-            if(sku.getInventory() !=null) {
-                Inventory inventory = sku.getInventory();
+            if(sku.getSkuInventory() !=null) {
+                SkuInventory inventory = sku.getSkuInventory();
                 long inventoryId = baseService.getNextSequence("TT_INVENTORY");
                 inventory.setId(inventoryId);
                 inventory.setSkuNo(skuNo);

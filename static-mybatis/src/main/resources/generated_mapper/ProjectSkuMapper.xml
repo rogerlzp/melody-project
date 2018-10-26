@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.generated.dao.ProjectSkuMapper">
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.ProjectSku">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="PROJECT_ID" jdbcType="BIGINT" property="projectId" />
+    <result column="SKU_NO" jdbcType="INTEGER" property="skuNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, PROJECT_ID, SKU_NO
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_PROJECT_SKU
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_PROJECT_SKU
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.ProjectSku" useGeneratedKeys="true">
+    insert into TR_PROJECT_SKU (PROJECT_ID, SKU_NO)
+    values (#{projectId,jdbcType=BIGINT}, #{skuNo,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.ProjectSku" useGeneratedKeys="true">
+    insert into TR_PROJECT_SKU
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="projectId != null">
+        PROJECT_ID,
+      </if>
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="projectId != null">
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.ProjectSku">
+    update TR_PROJECT_SKU
+    <set>
+      <if test="projectId != null">
+        PROJECT_ID = #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.ProjectSku">
+    update TR_PROJECT_SKU
+    set PROJECT_ID = #{projectId,jdbcType=BIGINT},
+      SKU_NO = #{skuNo,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

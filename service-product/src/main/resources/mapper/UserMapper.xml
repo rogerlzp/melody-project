@@ -309,60 +309,6 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.User">
-        update TS_USER
-        <set>
-            <if test="mobileNo != null">
-                MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
-            </if>
-            <if test="userName != null">
-                USER_NAME = #{userName,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null">
-                USER_PWD = #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="salt != null">
-                SALT = #{salt,jdbcType=VARCHAR},
-            </if>
-            <if test="deviceToken != null">
-                DEVICE_TOKEN = #{deviceToken,jdbcType=VARCHAR},
-            </if>
-            <if test="idCard != null">
-                ID_CARD = #{idCard,jdbcType=VARCHAR},
-            </if>
-            <if test="referralCode != null">
-                REFERRAL_CODE = #{referralCode,jdbcType=VARCHAR},
-            </if>
-            <if test="status != null">
-                STATUS = #{status,jdbcType=VARCHAR},
-            </if>
-            <if test="isFirstOrder != null">
-                IS_FIRST_ORDER = #{isFirstOrder,jdbcType=INTEGER},
-            </if>
-            <if test="regDate != null">
-                REG_DATE = #{regDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="createDate != null">
-                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateDate != null">
-                UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="nickname != null">
-                NICKNAME = #{nickname,jdbcType=VARCHAR},
-            </if>
-            <if test="headImage != null">
-                HEAD_IMAGE = #{headImage,jdbcType=VARCHAR},
-            </if>
-            <if test="gender != null">
-                GENDER = #{gender,jdbcType=INTEGER},
-            </if>
-            <if test="email != null">
-                EMAIL = #{email,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where USER_ID = #{userId,jdbcType=BIGINT}
-    </update>
     <update id="updateByPrimaryKey" parameterType="User">
         update TS_USER
         set MOBILE_NO = #{mobileNo},

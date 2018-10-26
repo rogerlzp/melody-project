@@ -72,12 +72,12 @@ public class AdminSKUController {
         }
 
         // 获取库存
-        Inventory inventory = new Inventory();
+        SkuInventory inventory = new SkuInventory();
 
         inventory.setTotalNum(jsonObject.getInteger("totalNum"));
         inventory.setSellableNum(jsonObject.getInteger("sellableNum"));
         inventory.setLockedNum(jsonObject.getInteger("lockedNum"));
-        brandObj.setInventory(inventory);
+        brandObj.setSkuInventory(inventory);
 
         // 获取价格
         SkuPriceEnter skuPriceEnter = new SkuPriceEnter();

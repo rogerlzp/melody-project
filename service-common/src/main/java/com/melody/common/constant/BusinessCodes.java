@@ -138,6 +138,10 @@ public class BusinessCodes {
     public final static String WX_ACCOUNT_ERROR = "90000001";// 微信openid 不正确
     public final static String UPDATE_ORDER_REFUND_ERROR = "90000002";// 更新订单状态为退款失败！
 
+
+    public final static String UPDATE_ORDER_TO_DELIVERY_ERROR = "90000003";// 更新订单状态为发货失败！
+
+
     /*************** 家庭作业 *************/
     public static final String ACTIVE_HOMEWORK_NOT_EXIST = "60000001";// 没有未完成的作业
     public static final String HOMEWORK_USER_STORY_SCORE = "60000002";// 创建用户家庭作业绘本成绩表失败

@@ -174,7 +174,7 @@
             <property name="useActualColumnNames" value="false"/>
             <generatedKey column="ID" sqlStatement="JDBC"/>
         </table>
-        <table tableName="TR_INVENTORY" domainObjectName="Inventory" enableCountByExample="false"
+        <table tableName="TR_SKU_INVENTORY" domainObjectName="Inventory" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <property name="my.isgen.usekeys" value="true"/>
@@ -220,5 +220,20 @@
             <generatedKey column="ID" sqlStatement="JDBC"/>
         </table>
 
+
+        <table tableName="TR_ORDER_REFUND" domainObjectName="OrderRefund" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="TR_ORDER_REFUND_ITEM" domainObjectName="OrderRefundItem" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
     </context>
 </generatorConfiguration>

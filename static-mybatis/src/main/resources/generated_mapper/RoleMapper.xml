@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.generated.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.Role">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="ROLE_ID" jdbcType="INTEGER" property="roleId" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+    <result column="ROLE_CODE" jdbcType="VARCHAR" property="roleCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ROLE_ID, ROLE_NAME, ROLE_CODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_ROLE
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TT_ROLE
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Role" useGeneratedKeys="true">
+    insert into TT_ROLE (ROLE_ID, ROLE_NAME, ROLE_CODE
+      )
+    values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.Role" useGeneratedKeys="true">
+    insert into TT_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="roleName != null">
+        ROLE_NAME,
+      </if>
+      <if test="roleCode != null">
+        ROLE_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.Role">
+    update TT_ROLE
+    <set>
+      <if test="roleId != null">
+        ROLE_ID = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.Role">
+    update TT_ROLE
+    set ROLE_ID = #{roleId,jdbcType=INTEGER},
+      ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      ROLE_CODE = #{roleCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

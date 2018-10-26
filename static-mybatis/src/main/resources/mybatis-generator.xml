@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="DB2Tables"    targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库链接地址账号密码-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://121.42.145.216:3306/melody" userId="root" password="root">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--生成Model类存放位置-->
+        <javaModelGenerator targetPackage="com.melody.generated.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成映射文件存放位置-->
+        <!--<sqlMapGenerator targetPackage="com.melody.generated.mapper" targetProject="src/main/java">-->
+            <!--<property name="enableSubPackages" value="true"/>-->
+        <!--</sqlMapGenerator>-->
+        <!--生成Dao类存放位置-->
+        <!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件 的代码
+                type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
+                type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
+                type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
+        -->
+        <!--<javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="com.melody.generated.dao" targetProject="src/main/java">-->
+            <!--<property name="enableSubPackages" value="true"/>-->
+        <!--</javaClientGenerator>-->
+        <!--生成xml映射文件存放位置-->
+        <sqlMapGenerator targetPackage="generated_mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--生成mapper类存放位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.melody.generated.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <!--生成对应表及类名-->
+        <!--<table tableName="TT_ACCOUNT" domainObjectName="Account" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+                                                                                           <!--enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+
+        <!--<table tableName="TS_USER" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+
+        <table tableName="TR_STORY_IMAGE_PRODUCT" domainObjectName="StoryImageProduct" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
+
+        <table tableName="TT_STORY_IMAGE" domainObjectName="StoryImage" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
+
+        <table tableName="TR_SKU_IMAGE" domainObjectName="SkuImage" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
+
+        <table tableName="TT_SKU" domainObjectName="SKU" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
+
+
+
+
+        <table tableName="TR_SKU_INVENTORY" domainObjectName="SkuInventory" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
+
+        <table tableName="TR_SKU_APPEND_SALE_ATTR" domainObjectName="SkuAppendSaleAttr" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="TT_ROLE" domainObjectName="Role" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
+
+
+        <table tableName="TR_SKU_PRICE" domainObjectName="SkuPrice" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
+
+
+        <table tableName="TT_PROJECT" domainObjectName="Project" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
+
+        <table tableName="TR_PROJECT_IMAGE" domainObjectName="ProjectImage" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="TR_PROJECT_SKU" domainObjectName="ProjectSku" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="TR_PROJECT_ARTIST" domainObjectName="ProjectArtist" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="TR_PROJECT_COMPANY" domainObjectName="ProjectCompany" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="my.isgen.usekeys" value="true"/>
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
+
+    </context>
+</generatorConfiguration>

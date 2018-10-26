@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.dao.AdminStoryImageMapper">
+  <resultMap id="BaseResultMap" type="StoryImage">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="STORY_IMAGE_NAME" jdbcType="VARCHAR" property="storyImageName" />
+    <result column="STORY_IMAGE_TYPE" jdbcType="VARCHAR" property="storyImageType" />
+    <result column="PROJECT_ID" jdbcType="INTEGER" property="projectId" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="IS_HOMEPAGE" jdbcType="INTEGER" property="isHomepage" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="IMAGE_URL" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="IMAGE_DESC" jdbcType="VARCHAR" property="imageDesc" />
+    <result column="SHOW_ORDER" jdbcType="INTEGER" property="showOrder" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+
+  <resultMap id="StoryImageProductResultMap" type="StoryImageProduct">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="STORY_IMAGE_ID" jdbcType="BIGINT" property="storyImageId" />
+    <result column="IS_SHOWN" jdbcType="BIT" property="isShown" />
+    <result column="LINK_URL" jdbcType="VARCHAR" property="linkUrl" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="TAG_LEFT" jdbcType="INTEGER" property="tagLeft" />
+    <result column="TAG_TOP" jdbcType="INTEGER" property="tagTop" />
+    <result column="TAG_RIGHT" jdbcType="INTEGER" property="tagRight" />
+    <result column="TAG_BOTTOM" jdbcType="INTEGER" property="tagBottom" />
+  </resultMap>
+  <sql id="Story_Image_Product_Column_List">
+    ID, SKU_NO, STORY_IMAGE_ID, IS_SHOWN, LINK_URL, CREATE_DATE, UPDATE_DATE, STATUS,
+    TAG_LEFT, TAG_TOP, TAG_RIGHT, TAG_BOTTOM
+  </sql>
+
+  <sql id="Base_Column_List">
+    ID, STORY_IMAGE_NAME, STORY_IMAGE_TYPE, PROJECT_ID, SKU_NO, IS_HOMEPAGE, STATUS, 
+    IMAGE_URL, IMAGE_DESC, SHOW_ORDER, CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_STORY_IMAGE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TT_STORY_IMAGE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertStoryImage" keyColumn="ID" keyProperty="id" parameterType="StoryImage" useGeneratedKeys="true">
+    insert into TT_STORY_IMAGE (ID, STORY_IMAGE_NAME, STORY_IMAGE_TYPE, PROJECT_ID,
+      SKU_NO, IS_HOMEPAGE, STATUS, 
+      IMAGE_URL, IMAGE_DESC, SHOW_ORDER, 
+      CREATE_DATE)
+    values (#{id},#{storyImageName,jdbcType=VARCHAR}, #{storyImageType,jdbcType=VARCHAR}, #{projectId,jdbcType=INTEGER},
+      #{skuNo,jdbcType=VARCHAR}, #{isHomepage,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{imageUrl,jdbcType=VARCHAR}, #{imageDesc,jdbcType=VARCHAR}, #{showOrder,jdbcType=INTEGER}, 
+     now())
+  </insert>
+
+
+
+
+  <insert id="insertStoryImageProduct" keyColumn="ID" keyProperty="id" parameterType="StoryImageProduct"
+          useGeneratedKeys="true">
+    insert into TR_STORY_IMAGE_PRODUCT (ID, SKU_NO, STORY_IMAGE_ID, IS_SHOWN,
+    LINK_URL, CREATE_DATE, UPDATE_DATE,
+    STATUS, TAG_LEFT, TAG_TOP,
+    TAG_RIGHT, TAG_BOTTOM)
+    values (#{id},#{skuNo,jdbcType=VARCHAR}, #{storyImageId,jdbcType=BIGINT}, #{isShown,jdbcType=BIT},
+    #{linkUrl,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},
+    #{status,jdbcType=VARCHAR}, #{tagLeft,jdbcType=INTEGER}, #{tagTop,jdbcType=INTEGER},
+    #{tagRight,jdbcType=INTEGER}, #{tagBottom,jdbcType=INTEGER})
+  </insert>
+
+  <select id="queryStoryImageList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from TT_STORY_IMAGE
+    WHERE STATUS = #{status}
+    <include refid="pagination"/>
+  </select>
+
+
+  <select id="queryStoryImageProductList" resultMap="StoryImageProductResultMap">
+    select
+    <include refid="Story_Image_Product_Column_List"/>
+    from TR_STORY_IMAGE_PRODUCT
+    WHERE STORY_IMAGE_ID = #{storyImageId}
+    <include refid="pagination"/>
+  </select>
+
+
+
+  <select id="countAllStoryImage" resultType="java.lang.Integer">
+    select count(*) FROM TT_STORY_IMAGE
+    WHERE STATUS = '1'
+  </select>
+
+  <select id="countStoryImageByStatus" resultType="java.lang.Integer">
+    select count(*) FROM TT_STORY_IMAGE
+    WHERE STATUS =  #{status}
+  </select>
+
+
+  <delete id="deleteByStoryImageId" parameterType="java.lang.Long">
+    UPDATE TT_STORY_IMAGE
+    set STATUS = '-1', UPDATE_DATE=now()
+    where ID = #{id}
+  </delete>
+
+  <sql id="pagination">
+    <![CDATA[
+	    limit #{offset}, #{pageSize}
+        ]]>
+  </sql>
+
+  <update id="updateByPrimaryKeySelective" parameterType="StoryImage">
+    update TT_STORY_IMAGE
+    <set>
+      <if test="storyImageName != null">
+        STORY_IMAGE_NAME = #{storyImageName,jdbcType=VARCHAR},
+      </if>
+      <if test="storyImageType != null">
+        STORY_IMAGE_TYPE = #{storyImageType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        PROJECT_ID = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isHomepage != null">
+        IS_HOMEPAGE = #{isHomepage,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageDesc != null">
+        IMAGE_DESC = #{imageDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="showOrder != null">
+        SHOW_ORDER = #{showOrder,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="StoryImage">
+    update TT_STORY_IMAGE
+    set STORY_IMAGE_NAME = #{storyImageName,jdbcType=VARCHAR},
+      STORY_IMAGE_TYPE = #{storyImageType,jdbcType=VARCHAR},
+      PROJECT_ID = #{projectId,jdbcType=INTEGER},
+      SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      IS_HOMEPAGE = #{isHomepage,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=VARCHAR},
+      IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      IMAGE_DESC = #{imageDesc,jdbcType=VARCHAR},
+      SHOW_ORDER = #{showOrder,jdbcType=INTEGER},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

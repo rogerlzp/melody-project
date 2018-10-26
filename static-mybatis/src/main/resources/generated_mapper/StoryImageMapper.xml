@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.generated.dao.StoryImageMapper">
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.StoryImage">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="STORY_IMAGE_NAME" jdbcType="VARCHAR" property="storyImageName" />
+    <result column="STORY_IMAGE_TYPE" jdbcType="VARCHAR" property="storyImageType" />
+    <result column="PROJECT_ID" jdbcType="INTEGER" property="projectId" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="IS_HOMEPAGE" jdbcType="INTEGER" property="isHomepage" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="IMAGE_URL" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="IMAGE_DESC" jdbcType="VARCHAR" property="imageDesc" />
+    <result column="SHOW_ORDER" jdbcType="INTEGER" property="showOrder" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, STORY_IMAGE_NAME, STORY_IMAGE_TYPE, PROJECT_ID, SKU_NO, IS_HOMEPAGE, STATUS, 
+    IMAGE_URL, IMAGE_DESC, SHOW_ORDER, CREATE_DATE, UPDATE_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TT_STORY_IMAGE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TT_STORY_IMAGE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.StoryImage" useGeneratedKeys="true">
+    insert into TT_STORY_IMAGE (STORY_IMAGE_NAME, STORY_IMAGE_TYPE, PROJECT_ID, 
+      SKU_NO, IS_HOMEPAGE, STATUS, 
+      IMAGE_URL, IMAGE_DESC, SHOW_ORDER, 
+      CREATE_DATE, UPDATE_DATE)
+    values (#{storyImageName,jdbcType=VARCHAR}, #{storyImageType,jdbcType=VARCHAR}, #{projectId,jdbcType=INTEGER}, 
+      #{skuNo,jdbcType=VARCHAR}, #{isHomepage,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{imageUrl,jdbcType=VARCHAR}, #{imageDesc,jdbcType=VARCHAR}, #{showOrder,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.StoryImage" useGeneratedKeys="true">
+    insert into TT_STORY_IMAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="storyImageName != null">
+        STORY_IMAGE_NAME,
+      </if>
+      <if test="storyImageType != null">
+        STORY_IMAGE_TYPE,
+      </if>
+      <if test="projectId != null">
+        PROJECT_ID,
+      </if>
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="isHomepage != null">
+        IS_HOMEPAGE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="imageUrl != null">
+        IMAGE_URL,
+      </if>
+      <if test="imageDesc != null">
+        IMAGE_DESC,
+      </if>
+      <if test="showOrder != null">
+        SHOW_ORDER,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="storyImageName != null">
+        #{storyImageName,jdbcType=VARCHAR},
+      </if>
+      <if test="storyImageType != null">
+        #{storyImageType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isHomepage != null">
+        #{isHomepage,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageDesc != null">
+        #{imageDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="showOrder != null">
+        #{showOrder,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.StoryImage">
+    update TT_STORY_IMAGE
+    <set>
+      <if test="storyImageName != null">
+        STORY_IMAGE_NAME = #{storyImageName,jdbcType=VARCHAR},
+      </if>
+      <if test="storyImageType != null">
+        STORY_IMAGE_TYPE = #{storyImageType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        PROJECT_ID = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isHomepage != null">
+        IS_HOMEPAGE = #{isHomepage,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imageDesc != null">
+        IMAGE_DESC = #{imageDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="showOrder != null">
+        SHOW_ORDER = #{showOrder,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.StoryImage">
+    update TT_STORY_IMAGE
+    set STORY_IMAGE_NAME = #{storyImageName,jdbcType=VARCHAR},
+      STORY_IMAGE_TYPE = #{storyImageType,jdbcType=VARCHAR},
+      PROJECT_ID = #{projectId,jdbcType=INTEGER},
+      SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      IS_HOMEPAGE = #{isHomepage,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=VARCHAR},
+      IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      IMAGE_DESC = #{imageDesc,jdbcType=VARCHAR},
+      SHOW_ORDER = #{showOrder,jdbcType=INTEGER},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

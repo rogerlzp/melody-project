@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * created by CaiBaoHong at 2018/4/17 14:55<br>
  */
-@TableName("sys_user")
+@TableName("SYS_USER")
 public class SysUser extends Model<SysUser> {
 
     @TableId(type = IdType.ID_WORKER_STR)

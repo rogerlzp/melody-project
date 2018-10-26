@@ -47,5 +47,8 @@ public interface SKUMapper {
 
     Double getPriceBySkuNo(@Param(value = "skuNo") String skuNo);
 
+    List<SKU> getAllSKUBySpu(@Param(value = "spuCode") String spuCode, @Param(value = "status") String status );
 
+
+    String getSPUCodeBySKUNo(@Param(value = "skuNo") String skuNo);
 }

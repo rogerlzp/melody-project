@@ -3,12 +3,11 @@ package com.melody.product.dto;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.util.Date;
 
 @Data
-public class OrderRefund implements Serializable {
-
-    private static final long serialVersionUID = 3230925201809151750L;
+public class OrderRefund implements Serializable{
+    private static final long serialVersionUID = 3230925201809211220L;
 
     private Long id;
 
@@ -16,9 +15,13 @@ public class OrderRefund implements Serializable {
 
     private String refundStatus;
 
-    private BigDecimal askedAmount;
+    private Integer askedAmount;
 
-    private BigDecimal realAmount;
+    private Integer realAmount;
+
+    private Date createDate;
+
+    private Date updateDate;
 
 
 }

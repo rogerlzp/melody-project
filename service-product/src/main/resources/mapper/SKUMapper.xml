@@ -52,7 +52,7 @@
     </sql>
 
 
-    <resultMap id="InventoryResultMap" type="Inventory">
+    <resultMap id="InventoryResultMap" type="SkuInventory">
         <id column="ID" jdbcType="BIGINT" property="id"/>
         <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo"/>
         <result column="TOTAL_NUM" jdbcType="VARCHAR" property="totalNum"/>
@@ -143,7 +143,7 @@
         si.PIC_URL
         from TT_SKU s
         LEFT JOIN TR_SKU_PRICE pr ON pr.SKU_NO = s.SKU_NO
-        LEFT JOIN TR_INVENTORY inv ON inv.SKU_NO = s.SKU_NO
+        LEFT JOIN TR_SKU_INVENTORY inv ON inv.SKU_NO = s.SKU_NO
         LEFT JOIN TR_SKU_IMAGE si  ON si.SKU_NO = s.SKU_NO
         where s.SKU_NO = #{skuNo}
         AND si.IS_MAIN = 1
@@ -154,8 +154,8 @@
         where TT_SKU.SPU_CODE = TT_SPU.SPU_CODE AND TT_SPU.ID = #{id}
     </delete>
 
-    <insert id="insertSKUInventory" keyColumn="ID" keyProperty="id" parameterType="Inventory" useGeneratedKeys="true">
-        insert into TR_INVENTORY
+    <insert id="insertSKUInventory" keyColumn="ID" keyProperty="id" parameterType="SkuInventory" useGeneratedKeys="true">
+        insert into TR_SKU_INVENTORY
         (<include refid="Inventory_Column_List"/>)
         values (#{id}, #{skuNo}, #{totalNum}, #{sellableNum},#{orderOccupiedNum}, #{unavailableNum},#{lockedNum})
     </insert>
@@ -361,7 +361,7 @@
         si.PIC_URL
         from TT_SKU s
         LEFT JOIN TR_SKU_PRICE pr ON pr.SKU_NO = s.SKU_NO
-        LEFT JOIN TR_INVENTORY inv ON inv.SKU_NO = s.SKU_NO
+        LEFT JOIN TR_SKU_INVENTORY inv ON inv.SKU_NO = s.SKU_NO
         LEFT JOIN TR_SKU_IMAGE si ON si.SKU_NO = s.SKU_NO
         WHERE s.STATUS = #{status}
         AND si.IS_MAIN = 1
@@ -389,7 +389,7 @@
         si.PIC_URL
         from TT_SKU s
         LEFT JOIN TR_SKU_PRICE pr ON pr.SKU_NO = s.SKU_NO
-        LEFT JOIN TR_INVENTORY inv ON inv.SKU_NO = s.SKU_NO
+        LEFT JOIN TR_SKU_INVENTORY inv ON inv.SKU_NO = s.SKU_NO
         LEFT JOIN TR_SKU_IMAGE si ON si.SKU_NO = s.SKU_NO
         WHERE s.STATUS = #{status}
         AND si.IS_MAIN = 1
@@ -449,7 +449,7 @@
 
 
     <update id="updateSkuNum">
-        UPDATE TR_INVENTORY
+        UPDATE TR_SKU_INVENTORY
         SET SELLABLE_NUM = SELLABLE_NUM - #{num},
         ORDER_OCCUPIED_NUM = ORDER_OCCUPIED_NUM + #{num},
         UPDATE_DATE = now()
@@ -463,6 +463,41 @@
         WHERE SKU_NO = #{skuNo}
     </select>
 
+
+
+    <!-- 价格，图片，库存 -->
+    <select id="getAllSKUBySpu" resultMap="QueryResultMap">
+        select
+        s.ID,
+        s.SKU_NO,
+        s.SKU_NAME,
+        s.PRODUCT_PLACE,
+        s.CHUCHANG_TIME,
+        s.EXPIRATION_TIME,
+        s.BAOZHI_DAY,
+        s.PRODUCT_DESC,
+        s.STATUS,
+        s.SPU_CODE,
+
+        pr.LIST_PRICE,
+        pr.SALE_PRICE ,
+        pr.SPECIAL_PRICE,
+        inv.SELLABLE_NUM,
+        si.PIC_URL
+        from TT_SKU s
+        LEFT JOIN TR_SKU_PRICE pr ON pr.SKU_NO = s.SKU_NO
+        LEFT JOIN TR_SKU_INVENTORY inv ON inv.SKU_NO = s.SKU_NO
+        LEFT JOIN TR_SKU_IMAGE si ON si.SKU_NO = s.SKU_NO
+        WHERE s.STATUS = #{status}
+        AND si.IS_MAIN = 1
+        AND s.SPU_CODE = #{spuCode}
+    </select>
+
+    <select id="getSPUCodeBySKUNo" resultType="java.lang.String">
+        SELECT SPU_CODE
+        FROM TT_SKU
+        WHERE SKU_NO=#{skuNo}
+    </select>
 
 
 </mapper>

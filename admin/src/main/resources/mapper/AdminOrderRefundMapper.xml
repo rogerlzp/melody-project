@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.dao.AdminOrderRefundMapper">
+
+  <resultMap id="BaseResultMap" type="OrderRefund">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="ORDER_NO" jdbcType="VARCHAR" property="orderNo" />
+    <result column="REFUND_STATUS" jdbcType="VARCHAR" property="refundStatus" />
+    <result column="ASKED_AMOUNT" jdbcType="DECIMAL" property="askedAmount" />
+    <result column="REAL_AMOUNT" jdbcType="DECIMAL" property="realAmount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ORDER_NO, REFUND_STATUS, ASKED_AMOUNT, REAL_AMOUNT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_ORDER_REFUND
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_ORDER_REFUND
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="OrderRefund" useGeneratedKeys="true">
+    insert into TR_ORDER_REFUND (ID, ORDER_NO, REFUND_STATUS, ASKED_AMOUNT,
+      REAL_AMOUNT)
+    values (#{id}, #{orderNo,jdbcType=VARCHAR}, #{refundStatus,jdbcType=VARCHAR}, #{askedAmount,jdbcType=DECIMAL},
+      #{realAmount,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="OrderRefund" useGeneratedKeys="true">
+    insert into TR_ORDER_REFUND
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderNo != null">
+        ORDER_NO,
+      </if>
+      <if test="refundStatus != null">
+        REFUND_STATUS,
+      </if>
+      <if test="askedAmount != null">
+        ASKED_AMOUNT,
+      </if>
+      <if test="realAmount != null">
+        REAL_AMOUNT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="refundStatus != null">
+        #{refundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="askedAmount != null">
+        #{askedAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="realAmount != null">
+        #{realAmount,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateOrderRefund" parameterType="OrderRefund">
+    update TR_ORDER_REFUND
+    set ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      REFUND_STATUS = #{refundStatus,jdbcType=VARCHAR},
+      ASKED_AMOUNT = #{askedAmount,jdbcType=DECIMAL},
+      REAL_AMOUNT = #{realAmount,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <resultMap id="RefundOrderItemResultMap" type="OrderRefundItem">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="ORDER_NO" jdbcType="VARCHAR" property="orderNo" />
+    <result column="REFUND_ORDER_ID" jdbcType="BIGINT" property="refundOrderId" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="ORDER_ITEM_ID" jdbcType="BIGINT" property="orderItemId" />
+    <result column="REFUND_NUM" jdbcType="INTEGER" property="refundNum" />
+    <result column="TOTAL_NUM" jdbcType="INTEGER" property="totalNum" />
+    <result column="REFUND_REASON"  property="refundReason" />
+    <result column="ASKED_AMOUNT"  property="askedAmount" />
+    <result column="REAL_AMOUNT"  property="realAmount" />
+    <result column="CREATE_DATE"  property="createDate" />
+    <result column="AUDIT_DATE"  property="auditDate" />
+    <result column="REFUND_STATUS"  property="refundStatus" />
+  </resultMap>
+  <sql id="RefundOrderItem_Column_List">
+    ID, ORDER_NO, REFUND_ORDER_ID, SKU_NO, ORDER_ITEM_ID, REFUND_NUM, TOTAL_NUM,
+    REFUND_REASON, ASKED_AMOUNT,REAL_AMOUNT,CREATE_DATE,AUDIT_DATE, REFUND_STATUS
+  </sql>
+
+
+
+  <select id="getOrderRefundByOrderNo" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM TR_ORDER_REFUND
+    WHERE ORDER_NO = #{orderNo}
+  </select>
+
+  <select id="getOrderRefundItemByOrderItemId" resultMap="RefundOrderItemResultMap">
+    SELECT
+    <include refid="RefundOrderItem_Column_List"/>
+    FROM TR_ORDER_REFUND_ITEM
+    WHERE ORDER_ITEM_ID = #{orderItemId}
+  </select>
+
+
+  <update id="updateOrderRefundItem" parameterType="OrderRefundItem">
+    update TR_ORDER_REFUND_ITEM
+    set REFUND_STATUS = #{refundStatus}
+    <if test="realAmount != null">
+      ,REAL_AMOUNT = #{realAmount}
+    </if>
+    where ID = #{id}
+  </update>
+
+
+</mapper>

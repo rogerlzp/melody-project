@@ -18,19 +18,13 @@ public class SKU implements Serializable {
 
     private String skuName;
 
-    private String productPlace;
-
-    private Date chuchangTime;
-
-    private Date expirationTime;
-
-    private Integer baozhiDay;
 
     private Integer totalNumber;
 
-//    private Integer inventory;
 
-    private String productDesc;
+    private String skuDesc;
+
+    private String skuEnDesc;
 
     private String status;
 
@@ -47,7 +41,7 @@ public class SKU implements Serializable {
     private SkuPrice skuPrice;
 
     // 库存表
-    private Inventory inventory;
+    private SkuInventory  skuInventory;
 
 //    private List<FeatureOption> featureOptionList;
 //    private List<SkuImage> skuImageList;
@@ -69,9 +63,6 @@ public class SKU implements Serializable {
     // 主要的图片
 
     private String picUrl;  // 同SkuImage 中的一个
-
-
-
 
 
     private Date createDate;

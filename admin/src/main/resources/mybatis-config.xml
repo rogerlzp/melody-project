@@ -29,10 +29,32 @@
 
         <typeAlias alias="SkuPrice" type="com.melody.product.dto.SkuPrice"/>
         <typeAlias alias="UserSkuDiscount" type="com.melody.product.dto.UserSkuDiscount"/>
-        <typeAlias alias="Inventory" type="com.melody.product.dto.Inventory"/>
+        <typeAlias alias="SkuInventory" type="com.melody.product.dto.SkuInventory"/>
 
         <typeAlias alias="SysCustomerLevel" type="com.melody.system.dto.SysCustomerLevel"/>
 
+        <typeAlias alias="Order" type="com.melody.product.dto.Order"/>
+        <typeAlias alias="OrderDetailResult" type="com.melody.product.dto.OrderDetailResult"/>
+        <typeAlias alias="OrderExpress" type="com.melody.product.dto.OrderExpress"/>
+        <typeAlias alias="OrderItem" type="com.melody.product.dto.OrderItem"/>
+        <typeAlias alias="UserAddress" type="com.melody.user.dto.UserAddress"/>
+        <typeAlias alias="TradeOrder" type="com.melody.product.dto.TradeOder"/>
+
+        <typeAlias alias="Cart" type="com.melody.product.dto.Cart"/>
+        <typeAlias alias="CartItem" type="com.melody.product.dto.CartItem"/>
+
+        <typeAlias alias="OrderRefund" type="com.melody.product.dto.OrderRefund"/>
+        <typeAlias alias="OrderRefundItem" type="com.melody.product.dto.OrderRefundItem"/>
+
+        <!-- project-->
+        <typeAlias alias="Project" type="com.melody.product.dto.Project"/>
+        <typeAlias alias="ProjectArtist" type="com.melody.product.dto.ProjectArtist"/>
+        <typeAlias alias="ProjectCompany" type="com.melody.product.dto.ProjectCompany"/>
+        <typeAlias alias="ProjectSku" type="com.melody.product.dto.ProjectSku"/>
+        <typeAlias alias="ProjectImage" type="com.melody.product.dto.ProjectImage"/>
+
+        <typeAlias alias="StoryImage" type="com.melody.product.dto.StoryImage"/>
+        <typeAlias alias="StoryImageProduct" type="com.melody.product.dto.StoryImageProduct"/>
 
     </typeAliases>
 

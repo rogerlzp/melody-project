@@ -24,7 +24,7 @@
 
 
 
-    <resultMap id="InventoryResultMap" type="Inventory">
+    <resultMap id="InventoryResultMap" type="SkuInventory">
         <id column="ID" jdbcType="BIGINT" property="id"/>
         <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo"/>
         <result column="TOTAL_NUM" jdbcType="VARCHAR" property="totalNum"/>
@@ -83,8 +83,8 @@
         where TT_SKU.SPU_CODE = TT_SPU.SPU_CODE AND TT_SPU.ID = #{id}
     </delete>
 
-    <insert id="insertSKUInventory" keyColumn="ID" keyProperty="id" parameterType="Inventory" useGeneratedKeys="true">
-        insert into TR_INVENTORY
+    <insert id="insertSKUInventory" keyColumn="ID" keyProperty="id" parameterType="SkuInventory" useGeneratedKeys="true">
+        insert into TR_SKU_INVENTORY
         (<include refid="Inventory_Column_List"/>)
         values (#{id}, #{skuNo}, #{totalNum}, #{sellableNum},#{orderOccupiedNum}, #{unavailableNum},#{lockedNum})
     </insert>
@@ -276,5 +276,14 @@
         INSERT INTO TR_SKU_FEATURE (ID, SKU_NO, FEATURE_OPTION_ID)
         VALUES (#{id},#{skuNo},#{featureOptionId})
     </insert>
+
+
+    <update id="updateSKUNum">
+        UPDATE TR_SKU_INVENTORY
+        SET SELLABLE_NUM = SELLABLE_NUM + #{num},
+        ORDER_OCCUPIED_NUM = ORDER_OCCUPIED_NUM - #{num},
+        UPDATE_DATE = now()
+        WHERE SKU_NO = #{skuNo}
+    </update>
 
 </mapper>

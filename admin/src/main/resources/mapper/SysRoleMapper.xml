@@ -3,29 +3,29 @@
 <mapper namespace="com.melody.dao.SysRoleMapper">
 
     <resultMap id="roleMap" type="SysRole">
-        <id property="rid" column="rid"/>
-        <result property="rname" column="rname" />
-        <result property="rdesc" column="rdesc" />
-        <result property="rval" column="rval" />
-        <result property="created" column="created" jdbcType="TIMESTAMP" />
-        <result property="updated" column="updated" jdbcType="TIMESTAMP" />
+        <id property="rid" column="RID"/>
+        <result property="rname" column="RNAME" />
+        <result property="rdesc" column="RDESC" />
+        <result property="rval" column="RVAL" />
+        <result property="created" column="CREATED" jdbcType="TIMESTAMP" />
+        <result property="updated" column="UPDATED" jdbcType="TIMESTAMP" />
     </resultMap>
 
     <select id="getRolesByUserId" resultType="SysRole">
-        SELECT r.rname,r.rval FROM sys_role r, sys_user_role ur
-        WHERE r.rid = ur.role_id AND ur.user_id = #{userId}
+        SELECT r.RNAME,r.RVAL FROM SYS_ROLE r, SYS_USER_ROLE ur
+        WHERE r.RID = ur.ROLE_ID AND ur.USER_ID = #{userId}
     </select>
 
     <select id="getRoleIdsByUserId" resultType="java.lang.String">
-        SELECT r.rid FROM sys_role r, sys_user_role ur
-        WHERE r.rid = ur.role_id AND ur.user_id = #{userId}
+        SELECT r.RID FROM SYS_ROLE r, SYS_USER_ROLE ur
+        WHERE r.RID = ur.ROLE_ID AND ur.USER_ID = #{userId}
     </select>
 
     <select id="checkRidsContainRval" resultType="java.lang.Boolean">
         SELECT
-        CONCAT(',',GROUP_CONCAT(rval SEPARATOR ','),',')
-        REGEXP CONCAT(',',#{rval},',{1}') AS result FROM sys_role
-        WHERE rid IN
+        CONCAT(',',GROUP_CONCAT(RVAL SEPARATOR ','),',')
+        REGEXP CONCAT(',',#{RVAL},',{1}') AS result FROM SYS_ROLE
+        WHERE RID IN
         <foreach collection="rids" item="rid" separator="," open="(" close=")">
             #{rid}
         </foreach>
@@ -33,9 +33,9 @@
 
     <select id="checkUidContainRval" resultType="java.lang.Boolean">
         SELECT
-        CONCAT(',',GROUP_CONCAT(r.rval SEPARATOR ','),',')
-        REGEXP CONCAT(',',#{rval},',{1}') AS result FROM sys_role r, sys_user_role ur
-        WHERE ur.role_id = r.rid AND ur.user_id = #{uid}
+        CONCAT(',',GROUP_CONCAT(r.RVAL SEPARATOR ','),',')
+        REGEXP CONCAT(',',#{rval},',{1}') AS result FROM SYS_ROLE r, SYS_USER_ROLE ur
+        WHERE ur.ROLE_ID = r.RID AND ur.USER_ID = #{uid}
     </select>
 
 

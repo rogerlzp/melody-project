@@ -16,8 +16,8 @@ public class Feature implements Serializable {
     private String categoryCode;
     private String categoryName;
 
-
     private List<FeatureOption> featureOptions;
+
 
 
 }

@@ -4,10 +4,7 @@ package com.melody.web.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.melody.base.GeneralEnter;
 import com.melody.product.api.SKUService;
-import com.melody.product.dto.SKU;
-import com.melody.product.dto.SKUDetailResult;
-import com.melody.product.dto.SKUEnter;
-import com.melody.product.dto.SKUResult;
+import com.melody.product.dto.*;
 import com.melody.result.JsonApi;
 import com.melody.user.api.LoginService;
 import com.melody.user.dto.UserQueryEnter;
@@ -94,6 +91,7 @@ public class SKUController extends BaseController {
 
     /**
      * 列出SKU 所有的图片，包含所有的FeatureList，所有的图片List， 对应的会员价格
+     * TODO: 列出该SPU下所有的产品的销售属性，价格和数量列表
      *
      * @param baseForm
      * @param request
@@ -109,6 +107,29 @@ public class SKUController extends BaseController {
 
         Map<String, Object> results = JsonHelper.toRespJson(skuDetailResult);
         results.put("data", skuDetailResult);
+        return results;
+    }
+
+
+
+    /**
+     * 列出SKU 所有的图片，包含所有的FeatureList，所有的图片List， 对应的会员价格
+     * TODO: 列出该SPU下所有的产品的销售属性，价格和数量列表
+     *
+     * @param baseForm
+     * @param request
+     * @param bindingResult
+     * @return
+     */
+    @RequestMapping("/wx/spuFilter")
+    public Map<String, Object> getSPUFilter(SKUForm baseForm, HttpServletRequest request, BindingResult bindingResult) {
+        SKUListEnter skuListEnter = new SKUListEnter();
+        BeanUtils.copyProperties(baseForm, skuListEnter);
+
+        SKUListResult skuListResult = skuService.getSKUListFilter(skuListEnter);
+
+        Map<String, Object> results = JsonHelper.toRespJson(skuListResult);
+        results.put("data", skuListResult);
         return results;
     }
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.generated.dao.SkuAppendSaleAttrMapper">
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.SkuAppendSaleAttr">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_SKU_APPEND_SALE_ATTR
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_SKU_APPEND_SALE_ATTR
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuAppendSaleAttr" useGeneratedKeys="true">
+    insert into TR_SKU_APPEND_SALE_ATTR (SKU_NO)
+    values (#{skuNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.SkuAppendSaleAttr" useGeneratedKeys="true">
+    insert into TR_SKU_APPEND_SALE_ATTR
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.SkuAppendSaleAttr">
+    update TR_SKU_APPEND_SALE_ATTR
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.SkuAppendSaleAttr">
+    update TR_SKU_APPEND_SALE_ATTR
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

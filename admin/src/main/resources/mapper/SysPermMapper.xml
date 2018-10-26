@@ -3,23 +3,23 @@
 <mapper namespace="com.melody.dao.SysPermMapper">
 
     <select id="getPermsByUserId" resultType="SysPerm">
-        SELECT p.pname,p.pval FROM sys_perm p, sys_role_perm rp, sys_user_role ur
-        WHERE p.pval = rp.perm_val AND ur.role_id = rp.role_id
-        AND ur.user_id = #{userId}
+        SELECT p.PNAME,p.PVAL FROM SYS_PERM p, SYS_ROLE_PERM rp, SYS_USER_ROLE ur
+        WHERE p.PVAL = rp.PERM_VAL AND ur.ROLE_ID = rp.ROLE_ID
+        AND ur.USER_ID = #{userId}
     </select>
 
     <select id="getPermsByRoleId" resultType="SysPerm">
-        SELECT p.pval,p.ptype,p.leaf FROM sys_perm p, sys_role_perm rp
-        WHERE p.pval = rp.perm_val AND rp.role_id = #{roleId}
+        SELECT p.PVAL,p.PTYPE,p.LEAF FROM SYS_PERM p, SYS_ROLE_PERM rp
+        WHERE p.PVAL = rp.PERM_VAL AND rp.ROLE_ID = #{roleId}
     </select>
 
     <insert id="saveOrUpdate">
-        INSERT INTO sys_perm (pval,parent,pname,ptype,leaf,created) VALUES
+        INSERT INTO SYS_PERM (PVAL,PARENT,PNAME,PTYPE,LEAF,CREATED) VALUES
         <foreach collection="perms" item="p" separator=",">
-            (#{p.pval},#{p.parent},#{p.pname},#{p.ptype},#{p.leaf},#{p.created})
+            (#{p.PVAL},#{p.PARENT},#{p.PNAME},#{p.PTYPE},#{p.LEAF},#{p.CREATED})
         </foreach>
         ON DUPLICATE KEY UPDATE
-        pname = VALUES(pname), parent = VALUES(parent), ptype = VALUES(ptype), leaf = VALUES(leaf), updated = now()
+        PNAME = VALUES(pname), parent = VALUES(parent), PTYPE = VALUES(ptype), LEAF = VALUES(leaf), UPDATED = now()
     </insert>
 
 

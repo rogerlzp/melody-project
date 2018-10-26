@@ -1,17 +1,17 @@
 package com.melody.dao;
 
-import com.melody.product.dto.Inventory;
+import com.melody.product.dto.SkuInventory;
 
 public interface AdminInventoryMapper {
     int deleteByPrimaryKey(Long id);
 
-    int insert(Inventory record);
+    int insert(SkuInventory record);
 
-    int insertSelective(Inventory record);
+    int insertSelective(SkuInventory record);
 
-    Inventory selectByPrimaryKey(Long id);
+    SkuInventory selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(Inventory record);
+    int updateByPrimaryKeySelective(SkuInventory record);
 
-    int updateByPrimaryKey(Inventory record);
+    int updateByPrimaryKey(SkuInventory record);
 }

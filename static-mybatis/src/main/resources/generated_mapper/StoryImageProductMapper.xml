@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.generated.dao.StoryImageProductMapper">
+  <resultMap id="BaseResultMap" type="com.melody.generated.model.StoryImageProduct">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
+    <result column="STORY_IMAGE_ID" jdbcType="BIGINT" property="storyImageId" />
+    <result column="IS_SHOWN" jdbcType="BIT" property="isShown" />
+    <result column="LINK_URL" jdbcType="VARCHAR" property="linkUrl" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="TAG_LEFT" jdbcType="INTEGER" property="tagLeft" />
+    <result column="TAG_TOP" jdbcType="INTEGER" property="tagTop" />
+    <result column="TAG_RIGHT" jdbcType="INTEGER" property="tagRight" />
+    <result column="TAG_BOTTOM" jdbcType="INTEGER" property="tagBottom" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SKU_NO, STORY_IMAGE_ID, IS_SHOWN, LINK_URL, CREATE_DATE, UPDATE_DATE, STATUS, 
+    TAG_LEFT, TAG_TOP, TAG_RIGHT, TAG_BOTTOM
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TR_STORY_IMAGE_PRODUCT
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from TR_STORY_IMAGE_PRODUCT
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.StoryImageProduct" useGeneratedKeys="true">
+    insert into TR_STORY_IMAGE_PRODUCT (SKU_NO, STORY_IMAGE_ID, IS_SHOWN, 
+      LINK_URL, CREATE_DATE, UPDATE_DATE, 
+      STATUS, TAG_LEFT, TAG_TOP, 
+      TAG_RIGHT, TAG_BOTTOM)
+    values (#{skuNo,jdbcType=VARCHAR}, #{storyImageId,jdbcType=BIGINT}, #{isShown,jdbcType=BIT}, 
+      #{linkUrl,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{tagLeft,jdbcType=INTEGER}, #{tagTop,jdbcType=INTEGER}, 
+      #{tagRight,jdbcType=INTEGER}, #{tagBottom,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.melody.generated.model.StoryImageProduct" useGeneratedKeys="true">
+    insert into TR_STORY_IMAGE_PRODUCT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        SKU_NO,
+      </if>
+      <if test="storyImageId != null">
+        STORY_IMAGE_ID,
+      </if>
+      <if test="isShown != null">
+        IS_SHOWN,
+      </if>
+      <if test="linkUrl != null">
+        LINK_URL,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="tagLeft != null">
+        TAG_LEFT,
+      </if>
+      <if test="tagTop != null">
+        TAG_TOP,
+      </if>
+      <if test="tagRight != null">
+        TAG_RIGHT,
+      </if>
+      <if test="tagBottom != null">
+        TAG_BOTTOM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuNo != null">
+        #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="storyImageId != null">
+        #{storyImageId,jdbcType=BIGINT},
+      </if>
+      <if test="isShown != null">
+        #{isShown,jdbcType=BIT},
+      </if>
+      <if test="linkUrl != null">
+        #{linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="tagLeft != null">
+        #{tagLeft,jdbcType=INTEGER},
+      </if>
+      <if test="tagTop != null">
+        #{tagTop,jdbcType=INTEGER},
+      </if>
+      <if test="tagRight != null">
+        #{tagRight,jdbcType=INTEGER},
+      </if>
+      <if test="tagBottom != null">
+        #{tagBottom,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.melody.generated.model.StoryImageProduct">
+    update TR_STORY_IMAGE_PRODUCT
+    <set>
+      <if test="skuNo != null">
+        SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="storyImageId != null">
+        STORY_IMAGE_ID = #{storyImageId,jdbcType=BIGINT},
+      </if>
+      <if test="isShown != null">
+        IS_SHOWN = #{isShown,jdbcType=BIT},
+      </if>
+      <if test="linkUrl != null">
+        LINK_URL = #{linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="tagLeft != null">
+        TAG_LEFT = #{tagLeft,jdbcType=INTEGER},
+      </if>
+      <if test="tagTop != null">
+        TAG_TOP = #{tagTop,jdbcType=INTEGER},
+      </if>
+      <if test="tagRight != null">
+        TAG_RIGHT = #{tagRight,jdbcType=INTEGER},
+      </if>
+      <if test="tagBottom != null">
+        TAG_BOTTOM = #{tagBottom,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.melody.generated.model.StoryImageProduct">
+    update TR_STORY_IMAGE_PRODUCT
+    set SKU_NO = #{skuNo,jdbcType=VARCHAR},
+      STORY_IMAGE_ID = #{storyImageId,jdbcType=BIGINT},
+      IS_SHOWN = #{isShown,jdbcType=BIT},
+      LINK_URL = #{linkUrl,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      TAG_LEFT = #{tagLeft,jdbcType=INTEGER},
+      TAG_TOP = #{tagTop,jdbcType=INTEGER},
+      TAG_RIGHT = #{tagRight,jdbcType=INTEGER},
+      TAG_BOTTOM = #{tagBottom,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

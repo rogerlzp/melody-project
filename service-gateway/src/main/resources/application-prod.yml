@@ -3,7 +3,7 @@ spring:
     name: gateway-provider
   datasource:
     name: dev
-    url: jdbc:mysql://121.42.145.216:3306/biu?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://121.42.145.216:3306/melody?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
 #    password: ENC(jLsYb6iWiRX88MJ5HfzP9w==)
@@ -61,6 +61,15 @@ spring:
     type: redis
 
 
+# rabbit mq
+  rabbitmq:
+    host: 121.42.145.216
+    port: 5672
+    username: rabbitmq
+    password: rabbitmq
+
+
+
 
 # dubbo
 dubbo :
@@ -99,7 +108,7 @@ wxapp:
   # 小程序关联商户秘钥
   wxSpMchKey: 12345678123456781234567812345678
   #小程序关联商户证书地址, 更新服务器文件夹位置
-  wxSpCertPath: /home/roger/work/egg/cert
+  wxSpCertPath: /home/roger/work/egg/cert/apiclient_cert.p12
   #统一异步回调地址
   notifyUrl: https://egg.ptelatino.com/api/v1/wx/xcx/callback
 

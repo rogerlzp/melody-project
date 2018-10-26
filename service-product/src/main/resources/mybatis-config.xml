@@ -20,7 +20,7 @@
         <typeAlias alias="SKU" type="com.melody.product.dto.SKU"/>
         <typeAlias alias="SkuImage" type="com.melody.product.dto.SkuImage"/>
         <typeAlias alias="SkuFeature" type="com.melody.product.dto.SkuFeature"/>
-        <typeAlias alias="Inventory" type="com.melody.product.dto.Inventory"/>
+        <typeAlias alias="SkuInventory" type="com.melody.product.dto.SkuInventory"/>
         <typeAlias alias="SkuPrice" type="com.melody.product.dto.SkuPrice"/>
         <typeAlias alias="UserSkuDiscount" type="com.melody.product.dto.UserSkuDiscount"/>
 
@@ -34,7 +34,13 @@
         <typeAlias alias="Cart" type="com.melody.product.dto.Cart"/>
         <typeAlias alias="CartItem" type="com.melody.product.dto.CartItem"/>
 
+        <typeAlias alias="OrderRefund" type="com.melody.product.dto.OrderRefund"/>
+        <typeAlias alias="OrderRefundItem" type="com.melody.product.dto.OrderRefundItem"/>
 
+        <typeAlias alias="StoryImage" type="com.melody.product.dto.StoryImage"/>
+        <typeAlias alias="StoryImageProduct" type="com.melody.product.dto.StoryImageProduct"/>
+
+        <typeAlias alias="Project" type="com.melody.product.dto.Project"/>
 
     </typeAliases>
 

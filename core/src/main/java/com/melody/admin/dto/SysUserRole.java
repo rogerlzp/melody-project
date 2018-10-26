@@ -8,12 +8,12 @@ import java.io.Serializable;
 /**
  * created by CaiBaoHong at 2018/4/17 14:55<br>
  */
-@TableName("sys_user_role")
+@TableName("SYS_USER_ROLE")
 public class SysUserRole implements Serializable {
 
-    @TableField("user_id")
+    @TableField("USER_ID")
     private String userId;
-    @TableField("role_id")
+    @TableField("ROLE_ID")
     private String roleId;
 
     public SysUserRole() {
