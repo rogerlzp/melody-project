@@ -24,4 +24,8 @@ public interface AdminBrandMapper {
                                @Param(value = "pageSize") Integer pageSize);
 
     int countAllBrand();
+
+    int updateBrand(@Param(value = "id") Integer id,
+                    @Param(value = "status") String status);
+
 }

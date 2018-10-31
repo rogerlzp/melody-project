@@ -12,8 +12,6 @@ public enum UserLoginEnum {
 
 
 
-
-
 	private String enName;
 	private String zhName;
 

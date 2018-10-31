@@ -28,18 +28,14 @@ public class AdminBrandServiceImpl implements AdminBrandService {
     public int addBrand(Brand brand) {
         int brandId = baseService.getNextSequence("TT_BRAND").intValue();
         brand.setId(brandId);
-
+        brand.setStatus("1");
         int insertResult = adminBrandMapper.insert(brand);
         return insertResult;
     }
 
     @Override
     public Page<Brand> queryBrandList(Page page) {
-
-//        List<Brand> records = adminBrandMapper.queryBrandList(page.getCurrent(), page.getSize());
-
         int currentPage = page.getCurrent()-1; // current为1， 所以往后减一位
-
         int pageSize = page.getSize();
         int totalCount = adminBrandMapper.countAllBrand();// 获取总条数
         Pager pager = new Pager(pageSize, totalCount, currentPage);
@@ -51,9 +47,17 @@ public class AdminBrandServiceImpl implements AdminBrandService {
         brandPage.setCurrent(currentPage);
         brandPage.setTotal(totalCount);
         return brandPage;
-
     }
 
+
+
+    // 产品状态位设置为-1， 不被搜索到
+    @Override
+    public int deleteBrandById(int brandId) {
+        String status = "-1"; //表示删除
+        int result = adminBrandMapper.updateBrand(brandId, status);
+        return result;
+    }
 
 }
 

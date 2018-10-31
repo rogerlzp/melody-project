@@ -10,4 +10,7 @@ public interface AdminBrandService {
 
     Page<Brand> queryBrandList(Page page);
 
+    int deleteBrandById(int brandId);
+
+
 }

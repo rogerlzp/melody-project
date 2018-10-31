@@ -5,13 +5,14 @@
         <id column="ID" jdbcType="BIGINT" property="id" />
         <result column="SPU_NAME" jdbcType="VARCHAR" property="spuName" />
         <result column="SPU_CODE" jdbcType="VARCHAR" property="spuCode" />
-        <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+        <result column="SPU_DESC" property="spuDesc" />
+        <result column="SPU_EN_DESC"  property="spuEnDesc" />
         <result column="DETAIL" jdbcType="VARCHAR" property="detail" />
         <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
         <result column="BRAND_CODE" jdbcType="VARCHAR" property="brandCode" />
     </resultMap>
     <sql id="Base_Column_List">
-        ID, SPU_NAME, SPU_CODE, DESCRIPTION, DETAIL, CATEGORY_CODE, BRAND_CODE
+        ID, SPU_NAME, SPU_CODE, SPU_DESC, SPU_EN_DESC, DETAIL, CATEGORY_CODE, BRAND_CODE
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -24,10 +25,9 @@
         where ID = #{id}
     </delete>
     <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="SPU" useGeneratedKeys="true">
-        insert into TT_SPU (ID, SPU_NAME, SPU_CODE, DESCRIPTION,
-        DETAIL, CATEGORY_CODE, BRAND_CODE
-        )
-        values (#{id},#{spuName,jdbcType=VARCHAR}, #{spuCode,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+        insert into TT_SPU (ID, SPU_NAME, SPU_CODE, SPU_DESC, SPU_EN_DESC
+        DETAIL, CATEGORY_CODE, BRAND_CODE)
+        values (#{id},#{spuName,jdbcType=VARCHAR}, #{spuCode}, #{spuDesc}, #{spuEnDesc},
         #{detail,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR}, #{brandCode,jdbcType=VARCHAR}
         )
     </insert>

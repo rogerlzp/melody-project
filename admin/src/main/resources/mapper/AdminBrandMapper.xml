@@ -4,16 +4,24 @@
     <resultMap id="BrandResultMap" type="Brand">
         <id column="ID" jdbcType="INTEGER" property="id"/>
         <result column="BRAND_NAME" jdbcType="VARCHAR" property="brandName"/>
-        <result column="BRAND_ENG_NAME" jdbcType="VARCHAR" property="brandEngName"/>
+        <result column="BRAND_EN_NAME" jdbcType="VARCHAR" property="brandEnName"/>
+        <result column="BRAND_DESC" jdbcType="VARCHAR" property="brandDesc"/>
+        <result column="BRAND_EN_DESC" jdbcType="VARCHAR" property="brandEnDesc"/>
         <result column="BRAND_CODE" jdbcType="VARCHAR" property="brandCode"/>
-        <result column="BRAND_LOGO_URL" jdbcType="VARCHAR" property="brandLogoUrl"/>
+        <result column="BRAND_LOGO" jdbcType="VARCHAR" property="brandLogo"/>
         <result column="STATUS" jdbcType="VARCHAR" property="status"/>
         <result column="HOMEPAGE" jdbcType="VARCHAR" property="homepage"/>
         <result column="BRAND_STORY" jdbcType="VARCHAR" property="brandStory"/>
         <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId"/>
+        <result column="CREATE_DATE" property="createDate"/>
+        <result column="UPDATE_DATE" property="updateDate"/>
     </resultMap>
     <sql id="Brand_Column_List">
-        ID, BRAND_NAME, BRAND_ENG_NAME, BRAND_CODE, BRAND_LOGO_URL, STATUS, HOMEPAGE, BRAND_STORY, PARENT_ID
+        <![CDATA[
+        ID, BRAND_NAME, BRAND_EN_NAME,
+        BRAND_DESC, BRAND_EN_DESC, BRAND_CODE, BRAND_LOGO, STATUS, HOMEPAGE, BRAND_STORY, PARENT_ID,
+        CREATE_DATE, UPDATE_DATE
+            ]]>
     </sql>
 
     <sql id="pagination">
@@ -34,9 +42,10 @@
     </delete>
     <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="Brand" useGeneratedKeys="true">
         insert into TT_BRAND
-        <include refid="Brand_Column_List"/>
-        values (#{id}, #{brandName}, #{brandEngName}, #{brandCode}, #{brandLogoUrl}, #{status}, #{homepage}, #{brandStory}, #{parentId}
-        )
+        (<include refid="Brand_Column_List"/>)
+        values (#{id}, #{brandName}, #{brandEnName},
+        #{brandDesc}, #{brandEnDesc}, #{brandCode}, #{brandLogo}, #{status}, #{homepage},
+        #{brandStory}, #{parentId}, now(), #{updateDate} )
     </insert>
     <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="Brand" useGeneratedKeys="true">
         insert into TT_BRAND
@@ -82,10 +91,18 @@
         update TT_BRAND
         set BRAND_NAME = #{brandName,jdbcType=VARCHAR},
         BRAND_CODE = #{brandCode,jdbcType=VARCHAR},
-        BRAND_LOGO_URL = #{brandLogoUrl,jdbcType=VARCHAR}
+        BRAND_LOGO = #{brandLogo,jdbcType=VARCHAR}
         where ID = #{id,jdbcType=INTEGER}
     </update>
 
+
+
+    <update id="updateBrand">
+        update TT_BRAND
+        set STATUS = #{status},
+        UPDATE_DATE = now()
+        where ID = #{id}
+    </update>
 
     <select id="countAllBrand" resultType="java.lang.Integer">
         select count(*) FROM TT_BRAND
@@ -100,6 +117,7 @@
         WHERE STATUS = '1'
         <include refid="pagination"/>
     </select>
+
 
 
 </mapper>

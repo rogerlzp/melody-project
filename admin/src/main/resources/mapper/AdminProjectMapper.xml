@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.melody.dao.AdminProjectMapper">
-  <resultMap id="BaseResultMap" type="Project">
-    <id column="ID" jdbcType="INTEGER" property="id" />
-    <result column="PROJECT_NAME" jdbcType="VARCHAR" property="projectName" />
-    <result column="BEGIN_TIME" jdbcType="TIMESTAMP" property="beginTime" />
-    <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
-    <result column="LOCATION" jdbcType="VARCHAR" property="location" />
-    <result column="CUSTOMER" jdbcType="VARCHAR" property="customer" />
-    <result column="PROJECT_DESC" jdbcType="VARCHAR" property="projectDesc" />
-    <result column="SPACE_TYPE" jdbcType="VARCHAR" property="spaceType" />
-    <result column="STATUS" jdbcType="VARCHAR" property="status" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="Project">
+        <id column="ID" jdbcType="INTEGER" property="id"/>
+        <result column="PROJECT_NAME" jdbcType="VARCHAR" property="projectName"/>
+        <result column="BEGIN_TIME" jdbcType="TIMESTAMP" property="beginTime"/>
+        <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="LOCATION" jdbcType="VARCHAR" property="location"/>
+        <result column="CUSTOMER" jdbcType="VARCHAR" property="customer"/>
+        <result column="PROJECT_DESC" jdbcType="VARCHAR" property="projectDesc"/>
+        <result column="SPACE_TYPE" jdbcType="VARCHAR" property="spaceType"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+    </resultMap>
 
-  <resultMap id="ProjectSkuResultMap" type="ProjectSku">
-    <id column="ID"  property="id" />
-    <result column="PROJECT_ID" property="projectId" />
-    <result column="SKU_NO" property="skuNo" />
-  </resultMap>
+    <resultMap id="ProjectSkuResultMap" type="ProjectSku">
+        <id column="ID" property="id"/>
+        <result column="PROJECT_ID" property="projectId"/>
+        <result column="SKU_NO" property="skuNo"/>
+    </resultMap>
 
-  <resultMap id="ProjectImageResultMap" type="ProjectImage">
-    <id column="ID"  property="id" />
-    <result column="PROJECT_ID" property="projectId" />
-    <result column="IMAGE_URL" property="imageUrl" />
-    <result column="IMAGE_DESC" property="imageDesc" />
-    <result column="IS_MAIN" property="isMain" />
-  </resultMap>
+    <resultMap id="ProjectImageResultMap" type="ProjectImage">
+        <id column="ID" property="id"/>
+        <result column="PROJECT_ID" property="projectId"/>
+        <result column="IMAGE_URL" property="imageUrl"/>
+        <result column="IMAGE_DESC" property="imageDesc"/>
+        <result column="IS_MAIN" property="isMain"/>
+    </resultMap>
 
-  <resultMap id="ProjectCompanyResultMap" type="ProjectCompany">
-    <id column="ID"  property="id" />
-    <result column="PROJECT_ID" property="projectId" />
-    <result column="COMPANY_UD" property="companyId" />
-  </resultMap>
+    <resultMap id="ProjectCompanyResultMap" type="ProjectCompany">
+        <id column="ID" property="id"/>
+        <result column="PROJECT_ID" property="projectId"/>
+        <result column="COMPANY_ID" property="companyId"/>
+    </resultMap>
 
-  <resultMap id="ProjectArtistResultMap" type="ProjectArtist">
-    <id column="ID"  property="id" />
-    <result column="PROJECT_ID" property="projectId" />
-    <result column="ARTIST_ID" property="artistId" />
-  </resultMap>
+    <resultMap id="ProjectArtistResultMap" type="ProjectArtist">
+        <id column="ID" property="id"/>
+        <result column="PROJECT_ID" property="projectId"/>
+        <result column="ARTIST_ID" property="artistId"/>
+    </resultMap>
 
-  <sql id="Base_Column_List">
+    <sql id="Base_Column_List">
     ID, PROJECT_NAME, BEGIN_TIME, END_TIME, LOCATION, CUSTOMER, PROJECT_DESC, SPACE_TYPE, 
     STATUS
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from TT_PROJECT
-    where ID = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from TT_PROJECT
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from TT_PROJECT
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insertProject" keyColumn="ID" keyProperty="id"
-          parameterType="Project" useGeneratedKeys="true">
+    <insert id="insertProject" keyColumn="ID" keyProperty="id"
+            parameterType="Project" useGeneratedKeys="true">
     insert into TT_PROJECT (ID, PROJECT_NAME, BEGIN_TIME, END_TIME,
       LOCATION, CUSTOMER, PROJECT_DESC, 
       SPACE_TYPE, STATUS)
@@ -64,43 +64,42 @@
   </insert>
 
 
-
-  <insert id="insertProjectArtist"  parameterType="ProjectArtist">
+    <insert id="insertProjectArtist" parameterType="ProjectArtist">
     INSERT INTO TR_PROJECT_ARTIST (ID, ARTIST_ID, PROJECT_ID)
     VALUES (#{id},#{artistId},#{projectId})
   </insert>
-  <insert id="insertProjectCompany"  parameterType="ProjectCompany">
+    <insert id="insertProjectCompany" parameterType="ProjectCompany">
     INSERT INTO TR_PROJECT_COMPANY (ID, COMPANY_ID, PROJECT_ID)
     VALUES (#{id},#{companyId},#{projectId})
   </insert>
-  <insert id="insertProjectImage"  parameterType="ProjectImage">
+    <insert id="insertProjectImage" parameterType="ProjectImage">
     INSERT INTO TR_PROJECT_IMAGE (ID, IMAGE_URL, IMAGE_DESC, IS_MAIN, PROJECT_ID)
     VALUES (#{id},#{imageUrl},#{imageDesc}, #{isMain}, #{projectId})
   </insert>
-  <insert id="insertProjectSku"  parameterType="ProjectSku">
+    <insert id="insertProjectSku" parameterType="ProjectSku">
     INSERT INTO TR_PROJECT_SKU (ID, SKU_NO, PROJECT_ID)
     VALUES (#{id},#{skuNo},#{projectId})
   </insert>
 
 
-  <select id="queryProjectList" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from TT_PROJECT
-    WHERE STATUS = #{status}
-    <include refid="pagination"/>
-  </select>
+    <select id="queryProjectList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from TT_PROJECT
+        WHERE STATUS = #{status}
+        <include refid="pagination"/>
+    </select>
 
-  <select id="queryProjectSkuList" resultMap="ProjectSkuResultMap">
+    <select id="queryProjectSkuList" resultMap="ProjectSkuResultMap">
   select
   trs.ID,
   trs.SKU_NO,
   trs.PROJECT_ID
   FROM TR_PROJECT_SKU trs
-  WHERE PROJECT_ID = #{projectId}
+  WHERE trs.PROJECT_ID = #{projectId}
 </select>
 
-  <select id="queryProjectImageList" resultMap="ProjectImageResultMap">
+    <select id="queryProjectImageList" resultMap="ProjectImageResultMap">
     select
     tri.ID,
     tri.PROJECT_ID,
@@ -108,81 +107,84 @@
     tri.IMAGE_DESC,
     tri.IS_MAIN
     FROM TR_PROJECT_IMAGE tri
-    WHERE PROJECT_ID = #{projectId}
+    WHERE tri.PROJECT_ID = #{projectId}
   </select>
-  <select id="queryProjectCompanyList" resultMap="ProjectCompanyResultMap">
+    <select id="queryProjectCompanyList" resultMap="ProjectCompanyResultMap">
     select
     trc.ID,
     trc.COMPANY_ID,
     trc.PROJECT_ID
     FROM TR_PROJECT_COMPANY trc
-    WHERE PROJECT_ID = #{projectId}
+    WHERE trc.PROJECT_ID = #{projectId}
   </select>
-  <select id="queryProjectArtistList" resultMap="ProjectArtistResultMap">
+    <select id="queryProjectArtistList" resultMap="ProjectArtistResultMap">
     select
     tra.ID,
     tra.ARTIST_ID,
     tra.PROJECT_ID
     FROM TR_PROJECT_ARTIST tra
-    WHERE PROJECT_ID = #{projectId}
+    WHERE tra.PROJECT_ID = #{projectId}
   </select>
 
 
-
-  <update id="updateProject">
+    <update id="updateProject">
     UPDATE TT_PROJECT
     set STATUS = #{status}, UPDATE_DATE=now()
     where ID = #{projectId}
   </update>
 
-  <select id="countAllProject" resultType="java.lang.Integer">
+    <select id="countAllProject" resultType="java.lang.Integer">
     select count(*) FROM TT_PROJECT
     WHERE STATUS = '1'
   </select>
 
-  <sql id="pagination">
+    <sql id="pagination">
     <![CDATA[
+
 	    limit #{offset}, #{pageSize}
+
         ]]>
   </sql>
 
-  <delete id="deleteByProjectId" parameterType="java.lang.Long">
+    <delete id="deleteByProjectId" parameterType="java.lang.Long">
     UPDATE TT_PROJECT
     set STATUS = '-1', UPDATE_DATE=now()
     where ID = #{projectId}
   </delete>
 
-  <update id="updateByPrimaryKeySelective" parameterType="Project">
-    update TT_PROJECT
-    <set>
-      <if test="projectName != null">
-        PROJECT_NAME = #{projectName,jdbcType=VARCHAR},
-      </if>
-      <if test="beginTime != null">
-        BEGIN_TIME = #{beginTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null">
-        END_TIME = #{endTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="location != null">
-        LOCATION = #{location,jdbcType=VARCHAR},
-      </if>
-      <if test="customer != null">
-        CUSTOMER = #{customer,jdbcType=VARCHAR},
-      </if>
-      <if test="projectDesc != null">
-        PROJECT_DESC = #{projectDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="spaceType != null">
-        SPACE_TYPE = #{spaceType,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        STATUS = #{status,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="Project">
+    <update id="updateProjectByPrimaryKeySelective" parameterType="Project">
+        update TT_PROJECT
+        <set>
+            <if test="projectName != null">
+                PROJECT_NAME = #{projectName,jdbcType=VARCHAR},
+            </if>
+            <if test="beginTime != null">
+                BEGIN_TIME = #{beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                END_TIME = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="location != null">
+                LOCATION = #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="customer != null">
+                CUSTOMER = #{customer,jdbcType=VARCHAR},
+            </if>
+            <if test="projectDesc != null">
+                PROJECT_DESC = #{projectDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="spaceType != null">
+                SPACE_TYPE = #{spaceType,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateByPrimaryKey" parameterType="Project">
     update TT_PROJECT
     set PROJECT_NAME = #{projectName,jdbcType=VARCHAR},
       BEGIN_TIME = #{beginTime,jdbcType=TIMESTAMP},
@@ -194,4 +196,41 @@
       STATUS = #{status,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+    <update id="updateProjectArtistById">
+    UPDATE TR_PROJECT_ARTIST
+    SET ARTIST_ID = #{artistId}
+    WHERE ID = #{id}
+  </update>
+
+    <update id="updateProjectCompanyById">
+    UPDATE TR_PROJECT_COMPANY
+    SET COMPANY_ID = #{companyId}
+    WHERE ID = #{id}
+  </update>
+
+    <update id="updateProjectSkuById">
+        UPDATE TR_PROJECT_SKU
+        SET SKU_NO = #{skuNo}
+        WHERE ID = #{id}
+    </update>
+
+
+    <update id="updateProjectImageById" parameterType="ProjectImage">
+        update TR_PROJECT_IMAGE
+        <set>
+            <if test="imageUrl != null">
+                IMAGE_URL = #{imageUrl},
+            </if>
+            <if test="imageDesc != null">
+                IMAGE_DESC = #{imageDesc},
+            </if>
+            <if test="isMain != null">
+                IS_MAIN = #{isMain}
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+
+
 </mapper>

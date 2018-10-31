@@ -34,10 +34,17 @@ public class User implements Serializable {
     private int isFirstOrder;// 是否首次下单
     private int isHasOrder;
 
+    public String description; // 用户描述
+    public String slogon; // 格言
+    private Date birthday;// 生日
+
 
     private Long userId;
 
     private String userName; // 姓名
+
+    private String roleName; // 姓名
+    private int roleId; // 姓名
 
     private String userPwd;
 

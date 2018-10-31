@@ -19,10 +19,7 @@ import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -70,7 +67,26 @@ public class AdminBrandController {
         Page<Brand> page = adminBrandService.queryBrandList(PageUtils.getPageParam(json));
 
         return Json.succ(oper).data("page", page);
+    }
 
+    @PermInfo("删除Brand")
+    @RequiresPermissions("a:sku:brand:del")
+    @DeleteMapping
+    public Json delete(@RequestBody String body) {
+
+        String oper = "delete brand";
+        log.info("{}, body: {}", oper, body);
+
+        JSONObject jsonObj = JSON.parseObject(body);
+        Integer brandId = jsonObj.getInteger("id");
+        if (brandId == null) {
+            return Json.fail(oper, "无法删除SPU：参数为空（skuNo）");
+        }
+
+        //限制：不能删当前登录用户
+        boolean success = adminBrandService.deleteBrandById(brandId) == 1 ? true : false;
+        log.info("delete result: " + success);
+        return Json.result(oper, success);
     }
 
 

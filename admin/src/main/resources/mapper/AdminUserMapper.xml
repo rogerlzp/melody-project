@@ -6,6 +6,61 @@
         <result column="LEVEL_ID" jdbcType="VARCHAR" property="levelId" />
         <result column="LEVEL_NAME" jdbcType="VARCHAR" property="levelName" />
     </resultMap>
+
+
+    <resultMap id="roleResultMap" type="Role">
+        <id column="ID"  property="id" />
+        <result column="ROLE_NAME"  property="roleName" />
+        <result column="ROLE_CODE"  property="roleCode" />
+        <result column="ROLE_DESC"  property="roleDesc" />
+    </resultMap>
+
+    <resultMap id="userResultMap" type="User">
+        <id column="USER_ID" jdbcType="BIGINT" property="userId" />
+        <result column="MOBILE_NO" jdbcType="VARCHAR" property="mobileNo" />
+        <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+        <result column="USER_PWD" jdbcType="VARCHAR" property="password" />
+        <result column="SALT" jdbcType="VARCHAR" property="salt" />
+        <result column="DEVICE_TOKEN" jdbcType="VARCHAR" property="deviceToken" />
+        <result column="ID_CARD" jdbcType="VARCHAR" property="idCard" />
+        <result column="REFERRAL_CODE" jdbcType="VARCHAR" property="referralCode" />
+        <result column="STATUS" jdbcType="VARCHAR" property="status" />
+        <result column="IS_FIRST_ORDER" jdbcType="INTEGER" property="isFirstOrder" />
+        <result column="REG_DATE" jdbcType="TIMESTAMP" property="regDate" />
+        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+        <result column="NICKNAME" jdbcType="VARCHAR" property="nickname" />
+        <result column="HEAD_IMAGE" jdbcType="VARCHAR" property="headImage" />
+        <result column="GENDER" jdbcType="INTEGER" property="gender" />
+        <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+        <result column="DESCRIPTION"  property="description" />
+        <result column="SLOGON" property="slogon" />
+        <result column="BIRTHDAY"  property="birthday" />
+        <result column="ROLE_NAME" property="roleName" />
+        <result column="ROLE_ID"  property="roleId" />
+
+    </resultMap>
+
+
+    <sql id="userColumns">
+        <![CDATA[
+		USER_ID,MOBILE_NO,USER_NAME,USER_PWD,SALT,DEVICE_TOKEN,ID_CARD,REFERRAL_CODE,STATUS,
+		IS_FIRST_ORDER,REG_DATE,CREATE_DATE,UPDATE_DATE,NICKNAME,HEAD_IMAGE,GENDER,EMAIL,
+		DESCRIPTION, SLOGON, BIRTHDAY, ROLE_NAME, ROLE_ID
+        ]]>
+    </sql>
+    <sql id="roleColumns">
+        <![CDATA[
+		ID, ROLE_NAME, ROLE_CODE, ROLE_DESC
+        ]]>
+    </sql>
+
+    <sql id="pagination">
+        <![CDATA[
+	    limit #{offset}, #{pageSize}
+        ]]>
+    </sql>
+
     <sql id="Base_Column_List">
         ID, LEVEL_ID, LEVEL_NAME
     </sql>
@@ -15,5 +70,90 @@
         <include refid="Base_Column_List"/>
         from SYS_CUSTOMER_LEVEL
     </select>
+
+
+    <insert id="insertUser" parameterType="User">
+        insert into TS_USER (USER_ID, MOBILE_NO, USER_NAME,
+        USER_PWD, SALT, DEVICE_TOKEN,
+        ID_CARD, REFERRAL_CODE, STATUS,
+        IS_FIRST_ORDER, REG_DATE, CREATE_DATE,
+        UPDATE_DATE, NICKNAME, HEAD_IMAGE,
+        GENDER, EMAIL, DESCRIPTION, SLOGON, BIRTHDAY)
+        values (#{userId}, #{mobileNo}, #{userName},
+        #{password}, #{salt}, #{deviceToken},
+        #{idCard}, #{referralCode}, #{status},
+        #{isFirstOrder}, #{regDate}, now(),
+        #{updateDate}, #{nickname}, #{headImage},
+        #{gender}, #{email}, #{description}, #{slogon}, #{birthday})
+    </insert>
+
+    <insert id="insertUserRole" >
+        insert into TR_USER_ROLE (ID, USER_ID, ROLE_ID, CREATE_DATE)
+        values (#{id}, #{userId}, #{roleId}, now())
+    </insert>
+
+    <insert id="insertRole" >
+        insert into TT_ROLE (ID, ROLE_NAME, ROLE_CODE, ROLE_DESC)
+        values (#{id},#{roleName}, #{roleCode}, #{roleDesc})
+    </insert>
+
+
+
+    <select id="queryUserList" resultMap="userResultMap">
+        select
+        tu.USER_ID,
+        tu.MOBILE_NO,
+        tu.USER_NAME,
+        tu.USER_PWD,
+        tu.SALT,
+        tu.DEVICE_TOKEN,
+        tu.ID_CARD,
+        tu.REFERRAL_CODE,
+        tu.STATUS,
+        tu.IS_FIRST_ORDER,
+        tu.REG_DATE,
+        tu.CREATE_DATE,
+        tu.UPDATE_DATE,
+        tu. NICKNAME,
+        tu.HEAD_IMAGE,
+        tu.GENDER,EMAIL,
+        tu.DESCRIPTION,
+        tu.SLOGON,
+        tu.BIRTHDAY,
+        tr.ROLE_NAME,
+        tus.ROLE_ID
+        from TS_USER tu
+        LEFT JOIN TR_USER_ROLE tus ON
+        tus.USER_ID = tu.USER_ID
+        LEFT JOIN TT_ROLE tr ON
+        tr.ID = tus.ROLE_ID
+        WHERE tu.STATUS  not in ('-1', '0')
+        <include refid="pagination"/>
+    </select>
+
+
+    <select id="queryRoleList" resultMap="roleResultMap">
+        select
+        <include refid="roleColumns"/>
+        from TT_ROLE
+    </select>
+
+
+
+    <select id="countAllUser" resultType="java.lang.Integer">
+        select count(*) FROM TS_USER
+        WHERE STATUS not in ('-1', '0')
+    </select>
+
+    <select id="countAllRole" resultType="java.lang.Integer">
+        select count(*) FROM TT_ROLE
+    </select>
+
+
+    <update id="updateUserStatus" >
+        UPDATE TS_USER
+        SET STATUS = #{status}, UPDATE_DATE=now()
+        where USER_ID = #{userId}
+    </update>
 
 </mapper>
