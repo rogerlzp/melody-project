@@ -56,6 +56,9 @@
         <typeAlias alias="StoryImage" type="com.melody.product.dto.StoryImage"/>
         <typeAlias alias="StoryImageProduct" type="com.melody.product.dto.StoryImageProduct"/>
 
+        <typeAlias alias="Article" type="com.melody.product.dto.Article"/>
+
+
     </typeAliases>
 
 

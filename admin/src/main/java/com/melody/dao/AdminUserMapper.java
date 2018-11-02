@@ -36,4 +36,11 @@ public interface AdminUserMapper {
 
     int updateUserStatus(@Param(value = "userId") long userId, @Param(value = "status") String status);
 
+    List<User> findUserByName(@Param(value = "userName") String userName);
+
+    int updateByPrimaryKeySelective(User user);
+
+    int getUserByRoleId(@Param(value = "userId") long userId, @Param(value = "roleId") Integer roleId);
+    int updateUserRole(@Param(value = "userId") long userId, @Param(value = "roleId") Integer roleId);
+
 }

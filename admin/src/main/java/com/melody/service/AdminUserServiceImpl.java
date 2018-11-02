@@ -49,7 +49,7 @@ public class AdminUserServiceImpl implements AdminUserService {
 
         // 添加属性成功后，在添加特性 TODO: 抛出异常
         if (insertResult == 1) {
-            if ( role != null) {
+            if (role != null) {
                 Long userRoleId = baseService.getNextSequence("TR_USER_ROLE");
                 adminUserMapper.insertUserRole(userRoleId, userId, role.getId());
             }
@@ -63,7 +63,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     public int addRole(Role role) {
         int roleId = baseService.getNextSequence("TT_ROLE").intValue();
         role.setId(roleId);
-       int insertResult = adminUserMapper.insertRole(role);
+        int insertResult = adminUserMapper.insertRole(role);
         if (insertResult == 1) {
             return roleId;
         }
@@ -111,4 +111,26 @@ public class AdminUserServiceImpl implements AdminUserService {
         brandPage.setTotal(totalCount);
         return brandPage;
     }
+
+
+    @Override
+    public List<User> findUserByName(String username) {
+        List<User> userList = adminUserMapper.findUserByName(username);
+        return userList;
+    }
+
+    // 更新用户角色，用户等级暂时不更新，TODO： 更新用户等级
+    // TODO: 优化更新顺序
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public int updateUser(User user) {
+        int resultId = adminUserMapper.updateByPrimaryKeySelective(user);
+        int roleId = user.getRoleId();
+        int userHasRole = adminUserMapper.getUserByRoleId(user.getUserId(), roleId);
+        if (userHasRole != 1) {
+            int updateRoleResult = adminUserMapper.updateUserRole(user.getUserId(), roleId);
+        }
+        return resultId;
+    }
+
 }

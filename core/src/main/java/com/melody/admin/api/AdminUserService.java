@@ -33,5 +33,10 @@ public interface AdminUserService {
     // 删除用户
     int deleteUserByUserId(Long userId);
 
+    // 获取用户
+    List<User> findUserByName(String username);
+
+    int updateUser(User user);
+
 }
 

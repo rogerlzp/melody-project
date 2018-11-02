@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.melody.admin.api.AdminSKUService;
 import com.melody.admin.api.AdminUserService;
+import com.melody.admin.dto.SysUser;
 import com.melody.annotation.PermInfo;
 import com.melody.product.dto.*;
 import com.melody.system.dto.SysCustomerLevel;
@@ -16,11 +17,15 @@ import com.melody.util.PageUtils;
 import com.melody.vo.Json;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.crypto.RandomNumberGenerator;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -123,4 +128,33 @@ public class AdminUserController {
         return Json.result(oper, success);
     }
 
+    @PermInfo("根据用户名查询User")
+    @RequiresPermissions("a:user:user:query")
+    @GetMapping("/search")
+    public Json queryUser(String username) {
+        String oper = "query user";
+        log.info("{}, body: {}", oper, username);
+//
+//        JSONObject jsonObj = JSON.parseObject(body);
+//        String name = jsonObj.getString("name");
+        List<User> userList = adminUserService.findUserByName(username);
+        return Json.succ(oper).data("userList", userList);
+    }
+
+
+    @PermInfo("更新系统用户的信息")
+    @RequiresPermissions("a:user:info:update")
+    @PatchMapping("/update")
+    public Json update(@RequestBody String body) {
+
+        String oper = "update user";
+        log.info("{}, body: {}", oper, body);
+
+        User user = JSON.parseObject(body, User.class);
+
+        // 更新用户
+        //boolean success = sysUserService.update(user,new EntityWrapper<User>().eq("uid",user.getUid()));
+        boolean success = adminUserService.updateUser(user) == 1 ? true : false;
+        return Json.result(oper, success).data("updated", "1");
+    }
 }
