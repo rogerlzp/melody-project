@@ -61,12 +61,6 @@ public class AdminSKUServiceImpl implements AdminSKUService {
 
         // 添加属性成功后，在添加特性
         if (insertResult == 1) {
-            if (sku.getFeatureOptionList() != null) {
-                for (FeatureOption featureOption : sku.getFeatureOptionList()) {
-                    long skuFeatureId = baseService.getNextSequence("TR_SKU_FEATURE");
-                    adminSKUMapper.insertSKUFeature(skuFeatureId, featureOption.getId(), skuNo);
-                }
-            }
             if (sku.getSkuImageList() != null) {
                 int seqId = 0;
                 for (SkuImage skuImage : sku.getSkuImageList()) {
@@ -153,6 +147,21 @@ public class AdminSKUServiceImpl implements AdminSKUService {
         String status = "-1"; //表示删除
         int result = adminSKUMapper.updateSKU(skuNo, status);
         return result;
+    }
+
+    /**
+     * 向数据里面插入销售属性
+     *
+     * attrName: 属性名字， 展示使用
+     * attrCode: 属性代码，选择使用
+     * attrType: 属性类型， 0： 输入， 1：选择
+     * attrInputType: 属性输入类型， 0： 输入， 1：选择
+     * attrValues: 属性值
+     *
+     *
+     */
+    private void addSaleAttr(){
+
     }
 
 }

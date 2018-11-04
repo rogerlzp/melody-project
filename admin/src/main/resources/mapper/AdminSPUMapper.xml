@@ -25,12 +25,20 @@
         where ID = #{id}
     </delete>
     <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="SPU" useGeneratedKeys="true">
-        insert into TT_SPU (ID, SPU_NAME, SPU_CODE, SPU_DESC, SPU_EN_DESC
-        DETAIL, CATEGORY_CODE, BRAND_CODE)
+        insert into TT_SPU (ID, SPU_NAME, SPU_CODE, SPU_DESC, SPU_EN_DESC, DETAIL,
+        CATEGORY_CODE, BRAND_CODE)
         values (#{id},#{spuName,jdbcType=VARCHAR}, #{spuCode}, #{spuDesc}, #{spuEnDesc},
         #{detail,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR}, #{brandCode,jdbcType=VARCHAR}
         )
     </insert>
+
+
+
+    <insert id="insertSpuAttr"  parameterType="SpuAttr">
+        insert into TR_SPU_ATTR (ID, ATTR_ID, SPU_CODE, SORT_ORDER)
+        values (#{id},#{attrId}, #{spuCode}, #{sortOrder} )
+    </insert>
+
     <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="SPU" useGeneratedKeys="true">
         insert into TT_SPU
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -102,7 +110,8 @@
         update TT_SPU
         set SPU_NAME = #{spuName,jdbcType=VARCHAR},
         SPU_CODE = #{spuCode,jdbcType=VARCHAR},
-        DESCRIPTION = #{description,jdbcType=VARCHAR},
+        SPU_DESC = #{spuDesc},
+        SPU_EN_DESC = #{spuEnDesc},
         DETAIL = #{detail,jdbcType=VARCHAR},
         CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
         BRAND_CODE = #{brandCode,jdbcType=VARCHAR}

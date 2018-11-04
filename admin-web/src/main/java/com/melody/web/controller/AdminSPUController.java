@@ -2,6 +2,7 @@ package com.melody.web.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -13,6 +14,8 @@ import com.melody.annotation.PermInfo;
 import com.melody.constant.Root;
 import com.melody.product.dto.Brand;
 import com.melody.product.dto.SPU;
+import com.melody.product.dto.SpuAttr;
+import com.melody.product.dto.StoryImageProduct;
 import com.melody.util.PageUtils;
 import com.melody.vo.Json;
 import org.apache.commons.lang3.StringUtils;
@@ -22,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -55,16 +59,21 @@ public class AdminSPUController {
 
         String oper = "add brand";
         log.info("{}, body: {}", oper, brandStr);
-
         SPU brandObj = JSON.parseObject(brandStr, SPU.class);
 
-//        if (StringUtils.isEmpty(brandObj.getBrandName())) {
-//            return Json.fail(oper, "品牌名不能为空");
-//        }
+        // 获取SpuAttr属性
+        // 因为传来的Image 只有 picUrl, 不能自动转化为SkuImage, 所以手动转化一下，在添加到 sku中
+        JSONObject jsonObject = JSON.parseObject(brandStr);
+        JSONArray jsonArray = jsonObject.getJSONArray("spuAttrList");
 
-        int success = adminSPUService.addSPU(brandObj);
-        return Json.result(oper, success == 1 ? true : false)
-                .data("spu", brandObj.getSpuName());
+        if (jsonArray != null) {
+            List<SpuAttr> spuAttrList = jsonArray.toJavaList(SpuAttr.class);
+            brandObj.setSpuAttrList(spuAttrList);
+        }
+
+        Long spuId = adminSPUService.addSPU(brandObj);
+        return Json.result(oper, spuId != -1 ? true : false)
+                .data("spuId", spuId);
     }
 
 

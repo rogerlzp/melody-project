@@ -50,9 +50,9 @@ public class AdminBrandController {
             return Json.fail(oper, "品牌名不能为空");
         }
 
-        int success = adminBrandService.addBrand(brandObj);
-        return Json.result(oper, success == 1 ? true : false)
-                .data("brand", brandObj.getBrandName());
+        int brandId = adminBrandService.addBrand(brandObj);
+        return Json.result(oper, brandId != -1 ? true : false)
+                .data("brandId", brandId);
     }
 
 

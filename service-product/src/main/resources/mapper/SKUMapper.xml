@@ -37,12 +37,12 @@
     </resultMap>
 
 
-    <resultMap id="SkuFeatureResultMap" type="SkuFeature">
+    <resultMap id="SkuAttrResultMap" type="SkuAttr">
         <id column="ID" property="id"/>
         <result column="SKU_NO" property="skuNo"/>
-        <result column="FEATURE_OPTION_ID" property="featureOptionId"/>
-        <result column="FEATURE_NAME" property="featureName"/>
-        <result column="FEATURE_VALUE" property="featureValue"/>
+        <result column="Attr_OPTION_ID" property="AttrOptionId"/>
+        <result column="Attr_NAME" property="AttrName"/>
+        <result column="Attr_VALUE" property="AttrValue"/>
     </resultMap>
 
 
@@ -398,24 +398,24 @@
     </select>
 
 
-    <insert id="insertSKUFeature">
-        INSERT INTO TR_SKU_FEATURE (ID, SKU_ID, FEATURE_OPTION_ID)
-        VALUES (#{id},#{skuId},#{featureOptionId})
+    <insert id="insertSKUAttr">
+        INSERT INTO TR_SKU_Attr (ID, SKU_ID, Attr_OPTION_ID)
+        VALUES (#{id},#{skuId},#{AttrOptionId})
     </insert>
 
 
     <!-- 价格，图片，库存 -->
-    <select id="getSkuFeatureList" resultMap="SkuFeatureResultMap">
+    <select id="getSkuAttrList" resultMap="SkuAttrResultMap">
         select
         s.ID,
         s.SKU_NO,
-        s.FEATURE_OPTION_ID,
-        s1.FEATURE_NAME,
-        s2.FEATURE_VALUE
+        s.Attr_OPTION_ID,
+        s1.Attr_NAME,
+        s2.Attr_VALUE
 
-        from TR_SKU_FEATURE s
-        LEFT JOIN TR_FEATURE_OPTION s2 ON s2.ID = s.FEATURE_OPTION_ID
-        LEFT JOIN TT_FEATURE s1  ON s1.ID = s2.FEATURE_ID
+        from TR_SKU_Attr s
+        LEFT JOIN TR_Attr_OPTION s2 ON s2.ID = s.Attr_OPTION_ID
+        LEFT JOIN TT_Attr s1  ON s1.ID = s2.Attr_ID
         WHERE s.SKU_NO = #{skuNo}
     </select>
 

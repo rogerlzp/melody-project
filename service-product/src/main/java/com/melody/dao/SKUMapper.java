@@ -35,7 +35,7 @@ public interface SKUMapper {
 
 
     List<SkuImage> getSkuImageList(@Param(value = "skuNo") String skuNo);
-    List<SkuFeature> getSkuFeatureList(@Param(value = "skuNo") String skuNo);
+    List<SkuAttr> getSkuAttrList(@Param(value = "skuNo") String skuNo);
 
     Double getSkuDiscount(@Param(value = "skuNo") String skuNo, @Param(value = "userId") Long userId);
 

@@ -22,9 +22,9 @@
         <typeAlias alias="SPU" type="com.melody.product.dto.SPU"/>
         <typeAlias alias="Category" type="com.melody.product.dto.Category"/>
         <typeAlias alias="Brand" type="com.melody.product.dto.Brand"/>
-        <typeAlias alias="Feature" type="com.melody.product.dto.Feature"/>
-        <typeAlias alias="FeatureOption" type="com.melody.product.dto.FeatureOption"/>
-        <typeAlias alias="SkuFeature" type="com.melody.product.dto.SkuFeature"/>
+        <typeAlias alias="Attr" type="com.melody.product.dto.Attr"/>
+        <typeAlias alias="SpuAttr" type="com.melody.product.dto.SpuAttr"/>
+        <typeAlias alias="SkuAttr" type="com.melody.product.dto.SkuAttr"/>
         <typeAlias alias="SkuImage" type="com.melody.product.dto.SkuImage"/>
 
         <typeAlias alias="SkuPrice" type="com.melody.product.dto.SkuPrice"/>

@@ -30,7 +30,10 @@ public class AdminBrandServiceImpl implements AdminBrandService {
         brand.setId(brandId);
         brand.setStatus("1");
         int insertResult = adminBrandMapper.insert(brand);
-        return insertResult;
+        if(insertResult == 1){
+            return brandId;
+        }
+        return -1;
     }
 
     @Override

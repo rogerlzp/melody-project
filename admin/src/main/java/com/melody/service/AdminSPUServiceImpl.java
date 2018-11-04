@@ -2,16 +2,20 @@ package com.melody.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.melody.admin.api.AdminFeatureService;
+import com.melody.admin.api.AdminAttrService;
 import com.melody.admin.api.AdminSPUService;
 import com.melody.common.constant.BusinessCodes;
 import com.melody.common.utils.StringUtils;
-import com.melody.dao.AdminFeatureMapper;
+import com.melody.dao.AdminAttrMapper;
 import com.melody.dao.AdminSPUMapper;
 import com.melody.exception.BusinessException;
-import com.melody.product.dto.Feature;
+import com.melody.product.dto.Attr;
 import com.melody.product.dto.SPU;
+import com.melody.product.dto.SkuAttr;
+import com.melody.product.dto.SpuAttr;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,18 +29,33 @@ public class AdminSPUServiceImpl implements AdminSPUService {
     @Autowired
     BaseServiceImpl baseService;
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public int addSPU(SPU spu) {
-        long spuId = baseService.getNextSequence("TT_FEATURE");
+    public Long addSPU(SPU spu) {
+        long spuId = baseService.getNextSequence("TT_SPU");
         spu.setId(spuId);
 
         // 创建SPU CODE
         // 先用SPU + ID 来设置
-        String spudCode = "SPU" + spuId;
-        spu.setSpuCode(spudCode);
+        if(StringUtils.isEmpty(spu.getSpuCode())) {
+            String spudCode = "SPU" + spuId;
+            spu.setSpuCode(spudCode);
+        }
+
+
 
         int insertResult = adminSPUMapper.insert(spu);
-        return insertResult;
+        if(insertResult==1){
+            //获取SpuAttr属性
+            for(SpuAttr spuAttr:spu.getSpuAttrList()){
+                long spuAttrId = baseService.getNextSequence("TR_SPU_ATTR");
+                spuAttr.setSpuCode(spu.getSpuCode());
+                spuAttr.setId(spuAttrId);
+                adminSPUMapper.insertSpuAttr(spuAttr);
+            }
+            return spuId;
+        }
+        return -1L;
     }
 
     @Override

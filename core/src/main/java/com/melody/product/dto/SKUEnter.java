@@ -40,7 +40,8 @@ public class SKUEnter extends GeneralEnter implements Serializable {
 
     private String spuCode;
 
-    private List<FeatureOption> featureOptionList;
+
+    private SkuAttr skuAttr;
     private List<SkuImage> skuImageList;
 
     // 价格表

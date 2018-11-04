@@ -13,14 +13,14 @@
         <result column="BRAND_NAME" jdbcType="VARCHAR" property="brandName" />
     </resultMap>
 
-    <resultMap id="FeatureResultMap" type="Feature">
+    <resultMap id="AttrResultMap" type="Attr">
         <id column="ID" property="id"/>
-        <result column="FEATURE_NAME" property="featureName"/>
+        <result column="Attr_NAME" property="AttrName"/>
     </resultMap>
-    <resultMap id="FeatureOptionResultMap" type="FeatureOption">
+    <resultMap id="AttrOptionResultMap" type="AttrOption">
         <id column="ID" property="id"/>
-        <result column="FEATURE_ID" property="featureId"/>
-        <result column="FEATURE_Value" property="featureValue"/>
+        <result column="Attr_ID" property="AttrId"/>
+        <result column="Attr_Value" property="AttrValue"/>
     </resultMap>
 
 
@@ -163,22 +163,22 @@
         WHERE CATEGORY_CODE = #{categoryCode} AND BRAND_CODE = #{brandCode}
     </select>
 
-    <select id="getFeatureListBySpuCode" resultMap="FeatureResultMap">
+    <select id="getAttrListBySpuCode" resultMap="AttrResultMap">
     SELECT
     ttf.ID,
-    ttf.FEATURE_NAME
-    FROM  TT_FEATURE ttf,TT_SPU tts
+    ttf.Attr_NAME
+    FROM  TT_Attr ttf,TT_SPU tts
     WHERE ttf.CATEGORY_CODE = tts.CATEGORY_CODE
     AND tts.SPU_CODE = #{spuCode}
     </select>
 
-    <select id="getFeatureOptionByFeationId" resultMap="FeatureOptionResultMap">
+    <select id="getAttrOptionByFeationId" resultMap="AttrOptionResultMap">
         SELECT
         trfo.ID,
-        trfo.FEATURE_ID,
-        trfo.FEATURE_VALUE
-        FROM  TR_FEATURE_OPTION trfo
-        WHERE trfo.FEATURE_ID = #{featureId}
+        trfo.Attr_ID,
+        trfo.Attr_VALUE
+        FROM  TR_Attr_OPTION trfo
+        WHERE trfo.Attr_ID = #{AttrId}
     </select>
 
 

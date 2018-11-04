@@ -32,18 +32,18 @@ public class SKU implements Serializable {
 
     private String spuCode;
 
-    private List<FeatureOption> featureOptionList;
+    private SkuAttr skuAttr;
     private List<SkuImage> skuImageList;
 
 
-    List<SkuFeature> skuFeatureList;
+    List<SkuAttr> skuAttrList;
     // 价格表
     private SkuPrice skuPrice;
 
     // 库存表
     private SkuInventory  skuInventory;
 
-//    private List<FeatureOption> featureOptionList;
+//    private List<AttrOption> AttrOptionList;
 //    private List<SkuImage> skuImageList;
 
     // 价格表

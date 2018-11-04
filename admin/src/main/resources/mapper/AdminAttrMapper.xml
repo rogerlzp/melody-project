@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.dao.AdminAttrMapper">
+
+    <resultMap id="AttrResultMap" type="Attr">
+        <id column="ATTR_ID" jdbcType="BIGINT" property="attrId" />
+        <result column="ATTR_NAME" jdbcType="VARCHAR" property="attrName" />
+        <result column="ATTR_CODE" jdbcType="VARCHAR" property="attrCode" />
+        <result column="ATTR_INPUT_TYPE" jdbcType="BIT" property="attrInputType" />
+        <result column="ATTR_TYPE" jdbcType="BIT" property="attrType" />
+        <result column="ATTR_VALUES" jdbcType="VARCHAR" property="attrValues" />
+        <result column="ATTR_INDEX" jdbcType="BIT" property="attrIndex" />
+        <result column="SORT_ORDER" jdbcType="BIT" property="sortOrder" />
+        <result column="IS_LINKED" jdbcType="BIT" property="isLinked" />
+    </resultMap>
+
+
+    <sql id="Attr_Column_List">
+    ATTR_ID, ATTR_NAME, ATTR_CODE, ATTR_INPUT_TYPE, ATTR_TYPE, ATTR_VALUES, ATTR_INDEX,
+    SORT_ORDER, IS_LINKED
+  </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="AttrResultMap">
+        select
+        <include refid="Attr_Column_List" />
+        from TT_ATTR
+        where ATTR_ID = #{attrId}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from TT_ATTR
+        where ATTR_ID = #{attrId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="Attr">
+        insert into TT_ATTR (ATTR_ID, ATTR_NAME, ATTR_CODE,
+        ATTR_INPUT_TYPE, ATTR_TYPE, ATTR_VALUES,
+        ATTR_INDEX, SORT_ORDER, IS_LINKED)
+        values (#{attrId,jdbcType=BIGINT}, #{attrName,jdbcType=VARCHAR}, #{attrCode,jdbcType=VARCHAR},
+        #{attrInputType,jdbcType=BIT}, #{attrType,jdbcType=BIT}, #{attrValues,jdbcType=VARCHAR},
+        #{attrIndex,jdbcType=BIT}, #{sortOrder,jdbcType=BIT}, #{isLinked,jdbcType=BIT})
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+       delete from TT_Attr
+        where ATTR_ID = #{attrId}
+    </delete>
+
+
+
+
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="Attr">
+        update TT_ATTR
+        <set>
+            <if test="attrName != null">
+                ATTR_NAME = #{attrName,jdbcType=VARCHAR},
+            </if>
+            <if test="attrCode != null">
+                ATTR_CODE = #{attrCode,jdbcType=VARCHAR},
+            </if>
+            <if test="attrInputType != null">
+                ATTR_INPUT_TYPE = #{attrInputType,jdbcType=BIT},
+            </if>
+            <if test="attrType != null">
+                ATTR_TYPE = #{attrType,jdbcType=BIT},
+            </if>
+            <if test="attrValues != null">
+                ATTR_VALUES = #{attrValues,jdbcType=VARCHAR},
+            </if>
+            <if test="attrIndex != null">
+                ATTR_INDEX = #{attrIndex,jdbcType=BIT},
+            </if>
+            <if test="sortOrder != null">
+                SORT_ORDER = #{sortOrder,jdbcType=BIT},
+            </if>
+            <if test="isLinked != null">
+                IS_LINKED = #{isLinked,jdbcType=BIT},
+            </if>
+        </set>
+        where ATTR_ID = #{attrId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="Attr">
+        update TT_ATTR
+        set ATTR_NAME = #{attrName,jdbcType=VARCHAR},
+        ATTR_CODE = #{attrCode,jdbcType=VARCHAR},
+        ATTR_INPUT_TYPE = #{attrInputType,jdbcType=BIT},
+        ATTR_TYPE = #{attrType,jdbcType=BIT},
+        ATTR_VALUES = #{attrValues,jdbcType=VARCHAR},
+        ATTR_INDEX = #{attrIndex,jdbcType=BIT},
+        SORT_ORDER = #{sortOrder,jdbcType=BIT},
+        IS_LINKED = #{isLinked,jdbcType=BIT}
+        where ATTR_ID = #{attrId,jdbcType=BIGINT}
+    </update>
+
+    <select id="countAllAttr" resultType="java.lang.Integer">
+        select count(*) FROM TT_ATTR;
+    </select>
+
+
+    <select id="queryAttrList" resultMap="AttrResultMap">
+        select
+        <include refid="Attr_Column_List" />
+        from TT_ATTR
+        <include refid="pagination"/>
+    </select>
+
+    <sql id="pagination">
+        <![CDATA[
+	    limit #{offset}, #{pageSize}
+        ]]>
+    </sql>
+
+
+
+
+
+</mapper>

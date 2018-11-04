@@ -1,14 +1,14 @@
 package com.melody.admin.api;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.melody.product.dto.Feature;
+import com.melody.product.dto.Attr;
 import com.melody.product.dto.SPU;
 
 import java.util.List;
 
 public interface AdminSPUService {
 
-    int addSPU(SPU spu);
+    Long addSPU(SPU spu);
 
 
     Page<SPU> querySPUList(Page page);

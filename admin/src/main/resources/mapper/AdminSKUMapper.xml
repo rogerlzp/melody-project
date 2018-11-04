@@ -262,9 +262,9 @@
         <include refid="pagination"/>
     </select>
 
-    <insert id="insertSKUFeature">
-        INSERT INTO TR_SKU_FEATURE (ID, SKU_NO, FEATURE_OPTION_ID)
-        VALUES (#{id},#{skuNo},#{featureOptionId})
+    <insert id="insertSKUAttr">
+        INSERT INTO TR_SKU_Attr (ID, SKU_NO, Attr_OPTION_ID)
+        VALUES (#{id},#{skuNo},#{AttrOptionId})
     </insert>
 
 

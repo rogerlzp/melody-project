@@ -28,8 +28,8 @@ public interface AdminSKUMapper {
 
     int deleteBySPUId(@Param(value = "id") Long id);
 
-    int insertSKUFeature(@Param(value = "id") Long id,
-                         @Param(value = "featureOptionId") Long featureOptionId,
+    int insertSKUAttr(@Param(value = "id") Long id,
+                         @Param(value = "AttrOptionId") Long AttrOptionId,
                          @Param(value = "skuNo") String skuNo);
 
 

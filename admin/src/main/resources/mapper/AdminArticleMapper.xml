@@ -276,4 +276,28 @@
     <include refid="pagination"/>
   </select>
 
+
+  <select id="getArticleById" resultMap="BaseResultMap">
+        select
+    ta.ARTICLE_ID,
+    ta.ARTICLE_TITLE,
+    ta.DISPLAY_TIME,
+    ta.ARTICLE_IP,
+    ta.ARTICLE_CLICK,
+    ta.USER_ID,
+    ta.ARTICLE_TYPE,
+    ta.ARTICLE_CONTENT,
+    ta.ARTICLE_ABSTRACT,
+    ta.ARTICLE_CATEGORY,
+    ta.STATUS,
+    ta.IS_COMMENT_ENABLED,
+    ta.IMPORTANCE,
+    ta.CREATE_DATE,
+    ta.UPDATE_DATE,
+    tu.USER_NAME as AUTHOR_NAME
+    from TT_ARTICLE ta
+    LEFT JOIN  TS_USER tu ON tu.USER_ID = ta.USER_ID
+    WHERE ta.ARTICLE_ID = #{articleId}
+  </select>
+
 </mapper>

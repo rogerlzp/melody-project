@@ -101,8 +101,8 @@ public class SKUServiceImpl implements SKUService {
         List<SkuImage> skuImageList = skuMapper.getSkuImageList(skuEnter.getSkuNo());
         skuDetailResult.setSkuImageList(skuImageList);
 
-        List<SkuFeature> skuFeatureList = skuMapper.getSkuFeatureList(skuEnter.getSkuNo());
-        skuDetailResult.setSkuFeatureList(skuFeatureList);
+        List<SkuAddr> skuAddrList = skuMapper.getSkuAddrList(skuEnter.getSkuNo());
+        skuDetailResult.setSkuAttrList(skuAttrList);
 
         skuDetailResult.setCode(BusinessCodes.SUCCESS);
 
@@ -118,7 +118,7 @@ public class SKUServiceImpl implements SKUService {
 
     /**
      * SPU下面的所有属性
-     * skuList:{1. featureList,  2. price, 3. inventory}
+     * skuList:{1. AttrList,  2. price, 3. inventory}
      *
      * @param skuListEnter
      * @return
@@ -135,21 +135,21 @@ public class SKUServiceImpl implements SKUService {
             List<SkuImage> skuImageList = skuMapper.getSkuImageList(sku.getSkuNo());
             sku.setSkuImageList(skuImageList);
 
-            List<SkuFeature> skuFeatureList = skuMapper.getSkuFeatureList(sku.getSkuNo());
-            sku.setSkuFeatureList(skuFeatureList);
+            List<SkuAttr> skuAttrList = skuMapper.getSkuAttrList(sku.getSkuNo());
+            sku.setSkuAttrList(skuAttrList);
         }
-        // 根据spuCode 获取Feature和对应的值
+        // 根据spuCode 获取Attr和对应的值
 
-        List<Feature> spuFeatureList = spuMapper.getFeatureListBySpuCode(spuCode);
-        for (Feature feature : spuFeatureList) {
-            List<FeatureOption> featureOptionList = spuMapper.getFeatureOptionByFeationId(feature.getId());
-            feature.setFeatureOptions(featureOptionList);
+        List<Attr> spuAttrList = spuMapper.getAttrListBySpuCode(spuCode);
+        for (Attr Attr : spuAttrList) {
+            List<AttrOption> AttrOptionList = spuMapper.getAttrOptionByFeationId(Attr.getId());
+            Attr.setAttrOptions(AttrOptionList);
         }
 
 
         SKUListResult skuListResult = new SKUListResult();
         skuListResult.setSkuList(skuList);
-        skuListResult.setFeatureList(spuFeatureList);
+        skuListResult.setAttrList(spuAttrList);
         skuListResult.setCode(BusinessCodes.SUCCESS);
 
         return skuListResult;

@@ -39,10 +39,10 @@ public class SKUDetailResult extends GeneralResult implements Serializable {
 
     private String spuCode;
 
-    private List<FeatureOption> featureOptionList;
+    private SkuAttr skuAttr;
     private List<SkuImage> skuImageList;
 
-    List<SkuFeature> skuFeatureList;
+    List<SkuAttr> skuAttrList;
     // 价格表
     private SkuPrice skuPrice;
 

@@ -3,6 +3,7 @@ package com.melody.product.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 public class SPU implements Serializable {
@@ -15,7 +16,9 @@ public class SPU implements Serializable {
 
     private String spuCode;
 
-    private String description;
+    private String spuDesc;
+
+    private String spuEnDesc;
 
     private String detail;
 
@@ -26,4 +29,7 @@ public class SPU implements Serializable {
     private String categoryName;
 
     private String brandName;
+
+    private List<SpuAttr> spuAttrList;
+    
 }
