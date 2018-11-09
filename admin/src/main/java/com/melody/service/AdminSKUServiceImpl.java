@@ -76,7 +76,7 @@ public class AdminSKUServiceImpl implements AdminSKUService {
             // 增加库存
             if(sku.getSkuInventory() !=null) {
                 SkuInventory inventory = sku.getSkuInventory();
-                long inventoryId = baseService.getNextSequence("TT_INVENTORY");
+                long inventoryId = baseService.getNextSequence("TR_SKU_INVENTORY");
                 inventory.setId(inventoryId);
                 inventory.setSkuNo(skuNo);
                 adminSKUMapper.insertSKUInventory(inventory);
@@ -105,6 +105,13 @@ public class AdminSKUServiceImpl implements AdminSKUService {
                    userSkuDiscount.setStatus("1");
                    adminSKUMapper.insertUserSKUDiscount(userSkuDiscount);
               }
+            }
+            // 增加SKU 特别的属性
+            if (sku.getSkuAttr() !=null) {
+                long skuAttrId = baseService.getNextSequence("TR_SKU_ATTR");
+                SkuAttr skuAttr = sku.getSkuAttr();
+                skuAttr.setId(skuAttrId);
+                adminSKUMapper.insertSKUAttr(skuAttr);
             }
 
         } else {
@@ -149,19 +156,18 @@ public class AdminSKUServiceImpl implements AdminSKUService {
         return result;
     }
 
-    /**
-     * 向数据里面插入销售属性
-     *
-     * attrName: 属性名字， 展示使用
-     * attrCode: 属性代码，选择使用
-     * attrType: 属性类型， 0： 输入， 1：选择
-     * attrInputType: 属性输入类型， 0： 输入， 1：选择
-     * attrValues: 属性值
-     *
-     *
-     */
-    private void addSaleAttr(){
 
+    @Override
+    public SKU querySKUBySkuNo(String skuNo) {
+        SKU sku = adminSKUMapper.querySKUBySkuNo(skuNo);
+        if (sku != null) {
+            SkuAttr skuAttr = adminSKUMapper.getSkuAttrBySkuNo(skuNo);
+            if (skuAttr != null) {
+                sku.setSkuAttr(skuAttr);
+            }
+        }
+
+        return sku;
     }
 
 }

@@ -101,8 +101,8 @@ public class SKUServiceImpl implements SKUService {
         List<SkuImage> skuImageList = skuMapper.getSkuImageList(skuEnter.getSkuNo());
         skuDetailResult.setSkuImageList(skuImageList);
 
-        List<SkuAddr> skuAddrList = skuMapper.getSkuAddrList(skuEnter.getSkuNo());
-        skuDetailResult.setSkuAttrList(skuAttrList);
+//        List<SkuAddr> skuAddrList = skuMapper.getSkuAddrList(skuEnter.getSkuNo());
+//        skuDetailResult.setSkuAttrList(skuAttrList);
 
         skuDetailResult.setCode(BusinessCodes.SUCCESS);
 
@@ -140,16 +140,16 @@ public class SKUServiceImpl implements SKUService {
         }
         // 根据spuCode 获取Attr和对应的值
 
-        List<Attr> spuAttrList = spuMapper.getAttrListBySpuCode(spuCode);
-        for (Attr Attr : spuAttrList) {
-            List<AttrOption> AttrOptionList = spuMapper.getAttrOptionByFeationId(Attr.getId());
-            Attr.setAttrOptions(AttrOptionList);
-        }
+//        List<Attr> spuAttrList = spuMapper.getAttrListBySpuCode(spuCode);
+//        for (Attr Attr : spuAttrList) {
+//            List<AttrOption> AttrOptionList = spuMapper.getAttrOptionByFeationId(Attr.getId());
+//            Attr.setAttrOptions(AttrOptionList);
+//        }
 
 
         SKUListResult skuListResult = new SKUListResult();
         skuListResult.setSkuList(skuList);
-        skuListResult.setAttrList(spuAttrList);
+//        skuListResult.setAttrList(spuAttrList);
         skuListResult.setCode(BusinessCodes.SUCCESS);
 
         return skuListResult;

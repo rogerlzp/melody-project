@@ -14,7 +14,7 @@ public class SkuPrice  implements Serializable {
     private Long id;
 
     private String skuNo;
-    private Integer skuAppendAttrId; // 额外增加的属性
+//    private Integer skuAppendAttrId; // 额外增加的属性
 
     private Double listPrice;
 

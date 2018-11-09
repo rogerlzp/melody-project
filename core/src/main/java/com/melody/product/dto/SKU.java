@@ -28,7 +28,7 @@ public class SKU implements Serializable {
 
     private String status;
 
-    private BigDecimal price;
+    private Double price;
 
     private String spuCode;
 
@@ -36,7 +36,7 @@ public class SKU implements Serializable {
     private List<SkuImage> skuImageList;
 
 
-    List<SkuAttr> skuAttrList;
+//    List<SkuAttr> skuAttrList;
     // 价格表
     private SkuPrice skuPrice;
 

@@ -17,4 +17,9 @@ public interface AdminSPUService {
 
     List<SPU> querySPUByBC(String categoryCode, String brandCode);
 
+    SPU  querySPUBySpuCode(String spuCode);
+
+    int updateSPU(SPU spu);
+
+    int deleteAttr(Long attrId, String spuCode);
 }

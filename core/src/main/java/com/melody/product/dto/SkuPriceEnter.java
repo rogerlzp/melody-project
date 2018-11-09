@@ -16,7 +16,7 @@ public class SkuPriceEnter  implements Serializable {
 
     private Double salePrice;
 
-    private Integer skuAppendAttrId; // 额外增加的属性
+//    private Integer skuAppendAttrId; // 额外增加的属性
 
     private Double specialPrice;
 
@@ -25,6 +25,7 @@ public class SkuPriceEnter  implements Serializable {
     private Double costPrice;
 
     private List<Double> discountPriceList;
+
 
 
 

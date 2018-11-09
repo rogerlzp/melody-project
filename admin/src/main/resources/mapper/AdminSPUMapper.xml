@@ -11,6 +11,22 @@
         <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
         <result column="BRAND_CODE" jdbcType="VARCHAR" property="brandCode" />
     </resultMap>
+
+
+
+    <resultMap id="SpuAttrResultMap" type="SpuAttr">
+        <id column="ID"  property="id" />
+        <result column="ATTR_ID"  property="attrId" />
+        <result column="SPU_CODE"  property="spuCode" />
+        <result column="SORT_ORDER" property="sortOrder" />
+        <result column="ATTR_NAME" jdbcType="VARCHAR" property="attrName" />
+        <result column="ATTR_CODE" jdbcType="VARCHAR" property="attrCode" />
+        <result column="ATTR_INPUT_TYPE" jdbcType="BIT" property="attrInputType" />
+        <result column="ATTR_TYPE" jdbcType="BIT" property="attrType" />
+        <result column="ATTR_VALUES" jdbcType="VARCHAR" property="attrValues" />
+        <result column="ATTR_INDEX" jdbcType="BIT" property="attrIndex" />
+        <result column="IS_LINKED" jdbcType="BIT" property="isLinked" />
+    </resultMap>
     <sql id="Base_Column_List">
         ID, SPU_NAME, SPU_CODE, SPU_DESC, SPU_EN_DESC, DETAIL, CATEGORY_CODE, BRAND_CODE
     </sql>
@@ -130,6 +146,27 @@
         <include refid="Base_Column_List"/>
         from TT_SPU
     </select>
+
+
+    <select id="getSpuAttrBySpuCode" resultMap="SpuAttrResultMap">
+      SELECT
+      tsa.ID,
+      tsa.ATTR_ID,
+      tsa.SPU_CODE,
+      tsa.SORT_ORDER,
+      ta.ATTR_NAME,
+      ta.ATTR_CODE,
+      ta.ATTR_INPUT_TYPE,
+      ta.ATTR_TYPE,
+      ta.ATTR_VALUES,
+      ta.ATTR_INDEX,
+      ta.IS_LINKED
+      FROM TR_SPU_ATTR tsa
+      LEFT JOIN TT_ATTR ta ON ta.ATTR_ID = tsa.ATTR_ID
+      WHERE tsa.SPU_CODE = #{spuCode}
+      ORDER by tsa.SORT_ORDER
+    </select>
+
     <select id="querySPUByBC" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -137,5 +174,42 @@
         WHERE CATEGORY_CODE = #{categoryCode} AND BRAND_CODE = #{brandCode}
     </select>
 
+
+    <select id="querySPUBySpuCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from TT_SPU
+        WHERE SPU_CODE = #{spuCode}
+    </select>
+
+    <update id="updateSPUByPrimaryKeySelective" parameterType="SPU">
+        update TT_SPU
+        <set>
+            <if test="spuName != null">
+                SPU_NAME = #{spuName},
+            </if>
+            <if test="spuDesc != null">
+                SPU_DESC = #{spuDesc},
+            </if>
+            <if test="spuEnDesc != null">
+                SPU_EN_DESC = #{spuEnDesc},
+            </if>
+            <if test="detail != null">
+                DETAIL = #{detail},
+            </if>
+            <if test="categoryCode != null">
+                CATEGORY_CODE = #{categoryCode},
+            </if>
+            <if test="brandCode != null">
+                BRAND_CODE = #{brandCode},
+            </if>
+        </set>
+        where SPU_CODE = #{spuCode}
+    </update>
+
+    <delete id="deleteSpuAttr">
+        DELETE FROM TR_SPU_ATTR
+        WHERE ATTR_ID = #{attrId} AND SPU_CODE = #{spuCode}
+    </delete>
 
 </mapper>

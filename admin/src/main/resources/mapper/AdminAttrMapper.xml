@@ -112,6 +112,10 @@
     </sql>
 
 
+    <delete id="deleteAttrByAttrId">
+        DELETE FROM TT_ATTR
+        WHERE ATTR_ID = #{attrId}
+    </delete>
 
 
 

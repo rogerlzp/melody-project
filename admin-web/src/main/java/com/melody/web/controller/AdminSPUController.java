@@ -12,10 +12,7 @@ import com.melody.admin.dto.SysUser;
 import com.melody.admin.dto.SysUserRole;
 import com.melody.annotation.PermInfo;
 import com.melody.constant.Root;
-import com.melody.product.dto.Brand;
-import com.melody.product.dto.SPU;
-import com.melody.product.dto.SpuAttr;
-import com.melody.product.dto.StoryImageProduct;
+import com.melody.product.dto.*;
 import com.melody.util.PageUtils;
 import com.melody.vo.Json;
 import org.apache.commons.lang3.StringUtils;
@@ -42,15 +39,6 @@ public class AdminSPUController {
 
     @Reference(group = "adminSPUService", timeout = 10000)
     private AdminSPUService adminSPUService;
-
-    //获取categroy
-
-
-    // 获取品牌
-
-    // 获取SPU
-
-    // 获取SKU
 
     @PermInfo("添加SPU")
     @RequiresPermissions("a:sku:spu:add")
@@ -86,7 +74,22 @@ public class AdminSPUController {
         JSONObject json = JSON.parseObject(body);
 
         Page<SPU> page = adminSPUService.querySPUList(PageUtils.getPageParam(json));
+        // 每个SPU查询属性
+        // 变化属性
         return Json.succ(oper).data("page", page);
+    }
+
+    @PermInfo("查询所有品牌")
+    @RequiresPermissions("a:sku:spu:list")
+    @GetMapping("/list")
+    public Json list(String spuCode) {
+        String oper = "query spu";
+        log.info("{}, body: {}", oper, spuCode);
+
+        SPU spu = adminSPUService.querySPUBySpuCode(spuCode);
+        // 每个SPU查询属性
+        // 变化属性
+        return Json.succ(oper).data("spu", spu);
     }
 
 
@@ -103,6 +106,21 @@ public class AdminSPUController {
         List<SPU> spuList = adminSPUService.querySPUByBC(categoryCode, brandCode);
         return Json.succ(oper).data("spuList", spuList);
     }
+
+    @PermInfo("根据分类和品牌查询SPU")
+    @RequiresPermissions("a:sku:spu:delete")
+    @PostMapping("/deleteAttr")
+    public Json deleteAttr(@RequestBody String body) {
+        String oper = "delete attr";
+        log.info("{}, body: {}", oper, body);
+        JSONObject json = JSON.parseObject(body);
+        Long attrId = json.getLong("attrId");
+        String spuCode = json.getString("spuCode");
+
+        int deleteResult = adminSPUService.deleteAttr(attrId, spuCode);
+        return Json.succ(oper).data("deleteResult", deleteResult);
+    }
+
 
     // TODO: 删除后，对应的SKU删除
     // 添加到日志里面
@@ -129,4 +147,26 @@ public class AdminSPUController {
         return Json.result(oper, success);
     }
 
+
+    @PatchMapping("/update")
+    public Json updateSPU(@RequestBody String body) {
+
+        String oper = "update SPU";
+        log.info("{}, body: {}", oper, body);
+        SPU brandObj = JSON.parseObject(body, SPU.class);
+
+        // 获取SpuAttr属性
+        JSONObject jsonObject = JSON.parseObject(body);
+        JSONArray jsonArray = jsonObject.getJSONArray("spuAttrList");
+
+        if (jsonArray != null) {
+            List<SpuAttr> spuAttrList = jsonArray.toJavaList(SpuAttr.class);
+            brandObj.setSpuAttrList(spuAttrList);
+        }
+
+        int updateResult = adminSPUService.updateSPU(brandObj);
+        return Json.result(oper, updateResult == 1 ? true : false)
+                .data("updateResult", updateResult);
+
+    }
 }

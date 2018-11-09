@@ -28,5 +28,7 @@ public interface AdminSKUService {
     int deleteById(String skuNo);
 
 
+   SKU querySKUBySkuNo(String skuNo);
+
 
 }

@@ -29,10 +29,17 @@ public interface AdminSKUMapper {
     int deleteBySPUId(@Param(value = "id") Long id);
 
     int insertSKUAttr(@Param(value = "id") Long id,
-                         @Param(value = "AttrOptionId") Long AttrOptionId,
-                         @Param(value = "skuNo") String skuNo);
+                         @Param(value = "skuNo") String skuNo,
+                      @Param(value = "attributes") String attributes,
+                      @Param(value = "picUrl") String picUrl);
 
 
+
+    int insertSKUAttr(SkuAttr skuAttr);
     int updateSKU(@Param(value = "skuNo") String skuNo, @Param(value = "status") String status);
     int updateSKUNum(@Param(value = "skuNo") String skuNo, @Param(value = "num") Integer num);
+
+    SKU querySKUBySkuNo(@Param(value = "skuNo") String skuNo);
+
+    SkuAttr getSkuAttrBySkuNo(@Param(value = "skuNo") String skuNo);
 }
