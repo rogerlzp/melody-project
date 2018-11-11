@@ -29,6 +29,9 @@ public class AdminSKUServiceImpl implements AdminSKUService {
     AdminSKUMapper adminSKUMapper;
 
     @Autowired
+    AdminSPUMapper adminSPUMapper;
+
+    @Autowired
     BaseServiceImpl baseService;
 
 
@@ -110,6 +113,7 @@ public class AdminSKUServiceImpl implements AdminSKUService {
             if (sku.getSkuAttr() !=null) {
                 long skuAttrId = baseService.getNextSequence("TR_SKU_ATTR");
                 SkuAttr skuAttr = sku.getSkuAttr();
+                skuAttr.setSkuNo(sku.getSkuNo());
                 skuAttr.setId(skuAttrId);
                 adminSKUMapper.insertSKUAttr(skuAttr);
             }
@@ -160,12 +164,20 @@ public class AdminSKUServiceImpl implements AdminSKUService {
     @Override
     public SKU querySKUBySkuNo(String skuNo) {
         SKU sku = adminSKUMapper.querySKUBySkuNo(skuNo);
+
+        // sku attr属性
         if (sku != null) {
             SkuAttr skuAttr = adminSKUMapper.getSkuAttrBySkuNo(skuNo);
             if (skuAttr != null) {
                 sku.setSkuAttr(skuAttr);
             }
+
+            // 展示所有的属性，便于显示
+            List<SpuAttr> spuAttrList = adminSPUMapper.getSpuAttrBySpuCode(sku.getSpuCode());
+            sku.setSpuAttrList(spuAttrList);
+
         }
+
 
         return sku;
     }

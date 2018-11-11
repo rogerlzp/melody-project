@@ -61,7 +61,6 @@
       tsi.UPDATE_DATE,
 
       tp.PROJECT_NAME
-
     FROM TT_STORY_IMAGE tsi
     LEFT JOIN  TT_PROJECT tp ON
     tp.ID = tsi.PROJECT_ID

@@ -3,6 +3,7 @@ package com.melody.dao;
 import com.melody.product.dto.Category;
 import com.melody.product.dto.SPU;
 import com.melody.product.dto.SpuAttr;
+import com.melody.product.dto.SpuComponent;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -23,7 +24,11 @@ public interface AdminSPUMapper {
 
     int insertSpuAttr(SpuAttr spuAttr);
 
+    int insertSpuComponent(SpuComponent spuComponent);
+
     List<SpuAttr> getSpuAttrBySpuCode(@Param(value = "spuCode") String spuCode);
+
+    List<SpuComponent> getSpuComponentBySpuCode(@Param(value = "spuCode") String spuCode);
 
     SPU querySPUBySpuCode(@Param(value = "spuCode") String spuCode);
 
@@ -37,4 +42,15 @@ public interface AdminSPUMapper {
     int deleteSpuAttr(@Param(value = "attrId") Long attrId,
                       @Param(value = "spuCode") String spuCode);
 
+    int updateSpuComponentById(@Param(value = "id") Long id,
+                               @Param(value = "spuCode") String spuCode,
+                               @Param(value = "subSpuCode") String subSpuCode,
+                               @Param(value = "subNum") Integer subNum);
+
+    int deleteSpuComponent(
+            @Param(value = "spuCode") String spuCode,
+            @Param(value = "subSpuCode") String subSpuCode
+    );
+    int deleteSpuComponent(
+            @Param(value = "spuCode") String spuCode);
 }

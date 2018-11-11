@@ -31,5 +31,5 @@ public class SPU implements Serializable {
     private String brandName;
 
     private List<SpuAttr> spuAttrList;
-    
+    private List<SpuComponent> spuComponentList;
 }

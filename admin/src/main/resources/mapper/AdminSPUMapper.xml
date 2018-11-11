@@ -12,8 +12,6 @@
         <result column="BRAND_CODE" jdbcType="VARCHAR" property="brandCode" />
     </resultMap>
 
-
-
     <resultMap id="SpuAttrResultMap" type="SpuAttr">
         <id column="ID"  property="id" />
         <result column="ATTR_ID"  property="attrId" />
@@ -27,6 +25,15 @@
         <result column="ATTR_INDEX" jdbcType="BIT" property="attrIndex" />
         <result column="IS_LINKED" jdbcType="BIT" property="isLinked" />
     </resultMap>
+
+    <resultMap id="SpuComponentResultMap" type="SpuComponent">
+        <id column="ID"  property="id" />
+        <result column="SPU_CODE"  property="spuCode" />
+        <result column="SUB_SPU_CODE" property="subSpuCode" />
+        <result column="SUB_NUM"  property="subNum" />
+        <result column="SPU_NAME" property="spuName" />
+    </resultMap>
+
     <sql id="Base_Column_List">
         ID, SPU_NAME, SPU_CODE, SPU_DESC, SPU_EN_DESC, DETAIL, CATEGORY_CODE, BRAND_CODE
     </sql>
@@ -49,11 +56,16 @@
     </insert>
 
 
-
     <insert id="insertSpuAttr"  parameterType="SpuAttr">
         insert into TR_SPU_ATTR (ID, ATTR_ID, SPU_CODE, SORT_ORDER)
         values (#{id},#{attrId}, #{spuCode}, #{sortOrder} )
     </insert>
+
+    <insert id="insertSpuComponent"  parameterType="SpuComponent">
+        insert into TR_SPU_COMPONENT (ID, SPU_CODE, SUB_SPU_CODE, SUB_NUM)
+        values (#{id},#{spuCode}, #{subSpuCode}, #{subNum} )
+    </insert>
+
 
     <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="SPU" useGeneratedKeys="true">
         insert into TT_SPU
@@ -135,6 +147,14 @@
     </update>
 
 
+    <update id="updateSpuAttrById">
+        update TR_SPU_ATTR
+        set ATTR_ID = #{attrId},
+        SORT_ORDER = #{sortOrder}
+        where ID = #{id} AND SPU_CODE = #{spuCode}
+    </update>
+
+
 
     <select id="countAllSPU" resultType="java.lang.Integer">
         select count(*) FROM TT_SPU;
@@ -211,5 +231,31 @@
         DELETE FROM TR_SPU_ATTR
         WHERE ATTR_ID = #{attrId} AND SPU_CODE = #{spuCode}
     </delete>
+
+    <select id="getSpuComponentBySpuCode" resultMap="SpuComponentResultMap">
+        SELECT
+        tsc.ID,
+        tsc.SPU_CODE,
+        tsc.SUB_SPU_CODE,
+        tsc.SUB_NUM,
+        tsp.SPU_NAME
+        FROM TR_SPU_COMPONENT tsc
+        LEFT JOIN TT_SPU tsp ON tsp.SPU_CODE = tsc.SUB_SPU_CODE
+        WHERE tsc.SPU_CODE = #{spuCode}
+    </select>
+
+    <delete id="deleteSpuComponent">
+        DELETE FROM TR_SPU_COMPONENT
+        WHERE SPU_CODE = #{spuCode} AND SUB_SPU_CODE = #{subSpuCode}
+    </delete>
+
+
+    <update id="updateSpuComponentById">
+        update TR_SPU_COMPONENT
+        set SUB_SPU_CODE = #{subSpuCode},
+        SUB_NUM = #{subNum}
+        where ID = #{id} AND SPU_CODE = #{spuCode}
+    </update>
+
 
 </mapper>

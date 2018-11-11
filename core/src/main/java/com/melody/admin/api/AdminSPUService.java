@@ -22,4 +22,6 @@ public interface AdminSPUService {
     int updateSPU(SPU spu);
 
     int deleteAttr(Long attrId, String spuCode);
+
+    int deleteSubSpu(String spuCode, String subSpuCode);
 }

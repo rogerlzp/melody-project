@@ -69,6 +69,24 @@
         <result column="PIC_URL"  property="picUrl"/>
     </resultMap>
 
+        <resultMap id="SkuDetailResultMap" type="SKU">
+            <id column="SKU_NO" jdbcType="VARCHAR" property="skuNo"/>
+            <result column="ID" jdbcType="BIGINT" property="id"/>
+            <result column="SKU_NAME" jdbcType="VARCHAR" property="skuName"/>
+            <result column="SKU_DESC" jdbcType="VARCHAR" property="skuDesc"/>
+            <result column="SKU_EN_DESC" jdbcType="VARCHAR" property="skuEnDesc"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="SPU_CODE" jdbcType="VARCHAR" property="spuCode"/>
+            <result column="SPU_NAME" jdbcType="VARCHAR" property="spuName"/>
+            <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode"/>
+            <result column="CATEGORY_NAME" jdbcType="VARCHAR" property="categoryName"/>
+            <result column="BRAND_CODE" jdbcType="VARCHAR" property="brandCode"/>
+            <result column="BRAND_NAME" jdbcType="VARCHAR" property="brandName"/>
+            <result column="BRAND_LOGO" jdbcType="VARCHAR" property="brandLogo"/>
+            <result column="CREATE_DATE"  property="createDate"/>
+            <result column="UPDATE_DATE" property="updateDate"/>
+        </resultMap>
+
     <sql id="pagination">
         <![CDATA[
 	    limit #{offset}, #{pageSize}
@@ -283,10 +301,17 @@
         WHERE SKU_NO = #{skuNo}
     </update>
 
-    <select id="querySKUBySkuNo" resultMap="BaseResultMap">
+    <select id="querySKUBySkuNo" resultMap="SkuDetailResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from TT_SKU
+        tsk.ID,  tsk.SKU_NO, tsk.SKU_NAME, tsk.SKU_DESC,  tsk.SKU_EN_DESC,  tsk.STATUS, tsk.SPU_CODE,
+        tsk.CREATE_DATE, tsk.UPDATE_DATE,
+        tsp.SPU_NAME,
+        tb.BRAND_CODE, tb.BRAND_NAME, tb.BRAND_LOGO,
+        tc.CATEGORY_CODE, tc.CATEGORY_NAME
+        from TT_SKU tsk
+        LEFT JOIN TT_SPU tsp ON tsk.SPU_CODE = tsp.SPU_CODE
+        LEFT JOIN TT_BRAND tb ON tb.BRAND_CODE = tsp.BRAND_CODE
+        LEFT JOIN TT_CATEGORY tc ON tc.CATEGORY_CODE = tsp.CATEGORY_CODE
         WHERE SKU_NO = #{skuNo}
     </select>
 

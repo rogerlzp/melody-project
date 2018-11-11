@@ -9,10 +9,7 @@ import com.melody.common.utils.StringUtils;
 import com.melody.dao.AdminAttrMapper;
 import com.melody.dao.AdminSPUMapper;
 import com.melody.exception.BusinessException;
-import com.melody.product.dto.Attr;
-import com.melody.product.dto.SPU;
-import com.melody.product.dto.SkuAttr;
-import com.melody.product.dto.SpuAttr;
+import com.melody.product.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +57,13 @@ public class AdminSPUServiceImpl implements AdminSPUService {
                 spuAttr.setId(spuAttrId);
                 adminSPUMapper.insertSpuAttr(spuAttr);
             }
+
+            for(SpuComponent spuComponent:spu.getSpuComponentList()) {
+                long spuComponentId = baseService.getNextSequence("TR_SPU_COMPONENT");
+                spuComponent.setSpuCode(spu.getSpuCode());
+                spuComponent.setId(spuComponentId);
+                adminSPUMapper.insertSpuComponent(spuComponent);
+            }
             return spuId;
         }
         return -1L;
@@ -77,6 +81,9 @@ public class AdminSPUServiceImpl implements AdminSPUService {
         for (SPU spu : records) {
             List<SpuAttr> spuAttrList = adminSPUMapper.getSpuAttrBySpuCode(spu.getSpuCode());
             spu.setSpuAttrList(spuAttrList);
+
+            List<SpuComponent> spuCompoentList  = adminSPUMapper.getSpuComponentBySpuCode(spu.getSpuCode());
+            spu.setSpuComponentList(spuCompoentList);
         }
 
         Page<SPU> brandPage = new Page<SPU>();
@@ -93,6 +100,7 @@ public class AdminSPUServiceImpl implements AdminSPUService {
         return deleteResult;
     }
 
+
     @Override
     public List<SPU> querySPUByBC(String categoryCode, String brandCode) {
         List<SPU> spuList = adminSPUMapper.querySPUByBC(categoryCode, brandCode);
@@ -106,6 +114,10 @@ public class AdminSPUServiceImpl implements AdminSPUService {
             List<SpuAttr> spuAttrList = adminSPUMapper.getSpuAttrBySpuCode(spuCode);
             if (spuAttrList != null) {
                 spu.setSpuAttrList(spuAttrList);
+            }
+            List<SpuComponent> spuCompoentList = adminSPUMapper.getSpuComponentBySpuCode(spuCode);
+            if (spuCompoentList != null) {
+                spu.setSpuComponentList(spuCompoentList);
             }
         }
         return spu;
@@ -128,9 +140,19 @@ public class AdminSPUServiceImpl implements AdminSPUService {
                         spuAttr.setId(spuAttrId);
                         adminSPUMapper.insertSpuAttr(spuAttr);
                     }
-                    // 已经有的属性，服务器有，但后天没有了，需要删除， 在属性那里来删除
-
                 }
+                for (SpuComponent spuComponent : spu.getSpuComponentList()) {
+                    if (spuComponent.getId()!=null){ // 已经有的，直接更新之
+                        adminSPUMapper.updateSpuComponentById(spuComponent.getId(), spu.getSpuCode(),
+                                spuComponent.getSubSpuCode(), spuComponent.getSubNum());
+                    } else { // 没有的，新增
+                        long spuComponentId = baseService.getNextSequence("TR_SPU_COMPONENT");
+                        spuComponent.setSpuCode(spu.getSpuCode());
+                        spuComponent.setId(spuComponentId);
+                        adminSPUMapper.insertSpuComponent(spuComponent);
+                    }
+                }
+
                 return updateResult;
             }
         }
@@ -148,11 +170,25 @@ public class AdminSPUServiceImpl implements AdminSPUService {
               int attrResult =  adminAttrMapper.deleteAttrByAttrId(attrId);
                log.info("delete spu attrId result: attrId:" + attrId  +
                        " attrResult: " + attrResult);
+//               int subComponentResult = adminSPUMapper.deleteSpuComponent(spuCode);
+//               log.info("delete spu attrId result: attrId:" + attrId  +
+//                       "subComponentResult: " + subComponentResult);
                return attrResult;
            }
         }
-
         return -1;
     }
+
+    @Override
+    public int deleteSubSpu(String spuCode, String subSpuCode) {
+        int result = adminSPUMapper.deleteSpuComponent(spuCode, subSpuCode);
+        if (result==1) {
+            log.info("delete spu attrId result: spuCode:" + spuCode + " subSpuCode: " + subSpuCode +
+                    " result: " + result);
+            return result;
+        }
+        return -1;
+    }
+
 
 }

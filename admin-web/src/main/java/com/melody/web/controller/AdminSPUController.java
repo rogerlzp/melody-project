@@ -59,6 +59,14 @@ public class AdminSPUController {
             brandObj.setSpuAttrList(spuAttrList);
         }
 
+        JSONArray relateSpuArray = jsonObject.getJSONArray("spuComponentList");
+
+        if (relateSpuArray != null) {
+            List<SpuComponent> spuComponentList = jsonArray.toJavaList(SpuComponent.class);
+            brandObj.setSpuComponentList(spuComponentList);
+        }
+
+
         Long spuId = adminSPUService.addSPU(brandObj);
         return Json.result(oper, spuId != -1 ? true : false)
                 .data("spuId", spuId);
@@ -107,7 +115,7 @@ public class AdminSPUController {
         return Json.succ(oper).data("spuList", spuList);
     }
 
-    @PermInfo("根据分类和品牌查询SPU")
+    @PermInfo("删除SPU的属性")
     @RequiresPermissions("a:sku:spu:delete")
     @PostMapping("/deleteAttr")
     public Json deleteAttr(@RequestBody String body) {
@@ -118,6 +126,20 @@ public class AdminSPUController {
         String spuCode = json.getString("spuCode");
 
         int deleteResult = adminSPUService.deleteAttr(attrId, spuCode);
+        return Json.succ(oper).data("deleteResult", deleteResult);
+    }
+
+    @PermInfo("根据SPU的Sub spu")
+    @RequiresPermissions("a:sku:spu:delete")
+    @PostMapping("/deleteSubSpu")
+    public Json deleteSubSpu(@RequestBody String body) {
+        String oper = "delete attr";
+        log.info("{}, body: {}", oper, body);
+        JSONObject json = JSON.parseObject(body);
+        String subSpuCode = json.getString("subSpuCode");
+        String spuCode = json.getString("spuCode");
+
+        int deleteResult = adminSPUService.deleteSubSpu(spuCode, subSpuCode);
         return Json.succ(oper).data("deleteResult", deleteResult);
     }
 
@@ -167,6 +189,5 @@ public class AdminSPUController {
         int updateResult = adminSPUService.updateSPU(brandObj);
         return Json.result(oper, updateResult == 1 ? true : false)
                 .data("updateResult", updateResult);
-
     }
 }

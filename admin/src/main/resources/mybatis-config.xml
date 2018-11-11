@@ -24,6 +24,7 @@
         <typeAlias alias="Brand" type="com.melody.product.dto.Brand"/>
         <typeAlias alias="Attr" type="com.melody.product.dto.Attr"/>
         <typeAlias alias="SpuAttr" type="com.melody.product.dto.SpuAttr"/>
+        <typeAlias alias="SpuComponent" type="com.melody.product.dto.SpuComponent"/>
         <typeAlias alias="SkuAttr" type="com.melody.product.dto.SkuAttr"/>
         <typeAlias alias="SkuImage" type="com.melody.product.dto.SkuImage"/>
 

@@ -43,11 +43,11 @@
     ID, PROJECT_NAME, BEGIN_TIME, END_TIME, LOCATION, CUSTOMER, PROJECT_DESC, SPACE_TYPE, 
     STATUS
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="getProjectById" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from TT_PROJECT
-        where ID = #{id,jdbcType=INTEGER}
+        where ID = #{id}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from TT_PROJECT
@@ -141,7 +141,11 @@
     <sql id="pagination">
     <![CDATA[
 
+
+
 	    limit #{offset}, #{pageSize}
+
+
 
         ]]>
   </sql>
@@ -231,6 +235,26 @@
         </set>
         where ID = #{id,jdbcType=INTEGER}
     </update>
+
+    <delete id="deleteProjectArtist">
+      DELETE FROM TR_PROJECT_ARTIST
+      WHERE PROJECT_ID=#{projectId} AND ARTIST_ID = #{artistId}
+    </delete>
+
+    <delete id="deleteProjectCompany">
+        DELETE FROM TR_PROJECT_COMPANY
+        WHERE PROJECT_ID=#{projectId} AND COMPANY_ID = #{companyId}
+    </delete>
+
+    <delete id="deleteProjectImage">
+        DELETE FROM TR_PROJECT_IMAGE
+        WHERE PROJECT_ID=#{projectId} AND IMAGE_URL = #{imageUrl}
+    </delete>
+
+    <delete id="deleteProjectSku">
+        DELETE FROM TR_PROJECT_SKU
+        WHERE PROJECT_ID=#{projectId} AND SKU_NO = #{skuNo}
+    </delete>
 
 
 </mapper>

@@ -5,7 +5,8 @@
     <id column="ID" jdbcType="BIGINT" property="id" />
     <result column="STORY_IMAGE_NAME" jdbcType="VARCHAR" property="storyImageName" />
     <result column="STORY_IMAGE_TYPE" jdbcType="VARCHAR" property="storyImageType" />
-    <result column="PROJECT_ID" jdbcType="INTEGER" property="projectId" />
+    <result column="PROJECT_ID"  property="projectId" />
+    <result column="PROJECT_NAME"  property="projectName" />
     <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo" />
     <result column="IS_HOMEPAGE" jdbcType="INTEGER" property="isHomepage" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
@@ -40,10 +41,11 @@
     IMAGE_URL, IMAGE_DESC, SHOW_ORDER, CREATE_DATE, UPDATE_DATE
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    ID, STORY_IMAGE_NAME, STORY_IMAGE_TYPE, PROJECT_ID, SKU_NO, IS_HOMEPAGE, STATUS,
+    IMAGE_URL, IMAGE_DESC, SHOW_ORDER, CREATE_DATE, UPDATE_DATE
     from TT_STORY_IMAGE
-    where ID = #{id,jdbcType=BIGINT}
+    where ID = #{id}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from TT_STORY_IMAGE
@@ -84,14 +86,25 @@
   </select>
 
 
-  <select id="queryStoryImageProductList" resultMap="StoryImageProductResultMap">
+  <select id="getStoryImageProductList" resultMap="StoryImageProductResultMap">
     select
     <include refid="Story_Image_Product_Column_List"/>
     from TR_STORY_IMAGE_PRODUCT
     WHERE STORY_IMAGE_ID = #{storyImageId}
-    <include refid="pagination"/>
   </select>
 
+
+  <select id="getStoryImageById" resultMap="BaseResultMap">
+    select
+    tsi.ID,
+    tsi.STORY_IMAGE_NAME, tsi.STORY_IMAGE_TYPE, tsi.PROJECT_ID,
+    tsi.SKU_NO, tsi.IS_HOMEPAGE, tsi.STATUS,
+    tsi.IMAGE_URL, tsi.IMAGE_DESC, tsi.SHOW_ORDER, tsi.CREATE_DATE, tsi.UPDATE_DATE,
+    tp.PROJECT_NAME
+    from TT_STORY_IMAGE tsi
+    LEFT JOIN TT_PROJECT tp ON tp.ID = tsi.PROJECT_ID
+    WHERE tsi.ID = #{id}
+  </select>
 
 
   <select id="countAllStoryImage" resultType="java.lang.Integer">
@@ -103,6 +116,7 @@
     select count(*) FROM TT_STORY_IMAGE
     WHERE STATUS =  #{status}
   </select>
+
 
 
   <delete id="deleteByStoryImageId" parameterType="java.lang.Long">
@@ -171,4 +185,39 @@
       UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+  <update id="updateStoryImage" parameterType="StoryImage">
+    update TT_STORY_IMAGE
+    set STORY_IMAGE_NAME = #{storyImageName,jdbcType=VARCHAR},
+    STORY_IMAGE_TYPE = #{storyImageType,jdbcType=VARCHAR},
+    PROJECT_ID = #{projectId,jdbcType=INTEGER},
+    SKU_NO = #{skuNo,jdbcType=VARCHAR},
+    IS_HOMEPAGE = #{isHomepage,jdbcType=INTEGER},
+    STATUS = #{status,jdbcType=VARCHAR},
+    IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+    IMAGE_DESC = #{imageDesc,jdbcType=VARCHAR},
+    SHOW_ORDER = #{showOrder,jdbcType=INTEGER},
+    UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP}
+    where ID = #{id}
+  </update>
+
+  <update id="updateStoryImageProduct" parameterType="StoryImageProduct">
+    update TR_STORY_IMAGE_PRODUCT
+    set SKU_NO = #{skuNo},
+    STORY_IMAGE_ID = #{storyImageId},
+    IS_SHOWN = #{isShown},
+    LINK_URL = #{linkUrl},
+    STATUS = #{status},
+    TAG_LEFT = #{tagLeft},
+    TAG_TOP = #{tagTop},
+    TAG_RIGHT = #{tagRight},
+    TAG_BOTTOM = #{tagBottom}
+    where ID = #{id}
+  </update>
+
+  <delete id="deleteStoryImageProductById">
+    DELETE FROM TR_STORY_IMAGE_PRODUCT
+    WHERE ID = #{id}
+  </delete>
+
+
 </mapper>
