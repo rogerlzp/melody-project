@@ -76,16 +76,31 @@
         update TT_BRAND
         <set>
             <if test="brandName != null">
-                BRAND_NAME = #{brandName,jdbcType=VARCHAR},
+                BRAND_NAME = #{brandName},
             </if>
             <if test="brandCode != null">
-                BRAND_CODE = #{brandCode,jdbcType=VARCHAR},
+                BRAND_CODE = #{brandCode},
             </if>
-            <if test="brandImageUrl != null">
-                BRAND_IMAGE_URL = #{brandImageUrl,jdbcType=VARCHAR},
+            <if test="brandLogo != null">
+                BRAND_LOGO = #{brandLogo},
+            </if>
+            <if test="brandEnName != null">
+                BRAND_EN_NAME = #{brandEnName},
+            </if>
+            <if test="brandDesc != null">
+                BRAND_DESC = #{brandDesc},
+            </if>
+            <if test="brandEnDesc != null">
+                BRAND_EN_DESC = #{brandEnDesc},
+            </if>
+            <if test="brandStory != null">
+                BRAND_STORY = #{brandStory},
+            </if>
+            <if test="homepage != null">
+                HOMEPAGE = #{homepage},
             </if>
         </set>
-        where ID = #{id,jdbcType=INTEGER}
+        where ID = #{id}
     </update>
     <update id="updateByPrimaryKey" parameterType="Brand">
         update TT_BRAND

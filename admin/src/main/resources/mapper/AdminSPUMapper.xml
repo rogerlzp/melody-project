@@ -34,6 +34,14 @@
         <result column="SPU_NAME" property="spuName" />
     </resultMap>
 
+    <resultMap id="SpuDesignerResultMap" type="SpuDesigner">
+        <id column="ID"  property="id" />
+        <result column="SPU_CODE"  property="spuCode" />
+        <result column="DESIGNER_ID" property="designerId" />
+        <result column="DESIGNER_NAME"  property="designerName" />
+    </resultMap>
+
+
     <sql id="Base_Column_List">
         ID, SPU_NAME, SPU_CODE, SPU_DESC, SPU_EN_DESC, DETAIL, CATEGORY_CODE, BRAND_CODE
     </sql>
@@ -64,6 +72,10 @@
     <insert id="insertSpuComponent"  parameterType="SpuComponent">
         insert into TR_SPU_COMPONENT (ID, SPU_CODE, SUB_SPU_CODE, SUB_NUM)
         values (#{id},#{spuCode}, #{subSpuCode}, #{subNum} )
+    </insert>
+    <insert id="insertSpuDesigner"  parameterType="SpuDesigner">
+        insert into TR_SPU_DESIGNER (ID, SPU_CODE, DESIGNER_ID)
+        values (#{id},#{spuCode}, #{designerId} )
     </insert>
 
 
@@ -249,6 +261,11 @@
         WHERE SPU_CODE = #{spuCode} AND SUB_SPU_CODE = #{subSpuCode}
     </delete>
 
+    <delete id="deleteSpuDesigner">
+        DELETE FROM TR_SPU_DESIGNER
+        WHERE SPU_CODE = #{spuCode} AND DESIGNER_ID = #{designerId}
+    </delete>
+
 
     <update id="updateSpuComponentById">
         update TR_SPU_COMPONENT
@@ -256,6 +273,24 @@
         SUB_NUM = #{subNum}
         where ID = #{id} AND SPU_CODE = #{spuCode}
     </update>
+
+    <update id="updateSpuDesignerById">
+        update TR_SPU_DESIGNER
+        set DESIGNER_ID = #{designerId}
+        where ID = #{id} AND SPU_CODE = #{spuCode}
+    </update>
+
+
+    <select id="getSpuDesignerBySpuCode" resultMap="SpuDesignerResultMap">
+        SELECT
+        tsd.ID,
+        tsd.SPU_CODE,
+        tsd.DESIGNER_ID,
+        tu.USER_NAME as DESIGNER_NAME
+        FROM TR_SPU_DESIGNER tsd
+        LEFT JOIN TS_USER tu ON tu.USER_ID = tsd.DESIGNER_ID
+        WHERE tsd.SPU_CODE = #{spuCode}
+    </select>
 
 
 </mapper>

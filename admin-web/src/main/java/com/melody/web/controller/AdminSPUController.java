@@ -60,12 +60,17 @@ public class AdminSPUController {
         }
 
         JSONArray relateSpuArray = jsonObject.getJSONArray("spuComponentList");
-
         if (relateSpuArray != null) {
             List<SpuComponent> spuComponentList = jsonArray.toJavaList(SpuComponent.class);
             brandObj.setSpuComponentList(spuComponentList);
         }
 
+        // 获取产品设计师
+        JSONArray spuDesignerArray = jsonObject.getJSONArray("spuDesignerList");
+        if (spuDesignerArray != null) {
+            List<SpuDesigner> spuDesignerList = jsonArray.toJavaList(SpuDesigner.class);
+            brandObj.setSpuDesignerList(spuDesignerList);
+        }
 
         Long spuId = adminSPUService.addSPU(brandObj);
         return Json.result(oper, spuId != -1 ? true : false)
@@ -143,9 +148,21 @@ public class AdminSPUController {
         return Json.succ(oper).data("deleteResult", deleteResult);
     }
 
+    @PermInfo("删除SPU的产品设计师")
+    @RequiresPermissions("a:sku:spu:delete")
+    @PostMapping("/deleteDesigner")
+    public Json deleteSpuDesigner(@RequestBody String body) {
+        String oper = "delete spu designer";
+        log.info("{}, body: {}", oper, body);
+        JSONObject json = JSON.parseObject(body);
+        Long designerId = json.getLong("designerId");
+        String spuCode = json.getString("spuCode");
+
+        int deleteResult = adminSPUService.deleteSpuDesigner(spuCode, designerId);
+        return Json.succ(oper).data("deleteResult", deleteResult);
+    }
 
     // TODO: 删除后，对应的SKU删除
-    // 添加到日志里面
     @PermInfo("删除SPU")
     @RequiresPermissions("a:sku:spu:del")
     @DeleteMapping

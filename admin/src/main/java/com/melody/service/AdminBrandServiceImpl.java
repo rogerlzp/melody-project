@@ -6,10 +6,12 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.melody.admin.api.AdminBrandService;
 import com.melody.admin.api.AdminSKUService;
+import com.melody.common.utils.StringUtils;
 import com.melody.dao.AdminBrandMapper;
 import com.melody.dao.AdminSKUMapper;
 import com.melody.dao.SequenceDao;
 import com.melody.product.dto.Brand;
+import com.melody.product.dto.Project;
 import com.melody.product.dto.SKU;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,6 +31,11 @@ public class AdminBrandServiceImpl implements AdminBrandService {
         int brandId = baseService.getNextSequence("TT_BRAND").intValue();
         brand.setId(brandId);
         brand.setStatus("1");
+
+        if (StringUtils.isEmpty(brand.getBrandCode())) {
+            brand.setBrandCode("BC_"+brandId);
+        }
+
         int insertResult = adminBrandMapper.insert(brand);
         if(insertResult == 1){
             return brandId;
@@ -61,6 +68,24 @@ public class AdminBrandServiceImpl implements AdminBrandService {
         int result = adminBrandMapper.updateBrand(brandId, status);
         return result;
     }
+
+    @Override
+    public Brand getBrandById(int brandId) {
+        Brand brand = adminBrandMapper.selectByPrimaryKey(brandId);
+        return  brand;
+    }
+
+    @Override
+    public int updateBrand(Brand brand) {
+        if (brand.getId() != null) {
+            int updateResult = adminBrandMapper.updateByPrimaryKeySelective(brand);
+            if(updateResult ==1 ){
+                return updateResult;
+            }
+        }
+        return -1;
+    }
+
 
 }
 

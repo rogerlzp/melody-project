@@ -32,4 +32,6 @@ public class SPU implements Serializable {
 
     private List<SpuAttr> spuAttrList;
     private List<SpuComponent> spuComponentList;
+
+    private List<SpuDesigner> spuDesignerList;
 }

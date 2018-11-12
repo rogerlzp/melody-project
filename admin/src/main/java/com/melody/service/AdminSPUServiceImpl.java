@@ -47,7 +47,6 @@ public class AdminSPUServiceImpl implements AdminSPUService {
             spu.setSpuCode(spudCode);
         }
 
-
         int insertResult = adminSPUMapper.insert(spu);
         if (insertResult == 1) {
             //获取SpuAttr属性
@@ -58,11 +57,19 @@ public class AdminSPUServiceImpl implements AdminSPUService {
                 adminSPUMapper.insertSpuAttr(spuAttr);
             }
 
-            for(SpuComponent spuComponent:spu.getSpuComponentList()) {
+            for (SpuComponent spuComponent : spu.getSpuComponentList()) {
                 long spuComponentId = baseService.getNextSequence("TR_SPU_COMPONENT");
                 spuComponent.setSpuCode(spu.getSpuCode());
                 spuComponent.setId(spuComponentId);
                 adminSPUMapper.insertSpuComponent(spuComponent);
+            }
+
+            // 增加设计师
+            for (SpuDesigner spuDesigner : spu.getSpuDesignerList()) {
+                long spuDesignerId = baseService.getNextSequence("TR_SPU_DESIGNER");
+                spuDesigner.setSpuCode(spu.getSpuCode());
+                spuDesigner.setId(spuDesignerId);
+                adminSPUMapper.insertSpuDesigner(spuDesigner);
             }
             return spuId;
         }
@@ -82,8 +89,11 @@ public class AdminSPUServiceImpl implements AdminSPUService {
             List<SpuAttr> spuAttrList = adminSPUMapper.getSpuAttrBySpuCode(spu.getSpuCode());
             spu.setSpuAttrList(spuAttrList);
 
-            List<SpuComponent> spuCompoentList  = adminSPUMapper.getSpuComponentBySpuCode(spu.getSpuCode());
+            List<SpuComponent> spuCompoentList = adminSPUMapper.getSpuComponentBySpuCode(spu.getSpuCode());
             spu.setSpuComponentList(spuCompoentList);
+
+            List<SpuDesigner> spuDesignerList = adminSPUMapper.getSpuDesignerBySpuCode(spu.getSpuCode());
+            spu.setSpuDesignerList(spuDesignerList);
         }
 
         Page<SPU> brandPage = new Page<SPU>();
@@ -119,6 +129,10 @@ public class AdminSPUServiceImpl implements AdminSPUService {
             if (spuCompoentList != null) {
                 spu.setSpuComponentList(spuCompoentList);
             }
+            List<SpuDesigner> spuDesignerList = adminSPUMapper.getSpuDesignerBySpuCode(spu.getSpuCode());
+            if (spuDesignerList != null) {
+                spu.setSpuDesignerList(spuDesignerList);
+            }
         }
         return spu;
     }
@@ -131,7 +145,7 @@ public class AdminSPUServiceImpl implements AdminSPUService {
             if (updateResult == 1) {
                 //获取SpuAttr属性
                 for (SpuAttr spuAttr : spu.getSpuAttrList()) {
-                    if (spuAttr.getId()!=null){ // 已经有的，直接更新之
+                    if (spuAttr.getId() != null) { // 已经有的，直接更新之
                         adminSPUMapper.updateSpuAttrById(spuAttr.getId(), spuAttr.getAttrId(),
                                 spu.getSpuCode(), spuAttr.getSortOrder());
                     } else { // 没有的，新增
@@ -142,7 +156,7 @@ public class AdminSPUServiceImpl implements AdminSPUService {
                     }
                 }
                 for (SpuComponent spuComponent : spu.getSpuComponentList()) {
-                    if (spuComponent.getId()!=null){ // 已经有的，直接更新之
+                    if (spuComponent.getId() != null) { // 已经有的，直接更新之
                         adminSPUMapper.updateSpuComponentById(spuComponent.getId(), spu.getSpuCode(),
                                 spuComponent.getSubSpuCode(), spuComponent.getSubNum());
                     } else { // 没有的，新增
@@ -150,6 +164,17 @@ public class AdminSPUServiceImpl implements AdminSPUService {
                         spuComponent.setSpuCode(spu.getSpuCode());
                         spuComponent.setId(spuComponentId);
                         adminSPUMapper.insertSpuComponent(spuComponent);
+                    }
+                }
+                for (SpuDesigner spuDesigner : spu.getSpuDesignerList()) {
+                    if (spuDesigner.getId() != null) { // 已经有的，直接更新之
+                        adminSPUMapper.updateSpuDesignerById(spuDesigner.getId(), spu.getSpuCode(),
+                                spuDesigner.getDesignerId());
+                    } else { // 没有的，新增
+                        long spuDesignerId = baseService.getNextSequence("TR_SPU_DESIGNER");
+                        spuDesigner.setSpuCode(spu.getSpuCode());
+                        spuDesigner.setId(spuDesignerId);
+                        adminSPUMapper.insertSpuDesigner(spuDesigner);
                     }
                 }
 
@@ -162,19 +187,16 @@ public class AdminSPUServiceImpl implements AdminSPUService {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public int deleteAttr(Long attrId, String spuCode) {
-        if(attrId !=null && spuCode !=null) {
-           int result = adminSPUMapper.deleteSpuAttr(attrId, spuCode);
-            log.info("delete spu attrId result: attrId:" + attrId + " spuCode: " + spuCode  +
+        if (attrId != null && spuCode != null) {
+            int result = adminSPUMapper.deleteSpuAttr(attrId, spuCode);
+            log.info("delete spu attrId result: attrId:" + attrId + " spuCode: " + spuCode +
                     " result: " + result);
-           if (result == 1) {
-              int attrResult =  adminAttrMapper.deleteAttrByAttrId(attrId);
-               log.info("delete spu attrId result: attrId:" + attrId  +
-                       " attrResult: " + attrResult);
-//               int subComponentResult = adminSPUMapper.deleteSpuComponent(spuCode);
-//               log.info("delete spu attrId result: attrId:" + attrId  +
-//                       "subComponentResult: " + subComponentResult);
-               return attrResult;
-           }
+            if (result == 1) {
+                int attrResult = adminAttrMapper.deleteAttrByAttrId(attrId);
+                log.info("delete spu attrId result: attrId:" + attrId +
+                        " attrResult: " + attrResult);
+                return attrResult;
+            }
         }
         return -1;
     }
@@ -182,8 +204,19 @@ public class AdminSPUServiceImpl implements AdminSPUService {
     @Override
     public int deleteSubSpu(String spuCode, String subSpuCode) {
         int result = adminSPUMapper.deleteSpuComponent(spuCode, subSpuCode);
-        if (result==1) {
+        if (result == 1) {
             log.info("delete spu attrId result: spuCode:" + spuCode + " subSpuCode: " + subSpuCode +
+                    " result: " + result);
+            return result;
+        }
+        return -1;
+    }
+
+    @Override
+    public int deleteSpuDesigner(String spuCode, Long spuDesignerId) {
+        int result = adminSPUMapper.deleteSpuDesigner(spuCode, spuDesignerId);
+        if (result == 1) {
+            log.info("delete spu designer result: spuCode:" + spuCode + " spuDesignerId: " + spuDesignerId +
                     " result: " + result);
             return result;
         }

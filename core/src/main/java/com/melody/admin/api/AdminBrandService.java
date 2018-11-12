@@ -12,5 +12,9 @@ public interface AdminBrandService {
 
     int deleteBrandById(int brandId);
 
+    Brand getBrandById(int brandId);
+
+    int updateBrand(Brand brand);
+
 
 }

@@ -1,9 +1,6 @@
 package com.melody.dao;
 
-import com.melody.product.dto.Category;
-import com.melody.product.dto.SPU;
-import com.melody.product.dto.SpuAttr;
-import com.melody.product.dto.SpuComponent;
+import com.melody.product.dto.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -26,9 +23,14 @@ public interface AdminSPUMapper {
 
     int insertSpuComponent(SpuComponent spuComponent);
 
+    int insertSpuDesigner(SpuDesigner spuDesigner);
+
     List<SpuAttr> getSpuAttrBySpuCode(@Param(value = "spuCode") String spuCode);
 
     List<SpuComponent> getSpuComponentBySpuCode(@Param(value = "spuCode") String spuCode);
+
+    List<SpuDesigner> getSpuDesignerBySpuCode(@Param(value = "spuCode") String spuCode);
+
 
     SPU querySPUBySpuCode(@Param(value = "spuCode") String spuCode);
 
@@ -47,10 +49,18 @@ public interface AdminSPUMapper {
                                @Param(value = "subSpuCode") String subSpuCode,
                                @Param(value = "subNum") Integer subNum);
 
+    int updateSpuDesignerById(@Param(value = "id") Long id,
+                               @Param(value = "spuCode") String spuCode,
+                               @Param(value = "designerId") Long designerId);
+
     int deleteSpuComponent(
             @Param(value = "spuCode") String spuCode,
             @Param(value = "subSpuCode") String subSpuCode
     );
+    int deleteSpuDesigner(
+            @Param(value = "spuCode") String spuCode,
+            @Param(value = "designerId") Long designerId);
+
     int deleteSpuComponent(
             @Param(value = "spuCode") String spuCode);
 }
