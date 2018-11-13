@@ -38,12 +38,6 @@ public class AdminSKUServiceImpl implements AdminSKUService {
     @Autowired
     AdminUserMapper adminUserMapper;
 
-//    @Override
-//    public String addSKU(SKU sku) {
-//        return null;
-//    }
-
-
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public String addSKU(SKU sku) {
@@ -177,7 +171,6 @@ public class AdminSKUServiceImpl implements AdminSKUService {
             sku.setSpuAttrList(spuAttrList);
 
         }
-
 
         return sku;
     }

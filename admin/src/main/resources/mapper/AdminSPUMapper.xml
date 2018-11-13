@@ -6,6 +6,7 @@
         <result column="SPU_NAME" jdbcType="VARCHAR" property="spuName" />
         <result column="SPU_CODE" jdbcType="VARCHAR" property="spuCode" />
         <result column="SPU_DESC" property="spuDesc" />
+        <result column="SPU_TYPE" property="spuType" />
         <result column="SPU_EN_DESC"  property="spuEnDesc" />
         <result column="DETAIL" jdbcType="VARCHAR" property="detail" />
         <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
@@ -43,7 +44,7 @@
 
 
     <sql id="Base_Column_List">
-        ID, SPU_NAME, SPU_CODE, SPU_DESC, SPU_EN_DESC, DETAIL, CATEGORY_CODE, BRAND_CODE
+        ID, SPU_NAME, SPU_CODE,SPU_TYPE, SPU_DESC, SPU_EN_DESC, DETAIL, CATEGORY_CODE, BRAND_CODE
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -56,9 +57,9 @@
         where ID = #{id}
     </delete>
     <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="SPU" useGeneratedKeys="true">
-        insert into TT_SPU (ID, SPU_NAME, SPU_CODE, SPU_DESC, SPU_EN_DESC, DETAIL,
+        insert into TT_SPU (ID, SPU_NAME, SPU_CODE, SPU_TYPE, SPU_DESC, SPU_EN_DESC, DETAIL,
         CATEGORY_CODE, BRAND_CODE)
-        values (#{id},#{spuName,jdbcType=VARCHAR}, #{spuCode}, #{spuDesc}, #{spuEnDesc},
+        values (#{id},#{spuName}, #{spuCode}, #{spuType}, #{spuDesc}, #{spuEnDesc},
         #{detail,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR}, #{brandCode,jdbcType=VARCHAR}
         )
     </insert>
@@ -128,6 +129,9 @@
             <if test="spuName != null">
                 SPU_NAME = #{spuName,jdbcType=VARCHAR},
             </if>
+            <if test="spuType != null">
+                SPU_TYPE = #{spuType},
+            </if>
             <if test="spuCode != null">
                 SPU_CODE = #{spuCode,jdbcType=VARCHAR},
             </if>
@@ -151,6 +155,7 @@
         set SPU_NAME = #{spuName,jdbcType=VARCHAR},
         SPU_CODE = #{spuCode,jdbcType=VARCHAR},
         SPU_DESC = #{spuDesc},
+        SPU_TYPE = #{spuType},
         SPU_EN_DESC = #{spuEnDesc},
         DETAIL = #{detail,jdbcType=VARCHAR},
         CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
@@ -165,8 +170,6 @@
         SORT_ORDER = #{sortOrder}
         where ID = #{id} AND SPU_CODE = #{spuCode}
     </update>
-
-
 
     <select id="countAllSPU" resultType="java.lang.Integer">
         select count(*) FROM TT_SPU;
@@ -219,6 +222,9 @@
         <set>
             <if test="spuName != null">
                 SPU_NAME = #{spuName},
+            </if>
+            <if test="spuType != null">
+                SPU_TYPE = #{spuType},
             </if>
             <if test="spuDesc != null">
                 SPU_DESC = #{spuDesc},

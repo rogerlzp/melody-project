@@ -20,6 +20,8 @@ public class SPU implements Serializable {
 
     private String spuEnDesc; // 产品英文描述
 
+    private String spuType;   // 产品类型， 1 为主产品， 0 为二级产品
+
     private String detail;    // 产品详情
 
     private String categoryCode; // 产品分类 代码

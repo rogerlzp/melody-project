@@ -54,20 +54,20 @@ public class AdminSPUController {
         JSONObject jsonObject = JSON.parseObject(brandStr);
         JSONArray jsonArray = jsonObject.getJSONArray("spuAttrList");
 
-        if (jsonArray != null) {
+        if (jsonArray != null && jsonArray.size()!=0) {
             List<SpuAttr> spuAttrList = jsonArray.toJavaList(SpuAttr.class);
             brandObj.setSpuAttrList(spuAttrList);
         }
 
         JSONArray relateSpuArray = jsonObject.getJSONArray("spuComponentList");
-        if (relateSpuArray != null) {
+        if (relateSpuArray != null && relateSpuArray.size() != 0 ) {
             List<SpuComponent> spuComponentList = jsonArray.toJavaList(SpuComponent.class);
             brandObj.setSpuComponentList(spuComponentList);
         }
 
         // 获取产品设计师
         JSONArray spuDesignerArray = jsonObject.getJSONArray("spuDesignerList");
-        if (spuDesignerArray != null) {
+        if (spuDesignerArray != null && spuDesignerArray.size() != 0) {
             List<SpuDesigner> spuDesignerList = jsonArray.toJavaList(SpuDesigner.class);
             brandObj.setSpuDesignerList(spuDesignerList);
         }
@@ -198,7 +198,7 @@ public class AdminSPUController {
         JSONObject jsonObject = JSON.parseObject(body);
         JSONArray jsonArray = jsonObject.getJSONArray("spuAttrList");
 
-        if (jsonArray != null) {
+        if (jsonArray != null && jsonArray.size() != 0) {
             List<SpuAttr> spuAttrList = jsonArray.toJavaList(SpuAttr.class);
             brandObj.setSpuAttrList(spuAttrList);
         }

@@ -14,11 +14,22 @@
         <result column="IS_LINKED" jdbcType="BIT" property="isLinked" />
     </resultMap>
 
+    <resultMap id="AttrValResultMap" type="AttrVal">
+        <id column="ID"  property="id" />
+        <result column="ATTR_ID" property="attrId" />
+        <result column="ATTR_VAL_NAME" property="attrValName" />
+        <result column="ATTR_VAL_EN_NAME"  property="attrValEnName" />
+    </resultMap>
 
     <sql id="Attr_Column_List">
     ATTR_ID, ATTR_NAME, ATTR_CODE, ATTR_INPUT_TYPE, ATTR_TYPE, ATTR_VALUES, ATTR_INDEX,
     SORT_ORDER, IS_LINKED
   </sql>
+    <sql id="Attr_Val_Column_List">
+        ID, ATTR_ID, ATTR_VAL_NAME, ATTR_VAL_EN_NAME
+    </sql>
+
+
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="AttrResultMap">
         select
@@ -78,7 +89,7 @@
                 IS_LINKED = #{isLinked,jdbcType=BIT},
             </if>
         </set>
-        where ATTR_ID = #{attrId,jdbcType=BIGINT}
+        where ATTR_ID = #{attrId}
     </update>
     <update id="updateByPrimaryKey" parameterType="Attr">
         update TT_ATTR
@@ -111,12 +122,31 @@
         ]]>
     </sql>
 
-
     <delete id="deleteAttrByAttrId">
         DELETE FROM TT_ATTR
         WHERE ATTR_ID = #{attrId}
     </delete>
 
+    <insert id="insertAttrVal" parameterType="AttrVal">
+        insert into TR_ATTR_VAL (ID, ATTR_ID, ATTR_VAL_CODE, ATTR_VAL_NAME,
+        ATTR_VAL_EN_NAME)
+        values (#{id}, #{attrId}, #{attrValCode},
+        #{attrValName}, #{attrValEnName})
+    </insert>
+
+    <update id="updateAttrVal" parameterType="AttrVal">
+        UPDATE TR_ATTR_VAL
+        SET  ATTR_VAL_CODE = #{attrValCode}, ATTR_VAL_NAME= #{attrValName},
+        ATTR_VAL_EN_NAME = #{attrValEnName}
+        WHERE ID = #{id}
+    </update>
+
+    <select id="queryAttrValList" resultMap="AttrValResultMap">
+        select
+        <include refid="Attr_Val_Column_List" />
+        from TR_ATTR_VAL
+        WHERE ATTR_ID = #{attrId}
+    </select>
 
 
 </mapper>
