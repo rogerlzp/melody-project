@@ -19,7 +19,6 @@
     </sql>
 
 
-
     <resultMap id="InventoryResultMap" type="SkuInventory">
         <id column="ID" jdbcType="BIGINT" property="id"/>
         <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo"/>
@@ -87,6 +86,15 @@
             <result column="UPDATE_DATE" property="updateDate"/>
         </resultMap>
 
+    <resultMap id="SkuImageResultMap" type="SkuImage">
+        <id column="ID" jdbcType="BIGINT" property="id"/>
+        <result column="SKU_NO" jdbcType="VARCHAR" property="skuNo"/>
+        <result column="PIC_URL" jdbcType="VARCHAR" property="picUrl"/>
+        <result column="IS_MAIN" jdbcType="VARCHAR" property="isMain"/>
+    </resultMap>
+
+
+
     <sql id="pagination">
         <![CDATA[
 	    limit #{offset}, #{pageSize}
@@ -128,17 +136,36 @@
     <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="SKU" useGeneratedKeys="true">
         insert into TT_SKU (ID, SKU_NO, SKU_NAME,
         SKU_DESC,  SKU_EN_DESC,
-        STATUS, SPU_CODE, CREATE_DATE
-        )
+        STATUS, SPU_CODE, CREATE_DATE)
         values (#{id}, #{skuNo}, #{skuName,jdbcType=VARCHAR},
          #{skuDesc},  #{skuEnDesc},
-        #{status}, #{spuCode}, now()
-        )
+        #{status}, #{spuCode}, now())
     </insert>
+    <update id="updateSKUByPrimaryKey" parameterType="SKU">
+        update TT_SKU
+        set
+        SKU_NAME = #{skuName},
+        SKU_DESC = #{skuDesc},
+        SKU_EN_DESC = #{skuEnDesc},
+        STATUS = #{status},
+        SPU_CODE = #{spuCode},
+        UPDATE_DATE = now()
+        where SKU_NO = #{skuNo}
+    </update>
+
     <insert id="insertSKUImage" keyColumn="ID" keyProperty="id" parameterType="SkuImage" useGeneratedKeys="true">
         insert into TR_SKU_IMAGE (ID, SKU_NO, IS_MAIN, PIC_URL, PIC_SEQ,CREATE_DATE)
         values (#{id}, #{skuNo}, #{isMain}, #{picUrl}, #{picSeq},  now())
     </insert>
+    <update id="updateSkuImage" parameterType="SkuImage">
+        update TR_SKU_IMAGE
+        set
+        IS_MAIN = #{isMain},
+        PIC_URL = #{picUrl},
+        PIC_SEQ = #{picSeq},
+        UPDATE_DATE = now()
+        where ID = #{id}
+    </update>
 
     <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="SKU" useGeneratedKeys="true">
         insert into TT_SKU
@@ -255,16 +282,7 @@
         </set>
         where SKU_NO = #{skuNo,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="SKU">
-        update TT_SKU
-        set ID = #{id,jdbcType=BIGINT},
-        SKU_NAME = #{skuName,jdbcType=VARCHAR},
-        SKU_DESC = #{skuDesc},
-        SKU_EN_DESC = #{skuEnDesc},
-        STATUS = #{status,jdbcType=VARCHAR},
-        SPU_CODE = #{spuCode,jdbcType=VARCHAR}
-        where SKU_NO = #{skuNo,jdbcType=VARCHAR}
-    </update>
+
 
 
     <update id="updateSKU">
@@ -291,6 +309,13 @@
         INSERT INTO TR_SKU_ATTR (ID, SKU_NO, ATTRIBUTES, PIC_URL)
         VALUES (#{id},#{skuNo},#{attributes}, #{picUrl})
     </insert>
+
+    <update id="updateSKUAttr"  parameterType="SkuAttr">
+          UPDATE  TR_SKU_ATTR
+          SET ATTRIBUTES = #{attributes},
+          PIC_URL=#{picUrl}
+          WHERE ID = #{id} AND SKU_NO =#{skuNo}
+    </update>
 
 
     <update id="updateSKUNum">
@@ -322,6 +347,16 @@
       ATTRIBUTES,
       PIC_URL
       FROM TR_SKU_ATTR
+      WHERE SKU_NO = #{skuNo}
+    </select>
+
+    <select id="getSkuImageList" resultMap="SkuImageResultMap">
+      SELECT
+      ID,
+      SKU_NO,
+      PIC_URL,
+      IS_MAIN
+      FROM TR_SKU_IMAGE
       WHERE SKU_NO = #{skuNo}
     </select>
 

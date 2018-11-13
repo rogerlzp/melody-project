@@ -7,10 +7,7 @@ import com.melody.admin.api.AdminSKUService;
 import com.melody.admin.api.AdminSPUService;
 import com.melody.admin.api.SysPermService;
 import com.melody.admin.dto.SysPerm;
-import com.melody.dao.AdminSKUMapper;
-import com.melody.dao.AdminSPUMapper;
-import com.melody.dao.AdminUserMapper;
-import com.melody.dao.SysPermMapper;
+import com.melody.dao.*;
 import com.melody.product.dto.*;
 import com.melody.system.dto.SysCustomerLevel;
 import org.springframework.beans.BeanUtils;
@@ -32,6 +29,9 @@ public class AdminSKUServiceImpl implements AdminSKUService {
     AdminSPUMapper adminSPUMapper;
 
     @Autowired
+    AdminAttrMapper adminAttrMapper;
+
+    @Autowired
     BaseServiceImpl baseService;
 
 
@@ -42,18 +42,13 @@ public class AdminSKUServiceImpl implements AdminSKUService {
     @Override
     public String addSKU(SKU sku) {
 
-//        SKU sku = new SKU();
-//        BeanUtils.copyProperties(skuEnter, sku);
         long skuId = baseService.getNextSequence("TT_SKU");
         sku.setId(skuId);
 
         // SKU NO
         String skuNo = "SKU" + skuId;
         sku.setSkuNo(skuNo);
-
         sku.setStatus("1"); // 新建，有效
-
-
         int insertResult = adminSKUMapper.insert(sku);
 
         // 添加属性成功后，在添加特性
@@ -71,7 +66,7 @@ public class AdminSKUServiceImpl implements AdminSKUService {
             }
 
             // 增加库存
-            if(sku.getSkuInventory() !=null) {
+            if (sku.getSkuInventory() != null) {
                 SkuInventory inventory = sku.getSkuInventory();
                 long inventoryId = baseService.getNextSequence("TR_SKU_INVENTORY");
                 inventory.setId(inventoryId);
@@ -80,7 +75,7 @@ public class AdminSKUServiceImpl implements AdminSKUService {
             }
 
             // 增加价格
-            if(sku.getSkuPriceEnter() !=null) {
+            if (sku.getSkuPriceEnter() != null) {
                 SkuPriceEnter skuPriceEnter = sku.getSkuPriceEnter();
                 SkuPrice skuPrice = new SkuPrice();
                 BeanUtils.copyProperties(skuPriceEnter, skuPrice);
@@ -90,21 +85,21 @@ public class AdminSKUServiceImpl implements AdminSKUService {
                 adminSKUMapper.insertSKUPrice(skuPrice);
 
                 // 添加会员价格
-                List<SysCustomerLevel> customerLevelList =  adminUserMapper.getCustomerLevel();
-               for(int i=0;i<customerLevelList.size();i++){
-                    UserSkuDiscount userSkuDiscount =  new UserSkuDiscount();
+                List<SysCustomerLevel> customerLevelList = adminUserMapper.getCustomerLevel();
+                for (int i = 0; i < customerLevelList.size(); i++) {
+                    UserSkuDiscount userSkuDiscount = new UserSkuDiscount();
                     long userSkuDiscountId = baseService.getNextSequence("TR_USER_SKU_DISCOUNT");
-                   userSkuDiscount.setId(userSkuDiscountId);
-                   userSkuDiscount.setDiscount(skuPriceEnter.getDiscountPriceList().get(i));
-                   userSkuDiscount.setDiscount(100D);
-                   userSkuDiscount.setUserLevelId(customerLevelList.get(i).getLevelId());
-                   userSkuDiscount.setSkuNo(skuNo);
-                   userSkuDiscount.setStatus("1");
-                   adminSKUMapper.insertUserSKUDiscount(userSkuDiscount);
-              }
+                    userSkuDiscount.setId(userSkuDiscountId);
+                    userSkuDiscount.setDiscount(skuPriceEnter.getDiscountPriceList().get(i));
+                    userSkuDiscount.setDiscount(100D);
+                    userSkuDiscount.setUserLevelId(customerLevelList.get(i).getLevelId());
+                    userSkuDiscount.setSkuNo(skuNo);
+                    userSkuDiscount.setStatus("1");
+                    adminSKUMapper.insertUserSKUDiscount(userSkuDiscount);
+                }
             }
             // 增加SKU 特别的属性
-            if (sku.getSkuAttr() !=null) {
+            if (sku.getSkuAttr() != null) {
                 long skuAttrId = baseService.getNextSequence("TR_SKU_ATTR");
                 SkuAttr skuAttr = sku.getSkuAttr();
                 skuAttr.setSkuNo(sku.getSkuNo());
@@ -117,10 +112,6 @@ public class AdminSKUServiceImpl implements AdminSKUService {
         }
         return skuNo;
     }
-
-
-
-
 
 
     @Override
@@ -165,14 +156,102 @@ public class AdminSKUServiceImpl implements AdminSKUService {
             if (skuAttr != null) {
                 sku.setSkuAttr(skuAttr);
             }
-
             // 展示所有的属性，便于显示
             List<SpuAttr> spuAttrList = adminSPUMapper.getSpuAttrBySpuCode(sku.getSpuCode());
-            sku.setSpuAttrList(spuAttrList);
+            if (spuAttrList != null) {
+                for (SpuAttr spuAttr : spuAttrList) {
+                    if (spuAttr.getAttrInputType() == 3) { // 值存储在单独的列里面
+                        spuAttr.setAttrValList(adminAttrMapper.queryAttrValList(spuAttr.getAttrId()));
+                    }
+                }
+                sku.setSpuAttrList(spuAttrList);
+            }
+
+            // 获取图像信息
+            List<SkuImage> skuImageList = adminSKUMapper.getSkuImageList(skuNo);
+            if (skuImageList != null) {
+                sku.setSkuImageList(skuImageList);
+            }
 
         }
-
         return sku;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public int updateSKU(SKU sku) {
+        // SKU NO
+        sku.setStatus("1"); // 新建，有效
+        int insertResult = adminSKUMapper.updateSKUByPrimaryKey(sku);
+
+        // 添加属性成功后，在添加特性
+        if (insertResult == 1) {
+            if (sku.getSkuImageList() != null) {
+                int seqId = 0;
+
+                for (SkuImage skuImage : sku.getSkuImageList()) {
+                    if (sku.getId() != null) {
+                        // 已经有了
+                        adminSKUMapper.updateSkuImage(skuImage);
+                    } else {
+                        long skuImageId = baseService.getNextSequence("TR_SKU_IMAGE");
+                        skuImage.setIsMain(seqId == 0 ? 1 : 0);
+                        skuImage.setPicSeq(seqId++);
+                        skuImage.setId(skuImageId);
+                        skuImage.setSkuNo(sku.getSkuNo());
+                        adminSKUMapper.insertSKUImage(skuImage);
+                    }
+                }
+            }
+
+            // TODO: 更新 增加库存
+            if (sku.getSkuInventory() != null) {
+                SkuInventory inventory = sku.getSkuInventory();
+                long inventoryId = baseService.getNextSequence("TR_SKU_INVENTORY");
+                inventory.setId(inventoryId);
+                inventory.setSkuNo(sku.getSkuNo());
+                adminSKUMapper.insertSKUInventory(inventory);
+            }
+
+            // 增加价格
+            if (sku.getSkuPriceEnter() != null) {
+                SkuPriceEnter skuPriceEnter = sku.getSkuPriceEnter();
+                SkuPrice skuPrice = new SkuPrice();
+                BeanUtils.copyProperties(skuPriceEnter, skuPrice);
+                long skuPriceId = baseService.getNextSequence("TR_SKU_PRICE");
+                skuPrice.setId(skuPriceId);
+                skuPrice.setSkuNo(sku.getSkuNo());
+                adminSKUMapper.insertSKUPrice(skuPrice);
+
+                // 添加会员价格
+                List<SysCustomerLevel> customerLevelList = adminUserMapper.getCustomerLevel();
+                for (int i = 0; i < customerLevelList.size(); i++) {
+                    UserSkuDiscount userSkuDiscount = new UserSkuDiscount();
+                    long userSkuDiscountId = baseService.getNextSequence("TR_USER_SKU_DISCOUNT");
+                    userSkuDiscount.setId(userSkuDiscountId);
+                    userSkuDiscount.setDiscount(skuPriceEnter.getDiscountPriceList().get(i));
+                    userSkuDiscount.setDiscount(100D);
+                    userSkuDiscount.setUserLevelId(customerLevelList.get(i).getLevelId());
+                    userSkuDiscount.setSkuNo(sku.getSkuNo());
+                    userSkuDiscount.setStatus("1");
+                    adminSKUMapper.insertUserSKUDiscount(userSkuDiscount);
+                }
+            }
+            // 增加SKU 特别的属性
+            SkuAttr skuAttr = sku.getSkuAttr();
+            if (skuAttr != null) {
+                if (sku.getSkuAttr().getId() != null) {
+                    adminSKUMapper.updateSKUAttr(skuAttr);
+                } else {
+                    long skuAttrId = baseService.getNextSequence("TR_SKU_ATTR");
+                    skuAttr.setSkuNo(sku.getSkuNo());
+                    skuAttr.setId(skuAttrId);
+                    adminSKUMapper.insertSKUAttr(skuAttr);
+                }
+            }
+
+        }
+        return insertResult;
     }
 
 }

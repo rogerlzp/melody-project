@@ -123,6 +123,11 @@ public class AdminSPUServiceImpl implements AdminSPUService {
         if (spu != null) {
             List<SpuAttr> spuAttrList = adminSPUMapper.getSpuAttrBySpuCode(spuCode);
             if (spuAttrList != null) {
+                for(SpuAttr spuAttr: spuAttrList) {
+                    if (spuAttr.getAttrInputType() == 3) { // 值存储在单独的列里面
+                        spuAttr.setAttrValList(adminAttrMapper.queryAttrValList(spuAttr.getAttrId()));
+                    }
+                }
                 spu.setSpuAttrList(spuAttrList);
             }
             List<SpuComponent> spuCompoentList = adminSPUMapper.getSpuComponentBySpuCode(spuCode);

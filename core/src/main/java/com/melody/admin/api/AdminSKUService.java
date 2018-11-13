@@ -15,9 +15,7 @@ public interface AdminSKUService {
 
     String addSKU(SKU sku);
 
-//    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-//    String addSKUEnter(SKUEnter skuEnter);
-
+    int updateSKU(SKU sku);
 
     Page<SKU> querySKUList(Page page);
 

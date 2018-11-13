@@ -12,6 +12,7 @@ public interface AdminSKUMapper {
 
     int insert(SKU sku);
 
+    int updateSKUByPrimaryKey(SKU sku);
 
     int insertSKUInventory(SkuInventory skuInventory);
     int insertSKUPrice(SkuPrice skuPrice);
@@ -19,6 +20,7 @@ public interface AdminSKUMapper {
 
     // 插入图片
     int insertSKUImage(SkuImage skuImage);
+    int updateSkuImage(SkuImage skuImage);
 
     List<SKU> querySKUList(@Param(value = "offset") Integer offset,
                            @Param(value = "pageSize") Integer pageSize, @Param(value = "status") String status);
@@ -36,10 +38,15 @@ public interface AdminSKUMapper {
 
 
     int insertSKUAttr(SkuAttr skuAttr);
+    int updateSKUAttr(SkuAttr skuAttr);
+
     int updateSKU(@Param(value = "skuNo") String skuNo, @Param(value = "status") String status);
     int updateSKUNum(@Param(value = "skuNo") String skuNo, @Param(value = "num") Integer num);
 
     SKU querySKUBySkuNo(@Param(value = "skuNo") String skuNo);
-
     SkuAttr getSkuAttrBySkuNo(@Param(value = "skuNo") String skuNo);
+
+    List<SkuImage> getSkuImageList(@Param(value = "skuNo") String skuNo);
+
 }
+

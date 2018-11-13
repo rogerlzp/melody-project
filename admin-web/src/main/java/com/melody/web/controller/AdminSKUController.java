@@ -121,6 +121,87 @@ public class AdminSKUController {
     }
 
 
+    @PermInfo("更新SKU")
+    @RequiresPermissions("a:sku:sku:update")
+    @PostMapping("/update")
+    public Json update(@RequestBody String brandStr) {
+        String oper = "update sku";
+        log.info("{}, body: {}", oper, brandStr);
+        SKU brandObj = JSON.parseObject(brandStr, SKU.class);
+
+        // 因为传来的Image 只有 picUrl, 不能自动转化为SkuImage, 所以手动转化一下，在添加到 sku中
+        JSONObject jsonObject = JSON.parseObject(brandStr);
+        JSONArray jsonArray = jsonObject.getJSONArray("skuImageList");
+        List<SkuImage> skuImageList = new ArrayList<>();
+        if (jsonArray != null) {
+            for (Object obj : jsonArray) {
+                JSONObject jsonObject2 = (JSONObject) obj;
+                String picUrl = jsonObject2.getString("picUrl");
+                SkuImage skuImage = new SkuImage();
+                skuImage.setPicUrl(picUrl);
+                skuImageList.add(skuImage);
+            }
+            brandObj.setSkuImageList(skuImageList);
+        }
+
+        // 和 add时候有区别
+        JSONObject skuAttrObj = jsonObject.getJSONObject("skuAttr");
+        if (skuAttrObj != null) {
+            SkuAttr skuAttr = JSONObject.parseObject(skuAttrObj.toString(), SkuAttr.class);
+            brandObj.setSkuAttr(skuAttr);
+        }
+
+        // 获取库存
+        if (jsonObject.getInteger("totalNum") != null) {
+            SkuInventory inventory = new SkuInventory();
+            inventory.setTotalNum(jsonObject.getInteger("totalNum"));
+            if (jsonObject.getInteger("sellableNum") != null) {
+                inventory.setSellableNum(jsonObject.getInteger("sellableNum"));
+            }
+            if (jsonObject.getInteger("lockedNum") != null) {
+                inventory.setLockedNum(jsonObject.getInteger("lockedNum"));
+            }
+            brandObj.setSkuInventory(inventory);
+
+        }
+
+        // 获取价格
+
+        if (jsonObject.getDouble("listPrice") != null) {
+            SkuPriceEnter skuPriceEnter = new SkuPriceEnter();
+            skuPriceEnter.setListPrice(jsonObject.getDouble("listPrice"));
+
+            if (jsonObject.getDouble("salePrice") != null) {
+                skuPriceEnter.setSalePrice(jsonObject.getDouble("salePrice"));
+            }
+            if (jsonObject.getDouble("specialPrice") != null) {
+
+                skuPriceEnter.setSpecialPrice(jsonObject.getDouble("specialPrice"));
+            }
+            if (jsonObject.getDouble("importPrice") != null) {
+
+                skuPriceEnter.setImportPrice(jsonObject.getDouble("importPrice"));
+            }
+            if (jsonObject.getDouble("costPrice") != null) {
+                skuPriceEnter.setCostPrice(jsonObject.getDouble("costPrice"));
+            }
+
+            if (jsonObject.getJSONArray("discountPrice") != null) {
+                List<Double> discountPriceList =
+                        JSON.parseArray(jsonObject.getJSONArray("discountPrice").toString(),
+                                Double.class);
+                skuPriceEnter.setDiscountPriceList(discountPriceList);
+            }
+
+            brandObj.setSkuPriceEnter(skuPriceEnter);
+        }
+
+
+        int updateResult = adminSKUService.updateSKU(brandObj);
+        return Json.result(oper, updateResult == 1 ? true : false)
+                .data("updateResult", updateResult);
+    }
+
     @PermInfo("查询所有品牌")
     @RequiresPermissions("a:sku:sku:query")
     @PostMapping("/query")
