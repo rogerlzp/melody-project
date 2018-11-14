@@ -24,7 +24,7 @@
     <select id="checkRidsContainRval" resultType="java.lang.Boolean">
         SELECT
         CONCAT(',',GROUP_CONCAT(RVAL SEPARATOR ','),',')
-        REGEXP CONCAT(',',#{RVAL},',{1}') AS result FROM SYS_ROLE
+        REGEXP CONCAT(',',#{rval},',{1}') AS result FROM SYS_ROLE
         WHERE RID IN
         <foreach collection="rids" item="rid" separator="," open="(" close=")">
             #{rid}

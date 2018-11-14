@@ -16,10 +16,11 @@
     <insert id="saveOrUpdate">
         INSERT INTO SYS_PERM (PVAL,PARENT,PNAME,PTYPE,LEAF,CREATED) VALUES
         <foreach collection="perms" item="p" separator=",">
-            (#{p.PVAL},#{p.PARENT},#{p.PNAME},#{p.PTYPE},#{p.LEAF},#{p.CREATED})
+            (#{p.pval},#{p.parent},#{p.pname},#{p.ptype},#{p.leaf},#{p.created})
         </foreach>
         ON DUPLICATE KEY UPDATE
-        PNAME = VALUES(pname), parent = VALUES(parent), PTYPE = VALUES(ptype), LEAF = VALUES(leaf), UPDATED = now()
+        PNAME = VALUES(pname), PARENT = VALUES(parent), PTYPE = VALUES(ptype),
+        LEAF = VALUES(leaf), UPDATED = now()
     </insert>
 
 

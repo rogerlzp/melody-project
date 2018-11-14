@@ -54,3 +54,10 @@ web/src/main/resources/i18n/messages/
 web/src/main/resources/t1/t2/
 zookeeper.out
 melody/
+/admin/data/
+/web/logs/
+admin/data/
+data/
+static-mybatis/.mvn/
+static-mybatis/src/main/resources/generated_mapper/
+web/logs/

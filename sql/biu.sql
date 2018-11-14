@@ -90,6 +90,7 @@ insert  into `sys_role_perm`(`role_id`,`perm_val`,`perm_type`) values ('10027483
 
 /*Table structure for table `sys_user` */
 
+
 DROP TABLE IF EXISTS `sys_user`;
 
 CREATE TABLE `sys_user` (

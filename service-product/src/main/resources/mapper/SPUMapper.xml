@@ -13,15 +13,15 @@
         <result column="BRAND_NAME" jdbcType="VARCHAR" property="brandName" />
     </resultMap>
 
-    <resultMap id="AttrResultMap" type="Attr">
-        <id column="ID" property="id"/>
-        <result column="Attr_NAME" property="AttrName"/>
-    </resultMap>
-    <resultMap id="AttrOptionResultMap" type="AttrOption">
-        <id column="ID" property="id"/>
-        <result column="Attr_ID" property="AttrId"/>
-        <result column="Attr_Value" property="AttrValue"/>
-    </resultMap>
+    <!--<resultMap id="AttrResultMap" type="Attr">-->
+        <!--<id column="ID" property="id"/>-->
+        <!--<result column="Attr_NAME" property="AttrName"/>-->
+    <!--</resultMap>-->
+    <!--<resultMap id="AttrOptionResultMap" type="AttrOption">-->
+        <!--<id column="ID" property="id"/>-->
+        <!--<result column="Attr_ID" property="AttrId"/>-->
+        <!--<result column="Attr_Value" property="AttrValue"/>-->
+    <!--</resultMap>-->
 
 
 
@@ -163,23 +163,23 @@
         WHERE CATEGORY_CODE = #{categoryCode} AND BRAND_CODE = #{brandCode}
     </select>
 
-    <select id="getAttrListBySpuCode" resultMap="AttrResultMap">
-    SELECT
-    ttf.ID,
-    ttf.Attr_NAME
-    FROM  TT_Attr ttf,TT_SPU tts
-    WHERE ttf.CATEGORY_CODE = tts.CATEGORY_CODE
-    AND tts.SPU_CODE = #{spuCode}
-    </select>
+    <!--<select id="getAttrListBySpuCode" resultMap="AttrResultMap">-->
+    <!--SELECT-->
+    <!--ttf.ID,-->
+    <!--ttf.Attr_NAME-->
+    <!--FROM  TT_Attr ttf,TT_SPU tts-->
+    <!--WHERE ttf.CATEGORY_CODE = tts.CATEGORY_CODE-->
+    <!--AND tts.SPU_CODE = #{spuCode}-->
+    <!--</select>-->
 
-    <select id="getAttrOptionByFeationId" resultMap="AttrOptionResultMap">
-        SELECT
-        trfo.ID,
-        trfo.Attr_ID,
-        trfo.Attr_VALUE
-        FROM  TR_Attr_OPTION trfo
-        WHERE trfo.Attr_ID = #{AttrId}
-    </select>
+    <!--<select id="getAttrOptionByFeationId" resultMap="AttrOptionResultMap">-->
+        <!--SELECT-->
+        <!--trfo.ID,-->
+        <!--trfo.Attr_ID,-->
+        <!--trfo.Attr_VALUE-->
+        <!--FROM  TR_Attr_OPTION trfo-->
+        <!--WHERE trfo.Attr_ID = #{AttrId}-->
+    <!--</select>-->
 
 
 </mapper>

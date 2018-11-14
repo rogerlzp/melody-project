@@ -200,6 +200,14 @@
     where ID = #{id}
   </update>
 
+  <update id="updateStoryImageStatus" >
+    update TT_STORY_IMAGE
+    set
+    STATUS = #{status},
+    UPDATE_DATE = now()
+    where ID = #{id}
+  </update>
+
   <update id="updateStoryImageProduct" parameterType="StoryImageProduct">
     update TR_STORY_IMAGE_PRODUCT
     set SKU_NO = #{skuNo},

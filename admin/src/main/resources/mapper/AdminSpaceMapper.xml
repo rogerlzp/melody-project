@@ -3,20 +3,21 @@
 <mapper namespace="com.melody.dao.AdminSpaceMapper">
     <resultMap id="BaseResultMap" type="Space">
         <id column="ID" jdbcType="INTEGER" property="id"/>
+        <result column="PARENT_ID"  property="parentId"/>
         <result column="SPACE_NAME"  property="spaceName"/>
         <result column="SPACE_CODE"  property="spaceCode"/>
         <result column="SPACE_DESC"  property="spaceDesc"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        ID, SPACE_NAME, SPACE_CODE, SPACE_DESC
+        ID, SPACE_NAME, SPACE_CODE, SPACE_DESC, PARENT_ID
     </sql>
 
 
     <insert id="insertSpace" keyColumn="ID" keyProperty="id"
             parameterType="Space" useGeneratedKeys="true">
-        insert into TT_SPACE (ID, SPACE_NAME, SPACE_CODE, SPACE_DESC)
-        values (#{id},#{spaceName}, #{spaceCode}, #{spaceDesc})
+        insert into TT_SPACE (ID, SPACE_NAME, SPACE_CODE, SPACE_DESC, PARENT_ID)
+        values (#{id},#{spaceName}, #{spaceCode}, #{spaceDesc}, #{parentId})
     </insert>
 
 
@@ -24,7 +25,16 @@
         select
         <include refid="Base_Column_List"/>
         from TT_SPACE
+        WHERE PARENT_ID = 0
     </select>
+    <select id="querySubSpaceList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from TT_SPACE
+        WHERE PARENT_ID = #{parentId}
+    </select>
+
+
 
     <delete id="deleteSpaceById">
         DELETE FROM TT_SPACE
