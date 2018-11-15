@@ -62,7 +62,7 @@ public class QiNiuTokenServiceImpl implements QiNiuTokenService {
         } else {
             qiNiuTokenResult.setUploadToken("invalid upToken");
         }
-        qiNiuTokenResult.setCode(BusinessCodes.SUCCESS);
+//        qiNiuTokenResult.setCode(BusinessCodes.SUCCESS);
         return qiNiuTokenResult;
 
     }

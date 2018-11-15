@@ -2,9 +2,11 @@ package com.melody.web.controller.mobile;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.melody.base.GeneralResult;
 import com.melody.mobile.api.MobileCodeService;
 import com.melody.mobile.dto.MobileCodeEnter;
 import com.melody.mobile.dto.MobileCodeResult;
+import com.melody.result.JsonApi;
 import com.melody.web.base.BaseController;
 import com.melody.web.util.JsonHelper;
 import com.melody.web.vo.MobileCodeVO;
@@ -24,7 +26,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "mobile/getMobileCode")
+@RequestMapping(value = "/mobile/getMobileCode")
 public class MobileCodeController extends BaseController {
 
     private Log logger = LogFactory.getLog(this.getClass());
@@ -37,7 +39,7 @@ public class MobileCodeController extends BaseController {
     MobileCodeService mobileCodeService;
 
     @RequestMapping
-    public ModelAndView execute(MobileCodeVO mobileCodeVO, BindingResult bindingResult, HttpServletRequest request) throws IOException {
+    public GeneralResult execute(MobileCodeVO mobileCodeVO, BindingResult bindingResult, HttpServletRequest request) throws IOException {
 
 //    	String clientSign = request.getHeader("header_sign");
 //    	@SuppressWarnings("unchecked")
@@ -65,14 +67,12 @@ public class MobileCodeController extends BaseController {
             mobileCodeEnter.setCertification(mobileCodeVO.getClientType());
         }
 
-//        logger.info("mobileCodeForm" + mobileCodeEnter.toString() + " sentType: " +mobileCodeEnter.getSendType());
-
         checkIsMobileForm(mobileCodeVO, mobileCodeEnter);
 
-        MobileCodeResult result = mobileCodeService.getMobileCode(mobileCodeEnter);
-        Map<String, Object> results = JsonHelper.toRespJson(result);
-        results.put("data", result);
-        return new ModelAndView("registerResult", results);
+        GeneralResult result = mobileCodeService.getMobileCode(mobileCodeEnter);
+//        Map<String, Object> results = JsonHelper.toRespJson(result);
+//        results.put("data", result);
+        return result;
     }
 
     private void checkIsMobileForm(MobileCodeVO mobileCodeVO, MobileCodeEnter mobileCodeEnter) {

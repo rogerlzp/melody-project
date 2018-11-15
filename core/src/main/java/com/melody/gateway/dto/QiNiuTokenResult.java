@@ -6,7 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class QiNiuTokenResult extends GeneralResult implements Serializable {
+public class QiNiuTokenResult implements Serializable {
     private static final long serialVersionUID = 1019394959909071140L;
     private String uploadToken;
 

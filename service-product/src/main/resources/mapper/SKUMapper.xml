@@ -5,12 +5,7 @@
         <id column="SKU_NO" jdbcType="VARCHAR" property="skuNo"/>
         <result column="ID" jdbcType="BIGINT" property="id"/>
         <result column="SKU_NAME" jdbcType="VARCHAR" property="skuName"/>
-        <result column="PRODUCT_PLACE" jdbcType="VARCHAR" property="productPlace"/>
-        <result column="CHUCHANG_TIME" jdbcType="TIMESTAMP" property="chuchangTime"/>
-        <result column="EXPIRATION_TIME" jdbcType="TIMESTAMP" property="expirationTime"/>
-        <result column="BAOZHI_DAY" jdbcType="INTEGER" property="baozhiDay"/>
-        <result column="TOTAL_NUMBER" jdbcType="INTEGER" property="totalNumber"/>
-        <result column="PRODUCT_DESC" jdbcType="VARCHAR" property="productDesc"/>
+        <result column="SKU_DESC" jdbcType="VARCHAR" property="skuDesc"/>
         <result column="STATUS" jdbcType="VARCHAR" property="status"/>
         <result column="PRICE" jdbcType="DECIMAL" property="price"/>
         <result column="SPU_CODE" jdbcType="VARCHAR" property="spuCode"/>
@@ -20,12 +15,7 @@
         <id column="ID" property="id"/>
         <result column="SKU_NO" property="skuNo"/>
         <result column="SKU_NAME" jdbcType="VARCHAR" property="skuName"/>
-        <result column="PRODUCT_PLACE" jdbcType="VARCHAR" property="productPlace"/>
-        <result column="CHUCHANG_TIME" jdbcType="TIMESTAMP" property="chuchangTime"/>
-        <result column="EXPIRATION_TIME" jdbcType="TIMESTAMP" property="expirationTime"/>
-        <result column="BAOZHI_DAY" jdbcType="INTEGER" property="baozhiDay"/>
-        <result column="TOTAL_NUMBER" jdbcType="INTEGER" property="totalNumber"/>
-        <result column="PRODUCT_DESC" jdbcType="VARCHAR" property="productDesc"/>
+        <result column="SKU_DESC" jdbcType="VARCHAR" property="skuDesc"/>
         <result column="STATUS" jdbcType="VARCHAR" property="status"/>
         <result column="PRICE" jdbcType="DECIMAL" property="price"/>
         <result column="SPU_CODE" jdbcType="VARCHAR" property="spuCode"/>
@@ -47,8 +37,7 @@
 
 
     <sql id="Base_Column_List">
-        SKU_NO, ID, SKU_NAME, PRODUCT_PLACE, CHUCHANG_TIME, EXPIRATION_TIME, BAOZHI_DAY,
-        TOTAL_NUMBER,  PRODUCT_DESC, STATUS, PRICE, SPU_CODE
+        SKU_NO, ID, SKU_NAME, SKU_DESC, STATUS, PRICE, SPU_CODE
     </sql>
 
 
@@ -128,14 +117,9 @@
         s.ID,
         s.SKU_NO,
         s.SKU_NAME,
-        s.PRODUCT_PLACE,
-        s.CHUCHANG_TIME,
-        s.EXPIRATION_TIME,
-        s.BAOZHI_DAY,
-        s.PRODUCT_DESC,
+        s.SKU_DESC,
         s.STATUS,
         s.SPU_CODE,
-
         pr.LIST_PRICE,
         pr.SALE_PRICE ,
         pr.SPECIAL_PRICE,
@@ -177,15 +161,11 @@
 
 
     <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="SKU" useGeneratedKeys="true">
-        insert into TT_SKU (ID, SKU_NO, SKU_NAME, PRODUCT_PLACE,
-        CHUCHANG_TIME, EXPIRATION_TIME, BAOZHI_DAY,
-        TOTAL_NUMBER,  PRODUCT_DESC,
+        insert into TT_SKU (ID, SKU_NO, SKU_NAME, SKU_DESC,
         STATUS, PRICE, SPU_CODE, CREATE_DATE
         )
-        values (#{id}, #{skuNo}, #{skuName,jdbcType=VARCHAR}, #{productPlace,jdbcType=VARCHAR},
-        #{chuchangTime,jdbcType=TIMESTAMP}, #{expirationTime,jdbcType=TIMESTAMP}, #{baozhiDay,jdbcType=INTEGER},
-        #{totalNumber,jdbcType=INTEGER},  #{productDesc,jdbcType=VARCHAR},
-        #{status,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{spuCode,jdbcType=VARCHAR}, now()
+        values (#{id}, #{skuNo}, #{skuName},  #{skuDesc},
+        #{status}, #{price}, #{spuCode}, now()
         )
     </insert>
     <insert id="insertSKUImage" keyColumn="ID" keyProperty="id" parameterType="SkuImage" useGeneratedKeys="true">
@@ -202,24 +182,9 @@
             <if test="skuName != null">
                 SKU_NAME,
             </if>
-            <if test="productPlace != null">
-                PRODUCT_PLACE,
-            </if>
-            <if test="chuchangTime != null">
-                CHUCHANG_TIME,
-            </if>
-            <if test="expirationTime != null">
-                EXPIRATION_TIME,
-            </if>
-            <if test="baozhiDay != null">
-                BAOZHI_DAY,
-            </if>
-            <if test="totalNumber != null">
-                TOTAL_NUMBER,
-            </if>
 
-            <if test="productDesc != null">
-                PRODUCT_DESC,
+            <if test="skuDesc != null">
+                SKU_DESC,
             </if>
             <if test="status != null">
                 STATUS,
@@ -238,24 +203,9 @@
             <if test="skuName != null">
                 #{skuName,jdbcType=VARCHAR},
             </if>
-            <if test="productPlace != null">
-                #{productPlace,jdbcType=VARCHAR},
-            </if>
-            <if test="chuchangTime != null">
-                #{chuchangTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="expirationTime != null">
-                #{expirationTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="baozhiDay != null">
-                #{baozhiDay,jdbcType=INTEGER},
-            </if>
-            <if test="totalNumber != null">
-                #{totalNumber,jdbcType=INTEGER},
-            </if>
 
-            <if test="productDesc != null">
-                #{productDesc,jdbcType=VARCHAR},
+            <if test="skuDesc != null">
+                #{skuDesc},
             </if>
             <if test="status != null">
                 #{status,jdbcType=VARCHAR},
@@ -277,24 +227,9 @@
             <if test="skuName != null">
                 SKU_NAME = #{skuName,jdbcType=VARCHAR},
             </if>
-            <if test="productPlace != null">
-                PRODUCT_PLACE = #{productPlace,jdbcType=VARCHAR},
-            </if>
-            <if test="chuchangTime != null">
-                CHUCHANG_TIME = #{chuchangTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="expirationTime != null">
-                EXPIRATION_TIME = #{expirationTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="baozhiDay != null">
-                BAOZHI_DAY = #{baozhiDay,jdbcType=INTEGER},
-            </if>
-            <if test="totalNumber != null">
-                TOTAL_NUMBER = #{totalNumber,jdbcType=INTEGER},
-            </if>
 
-            <if test="productDesc != null">
-                PRODUCT_DESC = #{productDesc,jdbcType=VARCHAR},
+            <if test="skuDesc != null">
+                SKU_DESC = #{skuDesc},
             </if>
             <if test="status != null">
                 STATUS = #{status,jdbcType=VARCHAR},
@@ -312,12 +247,7 @@
         update TT_SKU
         set ID = #{id,jdbcType=BIGINT},
         SKU_NAME = #{skuName,jdbcType=VARCHAR},
-        PRODUCT_PLACE = #{productPlace,jdbcType=VARCHAR},
-        CHUCHANG_TIME = #{chuchangTime,jdbcType=TIMESTAMP},
-        EXPIRATION_TIME = #{expirationTime,jdbcType=TIMESTAMP},
-        BAOZHI_DAY = #{baozhiDay,jdbcType=INTEGER},
-        TOTAL_NUMBER = #{totalNumber,jdbcType=INTEGER},
-        PRODUCT_DESC = #{productDesc,jdbcType=VARCHAR},
+        SKU_DESC = #{skuDesc},
         STATUS = #{status,jdbcType=VARCHAR},
         PRICE = #{price,jdbcType=DECIMAL},
         SPU_CODE = #{spuCode,jdbcType=VARCHAR}
@@ -346,14 +276,9 @@
         s.ID,
         s.SKU_NO,
         s.SKU_NAME,
-        s.PRODUCT_PLACE,
-        s.CHUCHANG_TIME,
-        s.EXPIRATION_TIME,
-        s.BAOZHI_DAY,
-        s.PRODUCT_DESC,
+        s.SKU_DESC,
         s.STATUS,
         s.SPU_CODE,
-
         pr.LIST_PRICE,
         pr.SALE_PRICE ,
         pr.SPECIAL_PRICE,
@@ -374,11 +299,7 @@
         s.ID,
         s.SKU_NO,
         s.SKU_NAME,
-        s.PRODUCT_PLACE,
-        s.CHUCHANG_TIME,
-        s.EXPIRATION_TIME,
-        s.BAOZHI_DAY,
-        s.PRODUCT_DESC,
+        s.SKU_DESC,
         s.STATUS,
         s.SPU_CODE,
 
@@ -465,17 +386,36 @@
 
 
 
+    <select id="querySKUHomeList" resultMap="QueryResultMap">
+        select
+        s.ID,
+        s.SKU_NO,
+        s.SKU_NAME,
+        s.SKU_DESC,
+        s.STATUS,
+        s.SPU_CODE,
+        pr.LIST_PRICE,
+        pr.SALE_PRICE ,
+        pr.SPECIAL_PRICE,
+        inv.SELLABLE_NUM,
+        si.PIC_URL
+        from TT_SKU s
+        LEFT JOIN TR_SKU_PRICE pr ON pr.SKU_NO = s.SKU_NO
+        LEFT JOIN TR_SKU_INVENTORY inv ON inv.SKU_NO = s.SKU_NO
+        LEFT JOIN TR_SKU_IMAGE si ON si.SKU_NO = s.SKU_NO
+        WHERE s.STATUS = #{status}
+        AND si.IS_MAIN = 1
+        <include refid="pagination"/>
+    </select>
+
+
     <!-- 价格，图片，库存 -->
     <select id="getAllSKUBySpu" resultMap="QueryResultMap">
         select
         s.ID,
         s.SKU_NO,
         s.SKU_NAME,
-        s.PRODUCT_PLACE,
-        s.CHUCHANG_TIME,
-        s.EXPIRATION_TIME,
-        s.BAOZHI_DAY,
-        s.PRODUCT_DESC,
+        s.SKU_DESC,
         s.STATUS,
         s.SPU_CODE,
 

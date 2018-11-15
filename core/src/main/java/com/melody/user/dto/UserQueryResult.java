@@ -6,10 +6,11 @@ import com.melody.base.GeneralResult;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class UserQueryResult extends GeneralResult {
+public class UserQueryResult implements Serializable {
 
     private static final long serialVersionUID = -4074348732920836434L;
 

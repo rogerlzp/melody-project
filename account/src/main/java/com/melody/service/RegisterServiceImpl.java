@@ -1,6 +1,7 @@
 package com.melody.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.melody.base.GeneralResult;
 import com.melody.common.constant.BusinessCodes;
 import com.melody.common.constant.RedisCodes;
 import com.melody.common.constant.UserLevelEnum;
@@ -47,20 +48,20 @@ public class RegisterServiceImpl implements RegisterService {
 //    private PushRelationService pushRelationService;
 
     @Override
-    public RegisterResult getPictureCode(RegisterEnter registerPara) {
+    public GeneralResult getPictureCode(RegisterEnter registerPara) {
+
         RegisterResult registerResult = new RegisterResult();
-
-
         String pictureCode = AuthCodeUtils.createAuthCode();
         redisCache.setString(RedisCodes.VERIFYCODE + registerPara.getMachineNo(), pictureCode, RedisCodes.VERIFYCODE_TIME);
 
         registerResult.setPictureCode(pictureCode);
-        registerResult.setCode(BusinessCodes.SUCCESS);
+//        registerResult.setCode(BusinessCodes.SUCCESS);
 
-        if (log.isInfoEnabled()) {
-            log.info("getPictureCode>>>>>>RegisterResult:" + registerResult);
-        }
-        return registerResult;
+//        if (log.isInfoEnabled()) {
+//            log.info("getPictureCode>>>>>>RegisterResult:" + registerResult);
+//        }
+
+        return  GeneralResult.isOk();
     }
 
     private boolean checkMobileCode(String mobileNo, String mobileCode) {
@@ -88,7 +89,7 @@ public class RegisterServiceImpl implements RegisterService {
 
     @SuppressWarnings("unused")
     @Override
-    public RegisterResult registerUser(RegisterEnter registerPara) {
+    public GeneralResult registerUser(RegisterEnter registerPara) {
         RegisterResult registerResult = new RegisterResult();
         this.validatorUser(registerPara);
 
@@ -156,7 +157,7 @@ public class RegisterServiceImpl implements RegisterService {
             // 插入缓存
             redisCache.updateUser(user);
             registerResult.setSessionKey(sessionKey);
-            registerResult.setCode(BusinessCodes.SUCCESS);
+//            registerResult.setCode(BusinessCodes.SUCCESS);
         }
         //TODO: add for push message later
 //        try {
@@ -164,7 +165,7 @@ public class RegisterServiceImpl implements RegisterService {
 //        } catch (Exception e) {
 //            log.error("save user device relation falure, registrationId:" + registerPara.getRegistrationId() + " userId:" + sequenceId, e);
 //        }
-        return registerResult;
+        return GeneralResult.isOk().data(registerResult);
     }
 
     private void validatorUser(RegisterEnter registerPara) {

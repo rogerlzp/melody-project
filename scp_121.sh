@@ -10,6 +10,5 @@ scp web/target/web-0.0.1-SNAPSHOT.jar  roger@121.42.145.216:/home/roger/work/egg
 scp admin/target/admin-0.0.1-SNAPSHOT.jar roger@121.42.145.216:/home/roger/work/egg/
 
 
-scp target/admin-0.0.1-SNAPSHOT.jar roger@121.42.145.216:/home/roger/work/egg/
 
 

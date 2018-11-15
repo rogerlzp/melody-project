@@ -1,5 +1,6 @@
 package com.melody.mobile.api;
 
+import com.melody.base.GeneralResult;
 import com.melody.mobile.dto.MobileCodeResult;
 
 public interface PrivateMobileCodeService {
@@ -13,7 +14,7 @@ public interface PrivateMobileCodeService {
      * @param type        发送方式
      * @return
      */
-    public MobileCodeResult sendMobileCode(String mobile, String messageData, String type);
+    public GeneralResult sendMobileCode(String mobile, String messageData, String type);
 
     /**
      * 发送短信
@@ -23,5 +24,5 @@ public interface PrivateMobileCodeService {
      * @param type        发送方式
      * @return
      */
-    public MobileCodeResult sendMobileCode(String[] mobile, String messageData, String type);
+    public GeneralResult sendMobileCode(String[] mobile, String messageData, String type);
 }

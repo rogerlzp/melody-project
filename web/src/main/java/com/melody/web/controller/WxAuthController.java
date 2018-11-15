@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
 import com.melody.annotation.PermInfo;
+import com.melody.base.GeneralResult;
 import com.melody.exception.BusinessException;
 import com.melody.gateway.api.WxAuthService;
 import com.melody.gateway.api.WxPayService;
@@ -79,7 +80,7 @@ public class WxAuthController extends BaseController {
     @ApiImplicitParam(name = "code", value = "用户登录回调内容会带上 ", required = true, dataType = "String")
     @Api(name = ApiConstant.WX_CODE)
     @RequestMapping(value = "/auth2", method = RequestMethod.GET, produces = "application/json")
-    public Map<String, Object> createSssion(@RequestParam(required = true, value = "code") String wxCode) {
+    public GeneralResult createSssion(@RequestParam(required = true, value = "code") String wxCode) {
         Map<String, Object> wxSessionMap = this.getWxSession(wxCode);
 
         if (null == wxSessionMap) {
@@ -103,17 +104,17 @@ public class WxAuthController extends BaseController {
         // 将结果上传到服务器后台，如果已经有用户，则更新用户的关系，并更新SESSION_KEY, 如果没有用户，则返回页面，弹出用户注册界面。
         UserQueryResult userQueryResult = wxService.create3rdSession(wxOpenId, wxSessionKey, expires);
         userQueryResult.setOpenid(wxOpenId);
-        Map<String, Object> results = JsonHelper.toRespJson(userQueryResult);
-        results.put("data", userQueryResult);
+//        Map<String, Object> results = JsonHelper.toRespJson(userQueryResult);
+//        results.put("data", userQueryResult);
 //        return JsonApi.isOk().data(result);
 //        return result;
 //        return new ModelAndView("registerResult", results);
-        return results;
+        return GeneralResult.isOk().data(userQueryResult);
 //        return userQueryResult;
     }
 
     @RequestMapping(value = "/auth", method = RequestMethod.GET, produces = "application/json")
-    public Map<String, Object> createSssion2(@RequestParam(required = true, value = "code") String wxCode) throws Exception {
+    public GeneralResult createSssion2(@RequestParam(required = true, value = "code") String wxCode) throws Exception {
 
         Map<String, Object> wxSessionMap = JSON.parseObject(wxAuthService.wxSpOAuth2AccessToken(wxCode), Map.class);
 
@@ -139,12 +140,12 @@ public class WxAuthController extends BaseController {
         // 将结果上传到服务器后台，如果已经有用户，则更新用户的关系，并更新SESSION_KEY, 如果没有用户，则返回页面，弹出用户注册界面。
         UserQueryResult userQueryResult = wxService.create3rdSession(wxOpenId, wxSessionKey, expires);
         userQueryResult.setOpenid(wxOpenId);
-        Map<String, Object> results = JsonHelper.toRespJson(userQueryResult);
-        results.put("data", userQueryResult);
+//        Map<String, Object> results = JsonHelper.toRespJson(userQueryResult);
+//        results.put("data", userQueryResult);
 //        return JsonApi.isOk().data(result);
 //        return result;
 //        return new ModelAndView("registerResult", results);
-        return results;
+        return GeneralResult.isOk().data(userQueryResult);
 
     }
 

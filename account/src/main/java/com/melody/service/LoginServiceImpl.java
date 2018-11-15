@@ -2,6 +2,7 @@ package com.melody.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.melody.annotation.Role;
+import com.melody.base.GeneralResult;
 import com.melody.common.constant.BusinessCodes;
 import com.melody.common.constant.RedisCodes;
 import com.melody.common.constant.UserLoginEnum;
@@ -62,9 +63,9 @@ public class LoginServiceImpl implements LoginService {
         redisCache.delKey(RedisCodes.VERIFYCODE + userQueryPara.getMachineNo());
     }
 
-    public UserQueryResult doLogin(UserQueryEnter userQueryPara) {
+    public GeneralResult doLogin(UserQueryEnter userQueryPara) {
         UserQueryResult result = new UserQueryResult();
-        result.setCode(BusinessCodes.SUCCESS);
+//        result.setCode(BusinessCodes.SUCCESS);
 
         String password = TokenUtils.getInstance().MD5(userQueryPara.getPassword());
         // 0.判断验证码, 不需要验证码
@@ -94,16 +95,16 @@ public class LoginServiceImpl implements LoginService {
                     "save user device relation falure, registrationId:" + userQueryPara.getRegistrationId() + " userId:"
                             + redisUser.getUserId(), e);
         }
-        return result;
+       return GeneralResult.isOk().data(result);
     }
 
     @Role
-    public UserQueryResult doLogout(UserQueryEnter userQueryEnter) {
+    public GeneralResult doLogout(UserQueryEnter userQueryEnter) {
         UserQueryResult userQueryResult = new UserQueryResult();
         redisCache.delKey(RedisCodes.SESSION + userQueryEnter.getSessionKey());
-        userQueryResult.setCode(BusinessCodes.SUCCESS);
+//        userQueryResult.setCode(BusinessCodes.SUCCESS);
         pushRelationService.saveUserDevice(userQueryEnter.getRegistrationId(), 0);
-        return userQueryResult;
+        return GeneralResult.isOk().data(userQueryResult);
     }
 
     /**

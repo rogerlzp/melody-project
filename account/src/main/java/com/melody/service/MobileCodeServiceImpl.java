@@ -2,6 +2,7 @@ package com.melody.service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.melody.base.GeneralResult;
 import com.melody.common.constant.BusinessCodes;
 import com.melody.common.constant.RedisCodes;
 
@@ -55,7 +56,7 @@ public class MobileCodeServiceImpl implements MobileCodeService {
     PrivateMobileCodeService privateMobileCodeService;
 
 
-    public MobileCodeResult getMobileCode(MobileCodeEnter mce) {
+    public GeneralResult getMobileCode(MobileCodeEnter mce) {
 
         log.info("getMobileCode" + mce.toString());
         MobileCodeResult mcr = new MobileCodeResult();
@@ -71,7 +72,7 @@ public class MobileCodeServiceImpl implements MobileCodeService {
         } else {// 3.其他
             throw new BusinessException("-1", "短信发送类型不正确，请重新选择！");
         }
-        MobileCodeResult result = privateMobileCodeService.sendMobileCode(mce.getMobileNo(), String.format(MESSAGE_DATA, mobileCode),
+        GeneralResult result = privateMobileCodeService.sendMobileCode(mce.getMobileNo(), String.format(MESSAGE_DATA, mobileCode),
                 SMSManager.YP);
 
         if (result == null || !result.getCode().equals(BusinessCodes.SUCCESS)) {
@@ -82,9 +83,9 @@ public class MobileCodeServiceImpl implements MobileCodeService {
         //把验证码保存到redis中
         redisCache.setString(RedisCodes.MOBILE_SMS + mce.getMobileNo(), mobileCode, RedisCodes.SMS_CODE_EXPIRE_TIME);
 
-        mcr.setCode(BusinessCodes.SUCCESS);
-        mcr.setMessage("Success");
-        return mcr;
+//        mcr.setCode(BusinessCodes.SUCCESS);
+//        mcr.setMessage("Success");
+        return GeneralResult.isOk().data(mcr);
     }
 
     private void sendRetrievePwdMobileCode(MobileCodeEnter mce, MobileCodeResult mcr) {
@@ -140,16 +141,17 @@ public class MobileCodeServiceImpl implements MobileCodeService {
 
 
     @Override
-    public MobileCodeResult verifyMobileCode(MobileCodeEnter mobileCodeEnter) {
+    public    GeneralResult verifyMobileCode(MobileCodeEnter mobileCodeEnter) {
         MobileCodeResult result = new MobileCodeResult();
-        result.setCode(BusinessCodes.SUCCESS);
+//        result.setCode(BusinessCodes.SUCCESS);
         User redisUser = userDAO.getUserByMobileNo(mobileCodeEnter.getMobileNo());
 
         String rmc = redisCache.getString(RedisCodes.MOBILE_SMS + mobileCodeEnter.getMobileNo());
 
         String checkCode = sysConfigService.getSysParameter("CHECKCODE"/*登录，注册，忘记密码的万能密码*/);
         if (mobileCodeEnter.getMobileCode().equals(checkCode)) {
-            return result;
+//            return result;
+           return GeneralResult.isOk().data(result);
         }
         if (redisUser == null) {
             throw new BusinessException(BusinessCodes.ACCOUNT_FINDUSER_ERROR, "ACCOUNT_FINDUSER_ERROR");//没有找到该用户!
@@ -165,7 +167,9 @@ public class MobileCodeServiceImpl implements MobileCodeService {
 //            throw new BusinessException(BusinessCodes.ACCOUNT_IDCARD_ERROR, "idCard is error");//身份证号码不对
 //        }
         //redisCache.delKey(RedisCodes.MOBILE_SMS + mobileCodeEnter.getMobileNo());
-        return result;
+
+
+        return GeneralResult.isOk().data(result);
     }
 
 

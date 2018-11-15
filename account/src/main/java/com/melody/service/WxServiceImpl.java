@@ -1,6 +1,7 @@
 package com.melody.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.melody.base.GeneralResult;
 import com.melody.common.constant.BusinessCodes;
 import com.melody.common.constant.RedisCodes;
 import com.melody.common.constant.UserLevelEnum;
@@ -64,7 +65,7 @@ public class WxServiceImpl implements WxService {
         //TODO: 后续添加
 //        insertUserLoginLog(redisUser, sessionKey, "login", userQueryPara.getIp());// 处理登录日志
 
-        userQueryResult.setCode(BusinessCodes.SUCCESS);
+//        userQueryResult.setCode(BusinessCodes.SUCCESS);
 
         userQueryResult.setSessionKey(sessionKey);
 

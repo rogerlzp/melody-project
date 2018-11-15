@@ -1,6 +1,7 @@
 package com.melody.user.api;
 
 import com.melody.annotation.Role;
+import com.melody.base.GeneralResult;
 import com.melody.exception.TxException;
 import com.melody.user.dto.User;
 import com.melody.user.dto.UserAddress;
@@ -12,16 +13,16 @@ import java.util.List;
 public interface UserAddressService {
 
     @Role
-    UserAddressSaveResult saveUserAddress(UserAddress userAddress);
+    GeneralResult saveUserAddress(UserAddress userAddress);
 
 
 
-    UserAddressResult getUserAddressByOpenId(String openid);
+    GeneralResult getUserAddressByOpenId(String openid);
 
 //    @Role
 //    List<UserAddress> getUserAddressByUserId(UserAddress userAddress);
 
-    UserAddressSaveResult getUserAddressById(Long id);
+    GeneralResult getUserAddressById(Long id);
 
     UserAddress getDefaultAddressByUserId(Long userId);
 

@@ -1,6 +1,7 @@
 package com.melody.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.melody.base.GeneralResult;
 import com.melody.common.constant.BusinessCodes;
 import com.melody.common.constant.RedisCodes;
 import com.melody.dao.UserAddressMapper;
@@ -37,7 +38,7 @@ public class UserAddressServiceImpl implements UserAddressService {
 
     //返回UserAddress id
     @Override
-    public UserAddressSaveResult saveUserAddress(UserAddress userAddress) {
+    public GeneralResult saveUserAddress(UserAddress userAddress) {
         long sequenceId = baseService.getNextSequence("TR_USER_ADDRESS");
         userAddress.setId(sequenceId);
 
@@ -59,13 +60,13 @@ public class UserAddressServiceImpl implements UserAddressService {
         if (id == 1) {
             BeanUtils.copyProperties(userAddress, userAddressSaveResult);
         }
-        userAddressSaveResult.setCode(BusinessCodes.SUCCESS);
+//        userAddressSaveResult.setCode(BusinessCodes.SUCCESS);
 
-        return userAddressSaveResult;
+        return GeneralResult.isOk().data(userAddressSaveResult);
     }
 
     @Override
-    public UserAddressResult getUserAddressByOpenId(String openId) {
+    public GeneralResult getUserAddressByOpenId(String openId) {
         UserAddressResult userAddressResult = new UserAddressResult();
 
         List<UserAddress> userAddressList = userAddressMapper.getUserAddress(openId);
@@ -73,24 +74,19 @@ public class UserAddressServiceImpl implements UserAddressService {
 
         userAddressResult.setRecords(userAddressList);
 
-
-        userAddressResult.setCode(BusinessCodes.SUCCESS);
-        return userAddressResult;
+        return GeneralResult.isOk().data(userAddressResult);
 
     }
 
     @Override
-    public UserAddressSaveResult getUserAddressById(Long id) {
+    public GeneralResult getUserAddressById(Long id) {
         UserAddressSaveResult userAddressSaveResult = new UserAddressSaveResult();
 
         UserAddress userAddress = userAddressMapper.selectByPrimaryKey(id);
 
 
         BeanUtils.copyProperties(userAddress, userAddressSaveResult);
-
-
-        userAddressSaveResult.setCode(BusinessCodes.SUCCESS);
-        return userAddressSaveResult;
+        return GeneralResult.isOk().data(userAddressSaveResult);
 
     }
 

@@ -3,6 +3,8 @@ package com.melody.web.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.melody.base.GeneralEnter;
+import com.melody.base.GeneralResult;
+import com.melody.common.constant.BusinessCodes;
 import com.melody.product.api.SKUService;
 import com.melody.product.dto.*;
 import com.melody.result.JsonApi;
@@ -40,7 +42,6 @@ public class SKUController extends BaseController {
         BeanUtils.copyProperties(loginFrom, generalEnter);
         List<SKU> skuList = skuService.getSKU(generalEnter);
 
-
         return JsonApi.isOk().message(skuList.get(0).getSkuNo());
 
     }
@@ -50,21 +51,21 @@ public class SKUController extends BaseController {
     public JsonApi get2(LoginForm loginFrom, HttpServletRequest request, BindingResult bindingResult) {
         GeneralEnter generalEnter = new GeneralEnter();
         BeanUtils.copyProperties(loginFrom, generalEnter);
-        List<SKU> skuList = skuService.getSKUWithoutUserInfo(generalEnter);
+        SKUListResult skuListResult = skuService.getSKUWithoutUserInfo(generalEnter);
 
-        return JsonApi.isOk().message(skuList.get(0).getSkuNo());
+        return JsonApi.isOk().code(BusinessCodes.SUCCESS).data(skuListResult);
     }
 
-    @RequestMapping("/homeRecommend")
-    public Map<String, Object> getHomeRecommend(BaseForm baseForm, HttpServletRequest request, BindingResult bindingResult) {
+    @RequestMapping("/home/list")
+    public GeneralResult getHomeRecommend(BaseForm baseForm, HttpServletRequest request, BindingResult bindingResult) {
         GeneralEnter generalEnter = new GeneralEnter();
         BeanUtils.copyProperties(baseForm, generalEnter);
 
-        SKUResult skuResult = skuService.getSKUHomePage(generalEnter);
+        SKUListResult skuListResult = skuService.getSKUHomePage(generalEnter);
 
-        Map<String, Object> results = JsonHelper.toRespJson(skuResult);
-        results.put("data", skuResult);
-        return results;
+//        Map<String, Object> results = JsonHelper.toRespJson(skuResult);
+//        results.put("data", skuResult);
+        return GeneralResult.isOk().data(skuListResult);
     }
 
 
@@ -77,15 +78,15 @@ public class SKUController extends BaseController {
      * @return
      */
     @RequestMapping("/home/ListSpu")
-    public Map<String, Object> getHomeRecommend(SPUForm baseForm, HttpServletRequest request, BindingResult bindingResult) {
+    public GeneralResult getHomeRecommend(SPUForm baseForm, HttpServletRequest request, BindingResult bindingResult) {
         SKUEnter skuEnter = new SKUEnter();
         BeanUtils.copyProperties(baseForm, skuEnter);
 
         SKUResult skuResult = skuService.getSKUHomeBySpu(skuEnter);
 
-        Map<String, Object> results = JsonHelper.toRespJson(skuResult);
-        results.put("data", skuResult);
-        return results;
+//        Map<String, Object> results = JsonHelper.toRespJson(skuResult);
+//        results.put("data", skuResult);
+        return GeneralResult.isOk().data(skuResult);
     }
 
 
@@ -122,14 +123,14 @@ public class SKUController extends BaseController {
      * @return
      */
     @RequestMapping("/wx/spuFilter")
-    public Map<String, Object> getSPUFilter(SKUForm baseForm, HttpServletRequest request, BindingResult bindingResult) {
+    public GeneralResult getSPUFilter(SKUForm baseForm, HttpServletRequest request, BindingResult bindingResult) {
         SKUListEnter skuListEnter = new SKUListEnter();
         BeanUtils.copyProperties(baseForm, skuListEnter);
 
         SKUListResult skuListResult = skuService.getSKUListFilter(skuListEnter);
 
-        Map<String, Object> results = JsonHelper.toRespJson(skuListResult);
-        results.put("data", skuListResult);
-        return results;
+//        Map<String, Object> results = JsonHelper.toRespJson(skuListResult);
+//        results.put("data", skuListResult);
+        return GeneralResult.isOk().data(skuListResult);
     }
 }

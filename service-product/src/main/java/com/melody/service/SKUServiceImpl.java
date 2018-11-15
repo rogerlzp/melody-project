@@ -30,20 +30,25 @@ public class SKUServiceImpl implements SKUService {
     @Role
     public List<SKU> getSKU(GeneralEnter generalEnter) {
         List<SKU> skuList = skuMapper.querySKUList(0, 10, "1");
-
         return skuList;
     }
 
     @Override
-    public List<SKU> getSKUWithoutUserInfo(GeneralEnter generalEnter) {
-        List<SKU> skuList = skuMapper.querySKUList(0, 10, "1");
-
-        return skuList;
+    public SKUListResult getSKUWithoutUserInfo(GeneralEnter generalEnter) {
+        SKUListResult skuListResult = new SKUListResult();
+        int currentPage = generalEnter.getCurrentPage(); // current为1， 所以往后减一位
+        int pageSize = generalEnter.getPageSize();
+        int totalCount = skuMapper.countAllSKU();// 获取总条数
+        Pager pager = new Pager(pageSize, totalCount, currentPage);
+        List<SKU> skuList = skuMapper.querySKUHomeList(pager.getOffset(), pager.getPageSize(), "1");
+        skuListResult.setSkuList(skuList);
+        skuListResult.setTotalCount(totalCount);
+        return skuListResult;
     }
 
     @Override
-    public SKUResult getSKUHomePage(GeneralEnter generalEnter) {
-        SKUResult skuResult = new SKUResult();
+    public SKUListResult getSKUHomePage(GeneralEnter generalEnter) {
+        SKUListResult skuListResult = new SKUListResult();
         int currentPage = generalEnter.getCurrentPage(); // current为1， 所以往后减一位
         int pageSize = generalEnter.getPageSize();
         int totalCount = skuMapper.countAllSKU();// 获取总条数
@@ -51,13 +56,12 @@ public class SKUServiceImpl implements SKUService {
         List<SKU> skuList = skuMapper.querySKUList(pager.getOffset(), pager.getPageSize(), "1");
         for (SKU sku : skuList) {
             // 设置价格
-
         }
-        skuResult.setRecords(skuList);
+        skuListResult.setSkuList(skuList);
 
-        skuResult.setTotalCount(totalCount);
-        skuResult.setCode(BusinessCodes.SUCCESS);
-        return skuResult;
+//        skuResult.setTotalCount(totalCount);
+//        skuResult.setCode(BusinessCodes.SUCCESS);
+        return skuListResult;
     }
 
     @Override
@@ -80,7 +84,7 @@ public class SKUServiceImpl implements SKUService {
 
         skuResult.setRecords(skuList);
         skuResult.setTotalCount(totalCount);
-        skuResult.setCode(BusinessCodes.SUCCESS);
+//        skuResult.setCode(BusinessCodes.SUCCESS);
         return skuResult;
     }
 
@@ -95,7 +99,7 @@ public class SKUServiceImpl implements SKUService {
         List<SkuImage> skuImageList = skuMapper.getSkuImageList(skuEnter.getSkuNo());
         skuDetailResult.setSkuImageList(skuImageList);
 
-        skuDetailResult.setCode(BusinessCodes.SUCCESS);
+//        skuDetailResult.setCode(BusinessCodes.SUCCESS);
 
         return skuDetailResult;
     }
@@ -132,7 +136,7 @@ public class SKUServiceImpl implements SKUService {
 
         SKUListResult skuListResult = new SKUListResult();
         skuListResult.setSkuList(skuList);
-        skuListResult.setCode(BusinessCodes.SUCCESS);
+//        skuListResult.setCode(BusinessCodes.SUCCESS);
 
         return skuListResult;
 

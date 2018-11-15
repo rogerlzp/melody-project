@@ -2,6 +2,7 @@ package com.melody.web.controller;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.melody.base.GeneralResult;
 import com.melody.result.JsonApi;
 import com.melody.user.api.LoginService;
 import com.melody.user.dto.UserQueryEnter;
@@ -33,7 +34,7 @@ public class LoginController extends BaseController {
     LoginService loginService;
 
     @RequestMapping
-    public  Map<String, Object> login(LoginForm loginFrom, HttpServletRequest request, BindingResult bindingResult) throws IOException {
+    public GeneralResult login(LoginForm loginFrom, HttpServletRequest request, BindingResult bindingResult) throws IOException {
 
         String registrationId = request.getHeader("registration-id");
 
@@ -42,14 +43,14 @@ public class LoginController extends BaseController {
         para.setIp(getIpAddr(request));//获取登录的ip地址
         para.setRegistrationId(registrationId);
 
-        UserQueryResult result = loginService.doLogin(para);
+        GeneralResult result = loginService.doLogin(para);
 
-        Map<String, Object> results = JsonHelper.toRespJson(result);
-        results.put("data", result);
+//        Map<String, Object> results = JsonHelper.toRespJson(result);
+//        results.put("data", result);
 //        return JsonApi.isOk().data(result);
 //        return result;
 //        return new ModelAndView("registerResult", results);
-        return results;
+        return result;
     }
 
     public String getIpAddr(HttpServletRequest request) {

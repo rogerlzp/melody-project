@@ -1,5 +1,6 @@
 package com.melody.user.api;
 
+import com.melody.base.GeneralResult;
 import com.melody.user.dto.UserQueryResult;
 
 public interface WxService {

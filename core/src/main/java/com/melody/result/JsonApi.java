@@ -39,28 +39,23 @@ public class JsonApi<T> {
         return new JsonApi();
     }
 
-//    public static JsonApi isFail() {
-//        return isFail(FAIL);
-//    }
-
     public static JsonApi isFail(Integer code) {
         return new JsonApi().code(code);
     }
 
-//    public static JsonApi isFail(Throwable e) {
-//        return isFail().message(e);
-//    }
 
     public static JsonApi isFail(ErrorCode errorCode) {
         return new JsonApi()
                 .code(errorCode.getErrorID())
                 .message(errorCode.getErrorMsg());
     }
-//
-//    public JsonApi code(String code) {
-//        this.setResultCode(code);
-//        return this;
-//    }
+
+    //
+    public JsonApi code(String code) {
+        this.setResultCode(Integer.parseInt(code));
+        return this;
+    }
+
     public JsonApi code(int code) {
         this.setResultCode(code);
         return this;
@@ -78,7 +73,9 @@ public class JsonApi<T> {
     }
 
     public JsonApi data(T data) {
-        this.setData(data);
+        if (data != null) {
+            this.setData(data);
+        }
         return this;
     }
 
@@ -87,6 +84,7 @@ public class JsonApi<T> {
                 .code(errorCode)
                 .message(message);
     }
+
     public static JsonApi unknowError() {
         return new JsonApi()
                 .code(UNKNOWN_ERROR)

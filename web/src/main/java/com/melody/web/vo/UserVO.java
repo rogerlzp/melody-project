@@ -12,12 +12,10 @@ import javax.validation.constraints.Size;
 
 /**
  * 用户vo
- * @author konghang
  */
 @ApiModel(value="userVo对象",description="用户对象userVo")
 public class UserVO {
 
-    @NotBlank
     @Length(max = 10)
     @ApiModelProperty(value="用户名",name="username",example="konghang")
     @Getter

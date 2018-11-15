@@ -12,9 +12,9 @@ public interface SKUService {
     List<SKU> getSKU(GeneralEnter generalEnter);
 
 
-    List<SKU> getSKUWithoutUserInfo(GeneralEnter generalEnter);
+    SKUListResult getSKUWithoutUserInfo(GeneralEnter generalEnter);
 
-    SKUResult getSKUHomePage(GeneralEnter generalEnter);
+    SKUListResult getSKUHomePage(GeneralEnter generalEnter);
 
     SKUResult getSKUHomeBySpu(SKUEnter skuEnter);
 

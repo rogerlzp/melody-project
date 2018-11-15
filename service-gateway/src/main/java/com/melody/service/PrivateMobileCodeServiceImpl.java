@@ -3,6 +3,7 @@ package com.melody.service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.melody.base.GeneralResult;
 import com.melody.common.constant.BusinessCodes;
 import com.melody.common.constant.RedisCodes;
 import com.melody.common.sms.SMSManager;
@@ -49,7 +50,7 @@ public class PrivateMobileCodeServiceImpl implements PrivateMobileCodeService {
     SysConfigService sysConfigService;
 
     @Override
-    public MobileCodeResult sendMobileCode(String mobileNo, String messageData, String type) {
+    public GeneralResult sendMobileCode(String mobileNo, String messageData, String type) {
         //校验每个手机每天发送的次数
         //TODO: enable it later
         //    verifySendMobileCode(mobileNo);
@@ -65,15 +66,11 @@ public class PrivateMobileCodeServiceImpl implements PrivateMobileCodeService {
             log.error("sendMobileCode is error !!!! mobileNo:" + mobileNo, e);
             throw new BusinessException(BusinessCodes.ACCOUNT_SMS_ERROR, e);//已超过当天发送短信总条数
         }
-        MobileCodeResult result = new MobileCodeResult();
-        result.setCode(BusinessCodes.SUCCESS);
-        return result;
+        return GeneralResult.isOk();
     }
 
     @Override
-    public MobileCodeResult sendMobileCode(String[] strings, String messageData, String type) {
-        MobileCodeResult result = new MobileCodeResult();
-        result.setCode(BusinessCodes.SUCCESS);
+    public GeneralResult sendMobileCode(String[] strings, String messageData, String type) {
         for (String mobileNo : strings) {
             try {
                 sendMobileCode(mobileNo, messageData, type);
@@ -81,7 +78,7 @@ public class PrivateMobileCodeServiceImpl implements PrivateMobileCodeService {
                 log.error("sendMobileCode is error !!!! mobileNo:" + mobileNo, e);
             }
         }
-        return result;
+        return GeneralResult.isOk();
     }
 
     private void verifySendMobileCode(String mobileNo) {

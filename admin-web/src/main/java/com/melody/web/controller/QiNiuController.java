@@ -4,6 +4,7 @@ package com.melody.web.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import com.melody.annotation.PermInfo;
+import com.melody.base.GeneralResult;
 import com.melody.gateway.api.QiNiuTokenService;
 
 import com.melody.gateway.dto.QiNiuTokenEnter;
@@ -56,7 +57,7 @@ public class QiNiuController {
     @PermInfo("获取七牛Token")
     @RequiresPermissions("a:gateway:qiniuToken:get")
     @GetMapping("/upToken")
-    public Json add(QiNiuForm qiNiuForm) {
+    public GeneralResult add(QiNiuForm qiNiuForm) {
 
         String oper = "get token";
 //        log.info("{}, body: {}", oper, brandStr);
@@ -70,9 +71,10 @@ public class QiNiuController {
         BeanUtils.copyProperties(qiNiuForm, qiNiuTokenEnter);
 
         QiNiuTokenResult result = qiNiuTokenService.getQiNiuToken(qiNiuTokenEnter);
-        int success = Integer.valueOf(result.getCode());
-        return Json.result(oper, success == 0 ? true : false)
-                .data("uploadToken", result.getUploadToken());
+//        int success = Integer.valueOf(result.getCode());
+        return GeneralResult.isOk().data(result);
+//                .result(oper, success == 0 ? true : false)
+//                .data("uploadToken", result.getUploadToken());
     }
 
 }

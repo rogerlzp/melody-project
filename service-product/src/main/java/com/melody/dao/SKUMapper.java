@@ -22,6 +22,10 @@ public interface SKUMapper {
                            @Param(value = "pageSize") Integer pageSize,
                            @Param(value = "status") String status);
 
+    List<SKU> querySKUHomeList(@Param(value = "offset") Integer offset,
+                           @Param(value = "pageSize") Integer pageSize,
+                           @Param(value = "status") String status);
+
 
     int countAllSKU();
 

@@ -6,7 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class RegisterResult extends GeneralResult implements Serializable {
+public class RegisterResult implements Serializable {
     private static final long serialVersionUID = 1620966942868460193L;
     private String pictureCode;
     private String sessionKey;
@@ -16,4 +16,5 @@ public class RegisterResult extends GeneralResult implements Serializable {
 
     public RegisterResult() {
     }
+
 }
