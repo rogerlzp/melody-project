@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.melody.admin.api.AdminSKUService;
 import com.melody.admin.api.AdminSPUService;
 import com.melody.admin.dto.SysUser;
@@ -20,10 +21,10 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @PermInfo(value = "创造产品模块", pval = "a:sku")
@@ -45,10 +46,11 @@ public class AdminSPUController {
     @PostMapping("/add")
     public Json add(@RequestBody String brandStr) {
 
-        String oper = "add brand";
+        String oper = "add spu";
         log.info("{}, body: {}", oper, brandStr);
-        SPU brandObj = JSON.parseObject(brandStr, SPU.class);
-
+        SpuEnter brandObj1 = JSON.parseObject(brandStr, SpuEnter.class);
+        SPU brandObj = new SPU();
+        BeanUtils.copyProperties(brandObj1, brandObj);
         // 获取SpuAttr属性
         // 因为传来的Image 只有 picUrl, 不能自动转化为SkuImage, 所以手动转化一下，在添加到 sku中
         JSONObject jsonObject = JSON.parseObject(brandStr);
@@ -63,6 +65,17 @@ public class AdminSPUController {
         if (relateSpuArray != null && relateSpuArray.size() != 0 ) {
             List<SpuComponent> spuComponentList = jsonArray.toJavaList(SpuComponent.class);
             brandObj.setSpuComponentList(spuComponentList);
+        }
+
+        JSONArray spuSpaceArray = jsonObject.getJSONArray("spuSpaceList");
+        if (spuSpaceArray != null && spuSpaceArray.size() != 0 ) {
+           List<SpuSpace> spuSpaceList = new ArrayList<SpuSpace>();
+            for(int i=0;i<brandObj1.getSpuSpaceList().size();i++){
+                SpuSpace spuSpace = new SpuSpace();
+                spuSpace.setSpaceId(brandObj1.getSpuSpaceList().get(i));
+                spuSpaceList.add(spuSpace);
+            }
+            brandObj.setSpuSpaceList(spuSpaceList);
         }
 
         // 获取产品设计师

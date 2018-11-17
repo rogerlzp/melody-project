@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.melody.dao.AdminThemeMapper">
+    <resultMap id="BaseResultMap" type="Theme">
+        <id column="ID" property="id"/>
+        <result column="THEME_TITLE" property="themeTitle"/>
+        <result column="THEME_NAME" property="themeName"/>
+        <result column="THEME_DESC" property="themeDesc"/>
+        <result column="THEME_COVER" property="themeCover"/>
+        <result column="STATUS" property="status"/>
+        <result column="SHOW_ORDER" property="showOrder"/>
+        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+
+
+    <resultMap id="ThemeSkuResultMap" type="ThemeSku">
+        <id column="ID" property="id"/>
+        <result column="THEME_ID" property="themeId"/>
+        <result column="SKU_NO"  property="skuNo"/>
+        <result column="SKU_NAME"  property="skuName"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,THEME_TITLE,THEME_NAME,THEME_DESC,THEME_COVER,STATUS,SHOW_ORDER,CREATE_DATE,UPDATE_DATE
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from TT_THEME
+        where ID = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from TT_THEME
+        where ID = #{id}
+    </delete>
+    <insert id="insertTheme" parameterType="Theme">
+        insert into TT_THEME (ID, THEME_TITLE, THEME_NAME,
+        THEME_DESC, THEME_COVER, STATUS, SHOW_ORDER,CREATE_DATE)
+        values (#{id}, #{themeTitle}, #{themeName},
+        #{themeDesc},#{themeCover}, #{status}, #{showOrder},now())
+    </insert>
+
+    <insert id="insertThemeSku" parameterType="ThemeSku">
+        insert into TR_THEME_SKU (ID, THEME_ID, SKU_NO)
+        values (#{id}, #{themeId}, #{skuNo})
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="Theme">
+        update TT_THEME
+        <set>
+            <if test="themeTitle != null">
+                THEME_TITLE = #{themeTitle},
+            </if>
+            <if test="themeName != null">
+                THEME_NAME = #{themeName},
+            </if>
+            <if test="themeDesc != null">
+                THEME_DESC = #{themeDesc},
+            </if>
+            <if test="themeCover != null">
+                THEME_COVER = #{themeCover},
+            </if>
+            <if test="status != null">
+                STATUS = #{status},
+            </if>
+            <if test="showOrder != null">
+                SHOW_ORDER = #{showOrder},
+            </if>
+            UPDATE_DATE = now()
+        </set>
+        where ID = #{id}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="Theme">
+        update TT_THEME
+        set THEME_TITLE = #{themeTitle},
+        THEME_NAME = #{themeName},
+        THEME_DESC = #{themeDesc},
+        THEME_COVER = #{themeCover},
+        STATUS = #{status},
+        SHOW_ORDER = #{showOrder},
+        UPDATE_DATE = now()
+        where ID = #{id}
+    </update>
+
+    <update id="updateThemeSku" parameterType="ThemeSku">
+        UPDATE TR_THEME_SKU
+        SET SKU_NO = #{skuNo}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteByThemeId">
+        DELETE FROM TT_THEME
+        where ID = #{id}
+    </delete>
+
+    <update id="updateTheme">
+        UPDATE TT_THEME
+        set STATUS = #{status}, UPDATE_DATE=now()
+        where ID = #{id}
+    </update>
+
+    <select id="countAllTheme" resultType="java.lang.Integer">
+        select count(*) FROM TT_THEME
+    </select>
+
+    <select id="countThemeByStatus" resultType="java.lang.Integer">
+        select count(*) FROM TT_THEME
+        WHERE STATUS = #{status}
+    </select>
+
+
+    <sql id="pagination">
+        <![CDATA[
+
+	    limit #{offset}, #{pageSize}
+
+        ]]>
+    </sql>
+    <select id="queryThemeList" resultMap="BaseResultMap">
+        select
+        tt.ID,
+        tt.THEME_TITLE,
+        tt.THEME_NAME,
+        tt.THEME_DESC,
+        tt.THEME_COVER,
+        tt.STATUS,
+        tt.SHOW_ORDER,
+        tt.CREATE_DATE,
+        tt.UPDATE_DATE
+        from TT_THEME tt
+        WHERE tt.STATUS = #{status}
+        <include refid="pagination"/>
+    </select>
+
+
+    <select id="getThemeById" resultMap="BaseResultMap">
+        select
+        tt.ID,
+        tt.THEME_TITLE,
+        tt.THEME_NAME,
+        tt.THEME_DESC,
+        tt.THEME_COVER,
+        tt.STATUS,
+        tt.SHOW_ORDER,
+        tt.CREATE_DATE,
+        tt.UPDATE_DATE
+        from TT_THEME tt
+        WHERE tt.ID = #{id}
+    </select>
+
+    <select id="querySKUByThemeId" resultMap="ThemeSkuResultMap">
+        select
+        tts.ID,
+        tts.THEME_ID,
+        ts.SKU_NO,
+        ts.SKU_NAME
+        from TR_THEME_SKU tts
+        LEFT JOIN TT_SKU ts ON ts.SKU_NO = tts.SKU_NO
+        WHERE tts.THEME_ID = #{themeId}
+    </select>
+
+    <delete id="deleteThemeSku">
+        DELETE FROM TR_THEME_SKU
+        WHERE THEME_ID = #{themeId} AND SKU_NO = #{skuNo}
+    </delete>
+</mapper>

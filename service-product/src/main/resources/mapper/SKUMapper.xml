@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.melody.dao.SKUMapper">
-    <resultMap id="BaseResultMap" type="SKU">
-        <id column="SKU_NO" jdbcType="VARCHAR" property="skuNo"/>
-        <result column="ID" jdbcType="BIGINT" property="id"/>
-        <result column="SKU_NAME" jdbcType="VARCHAR" property="skuName"/>
-        <result column="SKU_DESC" jdbcType="VARCHAR" property="skuDesc"/>
-        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
-        <result column="PRICE" jdbcType="DECIMAL" property="price"/>
-        <result column="SPU_CODE" jdbcType="VARCHAR" property="spuCode"/>
-    </resultMap>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.melody.dao.SKUMapper">
+        <resultMap id="BaseResultMap" type="SKU">
+            <id column="SKU_NO" jdbcType="VARCHAR" property="skuNo"/>
+            <result column="ID" jdbcType="BIGINT" property="id"/>
+            <result column="SKU_NAME" jdbcType="VARCHAR" property="skuName"/>
+            <result column="SKU_DESC" jdbcType="VARCHAR" property="skuDesc"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="PRICE" jdbcType="DECIMAL" property="price"/>
+            <result column="SPU_CODE" jdbcType="VARCHAR" property="spuCode"/>
+        </resultMap>
 
     <resultMap id="QueryResultMap" type="SKU">
         <id column="ID" property="id"/>

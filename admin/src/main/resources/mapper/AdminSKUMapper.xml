@@ -60,7 +60,6 @@
         ID, SKU_NO, USER_LEVEL_ID, DISCOUNT, STATUS
     </sql>
 
-
     <resultMap id="SkuAttrResultMap" type="SkuAttr">
         <id column="ID" property="id"/>
         <result column="SKU_NO" property="skuNo"/>
@@ -298,12 +297,21 @@
 
 
     <select id="querySKUList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from TT_SKU
+    WHERE STATUS = #{status}
+    <include refid="pagination"/>
+    </select>
+
+    <select id="queryAllSKUBySpuCode" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from TT_SKU
-        WHERE STATUS = #{status}
-        <include refid="pagination"/>
+        WHERE STATUS = #{status} AND SPU_CODE=#{spuCode}
     </select>
+
+
 
     <insert id="insertSKUAttr" parameterType="SkuAttr">
         INSERT INTO TR_SKU_ATTR (ID, SKU_NO, ATTRIBUTES, PIC_URL)
@@ -339,6 +347,8 @@
         LEFT JOIN TT_CATEGORY tc ON tc.CATEGORY_CODE = tsp.CATEGORY_CODE
         WHERE SKU_NO = #{skuNo}
     </select>
+
+
 
     <select id="getSkuAttrBySkuNo" resultMap="SkuAttrResultMap">
       SELECT

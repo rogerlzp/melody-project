@@ -42,6 +42,12 @@
         <result column="DESIGNER_ID" property="designerId" />
         <result column="DESIGNER_NAME"  property="designerName" />
     </resultMap>
+    <resultMap id="SpuSpaceResultMap" type="SpuSpace">
+        <id column="ID"  property="id" />
+        <result column="SPU_CODE"  property="spuCode" />
+        <result column="SPACE_ID" property="spaceId" />
+        <result column="SPACE_NAME"  property="spaceName" />
+    </resultMap>
 
 
     <sql id="Base_Column_List">
@@ -79,7 +85,10 @@
         insert into TR_SPU_DESIGNER (ID, SPU_CODE, DESIGNER_ID)
         values (#{id},#{spuCode}, #{designerId} )
     </insert>
-
+    <insert id="insertSpuSpace">
+        insert into TR_SPU_SPACE (ID, SPU_CODE, SPACE_ID)
+        values (#{id},#{spuCode}, #{spaceId} )
+    </insert>
 
     <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="SPU" useGeneratedKeys="true">
         insert into TT_SPU
@@ -304,6 +313,18 @@
         FROM TR_SPU_DESIGNER tsd
         LEFT JOIN TS_USER tu ON tu.USER_ID = tsd.DESIGNER_ID
         WHERE tsd.SPU_CODE = #{spuCode}
+    </select>
+
+
+    <select id="getSpuSpaceBySpuCode" resultMap="SpuSpaceResultMap">
+        SELECT
+        tsp.ID,
+        tsp.SPU_CODE,
+        tsp.SPACE_ID,
+        tp.SPACE_NAME
+        FROM TR_SPU_SPACE tsp
+        LEFT JOIN TT_SPACE tp ON tp.ID = tsp.SPACE_ID
+        WHERE tsp.SPU_CODE = #{spuCode}
     </select>
 
 

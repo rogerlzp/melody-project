@@ -20,6 +20,12 @@ public interface AdminSPUMapper {
                            @Param(value = "brandCode") String brandCode);
 
     int insertSpuAttr(SpuAttr spuAttr);
+    int insertSpuSpace(@Param(value = "id") Long id, @Param(value = "spuCode") String spuCode,
+                       @Param(value = "spaceId") Integer spaceId);
+
+    List<SpuSpace> getSpuSpaceBySpuCode(@Param(value = "spuCode") String spuCode);
+
+
 
     int insertSpuComponent(SpuComponent spuComponent);
 

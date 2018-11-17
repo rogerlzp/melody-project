@@ -215,6 +215,21 @@ public class AdminSKUController {
         return Json.succ(oper).data("page", page);
     }
 
+    @PermInfo("根据SPUCODE 所有SKU")
+    @RequiresPermissions("a:sku:sku:query")
+    @GetMapping("/getSKUBySpuCode")
+    public Json querySKUBySpuCode(String spuCode) {
+        String oper = "根据SPUCODE 所有SKU";
+        log.info("{}, body: {}", oper, spuCode);
+        if (StringUtils.isEmpty(spuCode)) {
+            return Json.fail(oper, "无法查询SKU：参数SpuCode为空（spuCode）");
+        }
+
+
+        List<SKU> skuList = adminSKUService.querySKUBySpuCode(spuCode);
+        return Json.succ(oper).data("skuList", skuList);
+    }
+
 
     // TODO: 删除后，对应的SKU删除
     // 添加到日志里面

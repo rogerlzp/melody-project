@@ -18,6 +18,9 @@ public interface AdminSKUMapper {
     int insertSKUPrice(SkuPrice skuPrice);
     int insertUserSKUDiscount(UserSkuDiscount userSkuDiscount);
 
+    List<SKU> queryAllSKUBySpuCode(@Param(value = "status") String status, @Param(value = "spuCode") String spuCode);
+
+
     // 插入图片
     int insertSKUImage(SkuImage skuImage);
     int updateSkuImage(SkuImage skuImage);

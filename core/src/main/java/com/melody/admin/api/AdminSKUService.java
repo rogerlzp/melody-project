@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 
 
 public interface AdminSKUService {
@@ -28,5 +29,5 @@ public interface AdminSKUService {
 
    SKU querySKUBySkuNo(String skuNo);
 
-
+   List<SKU> querySKUBySpuCode(String spuCode);
 }

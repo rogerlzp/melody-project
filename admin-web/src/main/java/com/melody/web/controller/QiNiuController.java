@@ -43,38 +43,20 @@ public class QiNiuController {
     private QiNiuTokenService qiNiuTokenService;
 
 
-//    @RequestMapping(value = "/upToken")
-//    public JSON getUploadToken(QiNiuForm qiNiuForm, BindingResult bindingResult) throws IOException {
-//        QiNiuTokenEnter qiNiuTokenEnter = new QiNiuTokenEnter();
-//        BeanUtils.copyProperties(qiNiuForm, qiNiuTokenEnter);
-//        QiNiuTokenResult result = qiNiuTokenService.getQiNiuToken(qiNiuTokenEnter);
-//
-//        Map<String, Object> results = JsonHelper.toRespJson(result);
-//        results.put("data", result);
-//        return new ModelAndView("qiniuResult", results);
-//    }
-
     @PermInfo("获取七牛Token")
     @RequiresPermissions("a:gateway:qiniuToken:get")
     @GetMapping("/upToken")
-    public GeneralResult add(QiNiuForm qiNiuForm) {
+    public Json add(QiNiuForm qiNiuForm) {
 
         String oper = "get token";
-//        log.info("{}, body: {}", oper, brandStr);
 
-//        QiNiuTokenEnter brandObj = JSON.parseObject(brandStr, QiNiuTokenEnter.class);
-
-//        if (StringUtils.isEmpty(brandObj.getBrandName())) {
-//            return Json.fail(oper, "品牌名不能为空");
-//        }
         QiNiuTokenEnter qiNiuTokenEnter = new QiNiuTokenEnter();
         BeanUtils.copyProperties(qiNiuForm, qiNiuTokenEnter);
 
         QiNiuTokenResult result = qiNiuTokenService.getQiNiuToken(qiNiuTokenEnter);
 //        int success = Integer.valueOf(result.getCode());
-        return GeneralResult.isOk().data(result);
-//                .result(oper, success == 0 ? true : false)
-//                .data("uploadToken", result.getUploadToken());
+        return Json.result(oper, result.getUploadToken() != null ? true : false)
+                .data("uploadToken", result.getUploadToken());
     }
 
 }

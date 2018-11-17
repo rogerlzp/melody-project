@@ -24,6 +24,9 @@
         <typeAlias alias="SkuPrice" type="com.melody.product.dto.SkuPrice"/>
         <typeAlias alias="UserSkuDiscount" type="com.melody.product.dto.UserSkuDiscount"/>
 
+        <typeAlias alias="Theme" type="com.melody.product.dto.Theme"/>
+        <typeAlias alias="ThemeSku" type="com.melody.product.dto.ThemeSku"/>
+
         <typeAlias alias="Order" type="com.melody.product.dto.Order"/>
         <typeAlias alias="OrderDetailResult" type="com.melody.product.dto.OrderDetailResult"/>
         <typeAlias alias="OrderExpress" type="com.melody.product.dto.OrderExpress"/>

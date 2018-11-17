@@ -58,9 +58,6 @@ public class SKUServiceImpl implements SKUService {
             // 设置价格
         }
         skuListResult.setSkuList(skuList);
-
-//        skuResult.setTotalCount(totalCount);
-//        skuResult.setCode(BusinessCodes.SUCCESS);
         return skuListResult;
     }
 
@@ -91,23 +88,18 @@ public class SKUServiceImpl implements SKUService {
     @Override
     public SKUDetailResult getSKUDetail(SKUEnter skuEnter) {
         SKU sku = skuMapper.selectByPrimaryKey(skuEnter.getSkuNo());
-
         SKUDetailResult skuDetailResult = new SKUDetailResult();
         // 添加图片
         BeanUtils.copyProperties(sku, skuDetailResult);
 
         List<SkuImage> skuImageList = skuMapper.getSkuImageList(skuEnter.getSkuNo());
         skuDetailResult.setSkuImageList(skuImageList);
-
-//        skuDetailResult.setCode(BusinessCodes.SUCCESS);
-
         return skuDetailResult;
     }
 
     @Override
     public Double getMySKUDiscount(String skuNo, Long userId) {
         return skuMapper.getSkuDiscount(skuNo, userId);
-
     }
 
     /**
@@ -128,18 +120,11 @@ public class SKUServiceImpl implements SKUService {
         for (SKU sku : skuList) {
             List<SkuImage> skuImageList = skuMapper.getSkuImageList(sku.getSkuNo());
             sku.setSkuImageList(skuImageList);
-
-//            List<SkuAttr> skuAttrList = skuMapper.getSkuAttrList(sku.getSkuNo());
-//            sku.setSkuAttrList(skuAttrList);
         }
         // 根据spuCode 获取Attr和对应的值
-
         SKUListResult skuListResult = new SKUListResult();
         skuListResult.setSkuList(skuList);
-//        skuListResult.setCode(BusinessCodes.SUCCESS);
-
         return skuListResult;
-
     }
 
 

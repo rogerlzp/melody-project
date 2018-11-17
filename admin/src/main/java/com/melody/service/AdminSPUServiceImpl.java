@@ -71,6 +71,13 @@ public class AdminSPUServiceImpl implements AdminSPUService {
                 spuDesigner.setId(spuDesignerId);
                 adminSPUMapper.insertSpuDesigner(spuDesigner);
             }
+
+            // 适用空间
+            for (SpuSpace spuSpace : spu.getSpuSpaceList()) {
+                long spuSpaceId = baseService.getNextSequence("TR_SPU_SPACE");
+                adminSPUMapper.insertSpuSpace(spuSpaceId, spu.getSpuCode(), spuSpace.getSpaceId());
+            }
+
             return spuId;
         }
         return -1L;
@@ -94,6 +101,8 @@ public class AdminSPUServiceImpl implements AdminSPUService {
 
             List<SpuDesigner> spuDesignerList = adminSPUMapper.getSpuDesignerBySpuCode(spu.getSpuCode());
             spu.setSpuDesignerList(spuDesignerList);
+            List<SpuSpace> spuSpaceList = adminSPUMapper.getSpuSpaceBySpuCode(spu.getSpuCode());
+            spu.setSpuSpaceList(spuSpaceList);
         }
 
         Page<SPU> brandPage = new Page<SPU>();
@@ -123,7 +132,7 @@ public class AdminSPUServiceImpl implements AdminSPUService {
         if (spu != null) {
             List<SpuAttr> spuAttrList = adminSPUMapper.getSpuAttrBySpuCode(spuCode);
             if (spuAttrList != null) {
-                for(SpuAttr spuAttr: spuAttrList) {
+                for (SpuAttr spuAttr : spuAttrList) {
                     if (spuAttr.getAttrInputType() == 3) { // 值存储在单独的列里面
                         spuAttr.setAttrValList(adminAttrMapper.queryAttrValList(spuAttr.getAttrId()));
                     }
@@ -137,6 +146,10 @@ public class AdminSPUServiceImpl implements AdminSPUService {
             List<SpuDesigner> spuDesignerList = adminSPUMapper.getSpuDesignerBySpuCode(spu.getSpuCode());
             if (spuDesignerList != null) {
                 spu.setSpuDesignerList(spuDesignerList);
+            }
+            List<SpuSpace> spuSpaceList = adminSPUMapper.getSpuSpaceBySpuCode(spu.getSpuCode());
+            if (spuSpaceList != null) {
+                spu.setSpuSpaceList(spuSpaceList);
             }
         }
         return spu;

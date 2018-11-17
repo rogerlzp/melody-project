@@ -253,6 +253,10 @@ public class AdminSKUServiceImpl implements AdminSKUService {
         }
         return insertResult;
     }
-
+    @Override
+    public List<SKU> querySKUBySpuCode(String spuCode){
+        List<SKU> skuList = adminSKUMapper.queryAllSKUBySpuCode("1", spuCode);
+        return skuList;
+    }
 }
 
