@@ -30,4 +30,6 @@ public interface AdminSKUService {
    SKU querySKUBySkuNo(String skuNo);
 
    List<SKU> querySKUBySpuCode(String spuCode);
+
+   List<SKU> searchSKUListByName(String skuName);
 }

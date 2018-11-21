@@ -304,6 +304,13 @@
     <include refid="pagination"/>
     </select>
 
+    <select id="searchSKUListByName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from TT_SKU WHERE SKU_NAME LIKE  CONCAT(CONCAT('%',#{skuName}),'%')
+    </select>
+
+
     <select id="queryAllSKUBySpuCode" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

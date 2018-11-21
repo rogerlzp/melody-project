@@ -14,6 +14,9 @@ public interface AdminSPUMapper {
 
     int countAllSPU();
 
+    int countSpuSpace( @Param(value = "spuCode") String spuCode,
+                       @Param(value = "spaceId") Integer spaceId);
+
     int deleteBySPUId(@Param(value = "id") Long id);
 
     List<SPU> querySPUByBC(@Param(value = "categoryCode") String categoryCode,

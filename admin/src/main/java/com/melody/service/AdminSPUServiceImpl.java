@@ -196,6 +196,16 @@ public class AdminSPUServiceImpl implements AdminSPUService {
                     }
                 }
 
+                // 适用空间
+                for (SpuSpace spuSpace : spu.getSpuSpaceList()) {
+                    // 检查是否在数据库中存在 TODO: 优化
+                    if (adminSPUMapper.countSpuSpace(spu.getSpuCode(), spuSpace.getSpaceId()) != 1) {
+                        long spuSpaceId = baseService.getNextSequence("TR_SPU_SPACE");
+                        adminSPUMapper.insertSpuSpace(spuSpaceId, spu.getSpuCode(), spuSpace.getSpaceId());
+                    }
+                }
+
+
                 return updateResult;
             }
         }

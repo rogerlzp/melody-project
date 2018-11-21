@@ -10,6 +10,7 @@ import com.melody.admin.api.AdminSPUService;
 import com.melody.admin.api.SysPermService;
 import com.melody.annotation.PermInfo;
 import com.melody.product.dto.*;
+import com.melody.user.dto.User;
 import com.melody.util.PageUtils;
 import com.melody.vo.Json;
 import org.apache.commons.lang3.StringUtils;
@@ -214,6 +215,21 @@ public class AdminSKUController {
         Page<SKU> page = adminSKUService.querySKUList(PageUtils.getPageParam(json));
         return Json.succ(oper).data("page", page);
     }
+
+    @PermInfo("根据SKU名字查询所有SKU")
+    @RequiresPermissions("a:sku:sku:query")
+    @GetMapping("/search")
+    public Json search(String skuName) {
+        String oper = "query sku";
+        log.info("{}, body: {}", oper, skuName);
+        if (StringUtils.isEmpty(skuName)) {
+            return Json.fail(oper, "无法查询SKU：参数SpuCode为空（spuCode）");
+        }
+
+        List<SKU> skuList   = adminSKUService.searchSKUListByName(skuName);
+        return Json.succ(oper).data("skuList", skuList);
+    }
+
 
     @PermInfo("根据SPUCODE 所有SKU")
     @RequiresPermissions("a:sku:sku:query")

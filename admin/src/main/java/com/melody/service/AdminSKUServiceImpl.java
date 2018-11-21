@@ -258,5 +258,12 @@ public class AdminSKUServiceImpl implements AdminSKUService {
         List<SKU> skuList = adminSKUMapper.queryAllSKUBySpuCode("1", spuCode);
         return skuList;
     }
+
+    // 查找名字类似的产品名称
+    @Override
+    public List<SKU> searchSKUListByName(String skuName){
+        List<SKU> skuList = adminSKUMapper.searchSKUListByName(skuName);
+        return skuList;
+    }
 }
 

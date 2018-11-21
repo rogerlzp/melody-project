@@ -327,5 +327,8 @@
         WHERE tsp.SPU_CODE = #{spuCode}
     </select>
 
-
+    <select id="countSpuSpace" resultType="java.lang.Integer">
+        SELECT count(*) FROM TR_SPU_SPACE
+        WHERE SPU_CODE = #{spuCode} AND SPACE_ID= #{spaceId}
+    </select>
 </mapper>

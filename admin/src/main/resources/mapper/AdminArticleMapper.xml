@@ -1,197 +1,199 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.melody.dao.AdminArticleMapper">
-  <resultMap id="BaseResultMap" type="Article">
-    <id column="ARTICLE_ID" jdbcType="BIGINT" property="articleId" />
-    <result column="ARTICLE_TITLE" jdbcType="VARCHAR" property="articleTitle" />
-    <result column="DISPLAY_TIME" jdbcType="TIMESTAMP" property="displayTime" />
-    <result column="ARTICLE_IP" jdbcType="VARCHAR" property="articleIp" />
-    <result column="ARTICLE_CLICK" jdbcType="INTEGER" property="articleClick" />
-    <result column="USER_ID" jdbcType="BIGINT" property="userId" />
-    <result column="AUTHOR_NAME" property="authorName" />
-    <result column="ARTICLE_TYPE" jdbcType="VARCHAR" property="articleType" />
-    <result column="ARTICLE_CONTENT" jdbcType="LONGVARCHAR" property="articleContent" />
-    <result column="ARTICLE_ABSTRACT" jdbcType="VARCHAR" property="articleAbstract" />
-    <result column="ARTICLE_CATEGORY" jdbcType="VARCHAR" property="articleCategory" />
-    <result column="STATUS" jdbcType="VARCHAR" property="status" />
-    <result column="IS_COMMENT_ENABLED" jdbcType="BIT" property="isCommentEnabled" />
-    <result column="IMPORTANCE" jdbcType="INTEGER" property="importance" />
-    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="Article">
+        <id column="ARTICLE_ID" jdbcType="BIGINT" property="articleId"/>
+        <result column="ARTICLE_TITLE" jdbcType="VARCHAR" property="articleTitle"/>
+        <result column="DISPLAY_TIME" jdbcType="TIMESTAMP" property="displayTime"/>
+        <result column="ARTICLE_IP" jdbcType="VARCHAR" property="articleIp"/>
+        <result column="ARTICLE_CLICK" jdbcType="INTEGER" property="articleClick"/>
+        <result column="USER_ID" jdbcType="BIGINT" property="userId"/>
+        <result column="AUTHOR_NAME" property="authorName"/>
+        <result column="ARTICLE_TYPE" jdbcType="VARCHAR" property="articleType"/>
+        <result column="ARTICLE_CONTENT" jdbcType="LONGVARCHAR" property="articleContent"/>
+        <result column="ARTICLE_ABSTRACT" jdbcType="VARCHAR" property="articleAbstract"/>
+        <result column="ARTICLE_CATEGORY" jdbcType="VARCHAR" property="articleCategory"/>
+        <result column="ARTICLE_IMAGE" jdbcType="VARCHAR" property="articleImage"/>
+        <result column="IMAGE_TYPE" jdbcType="VARCHAR" property="imageType"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="IS_COMMENT_ENABLED" jdbcType="BIT" property="isCommentEnabled"/>
+        <result column="IMPORTANCE" jdbcType="INTEGER" property="importance"/>
+        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     ARTICLE_ID, ARTICLE_TITLE, DISPLAY_TIME, ARTICLE_IP, ARTICLE_CLICK, USER_ID, AUTHOR_NAME,
     ARTICLE_TYPE, ARTICLE_CONTENT, ARTICLE_ABSTRACT, ARTICLE_CATEGORY, STATUS, IS_COMMENT_ENABLED,
-    IMPORTANCE, CREATE_DATE, UPDATE_DATE
+    IMPORTANCE, ARTICLE_IMAGE,IMAGE_TYPE, CREATE_DATE, UPDATE_DATE
   </sql>
-  <sql id="Blob_Column_List">
+    <sql id="Blob_Column_List">
     ARTICLE_CONTENT
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from TT_ARTICLE
-    where ARTICLE_ID = #{articleId}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from TT_ARTICLE
+        where ARTICLE_ID = #{articleId}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from TT_ARTICLE
     where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
   </delete>
-  <insert id="insertArticle" parameterType="Article">
+    <insert id="insertArticle" parameterType="Article">
     insert into TT_ARTICLE (ARTICLE_ID, ARTICLE_TITLE, DISPLAY_TIME, 
       ARTICLE_IP, ARTICLE_CLICK, USER_ID, 
       ARTICLE_TYPE, ARTICLE_ABSTRACT, ARTICLE_CATEGORY, 
       STATUS, IS_COMMENT_ENABLED, IMPORTANCE, 
-      CREATE_DATE, UPDATE_DATE, ARTICLE_CONTENT
+      CREATE_DATE,  ARTICLE_CONTENT,ARTICLE_IMAGE,IMAGE_TYPE
       )
     values (#{articleId,jdbcType=BIGINT}, #{articleTitle,jdbcType=VARCHAR}, #{displayTime,jdbcType=TIMESTAMP}, 
       #{articleIp,jdbcType=VARCHAR}, #{articleClick,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, 
       #{articleType,jdbcType=VARCHAR}, #{articleAbstract,jdbcType=VARCHAR}, #{articleCategory,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR}, #{isCommentEnabled,jdbcType=BIT}, #{importance,jdbcType=INTEGER}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{articleContent,jdbcType=LONGVARCHAR}
+      #{createDate}, #{articleContent}, #{articleImage}, #{imageType}
       )
   </insert>
-  <insert id="insertSelective" parameterType="Article">
-    insert into TT_ARTICLE
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
-        ARTICLE_ID,
-      </if>
-      <if test="articleTitle != null">
-        ARTICLE_TITLE,
-      </if>
-      <if test="displayTime != null">
-        DISPLAY_TIME,
-      </if>
-      <if test="articleIp != null">
-        ARTICLE_IP,
-      </if>
-      <if test="articleClick != null">
-        ARTICLE_CLICK,
-      </if>
-      <if test="userId != null">
-        USER_ID,
-      </if>
-      <if test="articleType != null">
-        ARTICLE_TYPE,
-      </if>
-      <if test="articleAbstract != null">
-        ARTICLE_ABSTRACT,
-      </if>
-      <if test="articleCategory != null">
-        ARTICLE_CATEGORY,
-      </if>
-      <if test="status != null">
-        STATUS,
-      </if>
-      <if test="isCommentEnabled != null">
-        IS_COMMENT_ENABLED,
-      </if>
-      <if test="importance != null">
-        IMPORTANCE,
-      </if>
-      <if test="createDate != null">
-        CREATE_DATE,
-      </if>
-      <if test="updateDate != null">
-        UPDATE_DATE,
-      </if>
-      <if test="articleContent != null">
-        ARTICLE_CONTENT,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
-        #{articleId,jdbcType=BIGINT},
-      </if>
-      <if test="articleTitle != null">
-        #{articleTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="displayTime != null">
-        #{displayTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="articleIp != null">
-        #{articleIp,jdbcType=VARCHAR},
-      </if>
-      <if test="articleClick != null">
-        #{articleClick,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="articleType != null">
-        #{articleType,jdbcType=VARCHAR},
-      </if>
-      <if test="articleAbstract != null">
-        #{articleAbstract,jdbcType=VARCHAR},
-      </if>
-      <if test="articleCategory != null">
-        #{articleCategory,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="isCommentEnabled != null">
-        #{isCommentEnabled,jdbcType=BIT},
-      </if>
-      <if test="importance != null">
-        #{importance,jdbcType=INTEGER},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateDate != null">
-        #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="articleContent != null">
-        #{articleContent,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="Article">
-    update TT_ARTICLE
-    <set>
-      <if test="articleTitle != null">
-        ARTICLE_TITLE = #{articleTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="displayTime != null">
-        DISPLAY_TIME = #{displayTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="articleIp != null">
-        ARTICLE_IP = #{articleIp,jdbcType=VARCHAR},
-      </if>
-      <if test="articleClick != null">
-        ARTICLE_CLICK = #{articleClick,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        USER_ID = #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="articleType != null">
-        ARTICLE_TYPE = #{articleType,jdbcType=VARCHAR},
-      </if>
-      <if test="articleAbstract != null">
-        ARTICLE_ABSTRACT = #{articleAbstract,jdbcType=VARCHAR},
-      </if>
-      <if test="articleCategory != null">
-        ARTICLE_CATEGORY = #{articleCategory,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        STATUS = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="isCommentEnabled != null">
-        IS_COMMENT_ENABLED = #{isCommentEnabled,jdbcType=BIT},
-      </if>
-      <if test="importance != null">
-        IMPORTANCE = #{importance,jdbcType=INTEGER},
-      </if>
-      <if test="articleContent != null">
-        ARTICLE_CONTENT = #{articleContent,jdbcType=LONGVARCHAR},
-      </if>
-        UPDATE_DATE = now()
-    </set>
-    where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="Article">
+    <insert id="insertSelective" parameterType="Article">
+        insert into TT_ARTICLE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">
+                ARTICLE_ID,
+            </if>
+            <if test="articleTitle != null">
+                ARTICLE_TITLE,
+            </if>
+            <if test="displayTime != null">
+                DISPLAY_TIME,
+            </if>
+            <if test="articleIp != null">
+                ARTICLE_IP,
+            </if>
+            <if test="articleClick != null">
+                ARTICLE_CLICK,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="articleType != null">
+                ARTICLE_TYPE,
+            </if>
+            <if test="articleAbstract != null">
+                ARTICLE_ABSTRACT,
+            </if>
+            <if test="articleCategory != null">
+                ARTICLE_CATEGORY,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="isCommentEnabled != null">
+                IS_COMMENT_ENABLED,
+            </if>
+            <if test="importance != null">
+                IMPORTANCE,
+            </if>
+            <if test="createDate != null">
+                CREATE_DATE,
+            </if>
+            <if test="updateDate != null">
+                UPDATE_DATE,
+            </if>
+            <if test="articleContent != null">
+                ARTICLE_CONTENT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">
+                #{articleId,jdbcType=BIGINT},
+            </if>
+            <if test="articleTitle != null">
+                #{articleTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="displayTime != null">
+                #{displayTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="articleIp != null">
+                #{articleIp,jdbcType=VARCHAR},
+            </if>
+            <if test="articleClick != null">
+                #{articleClick,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="articleType != null">
+                #{articleType,jdbcType=VARCHAR},
+            </if>
+            <if test="articleAbstract != null">
+                #{articleAbstract,jdbcType=VARCHAR},
+            </if>
+            <if test="articleCategory != null">
+                #{articleCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="isCommentEnabled != null">
+                #{isCommentEnabled,jdbcType=BIT},
+            </if>
+            <if test="importance != null">
+                #{importance,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="articleContent != null">
+                #{articleContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="Article">
+        update TT_ARTICLE
+        <set>
+            <if test="articleTitle != null">
+                ARTICLE_TITLE = #{articleTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="displayTime != null">
+                DISPLAY_TIME = #{displayTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="articleIp != null">
+                ARTICLE_IP = #{articleIp,jdbcType=VARCHAR},
+            </if>
+            <if test="articleClick != null">
+                ARTICLE_CLICK = #{articleClick,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="articleType != null">
+                ARTICLE_TYPE = #{articleType,jdbcType=VARCHAR},
+            </if>
+            <if test="articleAbstract != null">
+                ARTICLE_ABSTRACT = #{articleAbstract,jdbcType=VARCHAR},
+            </if>
+            <if test="articleCategory != null">
+                ARTICLE_CATEGORY = #{articleCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="isCommentEnabled != null">
+                IS_COMMENT_ENABLED = #{isCommentEnabled,jdbcType=BIT},
+            </if>
+            <if test="importance != null">
+                IMPORTANCE = #{importance,jdbcType=INTEGER},
+            </if>
+            <if test="articleContent != null">
+                ARTICLE_CONTENT = #{articleContent,jdbcType=LONGVARCHAR},
+            </if>
+            UPDATE_DATE = now()
+        </set>
+        where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="Article">
     update TT_ARTICLE
     set ARTICLE_TITLE = #{articleTitle,jdbcType=VARCHAR},
       DISPLAY_TIME = #{displayTime,jdbcType=TIMESTAMP},
@@ -209,7 +211,7 @@
       ARTICLE_CONTENT = #{articleContent,jdbcType=LONGVARCHAR}
     where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="Article">
+    <update id="updateByPrimaryKey" parameterType="Article">
     update TT_ARTICLE
     set ARTICLE_TITLE = #{articleTitle,jdbcType=VARCHAR},
       DISPLAY_TIME = #{displayTime,jdbcType=TIMESTAMP},
@@ -227,57 +229,59 @@
     where ARTICLE_ID = #{articleId,jdbcType=BIGINT}
   </update>
 
-  <update id="updateArticle">
+    <update id="updateArticle">
     UPDATE TT_ARTICLE
     set STATUS = #{status}, UPDATE_DATE=now()
     where ARTICLE_ID = #{articleId}
   </update>
 
-  <select id="countAllArticle" resultType="java.lang.Integer">
+    <select id="countAllArticle" resultType="java.lang.Integer">
     select count(*) FROM TT_ARTICLE
   </select>
 
-  <select id="countArticleByStatus" resultType="java.lang.Integer">
+    <select id="countArticleByStatus" resultType="java.lang.Integer">
     select count(*) FROM TT_ARTICLE
     WHERE STATUS = #{status}
   </select>
 
-  <select id="countArticleByUserAndStatus" resultType="java.lang.Integer">
+    <select id="countArticleByUserAndStatus" resultType="java.lang.Integer">
     select count(*) FROM TT_ARTICLE
     WHERE STATUS = #{status} AND USER_ID = #{userId}
   </select>
 
-  <sql id="pagination">
+    <sql id="pagination">
     <![CDATA[
+
 	    limit #{offset}, #{pageSize}
+
         ]]>
   </sql>
-  <select id="queryArticleList" resultMap="BaseResultMap">
-    select
-    ta.ARTICLE_ID,
-    ta.ARTICLE_TITLE,
-    ta.DISPLAY_TIME,
-    ta.ARTICLE_IP,
-    ta.ARTICLE_CLICK,
-    ta.USER_ID,
-    ta.ARTICLE_TYPE,
-    ta.ARTICLE_CONTENT,
-    ta.ARTICLE_ABSTRACT,
-    ta.ARTICLE_CATEGORY,
-    ta.STATUS,
-    ta.IS_COMMENT_ENABLED,
-    ta.IMPORTANCE,
-    ta.CREATE_DATE,
-    ta.UPDATE_DATE,
-    tu.USER_NAME as AUTHOR_NAME
-    from TT_ARTICLE ta
-    LEFT JOIN  TS_USER tu ON tu.USER_ID = ta.USER_ID
-    WHERE ta.STATUS = #{status}
-    <include refid="pagination"/>
-  </select>
+    <select id="queryArticleList" resultMap="BaseResultMap">
+        select
+        ta.ARTICLE_ID,
+        ta.ARTICLE_TITLE,
+        ta.DISPLAY_TIME,
+        ta.ARTICLE_IP,
+        ta.ARTICLE_CLICK,
+        ta.USER_ID,
+        ta.ARTICLE_TYPE,
+        ta.ARTICLE_CONTENT,
+        ta.ARTICLE_ABSTRACT,
+        ta.ARTICLE_CATEGORY,
+        ta.STATUS,
+        ta.IS_COMMENT_ENABLED,
+        ta.IMPORTANCE,
+        ta.CREATE_DATE,
+        ta.UPDATE_DATE,
+        tu.USER_NAME as AUTHOR_NAME
+        from TT_ARTICLE ta
+        LEFT JOIN TS_USER tu ON tu.USER_ID = ta.USER_ID
+        WHERE ta.STATUS = #{status}
+        <include refid="pagination"/>
+    </select>
 
 
-  <select id="getArticleById" resultMap="BaseResultMap">
+    <select id="getArticleById" resultMap="BaseResultMap">
         select
     ta.ARTICLE_ID,
     ta.ARTICLE_TITLE,
@@ -289,6 +293,8 @@
     ta.ARTICLE_CONTENT,
     ta.ARTICLE_ABSTRACT,
     ta.ARTICLE_CATEGORY,
+    ta.ARTICLE_IMAGE,
+    ta.IMAGE_TYPE,
     ta.STATUS,
     ta.IS_COMMENT_ENABLED,
     ta.IMPORTANCE,
@@ -298,6 +304,30 @@
     from TT_ARTICLE ta
     LEFT JOIN  TS_USER tu ON tu.USER_ID = ta.USER_ID
     WHERE ta.ARTICLE_ID = #{articleId}
+  </select>
+
+    <insert id="insertArticleDesigner">
+  insert into TR_ARTICLE_DESIGNER (ID, ARTICLE_ID, DESIGNER_ID)
+  values (#{id}, #{articleId}, #{designerId} )
+</insert>
+
+    <insert id="insertArticleSKU">
+    insert into TR_ARTICLE_SKU (ID, ARTICLE_ID, SKU_NO)
+    values (#{id}, #{articleId}, #{skuNo} )
+  </insert>
+    <insert id="insertArticleTag">
+    insert into TR_ARTICLE_TAG (ID, ARTICLE_ID, TAG_ID)
+    values (#{id}, #{articleId}, #{tagId} )
+  </insert>
+
+    <insert id="insertTag">
+    insert into TT_TAG (ID, TAG_NAME)
+    values (#{id}, #{tagName})
+  </insert>
+
+    <select id="getTagIdByTagName" resultMap="BaseResultMap">
+  select ID FROM TT_TAG
+  WHERE TAG_NAME = #{tagName}
   </select>
 
 </mapper>

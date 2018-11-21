@@ -205,7 +205,10 @@ public class AdminSPUController {
 
         String oper = "update SPU";
         log.info("{}, body: {}", oper, body);
-        SPU brandObj = JSON.parseObject(body, SPU.class);
+        SpuEnter brandObj1 = JSON.parseObject(body, SpuEnter.class);
+        SPU brandObj = new SPU();
+        BeanUtils.copyProperties(brandObj1, brandObj);
+//        SPU brandObj = JSON.parseObject(body, SPU.class);
 
         // 获取SpuAttr属性
         JSONObject jsonObject = JSON.parseObject(body);
@@ -214,6 +217,29 @@ public class AdminSPUController {
         if (jsonArray != null && jsonArray.size() != 0) {
             List<SpuAttr> spuAttrList = jsonArray.toJavaList(SpuAttr.class);
             brandObj.setSpuAttrList(spuAttrList);
+        }
+        JSONArray relateSpuArray = jsonObject.getJSONArray("spuComponentList");
+        if (relateSpuArray != null && relateSpuArray.size() != 0 ) {
+            List<SpuComponent> spuComponentList = jsonArray.toJavaList(SpuComponent.class);
+            brandObj.setSpuComponentList(spuComponentList);
+        }
+
+        JSONArray spuSpaceArray = jsonObject.getJSONArray("spuSpaceList");
+        if (spuSpaceArray != null && spuSpaceArray.size() != 0 ) {
+            List<SpuSpace> spuSpaceList = new ArrayList<SpuSpace>();
+            for(int i=0;i<brandObj1.getSpuSpaceList().size();i++){
+                SpuSpace spuSpace = new SpuSpace();
+                spuSpace.setSpaceId(brandObj1.getSpuSpaceList().get(i));
+                spuSpaceList.add(spuSpace);
+            }
+            brandObj.setSpuSpaceList(spuSpaceList);
+        }
+
+        // 获取产品设计师
+        JSONArray spuDesignerArray = jsonObject.getJSONArray("spuDesignerList");
+        if (spuDesignerArray != null && spuDesignerArray.size() != 0) {
+            List<SpuDesigner> spuDesignerList = jsonArray.toJavaList(SpuDesigner.class);
+            brandObj.setSpuDesignerList(spuDesignerList);
         }
 
         int updateResult = adminSPUService.updateSPU(brandObj);

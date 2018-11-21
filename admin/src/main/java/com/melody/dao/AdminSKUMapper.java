@@ -51,5 +51,7 @@ public interface AdminSKUMapper {
 
     List<SkuImage> getSkuImageList(@Param(value = "skuNo") String skuNo);
 
+    List<SKU> searchSKUListByName(@Param(value = "skuName") String skuName);
+
 }
 
