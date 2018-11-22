@@ -21,6 +21,21 @@
         <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate"/>
         <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate"/>
     </resultMap>
+
+    <resultMap id="TagResultMap" type="Tag">
+        <id column="ID" property="id"/>
+        <result column="TAG_NAME"  property="tagName"/>
+    </resultMap>
+    <resultMap id="SKUResultMap" type="SKU">
+        <result column="SKU_NO"  property="skuNo"/>
+        <result column="SKU_NAME"  property="skuName"/>
+        <result column="SPU_CODE"  property="spuCode"/>
+    </resultMap>
+    <resultMap id="DesignerResultMap" type="User">
+        <result column="USER_ID"  property="userId"/>
+        <result column="USER_NAME"  property="userName"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
     ARTICLE_ID, ARTICLE_TITLE, DISPLAY_TIME, ARTICLE_IP, ARTICLE_CLICK, USER_ID, AUTHOR_NAME,
     ARTICLE_TYPE, ARTICLE_CONTENT, ARTICLE_ABSTRACT, ARTICLE_CATEGORY, STATUS, IS_COMMENT_ENABLED,
@@ -252,7 +267,11 @@
     <sql id="pagination">
     <![CDATA[
 
+
+
 	    limit #{offset}, #{pageSize}
+
+
 
         ]]>
   </sql>
@@ -325,9 +344,57 @@
     values (#{id}, #{tagName})
   </insert>
 
-    <select id="getTagIdByTagName" resultMap="BaseResultMap">
+    <select id="getTagIdByTagName" resultType="java.lang.Long">
   select ID FROM TT_TAG
   WHERE TAG_NAME = #{tagName}
   </select>
+
+    <select id="queryArticleTagByArticleId" resultMap="TagResultMap">
+        SELECT
+          ta.ID,
+          ta.TAG_NAME
+        FROM TR_ARTICLE_TAG tat
+        LEFT JOIN TT_TAG ta ON ta.ID = tat.TAG_ID
+        WHERE tat.ARTICLE_ID = #{articleId}
+    </select>
+    <select id="queryArticleSKUByArticleId" resultMap="SKUResultMap">
+        SELECT
+        ts.SKU_NO,
+        ts.SKU_NAME,
+        ts.SPU_CODE
+        FROM TR_ARTICLE_SKU tas
+        LEFT JOIN TT_SKU ts ON tas.SKU_NO = ts.SKU_NO
+        WHERE tas.ARTICLE_ID = #{articleId}
+    </select>
+    <select id="queryArticleDesignerByArticleId" resultMap="DesignerResultMap">
+        SELECT
+        tu.USER_ID,
+        tu.USER_NAME
+        FROM TR_ARTICLE_DESIGNER tad
+        LEFT JOIN TS_USER tu ON tu.USER_ID = tad.DESIGNER_ID
+        WHERE tad.ARTICLE_ID = #{articleId}
+    </select>
+    <select id="queryArticleList" resultMap="BaseResultMap">
+        select
+        ta.ARTICLE_ID,
+        ta.ARTICLE_TITLE,
+        ta.DISPLAY_TIME,
+        ta.ARTICLE_IP,
+        ta.ARTICLE_CLICK,
+        ta.USER_ID,
+        ta.ARTICLE_TYPE,
+        ta.ARTICLE_CONTENT,
+        ta.ARTICLE_ABSTRACT,
+        ta.ARTICLE_CATEGORY,
+        ta.STATUS,
+        ta.IS_COMMENT_ENABLED,
+        ta.IMPORTANCE,
+        ta.CREATE_DATE,
+        ta.UPDATE_DATE,
+        tu.USER_NAME as AUTHOR_NAME
+        from TT_ARTICLE ta
+        LEFT JOIN TS_USER tu ON tu.USER_ID = ta.USER_ID
+        <include refid="pagination"/>
+    </select>
 
 </mapper>

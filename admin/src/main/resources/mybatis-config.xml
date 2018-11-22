@@ -28,6 +28,7 @@
         <typeAlias alias="SpuDesigner" type="com.melody.product.dto.SpuDesigner"/>
 
         <typeAlias alias="Theme" type="com.melody.product.dto.Theme"/>
+        <typeAlias alias="Tag" type="com.melody.product.dto.Tag"/>
         <typeAlias alias="ThemeSku" type="com.melody.product.dto.ThemeSku"/>
 
         <typeAlias alias="SkuAttr" type="com.melody.product.dto.SkuAttr"/>

@@ -119,6 +119,13 @@ public class AdminUserServiceImpl implements AdminUserService {
         return userList;
     }
 
+
+    @Override
+    public User findUserDetailByUserId(Long userId){
+        User user = adminUserMapper.findUserDetailByUserId(userId);
+        return user;
+    }
+
     // 更新用户角色，用户等级暂时不更新，TODO： 更新用户等级
     // TODO: 优化更新顺序
     @Transactional(propagation = Propagation.REQUIRED)
