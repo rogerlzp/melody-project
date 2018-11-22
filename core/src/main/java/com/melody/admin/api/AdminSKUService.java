@@ -2,12 +2,6 @@ package com.melody.admin.api;
 
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.melody.product.dto.SKU;
-import com.melody.product.dto.SKUEnter;
-import com.melody.product.dto.SPU;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

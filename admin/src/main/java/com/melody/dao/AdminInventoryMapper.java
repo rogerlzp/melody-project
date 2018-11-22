@@ -1,7 +1,5 @@
 package com.melody.dao;
 
-import com.melody.product.dto.SkuInventory;
-
 public interface AdminInventoryMapper {
     int deleteByPrimaryKey(Long id);
 

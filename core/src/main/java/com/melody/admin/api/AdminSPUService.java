@@ -1,8 +1,6 @@
 package com.melody.admin.api;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.melody.product.dto.Attr;
-import com.melody.product.dto.SPU;
 
 import java.util.List;
 

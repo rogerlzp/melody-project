@@ -3,16 +3,10 @@ package com.melody.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.melody.admin.api.AdminBrandService;
-import com.melody.admin.api.AdminSKUService;
 import com.melody.common.utils.StringUtils;
 import com.melody.dao.AdminBrandMapper;
-import com.melody.dao.AdminSKUMapper;
-import com.melody.dao.SequenceDao;
 import com.melody.product.dto.Brand;
-import com.melody.product.dto.Project;
-import com.melody.product.dto.SKU;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

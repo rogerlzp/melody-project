@@ -1,7 +1,5 @@
 package com.melody.dao;
 
-import com.melody.product.dto.SKU;
-import com.melody.product.dto.SPU;
 import com.melody.system.dto.SysCustomerLevel;
 import com.melody.user.dto.Role;
 import com.melody.user.dto.User;
