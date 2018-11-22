@@ -61,3 +61,4 @@ data/
 static-mybatis/.mvn/
 static-mybatis/src/main/resources/generated_mapper/
 web/logs/
+/static-mybatis/
