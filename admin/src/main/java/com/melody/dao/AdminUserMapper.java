@@ -43,4 +43,6 @@ public interface AdminUserMapper {
     int getUserByRoleId(@Param(value = "userId") long userId, @Param(value = "roleId") Integer roleId);
     int updateUserRole(@Param(value = "userId") long userId, @Param(value = "roleId") Integer roleId);
 
+    User findUserDetailByUserId(@Param(value = "userId") long userId);
+
 }

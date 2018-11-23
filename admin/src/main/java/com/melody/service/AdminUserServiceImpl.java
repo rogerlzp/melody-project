@@ -133,4 +133,10 @@ public class AdminUserServiceImpl implements AdminUserService {
         return resultId;
     }
 
+
+    @Override
+    public User findUserDetailByUserId(Long userId) {
+        User user = adminUserMapper.findUserDetailByUserId(userId);
+        return user;
+    }
 }

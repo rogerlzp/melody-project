@@ -38,5 +38,6 @@ public interface AdminUserService {
 
     int updateUser(User user);
 
+    User findUserDetailByUserId(Long userId);
 }
 

@@ -286,4 +286,35 @@
         WHERE USER_ID = #{userId}
     </update>
 
+    <select id="findUserDetailByUserId" resultMap="userResultMap">
+        SELECT
+        tu.USER_ID,
+        tu.MOBILE_NO,
+        tu.USER_NAME,
+        tu.USER_PWD,
+        tu.SALT,
+        tu.DEVICE_TOKEN,
+        tu.ID_CARD,
+        tu.REFERRAL_CODE,
+        tu.STATUS,
+        tu.IS_FIRST_ORDER,
+        tu.REG_DATE,
+        tu.CREATE_DATE,
+        tu.UPDATE_DATE,
+        tu.NICKNAME,
+        tu.HEAD_IMAGE,
+        tu.GENDER,EMAIL,
+        tu.DESCRIPTION,
+        tu.SLOGON,
+        tu.BIRTHDAY,
+        tr.ROLE_NAME,
+        tus.ROLE_ID
+        FROM TS_USER tu
+        LEFT JOIN TR_USER_ROLE tus ON tus.USER_ID = tu.USER_ID
+        LEFT JOIN TT_ROLE tr ON tr.ID = tus.ROLE_ID
+        WHERE tu.USER_ID = #{userId}
+    </select>
+
+
+
 </mapper>

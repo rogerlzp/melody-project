@@ -127,7 +127,6 @@ public class AdminUserController {
         log.info("delete result: " + success);
         return Json.result(oper, success);
     }
-
     @PermInfo("根据用户名查询User")
     @RequiresPermissions("a:user:user:query")
     @GetMapping("/search")
@@ -156,5 +155,16 @@ public class AdminUserController {
         //boolean success = sysUserService.update(user,new EntityWrapper<User>().eq("uid",user.getUid()));
         boolean success = adminUserService.updateUser(user) == 1 ? true : false;
         return Json.result(oper, success).data("updated", "1");
+    }
+
+    @PermInfo("根据用户ID查询User")
+    @RequiresPermissions("a:user:user:query")
+    @GetMapping("/detail")
+    public Json queryUserDetail(Long userId) {
+        String oper = "query user detail";
+        log.info("{}, body: {}", oper, userId);
+
+        User user = adminUserService.findUserDetailByUserId(userId);
+        return Json.succ(oper).data("user", user);
     }
 }

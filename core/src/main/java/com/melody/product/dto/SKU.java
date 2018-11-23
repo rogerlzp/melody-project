@@ -9,7 +9,6 @@ import java.util.List;
 
 @Data
 public class SKU implements Serializable {
-
     private static final long serialVersionUID = 3230925201809061620L;
     private String skuNo;
     private Long id;
@@ -66,4 +65,5 @@ public class SKU implements Serializable {
     private List<SpuAttr> spuAttrList;
 
 }
+
 
