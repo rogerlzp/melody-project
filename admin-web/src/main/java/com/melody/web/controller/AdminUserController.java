@@ -140,6 +140,16 @@ public class AdminUserController {
         return Json.succ(oper).data("userList", userList);
     }
 
+    @PermInfo("根据用户ID查询User")
+    @RequiresPermissions("a:user:user:query")
+    @GetMapping("/detail")
+    public Json queryUserDetail(Long userId) {
+        String oper = "query user detail";
+        log.info("{}, body: {}", oper, userId);
+
+        User user = adminUserService.findUserDetailByUserId(userId);
+        return Json.succ(oper).data("user", user);
+    }
 
     @PermInfo("更新系统用户的信息")
     @RequiresPermissions("a:user:info:update")
